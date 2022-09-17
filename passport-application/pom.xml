@@ -21,9 +21,5 @@
             <groupId>com.sparrow.passport</groupId>
             <artifactId>passport-domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.sparrow.passport</groupId>
-            <artifactId>passport-domain</artifactId>
-        </dependency>
     </dependencies>
 </project>
