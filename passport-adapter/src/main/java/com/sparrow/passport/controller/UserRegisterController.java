@@ -1,10 +1,10 @@
 package com.sparrow.passport.controller;
 
-import com.sparrow.exception.CacheNotFoundException;
+import com.sparrow.cache.exception.CacheNotFoundException;
+import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
-import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 
 /**
  * Created by harry on 16/12/17.

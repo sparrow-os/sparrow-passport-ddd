@@ -1,7 +1,5 @@
 package com.sparrow.passport.services;
 
-import com.sparrow.constant.ConfigKeyDB;
-import com.sparrow.protocol.Authenticator;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.api.UserLoginService;
@@ -10,6 +8,7 @@ import com.sparrow.passport.domain.object.value.Login;
 import com.sparrow.passport.domain.service.SecurityPrincipalService;
 import com.sparrow.passport.protocol.query.login.LoginQueryDTO;
 import com.sparrow.passport.domain.DomainRegistry;
+import com.sparrow.support.Authenticator;
 import javax.inject.Inject;
 import javax.inject.Named;
 

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.sparrow.passport</groupId>
     <artifactId>passport-api</artifactId>
-    <version>${sparrow_passport_version}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>com.sparrow.passport</groupId>

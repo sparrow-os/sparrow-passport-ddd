@@ -1,10 +1,9 @@
 package com.sparrow.passport.controller.impl;
 
+import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
-import com.sparrow.exception.CacheNotFoundException;
-import com.sparrow.protocol.Authenticator;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
@@ -13,6 +12,7 @@ import com.sparrow.servlet.ServletContainer;
 import com.sparrow.passport.api.UserRegisterService;
 import com.sparrow.passport.controller.UserRegisterController;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
+import com.sparrow.support.Authenticator;
 import javax.inject.Inject;
 import javax.inject.Named;
 

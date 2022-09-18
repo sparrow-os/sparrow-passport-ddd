@@ -1,6 +1,6 @@
 package com.sparrow.passport.controller;
 
-import com.sparrow.exception.CacheNotFoundException;
+import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
