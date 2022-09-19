@@ -14,6 +14,7 @@ import com.sparrow.passport.api.UserLoginService;
 import com.sparrow.passport.controller.UserLoginController;
 import com.sparrow.passport.controller.assemble.LoginControllerAssemble;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
