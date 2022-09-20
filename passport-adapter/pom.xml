@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.sparrow.passport</groupId>
-            <artifactId>passport-api</artifactId>
+            <artifactId>passport-application</artifactId>
         </dependency>
     </dependencies>
 </project>

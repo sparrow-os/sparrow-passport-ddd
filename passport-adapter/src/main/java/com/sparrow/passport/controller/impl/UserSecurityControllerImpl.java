@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 @Named
 public class UserSecurityControllerImpl implements UserSecurityController {
-    @Inject
+//    @Inject
     private UserSecurityService userSecurityService;
 
     @Override

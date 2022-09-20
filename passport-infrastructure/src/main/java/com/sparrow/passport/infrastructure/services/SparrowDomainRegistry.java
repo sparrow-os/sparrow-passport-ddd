@@ -24,7 +24,7 @@ public class SparrowDomainRegistry implements DomainRegistry {
     @Inject
     private UserLimitService userLimitService;
 
-    @Inject
+//    @Inject
     private ShortMessageService shortMessageService;
     @Inject
     private EncryptionService encryptionService;

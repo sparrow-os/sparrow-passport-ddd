@@ -26,6 +26,7 @@ public class UserLoginControllerImpl implements UserLoginController {
     @Inject
     @Named("userLoginApplicationService")
     private UserLoginService userLoginService;
+
     @Inject
     private LoginControllerAssemble loginControllerAssemble;
 

@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 @Named("registeringUserRepository")
 public class SparrowRegisteringUserRepository implements RegisteringUserRepository {
-    @Inject
+//    @Inject
     private UserDAO userDao;
     @Inject
     private UserMapper userMapper;

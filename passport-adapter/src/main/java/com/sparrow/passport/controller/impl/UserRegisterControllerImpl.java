@@ -23,7 +23,7 @@ public class UserRegisterControllerImpl implements UserRegisterController {
 
     @Inject
     private UserRegisterService registeringUserApplicationService;
-    @Inject
+//    @Inject
     private ServletContainer servletContainer;
     @Inject
     private Authenticator authenticatorService;

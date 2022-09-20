@@ -9,7 +9,7 @@ import javax.inject.Named;
 
 @Named("securityPrincipalRepository")
 public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepository {
-    @Inject
+//    @Inject
     private UserDAO userDao;
     @Inject
     private UserMapper userMapper;

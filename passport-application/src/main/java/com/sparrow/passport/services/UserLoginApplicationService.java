@@ -9,6 +9,7 @@ import com.sparrow.passport.domain.service.SecurityPrincipalService;
 import com.sparrow.passport.protocol.query.login.LoginQueryDTO;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.support.Authenticator;
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
