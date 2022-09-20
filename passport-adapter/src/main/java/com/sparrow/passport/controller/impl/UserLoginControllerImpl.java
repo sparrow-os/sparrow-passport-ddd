@@ -20,8 +20,8 @@ import javax.inject.Named;
 
 @Named
 public class UserLoginControllerImpl implements UserLoginController {
-//    @Inject
-//    private ServletContainer servletContainer;
+    @Inject
+    private ServletContainer servletContainer;
 
     @Inject
     @Named("userLoginApplicationService")
@@ -39,18 +39,18 @@ public class UserLoginControllerImpl implements UserLoginController {
     @Override
     public LoginToken login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        //String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        //this.validateCode(validateCode, login.getValidateCode());
+        String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
+        this.validateCode(validateCode, login.getValidateCode());
         LoginToken loginResult = this.userLoginService.login(this.loginControllerAssemble.vo2dto(login, client));
-//        servletContainer
-//            .rootCookie(User.PERMISSION, loginResult.getPermission(), loginResult.getDays());
+        servletContainer
+            .rootCookie(User.PERMISSION, loginResult.getPermission(), loginResult.getDays());
         return loginResult;
     }
 
     @Override
     public LoginToken shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
-        //String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        //this.validateCode(validateCode, login.getValidateCode());
+        String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
+        this.validateCode(validateCode, login.getValidateCode());
         return this.userLoginService.login(this.loginControllerAssemble.vo2dto(login, client));
     }
 

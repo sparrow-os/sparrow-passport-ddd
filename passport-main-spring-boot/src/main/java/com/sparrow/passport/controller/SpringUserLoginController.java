@@ -7,14 +7,21 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+//@RequestMapping("/")
 public class SpringUserLoginController {
     @Autowired
     private UserLoginController userLoginController;
-
-    public LoginToken login(LoginQuery login,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+    @PostMapping("/login")
+    public LoginToken login(@RequestBody LoginQuery login,
+        @RequestHeader ClientInformation client) throws BusinessException, CacheNotFoundException {
         return this.userLoginController.login(login, client);
     }
 

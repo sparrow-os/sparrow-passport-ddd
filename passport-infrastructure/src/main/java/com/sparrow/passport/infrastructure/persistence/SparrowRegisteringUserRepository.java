@@ -12,21 +12,20 @@ import javax.inject.Named;
 
 @Named("registeringUserRepository")
 public class SparrowRegisteringUserRepository implements RegisteringUserRepository {
-//    @Inject
+    @Inject
     private UserDAO userDao;
     @Inject
     private UserMapper userMapper;
 
     @Override public RegisteringUserEntity findByEmail(String email) {
-//        UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
-//        User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return null;
-//        return this.userMapper.user2RegisteringUser(user);
+        UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
+        User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
+       return this.userMapper.user2RegisteringUser(user);
     }
 
     @Override public void saveRegisteringUser(RegisteringUserEntity registeringUserEntity, ClientInformation client) {
-//        User user = this.userMapper.registeringUser2User(registeringUserEntity, client);
-//        Long userId = this.userDao.insert(user);
-//        registeringUserEntity.setUserId(userId);
+        User user = this.userMapper.registeringUser2User(registeringUserEntity, client);
+        Long userId = this.userDao.insert(user);
+        registeringUserEntity.setUserId(userId);
     }
 }
