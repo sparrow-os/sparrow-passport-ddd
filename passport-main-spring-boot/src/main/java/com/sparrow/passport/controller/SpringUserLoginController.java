@@ -20,8 +20,10 @@ public class SpringUserLoginController {
     @Autowired
     private UserLoginController userLoginController;
     @PostMapping("/login")
-    public LoginToken login(@RequestBody LoginQuery login,
-        @RequestHeader ClientInformation client) throws BusinessException, CacheNotFoundException {
+    public LoginToken login(@RequestBody LoginQuery login) throws BusinessException, CacheNotFoundException {
+        //为什么要注入这个？
+        ClientInformation client=new ClientInformation();
+
         return this.userLoginController.login(login, client);
     }
 

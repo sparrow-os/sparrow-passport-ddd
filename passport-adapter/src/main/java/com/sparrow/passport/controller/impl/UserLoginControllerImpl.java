@@ -40,7 +40,7 @@ public class UserLoginControllerImpl implements UserLoginController {
     public LoginToken login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
         String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        this.validateCode(validateCode, login.getValidateCode());
+        //this.validateCode(validateCode, login.getValidateCode());
         LoginToken loginResult = this.userLoginService.login(this.loginControllerAssemble.vo2dto(login, client));
         servletContainer
             .rootCookie(User.PERMISSION, loginResult.getPermission(), loginResult.getDays());
