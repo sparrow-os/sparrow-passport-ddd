@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
+public class MvcConfigurerAdapter implements WebMvcConfigurer {
     /**
      * 配置静态访问资源
      * <p>
