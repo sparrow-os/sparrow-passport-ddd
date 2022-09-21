@@ -128,7 +128,7 @@ public class SecurityPrincipalService {
     }
 
     private void addPasswordModifiedEvent(SecurityPrincipal securityPrincipal, ClientInformation client,
-       DomainRegistry domainRegistry) {
+        DomainRegistry domainRegistry) {
 //        try {
 //            OperationQueryDTO operationQuery = new OperationQueryDTO();
 //            operationQuery.setUserId(securityPrincipal.getUserId());
@@ -139,5 +139,5 @@ public class SecurityPrincipalService {
 //        } catch (Exception e) {
 //            logger.error("modify password event error", e);
 //        }
-}
+    }
 }
