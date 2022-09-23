@@ -39,7 +39,7 @@ public class RegisteringUserService {
         Asserts.isTrue(oldUser != null,
             SparrowError.USER_EMAIL_EXIST,
             UserFieldSuffix.REGISTER_USER_EMAIL);
-
+        registeringUserEntity.setCent(100L);
         //registeringUserEntity.setCent(domainRegistry.getCodeService().getLongValueByCode(ConfigKeyDB.USER_CENT_REGISTER));
         registeringUserEntity.register(domainRegistry);
 

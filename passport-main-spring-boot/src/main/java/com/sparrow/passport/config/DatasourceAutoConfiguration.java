@@ -19,7 +19,8 @@ public class DatasourceAutoConfiguration {
         druidDataSource.setPassword(this.sparrowConfig.getPassword());
         druidDataSource.setUrl(this.sparrowConfig.getUrl());
         druidDataSource.setDriverClassName(this.sparrowConfig.getDriverClassName());
-        druidDataSource.setInitialSize(10);
+        druidDataSource.setInitialSize(8);
+        druidDataSource.setMaxActive(8);
         druidDataSource.setBreakAfterAcquireFailure(true);
         return druidDataSource;
     }

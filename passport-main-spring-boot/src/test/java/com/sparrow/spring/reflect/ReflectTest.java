@@ -8,6 +8,7 @@ public class ReflectTest {
         long t = System.currentTimeMillis();
         user.setUserName("zhangsan");
         for (int i = 0; i < 10000000; i++) {
+            //user.getUserName();
             get(user, "userName");
         }
         System.out.println(System.currentTimeMillis() - t);
