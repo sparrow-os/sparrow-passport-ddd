@@ -1,95 +1,35 @@
 package com.sparrow.spring.reflect;
 
 import com.sparrow.cg.MethodAccessor;
+import com.sparrow.passport.protocol.dto.BasicUserDTO;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 public class BasicUserDTOMethodAccess implements MethodAccessor {
+    private static Map<String, BiFunction<BasicUserDTO, String, Object>> getMap = new HashMap<>(1280);
+    private static Map<String, BiConsumer<BasicUserDTO, Object>> setMap = new HashMap<>();
+
+    static {
+        getMap.put("getUserName", (o, s) -> o.getUserName());
+        setMap.put("setUserName", (o, arg) -> o.setUserName((String) arg));
+    }
+
     public Object get(Object o, String methodName) {
         com.sparrow.passport.protocol.dto.BasicUserDTO basicUserDTO = (com.sparrow.passport.protocol.dto.BasicUserDTO) o;
-        if (methodName.equalsIgnoreCase("getnickname") || methodName.equalsIgnoreCase("nickname")) {
-            return basicUserDTO.getNickName();
-        }
-        if (methodName.equalsIgnoreCase("getgender") || methodName.equalsIgnoreCase("gender")) {
-            return basicUserDTO.getGender();
-        }
-        if (methodName.equalsIgnoreCase("getavatar") || methodName.equalsIgnoreCase("avatar")) {
-            return basicUserDTO.getAvatar();
-        }
-        if (methodName.equalsIgnoreCase("getpersonalsignature") || methodName.equalsIgnoreCase("personalsignature")) {
-            return basicUserDTO.getPersonalSignature();
-        }
-        if (methodName.equalsIgnoreCase("getbirthday") || methodName.equalsIgnoreCase("birthday")) {
-            return basicUserDTO.getBirthday();
-        }
-        if (methodName.equalsIgnoreCase("getactivatetime") || methodName.equalsIgnoreCase("activatetime")) {
-            return basicUserDTO.getActivateTime();
-        }
-        if (methodName.equalsIgnoreCase("getdeviceid") || methodName.equalsIgnoreCase("deviceid")) {
-            return basicUserDTO.getDeviceId();
-        }
-        if (methodName.equalsIgnoreCase("getupdatetime") || methodName.equalsIgnoreCase("updatetime")) {
-            return basicUserDTO.getUpdateTime();
-        }
-        if (methodName.equalsIgnoreCase("getuserid") || methodName.equalsIgnoreCase("userid")) {
-            return basicUserDTO.getUserId();
-        }
-        if (methodName.equalsIgnoreCase("getonline") || methodName.equalsIgnoreCase("online")) {
-            return basicUserDTO.getOnline();
-        }
-
-        if (methodName.equalsIgnoreCase("getactivate") || methodName.equalsIgnoreCase("activate")) {
-            return basicUserDTO.getActivate();
-        }
-
-        if (methodName.equalsIgnoreCase("getmobile") || methodName.equalsIgnoreCase("mobile")) {
-            return basicUserDTO.getMobile();
-        }
-
-        if (methodName.equalsIgnoreCase("getlastlogintime") || methodName.equalsIgnoreCase("lastlogintime")) {
-            return basicUserDTO.getLastLoginTime();
-        }
-
-        if (methodName.equalsIgnoreCase("getstatus") || methodName.equalsIgnoreCase("status")) {
-            return basicUserDTO.getStatus();
-        }
-
-        if (methodName.equalsIgnoreCase("getdevice") || methodName.equalsIgnoreCase("device")) {
-            return basicUserDTO.getDevice();
-        }
-
-        if (methodName.equalsIgnoreCase("getdevicemodel") || methodName.equalsIgnoreCase("devicemodel")) {
-            return basicUserDTO.getDeviceModel();
-        }
-
-        if (methodName.equalsIgnoreCase("getcreatetime") || methodName.equalsIgnoreCase("createtime")) {
-            return basicUserDTO.getCreateTime();
-        }
-
-        if (methodName.equalsIgnoreCase("getip") || methodName.equalsIgnoreCase("ip")) {
-            return basicUserDTO.getIp();
-        }
-
-        if (methodName.equalsIgnoreCase("getcent") || methodName.equalsIgnoreCase("cent")) {
-            return basicUserDTO.getCent();
-        }
-
-        if (methodName.equalsIgnoreCase("getemail") || methodName.equalsIgnoreCase("email")) {
-            return basicUserDTO.getEmail();
-        }
-
-        if (methodName.equalsIgnoreCase("getzone") || methodName.equalsIgnoreCase("zone")) {
-            return basicUserDTO.getZone();
-        }
-
-        if (methodName.equalsIgnoreCase("getusername") || methodName.equalsIgnoreCase("username")) {
-            return basicUserDTO.getUserName();
-        }
-        return null;
+        BiFunction f=getMap.get("getNickName");
+        //f.apply(o,methodName);
+        //return null;
+        return getMap.get(methodName).apply(basicUserDTO, methodName);
     }
 
     public void set(Object o, String methodName, Object arg) {
         com.sparrow.passport.protocol.dto.BasicUserDTO basicUserDTO = (com.sparrow.passport.protocol.dto.BasicUserDTO) o;
+
         if (methodName.equalsIgnoreCase("setUserName") || methodName.equalsIgnoreCase("userName")) {
             basicUserDTO.setUserName((java.lang.String) arg);
+            return;
         }
 
         if (methodName.equalsIgnoreCase("setDevice") || methodName.equalsIgnoreCase("device")) {
