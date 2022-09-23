@@ -28,10 +28,9 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     }
 
     @Override public SecurityPrincipal findByName(String userName) {
-//        UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
-//        User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return null;
-        //return this.userMapper.user2SecurityPrincipal();
+        UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
+        User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
+        return this.userMapper.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipal findByMobile(String mobile, String secretMobile) {
