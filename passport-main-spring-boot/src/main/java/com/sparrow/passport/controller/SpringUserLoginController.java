@@ -5,6 +5,7 @@ import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 //@RequestMapping("/")
 public class SpringUserLoginController {
+
+
     @Autowired
     private UserLoginController userLoginController;
+
+    @GetMapping("/session-id")
+    public String sessionId(HttpServletRequest request) throws BusinessException {
+        return request.getSession().getId();
+    }
+
     @PostMapping("/login")
     public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
         //为什么要注入这个？
