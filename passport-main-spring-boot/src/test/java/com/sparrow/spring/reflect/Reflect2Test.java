@@ -19,16 +19,16 @@ public class Reflect2Test {
             .initSingletonBean(false)
             .initInterceptor(false);
         container.init(builder);
-        long t = System.currentTimeMillis();
         User user = new User();
         user.setUserName("zhangsan");
-//        MethodAccessor methodAccessor = container.getProxyBean(User.class);
+        MethodAccessor methodAccessor = container.getProxyBean(User.class);
+        long t = System.currentTimeMillis();
 
         for (int i = 0; i < 10000000; i++) {
-            //Object userName = methodAccessor.get(user, "userName");
+            methodAccessor.set(user, "userName","zhangsan");
             //System.out.println(userName);
-            Method method = User.class.getMethod("setUserName", String.class);
-            method.invoke(user, "zhansan");
+//            Method method = User.class.getMethod("setUserName", String.class);
+//            method.invoke(user, "zhansan");
             //System.out.println(user.getUserName());
         }
         System.out.println(System.currentTimeMillis() - t);

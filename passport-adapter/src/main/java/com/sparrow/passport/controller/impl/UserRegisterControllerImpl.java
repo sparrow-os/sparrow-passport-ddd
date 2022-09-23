@@ -41,8 +41,8 @@ public class UserRegisterControllerImpl implements UserRegisterController {
     @Override
     public LoginToken emailRegister(EmailRegisterParam user,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        this.validateCode(validateCode, user.getValidateCode());
+        //String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
+        //this.validateCode(validateCode, user.getValidateCode());
         LoginToken login = shortcut(user, client);
         String token = authenticatorService.sign(login, user.getPassword());
         servletContainer.rootCookie(User.PERMISSION, token, login.getDays());
