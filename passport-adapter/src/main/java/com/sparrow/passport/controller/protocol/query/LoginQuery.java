@@ -21,6 +21,8 @@ public class LoginQuery implements VO {
 
     private String validateCode;
 
+    private String redirectUrl;
+
     public Boolean getRemember() {
         return remember;
     }
@@ -51,5 +53,13 @@ public class LoginQuery implements VO {
 
     public void setValidateCode(String validateCode) {
         this.validateCode = validateCode;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 }

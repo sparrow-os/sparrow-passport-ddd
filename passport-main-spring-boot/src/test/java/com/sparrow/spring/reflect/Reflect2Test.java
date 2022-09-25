@@ -24,7 +24,7 @@ public class Reflect2Test {
         MethodAccessor methodAccessor = container.getProxyBean(User.class);
         long t = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
-            methodAccessor.set(user, "setZone","zhangsan");
+            methodAccessor.set(user, "zone","zhangsan"+i);
             //System.out.println(userName);
 //            Method method = User.class.getMethod("setUserName", String.class);
 //            method.invoke(user, "zhansan");

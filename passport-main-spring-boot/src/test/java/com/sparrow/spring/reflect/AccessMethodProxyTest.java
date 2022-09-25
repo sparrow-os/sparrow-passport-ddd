@@ -1,12 +1,13 @@
 package com.sparrow.spring.reflect;
 
 import com.sparrow.passport.protocol.dto.BasicUserDTO;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class AccessMethodProxyTest {
     public static void main(
-        String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, InterruptedException {
+        String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, InterruptedException, NoSuchFieldException {
         BasicUserDTOMethodAccess basicUserMethodAccess = new BasicUserDTOMethodAccess();
         BasicUserDTO basicUser = new BasicUserDTO();
         basicUser.setUserName("zhangsan");
@@ -24,14 +25,17 @@ public class AccessMethodProxyTest {
 
         t = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
-            basicUser.setUserName("lisi");
-            basicUser.getUserName();
+            basicUser.setUserName("lisi"+i);
+//            basicUser.getUserName();
         }
         System.out.println("origin jdk cost:" + (System.currentTimeMillis() - t));
+        Field field = BasicUserDTO.class.getDeclaredField("userName");
+
         t = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
-            Method method = BasicUserDTO.class.getMethod("setUserName", String.class);
-            method.invoke(basicUser, "zhang san");
+            field.setAccessible(true);
+            field.set(basicUser,"zhangsan"+i);
+            //method.invoke(basicUser, "zhang san"+i);
         }
         System.out.println("reflect cost time " + (System.currentTimeMillis() - t));
     }

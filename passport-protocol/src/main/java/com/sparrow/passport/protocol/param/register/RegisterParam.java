@@ -1,8 +1,9 @@
 package com.sparrow.passport.protocol.param.register;
 
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.POJO;
 
-public abstract class RegisterParam {
+public abstract class RegisterParam implements POJO {
     public RegisterParam() {
     }
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <!-- 请求编码过滤器 -->
+    <filter>
+        <filter-name>CharSetEncoding</filter-name>
+        <filter-class>com.sparrow.support.web.CharSetEncodingFilter</filter-class>
+    </filter>
+
+
+    <filter-mapping>
+        <filter-name>CharSetEncoding</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <!--Bean容器初始化侦听器 -->
+    <listener>
+        <listener-class>com.sparrow.mvc.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- 生成验证码 -->
+    <servlet>
+        <servlet-name>ValidateCode</servlet-name>
+        <servlet-class>com.sparrow.web.support.ValidateCode</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValidateCode</servlet-name>
+        <url-pattern>/ValidateCode</url-pattern>
+    </servlet-mapping>
+
+    <!-- ActionFilter -->
+    <filter>
+        <filter-name>DispatcherFilter</filter-name>
+        <filter-class>com.sparrow.mvc.DispatcherFilter</filter-class>
+        <init-param>
+            <param-name>except_url</param-name>
+            <param-value>/ValidateCode</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>DispatcherFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DispatcherFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <session-config>
+        <!-- session超时时间单位为分钟 -->
+        <session-timeout>120</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

@@ -18,9 +18,6 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
 
     public Object get(Object o, String methodName) {
         com.sparrow.passport.protocol.dto.BasicUserDTO basicUserDTO = (com.sparrow.passport.protocol.dto.BasicUserDTO) o;
-        BiFunction f=getMap.get("getNickName");
-        //f.apply(o,methodName);
-        //return null;
         return getMap.get(methodName).apply(basicUserDTO, methodName);
     }
 

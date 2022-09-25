@@ -20,7 +20,7 @@
         <module>passport-domain</module>
         <module>passport-infrastructure</module>
         <module>passport-sparrow-dao</module>
-        <module>passport-main-mvc</module>
+        <module>passport-main-sparrow</module>
         <module>passport-main-spring-boot</module>
         <module>passport-adapter</module>
         <module>passport-mybatis</module>
