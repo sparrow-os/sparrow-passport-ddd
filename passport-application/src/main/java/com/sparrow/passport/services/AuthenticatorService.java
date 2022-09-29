@@ -16,8 +16,10 @@
  */
 package com.sparrow.passport.services;
 
-import com.sparrow.support.AbstractAuthenticatorService;
 import com.sparrow.passport.domain.DomainRegistry;
+import com.sparrow.protocol.LoginToken;
+import com.sparrow.support.AbstractAuthenticatorService;
+import com.sparrow.support.Authenticator;
 import javax.inject.Inject;
 import javax.inject.Named;
 
