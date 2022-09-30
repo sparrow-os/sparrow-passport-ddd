@@ -7,12 +7,18 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 public class JwtUtils {
-    private long expire=7;
+    private long expire=7*60*60;
     private String secret="123456";
+
+    public static void main(String[] args) {
+        JwtUtils jwtUtils=new JwtUtils();
+        LoginToken loginToken=new LoginToken();
+        loginToken.setUserId(1L);
+        loginToken.setUserName("admin");
+        System.out.println(jwtUtils.generateToken(loginToken));
+    }
 
     private Json json= JsonFactory.getProvider();
 

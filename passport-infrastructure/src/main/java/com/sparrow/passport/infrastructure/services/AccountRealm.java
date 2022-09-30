@@ -8,18 +8,24 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-@Named
 public class AccountRealm extends AuthorizingRealm {
-//    @Inject
     private JwtUtils jwtUtils;
+
+    public AccountRealm(CacheManager cacheManager,
+        JwtUtils jwtUtils) {
+        super(cacheManager);
+        this.jwtUtils = jwtUtils;
+    }
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JwtToken;
+        return token instanceof UsernamePasswordToken;
     }
 
     @Override
