@@ -3,6 +3,7 @@ package com.sparrow.passport.infrastructure.support.shiro;
 import io.jsonwebtoken.Claims;
 import java.io.IOException;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,12 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 public class JwtFilter extends AuthenticatingFilter {
+    public JwtFilter(JwtUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
 
-    @Inject
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
@@ -42,7 +44,8 @@ public class JwtFilter extends AuthenticatingFilter {
     }
 
     @Override
-    protected AuthenticationToken createToken(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
+    protected AuthenticationToken createToken(ServletRequest servletRequest,
+        ServletResponse servletResponse) throws Exception {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String jwt = request.getHeader("Authorization");
         if (StringUtils.isEmpty(jwt)) {
@@ -52,7 +55,8 @@ public class JwtFilter extends AuthenticatingFilter {
     }
 
     @Override
-    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,
+        ServletResponse response) {
 
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
