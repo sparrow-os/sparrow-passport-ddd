@@ -1,14 +1,8 @@
 package com.sparrow.passport.infrastructure.support.shiro;
 
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.AuthenticationToken;
 
-public class JwtToken extends UsernamePasswordToken {
-
-    public JwtToken(String username, String password, String host, String token) {
-        super(username, password, host);
-        this.token = token;
-    }
-
+public class JwtToken implements AuthenticationToken {
     private String token;
 
     public JwtToken(String jwt) {
@@ -23,9 +17,5 @@ public class JwtToken extends UsernamePasswordToken {
     @Override
     public Object getCredentials() {
         return token;
-    }
-
-    @Override public boolean isRememberMe() {
-        return true;
     }
 }

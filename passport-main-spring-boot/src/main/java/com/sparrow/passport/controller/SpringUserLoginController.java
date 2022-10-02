@@ -33,12 +33,17 @@ public class SpringUserLoginController {
     public String sessionId(HttpServletRequest request) throws BusinessException {
         return request.getSession().getId();
     }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
-    @PostMapping("/login")
+
+    @PostMapping("/login.json")
     public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
         try {
             //使用shiro 编写认证操作
-            JwtToken token = new JwtToken(login.getUserName(),login.getPassword());
+            UsernamePasswordToken token = new UsernamePasswordToken(login.getUserName(),login.getPassword());
             //拿到subject
             Subject subject = SecurityUtils.getSubject();
             // 执行登陆方法
