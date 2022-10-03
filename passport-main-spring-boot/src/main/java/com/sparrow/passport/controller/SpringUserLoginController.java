@@ -8,17 +8,11 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,7 +32,8 @@ public class SpringUserLoginController {
     public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
         try {
             //使用shiro 编写认证操作
-            JwtToken token = new JwtToken(login.getUserName(),login.getPassword());
+            JwtToken token = new JwtToken(login.getUserName(),
+                login.getPassword(),client.getIp());
             //拿到subject
             Subject subject = SecurityUtils.getSubject();
             // 执行登陆方法

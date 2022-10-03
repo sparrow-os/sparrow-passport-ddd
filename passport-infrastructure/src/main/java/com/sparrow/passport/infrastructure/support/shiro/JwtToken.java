@@ -4,9 +4,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 
 public class JwtToken extends UsernamePasswordToken {
 
-    public JwtToken(String username, String password, String host, String token) {
+    public JwtToken(String username,
+        String password,
+        String host) {
         super(username, password, host);
-        this.token = token;
     }
 
     private String token;
