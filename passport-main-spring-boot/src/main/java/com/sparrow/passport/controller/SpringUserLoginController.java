@@ -43,6 +43,7 @@ public class SpringUserLoginController {
     public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
         try {
             //使用shiro 编写认证操作
+            //
             UsernamePasswordToken token = new UsernamePasswordToken(login.getUserName(),login.getPassword());
             //拿到subject
             Subject subject = SecurityUtils.getSubject();
