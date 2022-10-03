@@ -2,7 +2,10 @@ package com.sparrow.passport.config;
 
 import com.sparrow.passport.JwtFilter;
 import com.sparrow.passport.infrastructure.services.AccountRealm;
+import com.sparrow.passport.infrastructure.services.JwtRealm;
 import com.sparrow.passport.infrastructure.support.shiro.JwtUtils;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,6 +15,8 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
@@ -23,6 +28,7 @@ import org.crazycake.shiro.IRedisManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,7 +48,16 @@ public class ShiroConfig {
     public AccountRealm accountRealm(JwtUtils jwtUtils, CacheManager cacheManager) {
         return new AccountRealm(cacheManager, jwtUtils);
     }
+    @Bean
+    public JwtRealm jwtRealm(JwtUtils jwtUtils,CacheManager cacheManager){
+        return new JwtRealm(cacheManager,jwtUtils);
+    }
 
+
+    @Bean
+    public JwtDefaultSubjectFactory subjectFactory(){
+        return new JwtDefaultSubjectFactory();
+    }
     @Bean
     public IRedisManager redisManager() {
         return new RedisManager();
@@ -90,10 +105,17 @@ public class ShiroConfig {
 
     @Bean
     public DefaultWebSecurityManager securityManager(AccountRealm accountRealm,
-        CacheManager cacheManager,RedisSessionDAO redisSessionDao) {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(accountRealm);
-        securityManager.setSessionManager(defaultWebSessionManager(redisSessionDao));
-        securityManager.setCacheManager(cacheManager);
+        JwtRealm jwtRealm,
+        CacheManager cacheManager,RedisSessionDAO redisSessionDao, JwtDefaultSubjectFactory subjectFactory) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setSubjectFactory(subjectFactory);
+        //securityManager.setSessionManager(defaultWebSessionManager(redisSessionDao));
+        //securityManager.setCacheManager(cacheManager);
+        Collection<Realm> authorizingRealms=new ArrayList<>();
+        authorizingRealms.add(accountRealm);
+        authorizingRealms.add(jwtRealm);
+        securityManager.setRealms(authorizingRealms);
+        //subjectDAO.sessionStorageEvaluator.sessionStorageEnabled
         /*
          * 关闭shiro自带的session，详情见文档
          */
@@ -109,24 +131,39 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/**", "jwt");
-        chainDefinition.addPathDefinitions(filterMap);
+        chainDefinition.addPathDefinition("/favicon.ico", "anon");
+        chainDefinition.addPathDefinition("/login", "anon");
+        chainDefinition.addPathDefinition("/login.json", "anon");
+
+        chainDefinition.addPathDefinition("/**", "jwt");
         return chainDefinition;
     }
 
     @Bean("shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,
-        ShiroFilterChainDefinition shiroFilterChainDefinition, JwtFilter jwtFilter) {
+        ShiroFilterChainDefinition shiroFilterChainDefinition, FilterRegistrationBean jwtFilterRegBean) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         shiroFilter.setLoginUrl("/login");
         shiroFilter.setUnauthorizedUrl("/403");
         Map<String, Filter> filters = new HashMap<>();
-        filters.put("jwt", jwtFilter);
+        filters.put("jwt", jwtFilterRegBean.getFilter());
         shiroFilter.setFilters(filters);
         Map<String, String> filterMap = shiroFilterChainDefinition.getFilterChainMap();
         shiroFilter.setFilterChainDefinitionMap(filterMap);
         return shiroFilter;
+    }
+
+
+    /**
+     * 配置JwtFilter过滤器,并设置为未注册状态
+     */
+    @Bean
+    public FilterRegistrationBean jwtFilterRegBean(JwtFilter jwtFilter) {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        //添加JwtFilter  并设置为未注册状态
+        filterRegistrationBean.setFilter(jwtFilter);
+        filterRegistrationBean.setEnabled(false);
+        return filterRegistrationBean;
     }
 }

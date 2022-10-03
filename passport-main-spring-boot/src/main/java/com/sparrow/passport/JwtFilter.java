@@ -24,6 +24,10 @@ public class JwtFilter extends AuthenticatingFilter {
 
     private JwtUtils jwtUtils;
 
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        return false;
+    }
+
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
 
