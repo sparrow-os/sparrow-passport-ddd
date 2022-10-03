@@ -1,7 +1,9 @@
 package com.sparrow.passport.infrastructure.support.shiro;
+/**
+ * add
+ */
 
 import org.apache.shiro.authc.AuthenticationToken;
-
 public class JwtToken implements AuthenticationToken {
     private String token;
 
