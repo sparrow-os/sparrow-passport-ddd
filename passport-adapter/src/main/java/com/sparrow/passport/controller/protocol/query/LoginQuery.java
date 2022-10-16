@@ -1,6 +1,7 @@
 package com.sparrow.passport.controller.protocol.query;
 
 import com.sparrow.protocol.VO;
+import com.sparrow.utility.StringUtility;
 
 /**
  * login query dto
@@ -56,6 +57,9 @@ public class LoginQuery implements VO {
     }
 
     public String getRedirectUrl() {
+        if (StringUtility.isNullOrEmpty(this.redirectUrl)) {
+            return "/login-success";
+        }
         return redirectUrl;
     }
 

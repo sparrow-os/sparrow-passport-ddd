@@ -2,30 +2,21 @@ package com.sparrow.passport.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
-import com.sparrow.passport.infrastructure.support.shiro.JwtToken;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 //@RequestMapping("/")
 public class SpringUserLoginController {
-
-
     @Autowired
     private UserLoginController userLoginController;
 
@@ -33,31 +24,20 @@ public class SpringUserLoginController {
     public String sessionId(HttpServletRequest request) throws BusinessException {
         return request.getSession().getId();
     }
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+
+    @PostMapping("/login.do")
+    /**
+     * @RequestBody DispatcherServlet Completed 415 UNSUPPORTED_MEDIA_TYPE
+     */
+    public ModelAndView login(LoginQuery login,
+        ClientInformation client) throws BusinessException, CacheNotFoundException {
+        LoginToken loginToken = this.userLoginController.login(login, client);
+        ModelAndView mv = new ModelAndView(login.getRedirectUrl());
+        mv.addObject(loginToken);
+        return mv;
     }
 
-
-    @PostMapping("/login.json")
-    public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
-        try {
-            //使用shiro 编写认证操作
-            //
-            UsernamePasswordToken token = new UsernamePasswordToken(login.getUserName(),login.getPassword());
-            //拿到subject
-            Subject subject = SecurityUtils.getSubject();
-            // 执行登陆方法
-            subject.login(token);
-            // 执行到这里说明用户已登录成功
-            return new LoginToken();
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-        //return this.userLoginController.login(login, client);
-    }
-
+    @PostMapping("/shortcut-login.json")
     public LoginToken shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
         return this.userLoginController.shortcut(login, client);
     }
