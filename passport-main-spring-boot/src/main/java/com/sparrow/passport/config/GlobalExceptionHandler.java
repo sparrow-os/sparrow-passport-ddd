@@ -28,13 +28,9 @@ public class GlobalExceptionHandler {
         String contentType = request.getContentType();
         if (Constant.CONTENT_TYPE_FORM.equals(contentType)) {
             ModelAndView mv = new ModelAndView("redirect:/error");
-            Result error = Result.fail(e);
-            attr.addFlashAttribute("result", error);
+            attr.addFlashAttribute("result", Result.fail(e));
             attr.addFlashAttribute("ref", servletContainer.referer());
             return mv;
-        }
-        if (Constant.CONTENT_TYPE_JSON.equals(contentType)) {
-            return Result.fail(e);
         }
         return Result.fail(e);
     }
