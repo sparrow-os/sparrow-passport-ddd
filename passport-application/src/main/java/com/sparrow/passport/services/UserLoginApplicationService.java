@@ -30,8 +30,6 @@ public class UserLoginApplicationService implements UserLoginService {
         Integer rememberDays =15; //domainRegistry.getCodeService().getIntegerValueByCode(ConfigKeyDB.USER_LOGIN_REMEMBER_DAYS);
         Long loginCent = 10L;//domainRegistry.getCodeService().getLongValueByCode(ConfigKeyDB.USER_CENT_LOGIN);
         securityPrincipal.setLoginInfo(new Login(login.getPassword(), encryptLoginPassword, login.getRemember(), loginCent.intValue(), rememberDays));
-        LoginToken loginToken = securityPrincipalService.login(securityPrincipal, login.getClient(), this.domainRegistry);
-        loginToken.setPermission(this.authenticatorService.sign(loginToken, encryptLoginPassword));
-        return loginToken;
+        return securityPrincipalService.login(securityPrincipal, login.getClient(), this.domainRegistry);
     }
 }

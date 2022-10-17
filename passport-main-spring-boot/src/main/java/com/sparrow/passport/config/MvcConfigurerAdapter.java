@@ -1,5 +1,6 @@
 package com.sparrow.passport.config;
 
+import com.sparrow.passport.ValidateCode;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.ClientInfoConstant;
 import com.sparrow.protocol.constant.Constant;
@@ -15,6 +16,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -28,6 +31,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfigurerAdapter implements WebMvcConfigurer {
     private static Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
     private ServletUtility servletUtility = ServletUtility.getInstance();
+
+    @Bean
+    public ServletRegistrationBean servletTLReportServlet() {
+        return new ServletRegistrationBean(new ValidateCode(), "/validate-code");
+    }
 
     /**
      * 配置静态访问资源

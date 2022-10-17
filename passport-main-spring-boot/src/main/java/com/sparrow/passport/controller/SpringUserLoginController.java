@@ -7,19 +7,16 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 //@RequestMapping("/")
 public class SpringUserLoginController {
-
-
     @Autowired
     private UserLoginController userLoginController;
 
@@ -28,11 +25,19 @@ public class SpringUserLoginController {
         return request.getSession().getId();
     }
 
-    @PostMapping("/login")
-    public LoginToken login(@RequestBody LoginQuery login,ClientInformation client) throws BusinessException, CacheNotFoundException {
-        return this.userLoginController.login(login, client);
+    @PostMapping("/login.do")
+    /**
+     * @RequestBody DispatcherServlet Completed 415 UNSUPPORTED_MEDIA_TYPE
+     */
+    public ModelAndView login(LoginQuery login,
+        ClientInformation client) throws BusinessException, CacheNotFoundException {
+        LoginToken loginToken = this.userLoginController.login(login, client);
+        ModelAndView mv = new ModelAndView(login.getRedirectUrl());
+        mv.addObject(loginToken);
+        return mv;
     }
 
+    @PostMapping("/shortcut-login.json")
     public LoginToken shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
         return this.userLoginController.shortcut(login, client);
     }

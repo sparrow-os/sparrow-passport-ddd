@@ -5,7 +5,7 @@ source /etc/profile
 [ -z "$SPARROW_CODER_HOME" ] && echo "please config environment variable SPARROW_CODER_HOME" && exit 0
 
 # 生成ddl
-# sh coder.sh -ct com.sparrow.user.infrastructure.persistence.po.User
+# sh coder.sh -ct com.sparrow.passport.po.User
 #
 
 

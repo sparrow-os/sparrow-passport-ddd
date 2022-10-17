@@ -9,5 +9,4 @@ public interface UserDAO extends DaoSupport<User, Long> {
     List<User> queryList(UserQueryDTO userQuery);
 
     Integer getCount(UserQueryDTO userQuery);
-
 }

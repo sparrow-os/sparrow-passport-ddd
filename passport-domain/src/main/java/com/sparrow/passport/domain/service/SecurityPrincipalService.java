@@ -1,15 +1,7 @@
 package com.sparrow.passport.domain.service;
 
-import com.sparrow.constant.ConfigKeyDB;
 import com.sparrow.constant.SparrowError;
-import com.sparrow.enums.UserType;
 import com.sparrow.exception.Asserts;
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
-import com.sparrow.protocol.constant.magic.Symbol;
-import com.sparrow.protocol.enums.StatusRecord;
-import com.sparrow.support.mobile.ShortMessageService;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipal;
 import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
@@ -17,7 +9,15 @@ import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.domain.object.value.Password;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
+import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.LoginToken;
+import com.sparrow.protocol.constant.magic.Symbol;
+import com.sparrow.protocol.enums.StatusRecord;
+import com.sparrow.support.Authenticator;
+import com.sparrow.support.mobile.ShortMessageService;
 import com.sparrow.utility.DateTimeUtility;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 @Named
 public class SecurityPrincipalService {
     private static Logger logger = LoggerFactory.getLogger(SecurityPrincipalService.class);
+    @Inject
+    private Authenticator authenticatorService;
 
     public SecurityPrincipal findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
@@ -82,7 +84,8 @@ public class SecurityPrincipalService {
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
         Integer tokenExpireDays = securityPrincipal.getLoginInfo().getTokenExpireDays();
-        return LoginToken.create(securityPrincipal.getUserId(),
+
+        LoginToken loginToken = LoginToken.create(securityPrincipal.getUserId(),
             securityPrincipal.getUserName(),
             "",
             "",
@@ -91,6 +94,8 @@ public class SecurityPrincipalService {
             securityPrincipal.getActivate(),
             tokenExpireDays
         );
+        loginToken.setPermission(this.authenticatorService.sign(loginToken, securityPrincipal.getLoginInfo().getEncryptPassword()));
+        return loginToken;
     }
 
     public EmailFindPasswordToken getFindPasswordEmailToken(String email,
