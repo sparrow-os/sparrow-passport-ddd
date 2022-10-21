@@ -5,6 +5,7 @@ import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
+import com.sparrow.protocol.Result;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

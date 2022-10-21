@@ -23,6 +23,7 @@ public class UserLoginControllerProxy {
     @RequestParameters("login,client")
     public ViewWithModel login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
+        System.err.println("error test");
         LoginToken loginToken = userLoginController.login(login, client);
         String welcomePage = ConfigUtility.getValue(Config.DEFAULT_WELCOME_INDEX);
         if (StringUtility.isNullOrEmpty(login.getRedirectUrl())||login.getRedirectUrl().equals("/")) {
@@ -35,6 +36,7 @@ public class UserLoginControllerProxy {
 
     @RequestParameters("login,client")
     public LoginToken shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
+        System.err.println("error test");
         return userLoginController.shortcut(login, client);
     }
     public void logout() {

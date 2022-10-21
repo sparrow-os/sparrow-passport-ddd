@@ -37,6 +37,10 @@
             <artifactId>passport-infrastructure</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.sparrow</groupId>
+            <artifactId>sparrow-json</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sparrow.passport</groupId>
             <artifactId>passport-adapter</artifactId>
         </dependency>

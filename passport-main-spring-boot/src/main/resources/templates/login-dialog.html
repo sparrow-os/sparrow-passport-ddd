@@ -1,24 +1,24 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
-<%@taglib uri="http://www.sparrowzoo.com/ui" prefix="j" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>快捷登录</title>
-    <j:style href="$resource/styles/pure-css/pure-min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
     <!--[if lte IE 8]>
-    <j:style href="$resource/styles/layouts-old-ie.css"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <j:style href="$resource/styles/layouts.css"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts.css?v=1.0"/>
     <!--<![endif]-->
-    <j:style href="$resource/styles/sparrow.css"/>
-    <j:script src="$resource/scripts/sparrow.js"/>
-    <j:script src="$resource/ext/scripts/system/language/$language/user.js"/>
-    <j:script src="$resource/ext/scripts/passport.js"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/sparrow.css?v=1.0"/>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/passport.js?v=1.0"></script>
 
 
-    <meta name="application-name" content="${website_name}"/>
-    <meta name="msapplication-tooltip" content="${website_name}"/>
+    <meta name="application-name" content="麻雀窝"/>
+    <meta name="msapplication-tooltip" content="麻雀窝"/>
 </head>
 
 <body style="width: 650px; height:450px;">
@@ -47,7 +47,7 @@
                         <input class="input" type="text" name="userName"
                                onfocus="$.v.showMessage(loginInfo,this);"
                                onblur="$.v.isNull(loginInfo,this);" id="txtUserName"/>
-                        <j:span id="errorUserName" name="login_user_name" cssClass="pure-form-message-inline"/>
+                        <span id="errorUserName" name="login_user_name" class="pure-form-message-inline"></span>
                     </div>
                     <div class="pure-control-group">
                         <label>
@@ -58,7 +58,7 @@
                                onfocus="$.v.showMessage(loginInfo,this);"
                                onblur="$.v.isNull(loginInfo,this);" id="txtPassword"
                                name="password"/>
-                        <j:span id="errorPassword" name="login_password" cssClass="pure-form-message-inline"/>
+                        <span id="errorPassword" name="login_password" class="pure-form-message-inline"></span>
                     </div>
                     <div class="pure-control-group">
                         <label>
@@ -69,29 +69,29 @@
                                maxlength="4" name="validateCode" id="txtValidateCode"/>
 
                         <img id="imgLoginValidateCode"
-                             onclick="$(this).fresh()" src="${rootPath}/ValidateCode"/>
+                             onclick="$(this).fresh()" src="/validate-code"/>
                         <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
                     </div>
 
                     <div class="pure-controls">
-                        <j:span id="errorValidateCode" name="login_validate_code" cssClass="prompt"/>
+                        <span id="errorValidateCode" name="login_validate_code" class="prompt"></span>
                         <label for="chbLoginDays" class="pure-checkbox">
                             <input id="chbLoginDays" value="14" name="loginDays" type="checkbox"> 两周直接登录(家庭登录模式)<a
-                                href="${root_path}/password/find-by-email">忘记密码</a><br/>
+                                href="http://localhost:2222/password/find-by-email">忘记密码</a><br/>
                             <span class="highlight">温馨提示</span>为了您的密码安全,如果您在网吧等公共场所请不要勾选此项
                         </label>
 
-                        <button onenter="true" id="btnLogin"type="button"
+                        <button onenter="true" id="btnLogin" type="button"
                                 class="pure-button pure-button-primary">登录
                         </button>
                     </div>
                 </fieldset>
-                <j:hidden name="redirectUrl" id="hdnRedirectUrl"/>
+                <input type="hidden" id="hdnRedirectUrl" name="redirectUrl" class=""/>
             </form>
         </div>
         <div id="divShortCutRegister" class="none">
             <form method="post" class="pure-form pure-form-aligned">
-                <j:hidden name="introducer" id="hdnIntroducer"/>
+                <input type="hidden" id="hdnIntroducer" name="introducer" class=""/>
                 <fieldset>
                     <div class="pure-control-group">
 
@@ -99,14 +99,14 @@
                         <input type="text" tabindex="1"
                                onfocus="$.v.showMessage(regInfo,this);" onblur="$.register.validate.email(this);"
                                name="email" id="txtEmail"/>
-                        <j:span name="register_user_email" id="errorEmail" cssClass="prompt"/>
+                        <span id="errorEmail" name="register_user_email" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 用户名 </label>
                         <input type="text" tabIndex="2"
                                onfocus='$.v.showMessage(regInfo,this);' onblur='$.register.validate.user(this);'
                                name="userName" id="txtRegUserName"/>
-                        <j:span name="register_user_name" id="errorRegUserName" cssClass="prompt"/>
+                        <span id="errorRegUserName" name="register_user_name" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 登陆密码 </label> <input class="input" type="password"
@@ -131,18 +131,18 @@
                                onblur="$.v.isNull(regInfo,this);" maxlength="4"
                                name="validateCode" id="txtRegValidateCode"/>
                         <img alt="validate code" align="absMiddle" id="imgValidateCode" onclick="$(this).fresh();"
-                             src="ValidateCode"/>
+                             src="validate-code"/>
                         <a href="javascript:$('#imgValidateCode').fresh();"> 看不清 换一张</a>
                     </div>
                     <div class="pure-controls">
-                        <j:span id="errorRegValidateCode" name="register_validate_code" cssClass="prompt"/>
+                        <span id="errorRegValidateCode" name="register_validate_code" class="prompt"></span>
                         <br/>
                         <button onenter="true" id="btnRegister" type="button"
                                 class="pure-button pure-button-primary">注册
                         </button>
 
                         <br/> <br/> <a target="_blank"
-                                       href="${rootPath}/provision.jsp">${website_name}服务条款</a>
+                                       href="/provision.jsp">麻雀窝服务条款</a>
                     </div>
                 </fieldset>
             </form>

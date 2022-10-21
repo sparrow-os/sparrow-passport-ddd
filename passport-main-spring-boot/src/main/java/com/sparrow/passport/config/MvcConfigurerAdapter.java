@@ -13,6 +13,7 @@ import eu.bitwalker.useragentutils.DeviceType;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,11 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -31,6 +34,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfigurerAdapter implements WebMvcConfigurer {
     private static Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
     private ServletUtility servletUtility = ServletUtility.getInstance();
+
+    @Inject
+    private VOJsonMessageConverter jsonMessageConverter;
+
+    @Inject
+    private VOListJsonMessageConverter listJsonMessageConverter;
+
+    @Override public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(this.jsonMessageConverter);
+        converters.add(this.listJsonMessageConverter);
+    }
 
     @Bean
     public ServletRegistrationBean servletTLReportServlet() {
