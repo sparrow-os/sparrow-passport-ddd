@@ -7,22 +7,13 @@ public abstract class RegisterParam implements POJO {
     public RegisterParam() {
     }
 
-    /**
-     * 密码
-     */
+
     protected String password;
-    /**
-     * 密码确认
-     */
+
     protected String passwordConfirm;
-    /**
-     * 验证码
-     */
+
     protected String validateCode;
 
-    /**
-     * 介绍人
-     */
     protected String introducer;
 
     private ClientInformation client;

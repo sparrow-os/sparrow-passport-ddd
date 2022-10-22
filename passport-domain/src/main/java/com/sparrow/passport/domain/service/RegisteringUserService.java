@@ -1,15 +1,20 @@
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.constant.Config;
+import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
+import com.sparrow.passport.domain.object.value.EmailActivateToken;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.protocol.constant.magic.Symbol;
+import com.sparrow.utility.ConfigUtility;
+import com.sparrow.utility.DateTimeUtility;
 import javax.inject.Named;
 
 @Named
@@ -54,5 +59,33 @@ public class RegisteringUserService {
             client.getDeviceId(),
             false,
             1);
+    }
+
+    public void sendActivateEmail(RegisteringUserEntity registeringUserEntity,
+        DomainRegistry domainRegistry) throws BusinessException {
+        String currentDate = DateTimeUtility.getFormatCurrentTime();
+        EmailActivateToken emailActivateToken = EmailActivateToken
+            .createToken(registeringUserEntity.getUserId(),
+                registeringUserEntity.getUserName(),
+                registeringUserEntity.getEmail(),
+                registeringUserEntity.getPassword(),
+                currentDate,
+                domainRegistry);
+        String content = emailActivateToken.generateContent();
+
+        String language = ConfigUtility.getValue(Config.LANGUAGE);
+        String activateEmailSubject = ConfigUtility
+            .getLanguageValue(ConfigKeyLanguage.EMAIL_ACTIVATE_SUBJECT,
+                language);
+
+        domainRegistry.getEmailService().send(registeringUserEntity.getEmail(),
+            activateEmailSubject,
+            content,
+            language);
+    }
+
+    public void activeByEmail(RegisteringUserEntity registeringUserEntity,
+        DomainRegistry domainRegistry) {
+
     }
 }

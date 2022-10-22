@@ -3,6 +3,7 @@ package com.sparrow.passport.controller;
 import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.User;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
+import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/register")
 public class SpringUserRegisterController {
+    
     @Autowired
     private UserRegisterController userRegisterController;
 
     @PostMapping("/email/shortcut")
-    public LoginToken shortcut(@RequestBody EmailRegisterParam user, ClientInformation client) throws BusinessException {
+    public LoginToken shortcut(@RequestBody EmailRegisterParam user,
+        ClientInformation client) throws BusinessException {
         return userRegisterController.shortcut(user, client);
     }
 
@@ -29,5 +32,11 @@ public class SpringUserRegisterController {
     public LoginToken emailRegister(@RequestBody EmailRegisterParam user,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
         return this.userRegisterController.emailRegister(user, client);
+    }
+
+    @PostMapping("/email/activate")
+    public void emailActivate(@RequestBody EmailActivateParam user,
+        ClientInformation client) throws BusinessException {
+        this.userRegisterController.sendTokenToEmail(user, client);
     }
 }

@@ -4,6 +4,7 @@ import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
@@ -47,5 +48,11 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         String token = authenticatorService.sign(login, user.getPassword());
         servletContainer.rootCookie(User.PERMISSION, token, login.getDays());
         return login;
+    }
+
+    @Override public void sendTokenToEmail(EmailActivateParam emailActivateParam,
+        ClientInformation client) throws BusinessException {
+        emailActivateParam.setClient(client);
+        this.registeringUserApplicationService.sendTokenToEmail(emailActivateParam);
     }
 }

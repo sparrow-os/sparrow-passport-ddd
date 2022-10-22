@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+
 @Named
 public class UserLoginControllerImpl implements UserLoginController {
     @Inject

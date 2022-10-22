@@ -1,5 +1,6 @@
 package com.sparrow.passport.infrastructure.services;
 
+import com.sparrow.passport.domain.service.EmailService;
 import com.sparrow.support.mobile.ShortMessageService;
 import com.sparrow.passport.domain.service.EncryptionService;
 import com.sparrow.passport.domain.service.RegisteringUserService;
@@ -24,10 +25,12 @@ public class SparrowDomainRegistry implements DomainRegistry {
     @Inject
     private UserLimitService userLimitService;
 
-//    @Inject
+    //    @Inject
     private ShortMessageService shortMessageService;
     @Inject
     private EncryptionService encryptionService;
+    @Inject
+    private EmailService emailService;
 
     @Override public RegisteringUserRepository getRegisteringUserRepository() {
         return this.registeringUserRepository;
@@ -37,11 +40,9 @@ public class SparrowDomainRegistry implements DomainRegistry {
         return this.securityPrincipalService;
     }
 
-
     @Override public UserLimitService getUserLimitService() {
         return this.userLimitService;
     }
-
 
     @Override public SecurityPrincipalRepository getSecurityPrincipalRepository() {
         return this.securityPrincipalRepository;
@@ -57,5 +58,9 @@ public class SparrowDomainRegistry implements DomainRegistry {
 
     @Override public RegisteringUserService getRegisteringUserService() {
         return registeringUserService;
+    }
+
+    @Override public EmailService getEmailService() {
+        return emailService;
     }
 }
