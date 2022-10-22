@@ -36,11 +36,11 @@ public class VOJsonMessageConverter extends AbstractHttpMessageConverter<VO> {
     @Override
     protected void writeInternal(VO result,
         HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-        Result<VO> voResult = new Result<VO>(result);
         if (result instanceof Result) {
             outputMessage.getBody().write(this.json.toString(result).getBytes());
             return;
         }
+        Result<VO> voResult = new Result<VO>(result);
         outputMessage.getBody().write(this.json.toString(voResult).getBytes());
     }
 }

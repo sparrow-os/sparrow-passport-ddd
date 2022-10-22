@@ -8,17 +8,19 @@ import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
+import com.sparrow.protocol.Result;
 import com.sparrow.protocol.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/register")
 public class SpringUserRegisterController {
-    
+
     @Autowired
     private UserRegisterController userRegisterController;
 
@@ -34,9 +36,10 @@ public class SpringUserRegisterController {
         return this.userRegisterController.emailRegister(user, client);
     }
 
-    @PostMapping("/email/activate")
-    public void emailActivate(@RequestBody EmailActivateParam user,
+    @PostMapping("/email/activate/send")
+    public ModelAndView emailActivate(EmailActivateParam user,
         ClientInformation client) throws BusinessException {
         this.userRegisterController.sendTokenToEmail(user, client);
+        return new ModelAndView("redirect:/email-activate-success");
     }
 }
