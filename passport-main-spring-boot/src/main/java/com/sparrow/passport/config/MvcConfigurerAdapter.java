@@ -3,7 +3,6 @@ package com.sparrow.passport.config;
 import com.sparrow.passport.ValidateCode;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.ClientInfoConstant;
-import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.enums.Platform;
 import com.sparrow.support.web.ServletUtility;
 import com.sparrow.utility.StringUtility;
@@ -25,7 +24,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -42,6 +40,10 @@ public class MvcConfigurerAdapter implements WebMvcConfigurer {
     private VOListJsonMessageConverter listJsonMessageConverter;
 
     @Override public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        /**
+         * 只对输出结果对象提供转换
+         * 基本数据类型直接返回Result,不支持封装转换f
+         */
         converters.add(this.jsonMessageConverter);
         converters.add(this.listJsonMessageConverter);
     }

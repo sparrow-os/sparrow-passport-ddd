@@ -50,9 +50,10 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         return login;
     }
 
-    @Override public void sendTokenToEmail(EmailActivateParam emailActivateParam,
+    @Override public Boolean sendTokenToEmail(EmailActivateParam emailActivateParam,
         ClientInformation client) throws BusinessException {
         emailActivateParam.setClient(client);
         this.registeringUserApplicationService.sendTokenToEmail(emailActivateParam);
+        return true;
     }
 }

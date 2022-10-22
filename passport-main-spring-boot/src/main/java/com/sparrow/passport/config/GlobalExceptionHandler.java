@@ -32,7 +32,14 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(Exception.class)
-    public Object exceptionHandler(HttpServletRequest request, Exception exception) throws Exception {
+    public Object exceptionHandler(HttpServletRequest request, Exception exception,RedirectAttributes attr) throws Exception {
+        String contentType = request.getContentType();
+        if (Constant.CONTENT_TYPE_FORM.equals(contentType)) {
+            ModelAndView mv = new ModelAndView("redirect:/error");
+            attr.addFlashAttribute("result", Result.fail());
+            attr.addFlashAttribute("ref", servletContainer.referer());
+            return mv;
+        }
         return Result.fail();
     }
 }

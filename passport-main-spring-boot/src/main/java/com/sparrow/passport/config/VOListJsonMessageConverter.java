@@ -24,11 +24,11 @@ public class VOListJsonMessageConverter extends AbstractHttpMessageConverter<Lis
     }
 
     @Override
-    public boolean supports(Class clazz) {
-        if (List.class.getTypeParameters().length == 0) {
+    public boolean supports(Class<?> clazz) {
+        if (clazz.getTypeParameters().length == 0) {
             return false;
         }
-        return List.class.getTypeParameters()[0].getGenericDeclaration().isAssignableFrom(clazz);
+        return clazz.getTypeParameters()[0].getGenericDeclaration().isAssignableFrom(clazz);
     }
 
     @Override

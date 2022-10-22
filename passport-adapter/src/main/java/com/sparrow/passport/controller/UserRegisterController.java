@@ -7,15 +7,13 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 
-
 public interface UserRegisterController {
 
+    LoginToken shortcut(EmailRegisterParam user, ClientInformation client) throws BusinessException;
 
-    LoginToken shortcut(EmailRegisterParam user,ClientInformation client) throws BusinessException;
+    LoginToken emailRegister(EmailRegisterParam user,
+        ClientInformation client) throws BusinessException, CacheNotFoundException;
 
-
-    LoginToken emailRegister(EmailRegisterParam user, ClientInformation client) throws BusinessException, CacheNotFoundException;
-
-    void sendTokenToEmail(EmailActivateParam emailActivateParam,ClientInformation client) throws BusinessException;
+    Boolean sendTokenToEmail(EmailActivateParam emailActivateParam, ClientInformation client) throws BusinessException;
 
 }
