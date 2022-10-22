@@ -17,6 +17,7 @@ public class RegisteringUserEntity {
     private String passwordConfirm;
     private Long userId;
     private Long cent;
+    private Boolean activate;
 
     public String getUserName() {
         return userName;
@@ -81,5 +82,9 @@ public class RegisteringUserEntity {
         Asserts.isTrue(!passwordConfirm.equals(password), SparrowError.USER_PASSWORD_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
         Asserts.isTrue(StringUtility.isNullOrEmpty(email)&&StringUtility.isNullOrEmpty(mobile), SparrowError.SYSTEM_ILLEGAL_REQUEST);
         this.setPassword(domainRegistry.getEncryptionService().encryptPassword(this.getPassword()));
+    }
+
+    public void active(){
+        this.activate=true;
     }
 }

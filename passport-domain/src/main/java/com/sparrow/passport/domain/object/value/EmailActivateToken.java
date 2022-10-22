@@ -5,51 +5,53 @@ import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.enums.DateTimeUnit;
 import com.sparrow.exception.Asserts;
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.ddd.ValueObject;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.service.EncryptionService;
+import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ddd.ValueObject;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToken> {
+public class EmailActivateToken implements ValueObject<EmailActivateToken> {
     private DomainRegistry domainRegistry;
-
-    private static final String TOKEN_TYPE="fink-password";
-
-    public static EmailFindPasswordToken createToken(Long userId, String userName, String email, String password,
+    private EmailActivateToken(){}
+    private static final String TOKEN_TYPE="email-activate";
+    public static EmailActivateToken createToken(Long userId,
+        String userName,
+        String email,
+        String password,
         String currentDate,
         DomainRegistry domainRegistry) {
-        EmailFindPasswordToken emailPasswordToken = new EmailFindPasswordToken();
-        emailPasswordToken.userId = userId;
-        emailPasswordToken.userName = userName;
-        emailPasswordToken.sendDate = currentDate;
-        emailPasswordToken.email = email;
-        emailPasswordToken.domainRegistry = domainRegistry;
-        emailPasswordToken.password = password;
-        return emailPasswordToken;
+        EmailActivateToken emailActivateToken = new EmailActivateToken();
+        emailActivateToken.userId = userId;
+        emailActivateToken.userName = userName;
+        emailActivateToken.sendDate = currentDate;
+        emailActivateToken.email = email;
+        emailActivateToken.domainRegistry = domainRegistry;
+        emailActivateToken.password = password;
+        return emailActivateToken;
     }
 
-    public static EmailFindPasswordToken parse(EmailTokenPair emailTokenPair, String password,
+    public static EmailActivateToken parse(EmailTokenPair emailTokenPair,
+        String password,
         DomainRegistry domainRegistry) {
         if (emailTokenPair == null) {
             return null;
         }
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
-        EmailFindPasswordToken findPasswordOriginToken = new EmailFindPasswordToken();
-        findPasswordOriginToken.email = emailTokenPair.getEmail();
+        EmailActivateToken emailActivateToken = new EmailActivateToken();
+        emailActivateToken.email = emailTokenPair.getEmail();
 
         String originToken = encryptionService.decryptToken(emailTokenPair.getToken(), password);
         String[] array = originToken.split("\\|");
-        findPasswordOriginToken.tokenType=array[0];
-        findPasswordOriginToken.userId = Long.parseLong(array[1]);
-        findPasswordOriginToken.userName = array[2];
-        findPasswordOriginToken.sendDate = array[3];
-        findPasswordOriginToken.password = password;
-
-        return findPasswordOriginToken;
+        emailActivateToken.tokenType=array[0];
+        emailActivateToken.userId = Long.parseLong(array[1]);
+        emailActivateToken.userName = array[2];
+        emailActivateToken.sendDate = array[3];
+        emailActivateToken.password = password;
+        return emailActivateToken;
     }
 
     private Long userId;
@@ -61,10 +63,10 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
 
     private String generateOriginToken() {
         // 令牌原码
-        return "find-password|" + this.userId + "|" + this.userName + "|" + this.sendDate;
+        return TOKEN_TYPE+"|" + this.userId + "|" + this.userName + "|" + this.sendDate;
     }
 
-    public String generateToken() {
+    private String generateToken() {
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         String encryptedToken = encryptionService.generateToken(this.generateOriginToken(), this.password);
         return encryptionService.base64Encode(EmailTokenPair.create(this.email, encryptedToken).toString());
@@ -73,7 +75,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     public String generateContent() {
         String language = ConfigUtility.getValue(Config.LANGUAGE);
         return ConfigUtility
-            .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT,
+            .getLanguageValue(ConfigKeyLanguage.EMAIL_ACTIVATE_CONTENT,
                 language)
             .replace("$rootPath", ConfigUtility.getValue(Config.ROOT_PATH))
             .replace("$validateToken", this.generateToken())
@@ -99,9 +101,9 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof EmailFindPasswordToken))
+        if (!(o instanceof EmailActivateToken))
             return false;
-        EmailFindPasswordToken token = (EmailFindPasswordToken) o;
+        EmailActivateToken token = (EmailActivateToken) o;
         return
             userId.equals(token.userId) &&
                 userName.equals(token.userName) &&
@@ -114,7 +116,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         return Objects.hash(userId, userName, sendDate, email, password);
     }
 
-    @Override public boolean sameValueAs(EmailFindPasswordToken token) {
+    @Override public boolean sameValueAs(EmailActivateToken token) {
         if (this.hashCode() != token.hashCode()) {
             return false;
         }
