@@ -191,7 +191,7 @@ public class User implements POJO, Cloneable {
     }
 
     @MethodOrder(order = 15)
-    @Column(name = "activate", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否激活'", updatable = false)
+    @Column(name = "activate", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否激活'")
     public Boolean getActivate() {
         return this.activate;
     }
@@ -201,7 +201,7 @@ public class User implements POJO, Cloneable {
     }
 
     @MethodOrder(order = 16)
-    @Column(name = "activate_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '激活时间'", updatable = false)
+    @Column(name = "activate_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '激活时间'")
     public Long getActivateTime() {
         return activateTime;
     }

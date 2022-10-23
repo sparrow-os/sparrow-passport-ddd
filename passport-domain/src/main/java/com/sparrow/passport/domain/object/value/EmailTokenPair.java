@@ -31,6 +31,7 @@ public class EmailTokenPair {
             return null;
         }
         String[] pair = emailToken.split("\\|");
+
         return new EmailTokenPair(pair[0], pair[1]);
     }
 }

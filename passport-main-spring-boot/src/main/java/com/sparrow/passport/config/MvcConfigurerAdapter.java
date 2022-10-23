@@ -57,12 +57,10 @@ public class MvcConfigurerAdapter implements WebMvcConfigurer {
      * 配置静态访问资源
      * <p>
      * http://localhost:8000/s/static.html
-     *
-     * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/s/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Override public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {

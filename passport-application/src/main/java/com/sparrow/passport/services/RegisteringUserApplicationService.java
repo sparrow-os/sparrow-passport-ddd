@@ -2,6 +2,7 @@ package com.sparrow.passport.services;
 
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.api.UserRegisterService;
 import com.sparrow.passport.assemble.RegisteringUserApplicationAssemble;
@@ -36,12 +37,12 @@ public class RegisteringUserApplicationService implements UserRegisterService {
     }
 
     @Override public void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException {
-        RegisteringUserEntity registeringUserEntity=this.domainRegistry.getRegisteringUserRepository()
+        RegisteringUserEntity registeringUserEntity = this.domainRegistry.getRegisteringUserRepository()
             .findByEmail(emailActivateParam.getEmail());
-        this.domainRegistry.getRegisteringUserService().sendActivateEmail(registeringUserEntity,this.domainRegistry);
+        this.domainRegistry.getRegisteringUserService().sendActivateEmail(registeringUserEntity, this.domainRegistry);
     }
 
-    @Override public String activeEmail(String token) throws BusinessException {
-        return null;
+    @Override public void activeEmail(String token, ClientInformation client) throws BusinessException {
+        this.domainRegistry.getRegisteringUserService().activeEmail(token, client, this.domainRegistry);
     }
 }

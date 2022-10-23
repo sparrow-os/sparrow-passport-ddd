@@ -35,6 +35,7 @@ public class UserRegisterControllerImpl implements UserRegisterController {
 
     @Override public LoginToken emailRegister(EmailRegisterParam user,
         ClientInformation client) throws BusinessException {
+        user.setClient(client);
         return registeringUserApplicationService.register(user);
     }
 
@@ -44,4 +45,11 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         this.registeringUserApplicationService.sendTokenToEmail(emailActivateParam);
         return true;
     }
+
+
+    @Override
+    public void activateEmail(String token,ClientInformation client) throws BusinessException{
+        this.registeringUserApplicationService.activeEmail(token,client);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.sparrow.passport.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
+import com.sparrow.constant.SparrowError;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
@@ -30,10 +31,19 @@ public class SpringUserLoginController {
      */
     public ModelAndView login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        LoginToken loginToken = this.userLoginController.login(login, client);
-        ModelAndView mv = new ModelAndView(login.getRedirectUrl());
-        mv.addObject(loginToken);
-        return mv;
+        try {
+            LoginToken loginToken = this.userLoginController.login(login, client);
+            ModelAndView mv = new ModelAndView(login.getRedirectUrl());
+            mv.addObject(loginToken);
+            return mv;
+        } catch (BusinessException e) {
+            if (e.getCode().equals(SparrowError.USER_NOT_ACTIVATE.getCode())) {
+                ModelAndView mv = new ModelAndView("redirect:/email-activate");
+                mv.addObject("email", login.getUserName());
+                return mv;
+            }
+            throw e;
+        }
     }
 
     @PostMapping("/shortcut-login.json")

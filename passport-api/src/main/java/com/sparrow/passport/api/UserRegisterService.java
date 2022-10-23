@@ -2,6 +2,7 @@ package com.sparrow.passport.api;
 
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.param.register.MobileRegisterParam;
@@ -16,5 +17,5 @@ public interface UserRegisterService {
 
     void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException;
 
-    String activeEmail(String token) throws BusinessException;
+    void activeEmail(String token, ClientInformation client) throws BusinessException;
 }

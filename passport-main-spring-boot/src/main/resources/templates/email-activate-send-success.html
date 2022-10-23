@@ -9,6 +9,7 @@
     <meta http-equiv="description" content="邮箱激活"/>
 
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
+    <link rel="shortcut icon" href="/static/favicon.ico"/>
 
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
@@ -21,6 +22,10 @@
             src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
     <script language="javascript" type="text/javascript"
             src="http://r.sparrowzoo.net/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/passport.js?v=1.0"></script>
+
 </head>
 <body>
 <script language="javascript" type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
@@ -36,16 +41,15 @@
     <div class="content">
         <br/><br/>
 
-        <p>邮箱激活验证邮件已发送至 <a target="_blank" href=""
-                           onclick="$.browser.hyperClick(this,lang.message.email_no_config);">进入验证邮箱</a> <br/>
+        <p>邮箱激活验证邮件已发送
         </p> <br/>
-
+<!--        至 <a target="_blank" href=""-->
+<!--             onclick="$.browser.hyperClick(this,lang.message.email_no_config);">进入验证邮箱</a> <br/>-->
         未收到?
-<input type="hidden" th:value="${param.email}">
+        <input id="hdnEmail" type="hidden" th:value="${param.email}">
 
-        <input type="button" class="pure-button pure-button-primary button-xlarge pure-input-1-4"
-               onclick="$.ajax.json('http://passport.sparrowzoo.com/password/email/send.json',
-               'email=@{param.email}')" value="重新发送"/>
+        <input id="btnResentActiveEmail" type="button" class="pure-button pure-button-primary button-xlarge pure-input-1-4"
+                value="重新发送"/>
     </div>
 </div>
 </body>

@@ -1,18 +1,13 @@
 package com.sparrow.passport.controller;
 
-import com.sparrow.cache.exception.CacheNotFoundException;
-import com.sparrow.constant.User;
-import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.protocol.Result;
-import com.sparrow.protocol.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,13 +21,16 @@ public class SpringUserRegisterController {
     private UserRegisterController userRegisterController;
 
     @PostMapping("/email/shortcut")
-    public LoginToken shortcut(@RequestBody EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
-        return userRegisterController.emailRegister(user, client);
+    public Result<Boolean> shortcut(EmailRegisterParam user,
+        ClientInformation client) throws BusinessException {
+        userRegisterController.emailRegister(user, client);
+        Result<Boolean> result = new Result<>(true);
+        result.setMessage("激活邮件发送成功！！");
+        return result;
     }
 
     @PostMapping("/email.do")
-    public ModelAndView emailRegister(@RequestBody EmailRegisterParam user,
+    public ModelAndView emailRegister(EmailRegisterParam user,
         ClientInformation client, RedirectAttributes attributes) throws BusinessException {
         this.userRegisterController.emailRegister(user, client);
         ModelAndView mv = new ModelAndView("redirect:/email-activate-send-success");
@@ -41,10 +39,18 @@ public class SpringUserRegisterController {
         return mv;
     }
 
-    @PostMapping("/email/activate/send")
-    public ModelAndView emailActivate(EmailActivateParam user,
+    @PostMapping("/email/activate/send.json")
+    public Result<Boolean> sendActivateEmail(EmailActivateParam user,
         ClientInformation client) throws BusinessException {
         this.userRegisterController.sendTokenToEmail(user, client);
-        return new ModelAndView("redirect:/email-activate-send-success");
+        Result<Boolean> result = new Result<>(true);
+        result.setMessage("激活邮件发送成功！！");
+        return result;
+    }
+
+    @GetMapping("/email/activate")
+    public ModelAndView activeEmail(String token, ClientInformation client) throws BusinessException {
+        this.userRegisterController.activateEmail(token, client);
+        return new ModelAndView("redirect:/email-activate-success");
     }
 }

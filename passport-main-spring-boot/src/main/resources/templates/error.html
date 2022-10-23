@@ -5,6 +5,8 @@
     <meta content="操作成功！" name="description"/>
     <meta name="application-name" content="管理系统"/>
     <meta name="msapplication-tooltip" content="管理系统"/>
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}"/>
+
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0.1"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0.1"/>
@@ -32,6 +34,7 @@
             th:href="${ref}" target="_self">直接点击这里跳转</a>
         <script type="text/javascript">
             $.waitRedirect("timer");
+
         </script>
         <a href="http://admin.sparrowzoo.com">或点击这里,直接返回首页</a>
     </div>

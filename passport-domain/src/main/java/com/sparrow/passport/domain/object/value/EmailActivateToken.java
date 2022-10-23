@@ -16,8 +16,12 @@ import java.util.Objects;
 
 public class EmailActivateToken implements ValueObject<EmailActivateToken> {
     private DomainRegistry domainRegistry;
-    private EmailActivateToken(){}
-    private static final String TOKEN_TYPE="email-activate";
+
+    private EmailActivateToken() {
+    }
+
+    private static final String TOKEN_TYPE = "email-activate";
+
     public static EmailActivateToken createToken(Long userId,
         String userName,
         String email,
@@ -36,22 +40,25 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
 
     public static EmailActivateToken parse(EmailTokenPair emailTokenPair,
         String password,
-        DomainRegistry domainRegistry) {
+        DomainRegistry domainRegistry) throws BusinessException {
         if (emailTokenPair == null) {
             return null;
         }
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         EmailActivateToken emailActivateToken = new EmailActivateToken();
         emailActivateToken.email = emailTokenPair.getEmail();
-
-        String originToken = encryptionService.decryptToken(emailTokenPair.getToken(), password);
-        String[] array = originToken.split("\\|");
-        emailActivateToken.tokenType=array[0];
-        emailActivateToken.userId = Long.parseLong(array[1]);
-        emailActivateToken.userName = array[2];
-        emailActivateToken.sendDate = array[3];
-        emailActivateToken.password = password;
-        return emailActivateToken;
+        try {
+            String originToken = encryptionService.decryptToken(emailTokenPair.getToken(), password);
+            String[] array = originToken.split("\\|");
+            emailActivateToken.tokenType = array[0];
+            emailActivateToken.userId = Long.parseLong(array[1]);
+            emailActivateToken.userName = array[2];
+            emailActivateToken.sendDate = array[3];
+            emailActivateToken.password = password;
+            return emailActivateToken;
+        } catch (Exception e) {
+            throw new BusinessException(SparrowError.USER_TOKEN_ERROR);
+        }
     }
 
     private Long userId;
@@ -63,7 +70,7 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
 
     private String generateOriginToken() {
         // 令牌原码
-        return TOKEN_TYPE+"|" + this.userId + "|" + this.userName + "|" + this.sendDate;
+        return TOKEN_TYPE + "|" + this.userId + "|" + this.userName + "|" + this.sendDate;
     }
 
     private String generateToken() {

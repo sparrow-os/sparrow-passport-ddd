@@ -16,11 +16,17 @@ public class SecurityPrincipal implements Entity<SecurityPrincipal, Long> {
     private String mobile;
     private Boolean activate;
     private Long cent;
-    private Long plusCent=0L;
+    private Long plusCent = 0L;
     private Long lastLoginTime;
     private Integer status;
     private Login loginInfo;
     private ModifyPassword modifyPasswordInfo;
+
+    public void activateEmail() throws BusinessException {
+        if (!this.activate) {
+            throw new BusinessException(SparrowError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
+        }
+    }
 
     public void setLastLoginTime(Long lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
@@ -40,7 +46,7 @@ public class SecurityPrincipal implements Entity<SecurityPrincipal, Long> {
         this.loginInfo.getPassword().isValid();
         Asserts.isTrue(!this.loginInfo.getEncryptPassword().equals(this.password), SparrowError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
         this.setCurrent2LastLoginTime();
-        this.setCent((long)this.loginInfo.getCent());
+        this.setCent((long) this.loginInfo.getCent());
     }
 
     public void resetPassword(String encryptLoginPassword) {

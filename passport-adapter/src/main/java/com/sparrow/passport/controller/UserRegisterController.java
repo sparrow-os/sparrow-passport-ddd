@@ -13,4 +13,5 @@ public interface UserRegisterController {
 
     Boolean sendTokenToEmail(EmailActivateParam emailActivateParam, ClientInformation client) throws BusinessException;
 
+    void activateEmail(String token, ClientInformation client) throws BusinessException;
 }

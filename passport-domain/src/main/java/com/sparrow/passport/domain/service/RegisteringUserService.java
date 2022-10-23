@@ -7,6 +7,7 @@ import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.domain.object.value.EmailActivateToken;
+import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
@@ -85,8 +86,15 @@ public class RegisteringUserService {
             language);
     }
 
-    public void activeByEmail(RegisteringUserEntity registeringUserEntity,
-        DomainRegistry domainRegistry) {
+    public void activeEmail(String token,ClientInformation client,
+        DomainRegistry domainRegistry) throws BusinessException {
 
+        String originToken= domainRegistry.getEncryptionService().base64Decode(token);
+        EmailTokenPair emailTokenPair = EmailTokenPair.parse(originToken);
+        RegisteringUserEntity registeringUserEntity = domainRegistry.getRegisteringUserRepository().findByEmail(emailTokenPair.getEmail());
+        EmailActivateToken emailActivateToken = EmailActivateToken.parse(emailTokenPair, registeringUserEntity.getPassword(), domainRegistry);
+        emailActivateToken.isValid(registeringUserEntity.getUserName());
+        registeringUserEntity.active();
+        domainRegistry.getRegisteringUserRepository().saveRegisteringUser(registeringUserEntity,client);
     }
 }

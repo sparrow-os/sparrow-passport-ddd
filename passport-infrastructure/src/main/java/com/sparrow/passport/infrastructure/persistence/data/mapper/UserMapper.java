@@ -52,6 +52,7 @@ public class UserMapper {
             return null;
         }
         User user = new User();
+        user.setUserId(registeringUser.getUserId());
         user.setCent(registeringUser.getCent());
         user.setUserName(registeringUser.getUserName());
         user.setEmail(registeringUser.getEmail());
@@ -62,8 +63,13 @@ public class UserMapper {
         user.setCreateTime(System.currentTimeMillis());
         user.setUpdateTime(user.getCreateTime());
         user.setLastLoginTime(user.getCreateTime());
-        user.setActivate(false);
-        user.setActivateTime(0L);
+        user.setActivate(registeringUser.getActivate());
+        if(user.getActivate()){
+            user.setActivateTime(System.currentTimeMillis());
+        }
+        else {
+            user.setActivateTime(0L);
+        }
         user.setAvatar(Symbol.EMPTY);
         user.setGender(Gender.NULL.ordinal());
         user.setGroupLevel(Symbol.EMPTY);

@@ -17,7 +17,7 @@ public class RegisteringUserEntity {
     private String passwordConfirm;
     private Long userId;
     private Long cent;
-    private Boolean activate;
+    private Boolean activate=false;
 
     public String getUserName() {
         return userName;
@@ -86,5 +86,9 @@ public class RegisteringUserEntity {
 
     public void active(){
         this.activate=true;
+    }
+
+    public Boolean getActivate() {
+        return activate;
     }
 }

@@ -36,6 +36,7 @@ public class SecurityPrincipalService {
 
         if (loginName.contains(Symbol.AT)) {
             securityPrincipal = securityPrincipalRepository.findByEmail(loginName);
+            securityPrincipal.activateEmail();
         } else {
             securityPrincipal = securityPrincipalRepository.findByName(loginName);
 //            if (securityPrincipal == null) {
@@ -47,15 +48,6 @@ public class SecurityPrincipalService {
         Asserts.isTrue(StatusRecord.DISABLE.ordinal() == securityPrincipal.getStatus(),
             SparrowError.USER_DISABLED,
             UserFieldSuffix.LOGIN);
-
-        Boolean isActiveLogin = false;
-        if (isActiveLogin == null) {
-            isActiveLogin = true;
-        }
-
-        if (isActiveLogin && !securityPrincipal.getActivate()) {
-            throw new BusinessException(SparrowError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
-        }
         return securityPrincipal;
     }
 

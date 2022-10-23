@@ -33,12 +33,10 @@ public class SparrowEncryptionService implements EncryptionService {
     }
 
     @Override public String generateToken(String originCode, String originPassword) {
-        String threeDes = ThreeDES.getInstance().encrypt(originPassword, originCode);
-        return this.base64Decode(threeDes);
+        return ThreeDES.getInstance().encrypt(originPassword, originCode);
     }
 
     @Override public String decryptToken(String token, String originPassword) {
-        String originThreeDes = this.base64Decode(token);
-        return ThreeDES.getInstance().decrypt(originPassword, originThreeDes);
+        return ThreeDES.getInstance().decrypt(originPassword, token);
     }
 }
