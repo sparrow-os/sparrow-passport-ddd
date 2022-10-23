@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 @RequestMapping("/register")
@@ -26,21 +27,24 @@ public class SpringUserRegisterController {
 
     @PostMapping("/email/shortcut")
     public LoginToken shortcut(@RequestBody EmailRegisterParam user,
-        ClientInformation client) throws BusinessException {
-        return userRegisterController.shortcut(user, client);
+        ClientInformation client) throws BusinessException, CacheNotFoundException {
+        return userRegisterController.emailRegister(user, client);
     }
 
     @PostMapping("/email.do")
     public ModelAndView emailRegister(@RequestBody EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+        ClientInformation client, RedirectAttributes attributes) throws BusinessException {
         this.userRegisterController.emailRegister(user, client);
-        ModelAndView mv=new ModelAndView("redirect:/")
+        ModelAndView mv = new ModelAndView("redirect:/email-activate-send-success");
+        mv.addObject("email", user.getEmail());
+        attributes.addFlashAttribute("email2", user.getEmail());
+        return mv;
     }
 
     @PostMapping("/email/activate/send")
     public ModelAndView emailActivate(EmailActivateParam user,
         ClientInformation client) throws BusinessException {
         this.userRegisterController.sendTokenToEmail(user, client);
-        return new ModelAndView("redirect:/email-activate-success");
+        return new ModelAndView("redirect:/email-activate-send-success");
     }
 }

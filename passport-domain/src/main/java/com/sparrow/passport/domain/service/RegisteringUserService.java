@@ -50,6 +50,7 @@ public class RegisteringUserService {
 
         registeringUserRepository.saveRegisteringUser(registeringUserEntity, client);
         this.success(registeringUserEntity.getUserId(), client, domainRegistry);
+        this.sendActivateEmail(registeringUserEntity, domainRegistry);
         return LoginToken.create(
             registeringUserEntity.getUserId(),
             registeringUserEntity.getUserName(),

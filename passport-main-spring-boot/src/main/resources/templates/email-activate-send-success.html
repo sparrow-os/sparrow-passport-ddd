@@ -41,10 +41,11 @@
         </p> <br/>
 
         未收到?
-
+<input type="hidden" th:value="${param.email}">
 
         <input type="button" class="pure-button pure-button-primary button-xlarge pure-input-1-4"
-               onclick="$.ajax.json('http://passport.sparrowzoo.com/password/email/send.json','email=')" value="重新发送"/>
+               onclick="$.ajax.json('http://passport.sparrowzoo.com/password/email/send.json',
+               'email=@{param.email}')" value="重新发送"/>
     </div>
 </div>
 </body>

@@ -33,21 +33,9 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, VALIDATE_CODE);
     }
 
-    @Override
-    public LoginToken shortcut(EmailRegisterParam user, ClientInformation client) throws BusinessException {
-        user.setClient(client);
+    @Override public LoginToken emailRegister(EmailRegisterParam user,
+        ClientInformation client) throws BusinessException {
         return registeringUserApplicationService.register(user);
-    }
-
-    @Override
-    public LoginToken emailRegister(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
-        //String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        //this.validateCode(validateCode, user.getValidateCode());
-        LoginToken login = shortcut(user, client);
-        String token = authenticatorService.sign(login, user.getPassword());
-        servletContainer.rootCookie(User.PERMISSION, token, login.getDays());
-        return login;
     }
 
     @Override public Boolean sendTokenToEmail(EmailActivateParam emailActivateParam,

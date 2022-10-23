@@ -20,7 +20,7 @@ public class UserRegisterControllerProxy {
 
     @RequestParameters("user,client")
     public LoginToken shortcut(EmailRegisterParam user, ClientInformation client) throws BusinessException {
-        return this.userRegisterController.shortcut(user, client);
+        return this.userRegisterController.emailRegister(user, client);
     }
 
     @RequestParameters("user,client")
