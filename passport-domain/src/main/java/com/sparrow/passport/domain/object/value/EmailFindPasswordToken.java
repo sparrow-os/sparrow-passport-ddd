@@ -17,7 +17,7 @@ import java.util.Objects;
 public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToken> {
     private DomainRegistry domainRegistry;
 
-    private static final String TOKEN_TYPE="fink-password";
+    private static final String TOKEN_TYPE = "find-password";
 
     public static EmailFindPasswordToken createToken(Long userId, String userName, String email, String password,
         String currentDate,
@@ -43,7 +43,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
 
         String originToken = encryptionService.decryptToken(emailTokenPair.getToken(), password);
         String[] array = originToken.split("\\|");
-        findPasswordOriginToken.tokenType=array[0];
+        findPasswordOriginToken.tokenType = array[0];
         findPasswordOriginToken.userId = Long.parseLong(array[1]);
         findPasswordOriginToken.userName = array[2];
         findPasswordOriginToken.sendDate = array[3];
@@ -61,10 +61,10 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
 
     private String generateOriginToken() {
         // 令牌原码
-        return "find-password|" + this.userId + "|" + this.userName + "|" + this.sendDate;
+        return TOKEN_TYPE + "|" + this.userId + "|" + this.userName + "|" + this.sendDate;
     }
 
-    public String generateToken() {
+    private String generateToken() {
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         String encryptedToken = encryptionService.generateToken(this.generateOriginToken(), this.password);
         return encryptionService.base64Encode(EmailTokenPair.create(this.email, encryptedToken).toString());

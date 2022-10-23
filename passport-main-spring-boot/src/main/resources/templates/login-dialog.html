@@ -100,14 +100,14 @@
 
                         <label> 电子邮箱 </label>
                         <input type="text" tabindex="1"
-                               onfocus="$.v.showMessage(regInfo,this);" onblur="$.register.validate.email(this);"
+                               onfocus="$.v.showMessage(regInfo,this);" onblur="$.passport.register.validate.email(this);"
                                name="email" id="txtEmail"/>
                         <span id="errorEmail" name="register_user_email" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 用户名 </label>
                         <input type="text" tabIndex="2"
-                               onfocus='$.v.showMessage(regInfo,this);' onblur='$.register.validate.user(this);'
+                               onfocus='$.v.showMessage(regInfo,this);' onblur='$.passport.register.validate.user(this);'
                                name="userName" id="txtRegUserName"/>
                         <span id="errorRegUserName" name="register_user_name" class="prompt"></span>
                     </div>

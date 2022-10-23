@@ -1,5 +1,7 @@
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.constant.Config;
+import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
@@ -16,6 +18,7 @@ import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
 import com.sparrow.support.mobile.ShortMessageService;
+import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -90,16 +93,25 @@ public class SecurityPrincipalService {
         return loginToken;
     }
 
-    public EmailFindPasswordToken getFindPasswordEmailToken(String email,
-        DomainRegistry domainRegistry) {
+    public void sendFindPasswordToken(String email,
+        DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipal securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(email);
         String currentDate = DateTimeUtility.getFormatCurrentTime();
-        return EmailFindPasswordToken.createToken(
+        EmailFindPasswordToken emailFindPasswordToken = EmailFindPasswordToken.createToken(
             securityPrincipal.getUserId(),
             securityPrincipal.getUserName(),
             securityPrincipal.getEmail(),
             securityPrincipal.getPassword(),
             currentDate, domainRegistry);
+        String passwordFindTokenContent = emailFindPasswordToken.generateContent();
+        String language = ConfigUtility.getValue(Config.LANGUAGE);
+        String emailFindPasswordSubject = ConfigUtility
+            .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT,
+                language);
+        domainRegistry.getEmailService().send(email,
+            emailFindPasswordSubject,
+            passwordFindTokenContent,
+            language);
     }
 
     public void resetPasswordByEmailToken(String token, String newPassword, DomainRegistry domainRegistry)
