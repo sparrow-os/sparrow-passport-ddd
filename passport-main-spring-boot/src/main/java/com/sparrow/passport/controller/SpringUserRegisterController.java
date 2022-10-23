@@ -30,10 +30,11 @@ public class SpringUserRegisterController {
         return userRegisterController.shortcut(user, client);
     }
 
-    @PostMapping("/email")
-    public LoginToken emailRegister(@RequestBody EmailRegisterParam user,
+    @PostMapping("/email.do")
+    public ModelAndView emailRegister(@RequestBody EmailRegisterParam user,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        return this.userRegisterController.emailRegister(user, client);
+        this.userRegisterController.emailRegister(user, client);
+        ModelAndView mv=new ModelAndView("redirect:/")
     }
 
     @PostMapping("/email/activate/send")
