@@ -13,6 +13,10 @@ public interface UserSecurityService {
     MobileShortMessaging findPasswordByMobile(String mobile) throws BusinessException;
 
     Boolean resetPasswordByMobile(ResetPasswordByMobileParam password) throws BusinessException;
-    public void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException;
+
+    void tokenVerify(String token) throws BusinessException;
+
+    void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException;
+
     Boolean modifyPassword(PasswordModifyParam password) throws BusinessException;
 }

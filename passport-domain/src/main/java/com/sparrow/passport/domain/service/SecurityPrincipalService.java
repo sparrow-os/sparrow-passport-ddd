@@ -5,7 +5,7 @@ import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
-import com.sparrow.passport.domain.entity.SecurityPrincipal;
+import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
 import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.domain.object.value.Password;
@@ -31,11 +31,11 @@ public class SecurityPrincipalService {
     @Inject
     private Authenticator authenticatorService;
 
-    public SecurityPrincipal findByLoginName(String loginName,
+    public SecurityPrincipalEntity findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
         ShortMessageService shortMessageService = domainRegistry.getShortMessageService();
-        SecurityPrincipal securityPrincipal;
+        SecurityPrincipalEntity securityPrincipal;
 
         if (loginName.contains(Symbol.AT)) {
             securityPrincipal = securityPrincipalRepository.findByEmail(loginName);
@@ -72,7 +72,7 @@ public class SecurityPrincipalService {
 //        }
     }
 
-    public LoginToken login(SecurityPrincipal securityPrincipal, ClientInformation client,
+    public LoginToken login(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
         DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canLogin(securityPrincipal.getUserId());
         securityPrincipal.login();
@@ -95,7 +95,7 @@ public class SecurityPrincipalService {
 
     public void sendFindPasswordToken(String email,
         DomainRegistry domainRegistry) throws BusinessException {
-        SecurityPrincipal securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(email);
+        SecurityPrincipalEntity securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(email);
         String currentDate = DateTimeUtility.getFormatCurrentTime();
         EmailFindPasswordToken emailFindPasswordToken = EmailFindPasswordToken.createToken(
             securityPrincipal.getUserId(),
@@ -114,12 +114,20 @@ public class SecurityPrincipalService {
             language);
     }
 
+    public void tokenVerify(String token, DomainRegistry domainRegistry) throws BusinessException {
+        EncryptionService encryptionService = domainRegistry.getEncryptionService();
+        EmailTokenPair emailTokenPair = EmailTokenPair.parse(encryptionService.base64Decode(token));
+        SecurityPrincipalEntity securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(emailTokenPair.getEmail());
+        EmailFindPasswordToken emailFindPasswordToken = EmailFindPasswordToken.parse(emailTokenPair, securityPrincipal.getPassword(), domainRegistry);
+        emailFindPasswordToken.isValid(securityPrincipal.getUserName());
+    }
+
     public void resetPasswordByEmailToken(String token, String newPassword, DomainRegistry domainRegistry)
         throws BusinessException {
         Asserts.isTrue(token == null, SparrowError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         EmailTokenPair emailTokenPair = EmailTokenPair.parse(encryptionService.base64Decode(token));
-        SecurityPrincipal securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(emailTokenPair.getEmail());
+        SecurityPrincipalEntity securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(emailTokenPair.getEmail());
         EmailFindPasswordToken emailFindPasswordToken = EmailFindPasswordToken.parse(emailTokenPair, securityPrincipal.getPassword(), domainRegistry);
         emailFindPasswordToken.isValid(securityPrincipal.getUserName());
         Password password = new Password(newPassword);
@@ -128,7 +136,7 @@ public class SecurityPrincipalService {
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
     }
 
-    public void modifyPassword(SecurityPrincipal securityPrincipal,
+    public void modifyPassword(SecurityPrincipalEntity securityPrincipal,
         ClientInformation client,
         DomainRegistry domainRegistry) throws BusinessException {
         securityPrincipal.modifyPassword();
@@ -136,7 +144,7 @@ public class SecurityPrincipalService {
         this.addPasswordModifiedEvent(securityPrincipal, client, domainRegistry);
     }
 
-    private void addPasswordModifiedEvent(SecurityPrincipal securityPrincipal, ClientInformation client,
+    private void addPasswordModifiedEvent(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
         DomainRegistry domainRegistry) {
 //        try {
 //            OperationQueryDTO operationQuery = new OperationQueryDTO();

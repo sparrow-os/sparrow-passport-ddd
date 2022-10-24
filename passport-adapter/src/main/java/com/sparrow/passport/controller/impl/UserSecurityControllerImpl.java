@@ -31,11 +31,8 @@ public class UserSecurityControllerImpl implements UserSecurityController {
         return result;
     }
 
-    @Override
-    public FindPasswordVO findPassword(String email) throws BusinessException {
-        //String officialEmailAddress = this.userSecurityService.findPasswordByEmail(email);
-        //return new FindPasswordVO(email, officialEmailAddress);
-        return null;
+    @Override public void tokenVerify(String token) throws BusinessException {
+        this.userSecurityService.tokenVerify(token);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.sparrow.passport.infrastructure.persistence;
 
 import com.sparrow.passport.dao.UserDAO;
-import com.sparrow.passport.domain.entity.SecurityPrincipal;
+import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
+import com.sparrow.passport.infrastructure.persistence.data.mapper.SecurityPrincipalMapper;
 import com.sparrow.passport.infrastructure.persistence.data.mapper.UserMapper;
+import com.sparrow.passport.po.SecurityPrincipal;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
@@ -15,25 +17,27 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     private UserDAO userDao;
     @Inject
     private UserMapper userMapper;
+    @Inject
+    private SecurityPrincipalMapper securityPrincipalMapper;
 
-    @Override public SecurityPrincipal findByUserId(Long userId) {
+    @Override public SecurityPrincipalEntity findByUserId(Long userId) {
         User user = this.userDao.getEntity(userId);
         return this.userMapper.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipal findByEmail(String email) {
+    @Override public SecurityPrincipalEntity findByEmail(String email) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
         return this.userMapper.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipal findByName(String userName) {
+    @Override public SecurityPrincipalEntity findByName(String userName) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
         return this.userMapper.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipal findByMobile(String mobile, String secretMobile) {
+    @Override public SecurityPrincipalEntity findByMobile(String mobile, String secretMobile) {
 //        SearchCriteria searchCriteria = new SearchCriteria();
 //        searchCriteria.setWhere(BooleanCriteria.criteria(Criteria.field("mobile").equal(mobile))
 //            .and(Criteria.field("user.secretMobile").equal(secretMobile)));
@@ -41,13 +45,8 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
         return null;
     }
 
-    @Override public void saveSecurity(SecurityPrincipal securityPrincipal) {
-//        UpdateCriteria updateCriteria = new UpdateCriteria();
-//        updateCriteria.set(UpdateSetClausePair.field("user.lastLoginTime").equal(securityPrincipal.getLastLoginTime()));
-//        updateCriteria.set(UpdateSetClausePair.field("user.password").equal(securityPrincipal.getPassword()));
-//        updateCriteria.set(UpdateSetClausePair.field("user.cent").add(securityPrincipal.getPlusCent()));
-//        updateCriteria.set(UpdateSetClausePair.field("user.activate").equal(securityPrincipal.getActivate()));
-//        updateCriteria.setWhere(Criteria.field("user.userId").equal(securityPrincipal.getUserId()));
-        //this.userDao.update(updateCriteria);
+    @Override public void saveSecurity(SecurityPrincipalEntity securityPrincipalEntity) {
+        SecurityPrincipal securityPrincipal = this.securityPrincipalMapper.entity2Po(securityPrincipalEntity);
+        this.userDao.modifyPassword(securityPrincipal);
     }
 }

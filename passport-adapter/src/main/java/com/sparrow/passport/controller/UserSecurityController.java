@@ -11,7 +11,8 @@ public interface UserSecurityController {
 
     Result<Boolean> sendEmailTokenForFindPassword(String email) throws BusinessException;
 
-    FindPasswordVO findPassword(String email) throws BusinessException;
+    void tokenVerify(String token) throws BusinessException;
+
 
     void resetPassword(PasswordResetParam param) throws BusinessException;
 

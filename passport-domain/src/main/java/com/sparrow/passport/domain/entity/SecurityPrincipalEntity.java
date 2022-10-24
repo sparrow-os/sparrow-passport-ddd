@@ -8,7 +8,7 @@ import com.sparrow.passport.domain.object.value.Login;
 import com.sparrow.passport.domain.object.value.ModifyPassword;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 
-public class SecurityPrincipal implements Entity<SecurityPrincipal, Long> {
+public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, Long> {
     private Long userId;
     private String userName;
     private String password;
@@ -141,7 +141,7 @@ public class SecurityPrincipal implements Entity<SecurityPrincipal, Long> {
         this.status = status;
     }
 
-    @Override public boolean sameIdentityAs(SecurityPrincipal entity) {
+    @Override public boolean sameIdentityAs(SecurityPrincipalEntity entity) {
         return this.userId.equals(entity.getUserId());
     }
 

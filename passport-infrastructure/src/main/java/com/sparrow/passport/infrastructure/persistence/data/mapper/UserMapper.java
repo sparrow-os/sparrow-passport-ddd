@@ -7,7 +7,7 @@ import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.IpSupport;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
-import com.sparrow.passport.domain.entity.SecurityPrincipal;
+import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,11 +16,11 @@ public class UserMapper {
     @Inject
     private IpSupport ipSupport;
 
-    public SecurityPrincipal user2SecurityPrincipal(User user) {
+    public SecurityPrincipalEntity user2SecurityPrincipal(User user) {
         if (user == null) {
             return null;
         }
-        SecurityPrincipal securityPrincipal = new SecurityPrincipal();
+        SecurityPrincipalEntity securityPrincipal = new SecurityPrincipalEntity();
         securityPrincipal.setActivate(user.getActivate());
         securityPrincipal.setCent(user.getCent());
         securityPrincipal.setEmail(user.getEmail());

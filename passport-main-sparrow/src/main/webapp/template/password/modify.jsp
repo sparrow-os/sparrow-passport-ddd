@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.sparrowzoo.com/ui" prefix="J" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="j" uri="http://www.sparrowzoo.com/ui" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -11,16 +12,16 @@
     <meta http-equiv="expires" content="0"/>
     <meta http-equiv="keywords" content="修改密码"/>
     <meta http-equiv="description" content="修改密码"/>
-    <J:JScript src="$resource/javascript/sparrow.js"/>
-    <J:JScript src="$resource/javascript/system/language/$language/user.js"/>
-    <J:JStyleLink href="$resource/$website/style/global.css"/>
-    <J:JStyleLink href="$resource/$website/style/user.css"/>
+    <j:script src="$resource/scripts/sparrow.js"/>
+    <j:script src="$resource/scripts/system/language/$language/user.js"/>
+    <j:style href="$resource/$website/style/global.css"/>
+    <j:style href="$resource/$website/style/user.css"/>
 </head>
 <body>
-<jsp:include page="/template/include/top.jsp" flush="true"/>
+<%--<jsp:include page="/template/include/top.jsp" flush="true"/>--%>
 <div class="body">
     <div class="top">
-        <jsp:include page="/template/blog/include/user-menu.jsp"/>
+<%--        <jsp:include page="/template/blog/include/user-menu.jsp"/>--%>
         <div class="right">
             <div class="setmenu">
                 <ul>
@@ -38,7 +39,7 @@
                                                              onfocus="v.showMessage(password.txtOldPassword);"
                                                              onblur="v.isNull(password.txtOldPassword)"/>
 
-                                <J:JSpan cssClass="prompt" id="errorOldPassword"/>
+                                <j:span cssClass="prompt" id="errorOldPassword"/>
                             </div>
                         </c:when>
                         <c:otherwise>
@@ -56,14 +57,15 @@
                                                     onfocus="v.showMessage(password.txtPassword);"
                                                     onblur="v.isNull(password.txtPassword);" id="txtPassword"
                                                     name="newPassword"/>
-                        <J:JSpan cssClass="prompt"
+                        <j:span cssClass="prompt"
                                  id="errorPassword"/>
                     </div>
                     <div class="line">
                         <label> 确认密码 </label> <input type="password"
                                                      onfocus="v.showMessage(password.txtConfirmPassword);"
                                                      onblur="v.isEqual(password.txtConfirmPassword);"
-                                                     id="txtConfirmPassword" name="newPassword2"/> <J:JSpan
+                                                     id="txtConfirmPassword" name="newPassword2"/>
+                        <j:span
                             cssClass="prompt" id="errorConfirmPassword"/>
                     </div>
                     <input type="button" onclick="v.getValidateResult(password);"
@@ -73,6 +75,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="/template/include/bottom.jsp" flush="true"/>
+<%--<jsp:include page="/template/include/bottom.jsp" flush="true"/>--%>
 </body>
 </html>

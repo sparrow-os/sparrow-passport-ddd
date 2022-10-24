@@ -3,13 +3,12 @@ package com.sparrow.passport.services;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.api.UserLoginService;
-import com.sparrow.passport.domain.entity.SecurityPrincipal;
+import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.Login;
 import com.sparrow.passport.domain.service.SecurityPrincipalService;
 import com.sparrow.passport.protocol.query.login.LoginQueryDTO;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.support.Authenticator;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -25,7 +24,7 @@ public class UserLoginApplicationService implements UserLoginService {
     @Override
     public LoginToken login(LoginQueryDTO login) throws BusinessException {
         SecurityPrincipalService securityPrincipalService = this.domainRegistry.getSecurityPrincipalService();
-        SecurityPrincipal securityPrincipal = securityPrincipalService.findByLoginName(login.getUserName(), domainRegistry);
+        SecurityPrincipalEntity securityPrincipal = securityPrincipalService.findByLoginName(login.getUserName(), domainRegistry);
         String encryptLoginPassword = this.domainRegistry.getEncryptionService().encryptPassword(login.getPassword());
         Integer rememberDays =15; //domainRegistry.getCodeService().getIntegerValueByCode(ConfigKeyDB.USER_LOGIN_REMEMBER_DAYS);
         Long loginCent = 10L;//domainRegistry.getCodeService().getLongValueByCode(ConfigKeyDB.USER_CENT_LOGIN);

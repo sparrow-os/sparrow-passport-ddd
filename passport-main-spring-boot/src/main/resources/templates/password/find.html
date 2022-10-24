@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>找回密码-麻雀窝</title>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="keywords" content="找回密码"/>
+    <meta http-equiv="description" content="找回密码"/>
+    <link rel="shortcut icon" href="/static/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts.css?v=1.0"/>
+    <!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/sparrow.css?v=1.0"/>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/password.js?v=1.0"></script>
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
+<div class="body">
+    <div class="header">
+        <h1>麻雀窝-找回密码</h1>
+        <h2>
+            通过邮箱找回
+        </h2>
+    </div>
+    <div class="content">
+        <div class="pure-controls">
+            <input onfocus="$.v.showMessage(findPassword,this);"
+                   onblur="$.v.isEmail(findPassword,this);" placeholder="请输入验证邮箱" class="pure-input-1-2"
+                   name="email" id="txtValidateEmail"/>
+            <span id="errorValidateEmail" name="login_user_name" class="prompt"></span>
+        </div>
+        <div class="pure-controls">
+            <input id="btnSendPasswordToken"
+                   type="button"
+                   class="pure-button pure-button-primary button-xlarge pure-input-1-4" value="找回"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

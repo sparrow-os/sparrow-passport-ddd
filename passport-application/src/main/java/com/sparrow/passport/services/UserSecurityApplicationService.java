@@ -2,8 +2,6 @@ package com.sparrow.passport.services;
 
 import com.sparrow.passport.api.UserSecurityService;
 import com.sparrow.passport.domain.DomainRegistry;
-import com.sparrow.passport.domain.entity.SecurityPrincipal;
-import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
 import com.sparrow.passport.protocol.param.password.PasswordModifyParam;
 import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.passport.protocol.param.password.ResetPasswordByMobileParam;
@@ -29,6 +27,12 @@ public class UserSecurityApplicationService implements UserSecurityService {
     @Override public Boolean resetPasswordByMobile(ResetPasswordByMobileParam password) throws BusinessException {
         return null;
     }
+
+
+    @Override public void tokenVerify(String token) throws BusinessException {
+        this.domainRegistry.getSecurityPrincipalService().tokenVerify(token,domainRegistry);
+    }
+
 
     @Override public void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException {
         this.domainRegistry.getSecurityPrincipalService().resetPasswordByEmailToken(param.getToken(), param.getPassword(), domainRegistry);
