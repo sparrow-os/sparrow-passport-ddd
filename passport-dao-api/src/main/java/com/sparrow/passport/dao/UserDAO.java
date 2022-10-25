@@ -7,5 +7,5 @@ import com.sparrow.passport.protocol.query.UserQueryDTO;
 import java.util.List;
 
 public interface UserDAO extends DaoSupport<User, Long> {
-    void modifyPassword(SecurityPrincipal securityPrincipal);
+    void save(SecurityPrincipal securityPrincipal);
 }

@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 
 public class Reflect2Test {
     public static void main(
-        String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String[] args){
 
         Container container = ApplicationContext.getContainer();
         ContainerBuilder builder = new ContainerBuilder()

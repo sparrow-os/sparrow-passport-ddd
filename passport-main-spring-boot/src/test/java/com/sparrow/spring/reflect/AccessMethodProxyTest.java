@@ -3,11 +3,10 @@ package com.sparrow.spring.reflect;
 import com.sparrow.passport.protocol.dto.BasicUserDTO;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class AccessMethodProxyTest {
     public static void main(
-        String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, InterruptedException, NoSuchFieldException {
+        String[] args) throws IllegalAccessException, InterruptedException, NoSuchFieldException {
         BasicUserDTOMethodAccess basicUserMethodAccess = new BasicUserDTOMethodAccess();
         BasicUserDTO basicUser = new BasicUserDTO();
         basicUser.setUserName("zhangsan");

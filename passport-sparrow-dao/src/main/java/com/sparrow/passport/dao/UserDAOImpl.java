@@ -11,9 +11,10 @@ import javax.inject.Named;
 @Named("userDao")
 public class UserDAOImpl extends ORMStrategy<User, Long> implements UserDAO {
 
-    @Override public void modifyPassword(SecurityPrincipal securityPrincipal) {
+    @Override public void save(SecurityPrincipal securityPrincipal) {
         UpdateCriteria updateCriteria = new UpdateCriteria();
         updateCriteria.set(UpdateSetClausePair.field("user.password").equal(securityPrincipal.getPassword()));
+        updateCriteria.set(UpdateSetClausePair.field("user.lastLoginTime").equal(securityPrincipal.getLastLoginTime()));
         updateCriteria.setWhere(Criteria.field("user.userId").equal(securityPrincipal.getUserId()));
         this.update(updateCriteria);
     }

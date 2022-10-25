@@ -47,6 +47,6 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
 
     @Override public void saveSecurity(SecurityPrincipalEntity securityPrincipalEntity) {
         SecurityPrincipal securityPrincipal = this.securityPrincipalMapper.entity2Po(securityPrincipalEntity);
-        this.userDao.modifyPassword(securityPrincipal);
+        this.userDao.save(securityPrincipal);
     }
 }
