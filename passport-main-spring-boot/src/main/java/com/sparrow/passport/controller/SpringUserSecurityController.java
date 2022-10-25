@@ -26,7 +26,7 @@ public class SpringUserSecurityController {
         this.userSecurityController.tokenVerify(token);
         return new ModelAndView("/password/token-verify");
     }
-
+    //127.0.0.1       passport.sparrowzoo.com
     @PostMapping("/reset-password-by-token")
     public ModelAndView resetPassword(PasswordResetParam param) throws BusinessException {
         this.userSecurityController.resetPassword(param);
