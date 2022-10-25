@@ -24,5 +24,7 @@
         <module>passport-main-spring-boot</module>
         <module>passport-adapter</module>
         <module>passport-mybatis</module>
+        <module>passport-mybatis-plus</module>
+
     </modules>
 </project>
