@@ -8,8 +8,8 @@ import com.sparrow.passport.controller.UserLoginController;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.Controller;
 import com.sparrow.protocol.LoginToken;
+import com.sparrow.servlet.Controller;
 import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.StringUtility;
@@ -25,7 +25,7 @@ public class UserLoginControllerProxy {
         ClientInformation client) throws BusinessException, CacheNotFoundException {
         LoginToken loginToken = userLoginController.login(login, client);
         String welcomePage = ConfigUtility.getValue(Config.DEFAULT_WELCOME_INDEX);
-        if (StringUtility.isNullOrEmpty(login.getRedirectUrl())||login.getRedirectUrl().equals("/")) {
+        if (StringUtility.isNullOrEmpty(login.getRedirectUrl()) || login.getRedirectUrl().equals("/")) {
             login.setRedirectUrl(welcomePage);
         } else {
             HttpContext.getContext().put(Config.DEFAULT_WELCOME_INDEX, welcomePage);
@@ -38,6 +38,7 @@ public class UserLoginControllerProxy {
         System.err.println("error test");
         return userLoginController.shortcut(login, client);
     }
+
     public void logout() {
 
     }

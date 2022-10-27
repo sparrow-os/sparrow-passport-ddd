@@ -1,7 +1,6 @@
 package com.sparrow.passport.domain;
 
 import com.sparrow.passport.domain.service.EmailService;
-import com.sparrow.support.mobile.ShortMessageService;
 import com.sparrow.passport.domain.service.EncryptionService;
 import com.sparrow.passport.domain.service.RegisteringUserService;
 import com.sparrow.passport.domain.service.SecurityPrincipalService;
@@ -19,8 +18,6 @@ public interface DomainRegistry {
     UserLimitService getUserLimitService();
 
     SecurityPrincipalRepository getSecurityPrincipalRepository();
-
-    ShortMessageService getShortMessageService();
 
     EncryptionService getEncryptionService();
 
