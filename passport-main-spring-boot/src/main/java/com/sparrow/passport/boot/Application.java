@@ -3,7 +3,7 @@ package com.sparrow.passport.boot;
 import com.sparrow.container.Container;
 import com.sparrow.container.ContainerBuilder;
 import com.sparrow.core.spi.ApplicationContext;
-import com.sparrow.passport.config.SparrowConfig;
+import com.sparrow.spring.starter.SparrowConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
