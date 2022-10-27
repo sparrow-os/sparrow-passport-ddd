@@ -1,10 +1,8 @@
 package com.sparrow.passport.protocol.param.password;
 
-import com.sparrow.protocol.MobileShortMessaging;
 import java.io.Serializable;
 
 public class ResetPasswordByMobileParam implements Serializable {
-    private MobileShortMessaging mobileShortMessaging;
     private String validateCode;
     private String password;
 
@@ -22,14 +20,5 @@ public class ResetPasswordByMobileParam implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-
-    public MobileShortMessaging getMobileShortMessaging() {
-        return mobileShortMessaging;
-    }
-
-    public void setMobileShortMessaging(MobileShortMessaging mobileShortMessaging) {
-        this.mobileShortMessaging = mobileShortMessaging;
     }
 }

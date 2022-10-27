@@ -6,7 +6,6 @@ import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.Controller;
 import com.sparrow.protocol.LoginToken;
 import com.sparrow.protocol.constant.Constant;
 import com.sparrow.servlet.ServletContainer;
@@ -14,10 +13,8 @@ import com.sparrow.passport.api.UserLoginService;
 import com.sparrow.passport.controller.UserLoginController;
 import com.sparrow.passport.controller.assemble.LoginControllerAssemble;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 
 @Named
 public class UserLoginControllerImpl implements UserLoginController {

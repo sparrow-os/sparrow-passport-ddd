@@ -6,7 +6,6 @@ import com.sparrow.passport.protocol.param.password.PasswordModifyParam;
 import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.passport.protocol.param.password.ResetPasswordByMobileParam;
 import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.MobileShortMessaging;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,19 +19,13 @@ public class UserSecurityApplicationService implements UserSecurityService {
         this.domainRegistry.getSecurityPrincipalService().sendFindPasswordToken(email, domainRegistry);
     }
 
-    @Override public MobileShortMessaging findPasswordByMobile(String mobile) throws BusinessException {
-        return null;
-    }
-
     @Override public Boolean resetPasswordByMobile(ResetPasswordByMobileParam password) throws BusinessException {
         return null;
     }
 
-
     @Override public void tokenVerify(String token) throws BusinessException {
-        this.domainRegistry.getSecurityPrincipalService().tokenVerify(token,domainRegistry);
+        this.domainRegistry.getSecurityPrincipalService().tokenVerify(token, domainRegistry);
     }
-
 
     @Override public void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException {
         this.domainRegistry.getSecurityPrincipalService().resetPasswordByEmailToken(param.getToken(), param.getPassword(), domainRegistry);

@@ -17,7 +17,6 @@ import com.sparrow.protocol.LoginToken;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
-import com.sparrow.support.mobile.ShortMessageService;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import javax.inject.Inject;
@@ -34,7 +33,6 @@ public class SecurityPrincipalService {
     public SecurityPrincipalEntity findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
-        ShortMessageService shortMessageService = domainRegistry.getShortMessageService();
         SecurityPrincipalEntity securityPrincipal;
 
         if (loginName.contains(Symbol.AT)) {

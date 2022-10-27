@@ -8,8 +8,8 @@ import com.sparrow.passport.controller.UserRegisterController;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.Controller;
 import com.sparrow.protocol.LoginToken;
+import com.sparrow.servlet.Controller;
 import com.sparrow.utility.ConfigUtility;
 import javax.inject.Inject;
 
