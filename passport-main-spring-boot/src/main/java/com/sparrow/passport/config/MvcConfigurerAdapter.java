@@ -49,7 +49,7 @@ public class MvcConfigurerAdapter implements WebMvcConfigurer {
     }
 
     @Bean
-    public ServletRegistrationBean servletTLReportServlet() {
+    public ServletRegistrationBean validateCode() {
         return new ServletRegistrationBean(new ValidateCode(), "/validate-code");
     }
 

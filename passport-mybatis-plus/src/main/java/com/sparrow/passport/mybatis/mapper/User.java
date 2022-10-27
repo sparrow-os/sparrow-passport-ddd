@@ -3,7 +3,7 @@ package com.sparrow.passport.mybatis.mapper;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.util.Date;
 
-public class User implements Cloneable {
+public class User {
     /*-------基本信息-------------*/
     @TableId("user_id")
     private Long userId;
