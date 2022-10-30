@@ -18,5 +18,9 @@
             <groupId>com.sparrow</groupId>
             <artifactId>sparrow</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sparrow.passport</groupId>
+            <artifactId>passport-protocol</artifactId>
+        </dependency>
     </dependencies>
 </project>

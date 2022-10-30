@@ -1,7 +1,7 @@
 package com.sparrow.passport.domain.entity;
 
-import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.Entity;
 import com.sparrow.passport.domain.object.value.Login;
@@ -24,7 +24,7 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
 
     public void activateEmail() throws BusinessException {
         if (!this.activate) {
-            throw new BusinessException(SparrowError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
+            throw new BusinessException(PassportError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
         }
     }
 
@@ -38,13 +38,13 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
 
     public void modifyPassword() throws BusinessException {
         this.modifyPasswordInfo.getNewOriginPassword().isValid();
-        Asserts.isTrue(!this.modifyPasswordInfo.getOldEncryptionPassword().equals(this.password), SparrowError.USER_PASSWORD_ERROR);
+        Asserts.isTrue(!this.modifyPasswordInfo.getOldEncryptionPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR);
         this.password = this.modifyPasswordInfo.getNewEncryptionPassword();
     }
 
     public void login() throws BusinessException {
         this.loginInfo.getPassword().isValid();
-        Asserts.isTrue(!this.loginInfo.getEncryptPassword().equals(this.password), SparrowError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
+        Asserts.isTrue(!this.loginInfo.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
         this.setCurrent2LastLoginTime();
         this.setCent((long) this.loginInfo.getCent());
     }

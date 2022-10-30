@@ -2,9 +2,9 @@ package com.sparrow.passport.domain.object.value;
 
 import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
-import com.sparrow.constant.SparrowError;
 import com.sparrow.enums.DateTimeUnit;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.ValueObject;
 import com.sparrow.passport.domain.DomainRegistry;
@@ -81,8 +81,8 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     }
 
     public boolean isValid(String originUserName) throws BusinessException {
-        Asserts.isTrue(!this.userName.equals(originUserName), SparrowError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
-        Asserts.isTrue(!TOKEN_TYPE.equals(this.tokenType), SparrowError.USER_TOKEN_TYPE_ERROR);
+        Asserts.isTrue(!this.userName.equals(originUserName), PassportError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
+        Asserts.isTrue(!TOKEN_TYPE.equals(this.tokenType), PassportError.USER_TOKEN_TYPE_ERROR);
 
         int validateTokenAvailableDay = Integer.parseInt(ConfigUtility
             .getValue(Config.VALIDATE_TOKEN_AVAILABLE_DAY));
@@ -91,7 +91,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
             System.currentTimeMillis(),
             DateTimeUnit.DAY);
         if (passDay > validateTokenAvailableDay) {
-            throw new BusinessException(SparrowError.USER_VALIDATE_TOKEN_TIME_OUT);
+            throw new BusinessException(PassportError.USER_VALIDATE_TOKEN_TIME_OUT);
         }
         return true;
     }

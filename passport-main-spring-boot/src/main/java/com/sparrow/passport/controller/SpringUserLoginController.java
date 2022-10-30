@@ -1,8 +1,8 @@
 package com.sparrow.passport.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
-import com.sparrow.constant.SparrowError;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginToken;
@@ -37,7 +37,7 @@ public class SpringUserLoginController {
             mv.addObject(loginToken);
             return mv;
         } catch (BusinessException e) {
-            if (e.getCode().equals(SparrowError.USER_NOT_ACTIVATE.getCode())) {
+            if (e.getCode().equals(PassportError.USER_NOT_ACTIVATE.getCode())) {
                 ModelAndView mv = new ModelAndView("redirect:/email-activate");
                 mv.addObject("email", login.getUserName());
                 return mv;

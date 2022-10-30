@@ -2,12 +2,12 @@ package com.sparrow.passport.domain.service;
 
 import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
-import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.domain.object.value.EmailActivateToken;
 import com.sparrow.passport.domain.object.value.EmailTokenPair;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
@@ -43,7 +43,7 @@ public class RegisteringUserService {
         RegisteringUserRepository registeringUserRepository = domainRegistry.getRegisteringUserRepository();
         RegisteringUserEntity oldUser = registeringUserRepository.findByEmail(registeringUserEntity.getEmail());
         Asserts.isTrue(oldUser != null,
-            SparrowError.USER_EMAIL_EXIST,
+            PassportError.USER_EMAIL_EXIST,
             UserFieldSuffix.REGISTER_USER_EMAIL);
         registeringUserEntity.setCent(100L);
         //registeringUserEntity.setCent(domainRegistry.getCodeService().getLongValueByCode(ConfigKeyDB.USER_CENT_REGISTER));

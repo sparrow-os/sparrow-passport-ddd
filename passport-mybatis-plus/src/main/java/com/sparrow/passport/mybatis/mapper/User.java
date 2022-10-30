@@ -1,8 +1,8 @@
 package com.sparrow.passport.mybatis.mapper;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
-
 public class User {
     /*-------基本信息-------------*/
     @TableId("user_id")

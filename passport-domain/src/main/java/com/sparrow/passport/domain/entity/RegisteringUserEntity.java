@@ -1,11 +1,12 @@
 package com.sparrow.passport.domain.entity;
 
 import com.sparrow.constant.Regex;
-import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
+import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.utility.RegexUtility;
 import com.sparrow.utility.StringUtility;
 
@@ -77,9 +78,9 @@ public class RegisteringUserEntity {
 
     public void register(DomainRegistry domainRegistry) throws BusinessException {
         Asserts.isTrue(StringUtility.isNullOrEmpty(userName), SparrowError.GLOBAL_PARAMETER_NULL, UserFieldSuffix.REGISTER_USER_NAME);
-        Asserts.isTrue(!RegexUtility.matches(password, Regex.PASSWORD), SparrowError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_PASSWORD);
-        Asserts.isTrue(!RegexUtility.matches(passwordConfirm, Regex.PASSWORD), SparrowError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
-        Asserts.isTrue(!passwordConfirm.equals(password), SparrowError.USER_PASSWORD_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
+        Asserts.isTrue(!RegexUtility.matches(password, Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_PASSWORD);
+        Asserts.isTrue(!RegexUtility.matches(passwordConfirm, Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
+        Asserts.isTrue(!passwordConfirm.equals(password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
         Asserts.isTrue(StringUtility.isNullOrEmpty(email)&&StringUtility.isNullOrEmpty(mobile), SparrowError.SYSTEM_ILLEGAL_REQUEST);
         this.setPassword(domainRegistry.getEncryptionService().encryptPassword(this.getPassword()));
     }

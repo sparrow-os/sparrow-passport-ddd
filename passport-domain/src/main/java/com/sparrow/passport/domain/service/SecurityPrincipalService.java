@@ -2,13 +2,13 @@ package com.sparrow.passport.domain.service;
 
 import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
-import com.sparrow.constant.SparrowError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
 import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.domain.object.value.Password;
+import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
@@ -45,9 +45,9 @@ public class SecurityPrincipalService {
 //                securityPrincipal = securityPrincipalRepository.findByMobile(mobilePair.getFirst(), mobilePair.getSecond());
 //            }
         }
-        Asserts.isTrue(securityPrincipal == null, SparrowError.USER_NAME_NOT_EXIST, UserFieldSuffix.LOGIN_USER_NAME);
+        Asserts.isTrue(securityPrincipal == null, PassportError.USER_NAME_NOT_EXIST, UserFieldSuffix.LOGIN_USER_NAME);
         Asserts.isTrue(StatusRecord.DISABLE.ordinal() == securityPrincipal.getStatus(),
-            SparrowError.USER_DISABLED,
+            PassportError.USER_DISABLED,
             UserFieldSuffix.LOGIN);
         return securityPrincipal;
     }
@@ -122,7 +122,7 @@ public class SecurityPrincipalService {
 
     public void resetPasswordByEmailToken(String token, String newPassword, DomainRegistry domainRegistry)
         throws BusinessException {
-        Asserts.isTrue(token == null, SparrowError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
+        Asserts.isTrue(token == null, PassportError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         EmailTokenPair emailTokenPair = EmailTokenPair.parse(encryptionService.base64Decode(token));
         SecurityPrincipalEntity securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(emailTokenPair.getEmail());
