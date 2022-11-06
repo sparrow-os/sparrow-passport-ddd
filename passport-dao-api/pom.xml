@@ -19,10 +19,6 @@
             <artifactId>sparrow-protocol-dao</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sparrow.passport</groupId>
-            <artifactId>passport-protocol</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
         </dependency>
