@@ -13,7 +13,6 @@ public interface UserSecurityController {
 
     void tokenVerify(String token) throws BusinessException;
 
-
     void resetPassword(PasswordResetParam param) throws BusinessException;
 
 }
