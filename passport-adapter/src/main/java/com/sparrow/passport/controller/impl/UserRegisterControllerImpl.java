@@ -1,13 +1,15 @@
 package com.sparrow.passport.controller.impl;
 
+import com.sparrow.cache.exception.CacheNotFoundException;
+import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.api.UserRegisterService;
 import com.sparrow.passport.controller.UserRegisterController;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.servlet.ServletContainer;
 import com.sparrow.support.Authenticator;
@@ -30,10 +32,13 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, VALIDATE_CODE);
     }
 
-    @Override public LoginToken emailRegister(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException {
+    @Override public LoginDTO emailRegister(EmailRegisterParam user,
+        ClientInformation client) throws BusinessException, CacheNotFoundException {
         user.setClient(client);
-        return registeringUserApplicationService.register(user);
+        LoginDTO loginDto = registeringUserApplicationService.register(user);
+        servletContainer
+            .rootCookie(User.PERMISSION, loginDto.getPermission(), loginDto.getLoginUser().getDays());
+        return loginDto;
     }
 
     @Override public Boolean sendTokenToEmail(EmailActivateParam emailActivateParam,
@@ -43,10 +48,9 @@ public class UserRegisterControllerImpl implements UserRegisterController {
         return true;
     }
 
-
     @Override
-    public void activateEmail(String token,ClientInformation client) throws BusinessException{
-        this.registeringUserApplicationService.activeEmail(token,client);
+    public void activateEmail(String token, ClientInformation client) throws BusinessException {
+        this.registeringUserApplicationService.activeEmail(token, client);
     }
 
 }

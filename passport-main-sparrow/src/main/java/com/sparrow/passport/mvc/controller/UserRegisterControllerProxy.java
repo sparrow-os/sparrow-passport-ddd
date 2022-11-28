@@ -2,13 +2,14 @@ package com.sparrow.passport.mvc.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.Config;
+import com.sparrow.constant.User;
 import com.sparrow.mvc.RequestParameters;
 import com.sparrow.mvc.ViewWithModel;
 import com.sparrow.passport.controller.UserRegisterController;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.servlet.Controller;
 import com.sparrow.utility.ConfigUtility;
 import javax.inject.Inject;
@@ -19,14 +20,15 @@ public class UserRegisterControllerProxy {
     private UserRegisterController userRegisterController;
 
     @RequestParameters("user,client")
-    public LoginToken shortcut(EmailRegisterParam user, ClientInformation client) throws BusinessException {
+    public LoginDTO shortcut(EmailRegisterParam user,
+        ClientInformation client) throws BusinessException, CacheNotFoundException {
         return this.userRegisterController.emailRegister(user, client);
     }
 
     @RequestParameters("user,client")
     public ViewWithModel emailRegister(EmailRegisterParam user,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        LoginToken loginToken = this.userRegisterController.emailRegister(user, client);
+        LoginDTO loginToken = this.userRegisterController.emailRegister(user, client);
         String welcomeUrl = ConfigUtility.getValue(Config.DEFAULT_WELCOME_INDEX);
         return ViewWithModel.transit("/login-success", welcomeUrl, loginToken);
     }

@@ -1,9 +1,9 @@
 package com.sparrow.passport.api;
 
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.LoginToken;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.query.login.LoginQueryDTO;
+import com.sparrow.protocol.BusinessException;
 
 public interface UserLoginService {
-    LoginToken login(LoginQueryDTO login) throws BusinessException;
+    LoginDTO login(LoginQueryDTO login) throws BusinessException;
 }

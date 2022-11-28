@@ -1,19 +1,20 @@
 package com.sparrow.passport.api;
 
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.param.register.MobileRegisterParam;
 import com.sparrow.passport.protocol.param.register.UserNameRegisterParam;
+import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.LoginUser;
 
 public interface UserRegisterService {
-    LoginToken register(UserNameRegisterParam registerParam) throws BusinessException;
+    LoginDTO register(UserNameRegisterParam registerParam) throws BusinessException;
 
-    LoginToken register(MobileRegisterParam registerParam) throws BusinessException;
+    LoginDTO register(MobileRegisterParam registerParam) throws BusinessException;
 
-    LoginToken register(EmailRegisterParam registerParam) throws BusinessException;
+    LoginDTO register(EmailRegisterParam registerParam) throws BusinessException;
 
     void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException;
 

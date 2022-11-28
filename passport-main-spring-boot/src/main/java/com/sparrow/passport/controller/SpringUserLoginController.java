@@ -2,11 +2,10 @@ package com.sparrow.passport.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
-import com.sparrow.protocol.Result;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +31,9 @@ public class SpringUserLoginController {
     public ModelAndView login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
         try {
-            LoginToken loginToken = this.userLoginController.login(login, client);
+            LoginDTO loginDto = this.userLoginController.login(login, client);
             ModelAndView mv = new ModelAndView(login.getRedirectUrl());
-            mv.addObject(loginToken);
+            mv.addObject(loginDto);
             return mv;
         } catch (BusinessException e) {
             if (e.getCode().equals(PassportError.USER_NOT_ACTIVATE.getCode())) {
@@ -47,7 +46,7 @@ public class SpringUserLoginController {
     }
 
     @PostMapping("/shortcut-login.json")
-    public LoginToken shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
+    public LoginDTO shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
         return this.userLoginController.shortcut(login, client);
     }
 

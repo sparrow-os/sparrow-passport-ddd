@@ -1,16 +1,16 @@
 package com.sparrow.passport.services;
 
-import com.sparrow.passport.protocol.param.register.EmailActivateParam;
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.api.UserRegisterService;
 import com.sparrow.passport.assemble.RegisteringUserApplicationAssemble;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
+import com.sparrow.passport.protocol.dto.LoginDTO;
+import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.param.register.MobileRegisterParam;
 import com.sparrow.passport.protocol.param.register.UserNameRegisterParam;
+import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.ClientInformation;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,15 +23,15 @@ public class RegisteringUserApplicationService implements UserRegisterService {
     @Inject
     private DomainRegistry domainRegistry;
 
-    @Override public LoginToken register(UserNameRegisterParam registerParam) throws BusinessException {
+    @Override public LoginDTO register(UserNameRegisterParam registerParam) throws BusinessException {
         return null;
     }
 
-    @Override public LoginToken register(MobileRegisterParam registerParam) throws BusinessException {
+    @Override public LoginDTO register(MobileRegisterParam registerParam) throws BusinessException {
         return null;
     }
 
-    @Override public LoginToken register(EmailRegisterParam registerParam) throws BusinessException {
+    @Override public LoginDTO register(EmailRegisterParam registerParam) throws BusinessException {
         RegisteringUserEntity registeringUser = this.registeringUserApplicationAssemble.emailDto2Entity(registerParam);
         return this.domainRegistry.getRegisteringUserService().registerByEmail(registeringUser, registerParam.getClient(), domainRegistry);
     }

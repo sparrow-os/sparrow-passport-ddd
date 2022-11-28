@@ -1,13 +1,13 @@
 package com.sparrow.passport.services;
 
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.LoginToken;
 import com.sparrow.passport.api.UserLoginService;
+import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.Login;
 import com.sparrow.passport.domain.service.SecurityPrincipalService;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.query.login.LoginQueryDTO;
-import com.sparrow.passport.domain.DomainRegistry;
+import com.sparrow.protocol.BusinessException;
 import com.sparrow.support.Authenticator;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,7 +22,7 @@ public class UserLoginApplicationService implements UserLoginService {
     private Authenticator authenticatorService;
 
     @Override
-    public LoginToken login(LoginQueryDTO login) throws BusinessException {
+    public LoginDTO login(LoginQueryDTO login) throws BusinessException {
         SecurityPrincipalService securityPrincipalService = this.domainRegistry.getSecurityPrincipalService();
         SecurityPrincipalEntity securityPrincipal = securityPrincipalService.findByLoginName(login.getUserName(), domainRegistry);
         String encryptLoginPassword = this.domainRegistry.getEncryptionService().encryptPassword(login.getPassword());

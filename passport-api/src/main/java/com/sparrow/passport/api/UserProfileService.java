@@ -1,13 +1,12 @@
 
 package com.sparrow.passport.api;
 
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.LoginToken;
-import com.sparrow.protocol.dto.AuthorDTO;
-import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.protocol.dto.BasicUserDTO;
+import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.protocol.param.UserModifyParam;
-
+import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.LoginUser;
+import com.sparrow.protocol.dto.AuthorDTO;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ public interface UserProfileService {
 
     Map<Long, AuthorDTO> getAuthorMap(Collection<Long> userIds) throws BusinessException;
 
-    LoginToken modify(UserModifyParam user) throws BusinessException;
+    LoginUser modify(UserModifyParam user) throws BusinessException;
 
     Boolean modifyAvatar(AvatarModifyParam avatarModify) throws BusinessException;
 }

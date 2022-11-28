@@ -7,19 +7,25 @@ import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.domain.object.value.EmailActivateToken;
 import com.sparrow.passport.domain.object.value.EmailTokenPair;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
+import com.sparrow.support.Authenticator;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 public class RegisteringUserService {
+    @Inject
+    private Authenticator authenticatorService;
+
     private void success(Long userId, ClientInformation client,
         DomainRegistry domainRegistry) throws BusinessException {
 //        EventService eventService = domainRegistry.getEventService();
@@ -37,7 +43,7 @@ public class RegisteringUserService {
 //        }
     }
 
-    public LoginToken registerByEmail(RegisteringUserEntity registeringUserEntity,
+    public LoginDTO registerByEmail(RegisteringUserEntity registeringUserEntity,
         ClientInformation client, DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canRegister(client.getIp());
         RegisteringUserRepository registeringUserRepository = domainRegistry.getRegisteringUserRepository();
@@ -52,15 +58,16 @@ public class RegisteringUserService {
         registeringUserRepository.saveRegisteringUser(registeringUserEntity, client);
         this.success(registeringUserEntity.getUserId(), client, domainRegistry);
         this.sendActivateEmail(registeringUserEntity, domainRegistry);
-        return LoginToken.create(
+        LoginUser loginUser = LoginUser.create(
             registeringUserEntity.getUserId(),
             registeringUserEntity.getUserName(),
             Symbol.EMPTY,
             Symbol.EMPTY,
-            registeringUserEntity.getCent(),
             client.getDeviceId(),
             false,
             1);
+        String permission = this.authenticatorService.sign(loginUser, registeringUserEntity.getPassword());
+        return new LoginDTO(loginUser, permission);
     }
 
     public void sendActivateEmail(RegisteringUserEntity registeringUserEntity,
@@ -86,15 +93,15 @@ public class RegisteringUserService {
             language);
     }
 
-    public void activeEmail(String token,ClientInformation client,
+    public void activeEmail(String token, ClientInformation client,
         DomainRegistry domainRegistry) throws BusinessException {
 
-        String originToken= domainRegistry.getEncryptionService().base64Decode(token);
+        String originToken = domainRegistry.getEncryptionService().base64Decode(token);
         EmailTokenPair emailTokenPair = EmailTokenPair.parse(originToken);
         RegisteringUserEntity registeringUserEntity = domainRegistry.getRegisteringUserRepository().findByEmail(emailTokenPair.getEmail());
         EmailActivateToken emailActivateToken = EmailActivateToken.parse(emailTokenPair, registeringUserEntity.getPassword(), domainRegistry);
         emailActivateToken.isValid(registeringUserEntity.getUserName());
         registeringUserEntity.active();
-        domainRegistry.getRegisteringUserRepository().saveRegisteringUser(registeringUserEntity,client);
+        domainRegistry.getRegisteringUserRepository().saveRegisteringUser(registeringUserEntity, client);
     }
 }

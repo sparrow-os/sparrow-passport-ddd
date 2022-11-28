@@ -8,12 +8,13 @@ import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
 import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.domain.object.value.Password;
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginToken;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
@@ -70,7 +71,7 @@ public class SecurityPrincipalService {
 //        }
     }
 
-    public LoginToken login(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
+    public LoginDTO login(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
         DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canLogin(securityPrincipal.getUserId());
         securityPrincipal.login();
@@ -78,17 +79,16 @@ public class SecurityPrincipalService {
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
         Integer tokenExpireDays = securityPrincipal.getLoginInfo().getTokenExpireDays();
 
-        LoginToken loginToken = LoginToken.create(securityPrincipal.getUserId(),
+        LoginUser loginUser = LoginUser.create(securityPrincipal.getUserId(),
             securityPrincipal.getUserName(),
             "",
             "",
-            securityPrincipal.getCent(),
             client.getDeviceId(),
             securityPrincipal.getActivate(),
             tokenExpireDays
         );
-        loginToken.setPermission(this.authenticatorService.sign(loginToken, securityPrincipal.getLoginInfo().getEncryptPassword()));
-        return loginToken;
+        String permission = this.authenticatorService.sign(loginUser, securityPrincipal.getLoginInfo().getEncryptPassword());
+        return new LoginDTO(loginUser, permission);
     }
 
     public void sendFindPasswordToken(String email,
