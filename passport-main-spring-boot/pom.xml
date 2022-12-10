@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sparrow-zoo-bom</artifactId>
-        <groupId>com.sparrow</groupId>
+        <groupId>com.sparrowzoo</groupId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -22,24 +22,24 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.sparrow</groupId>
+            <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.sparrow.passport</groupId>
+            <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-infrastructure</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sparrow</groupId>
+            <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-json</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sparrow.passport</groupId>
+            <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-adapter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sparrow.passport</groupId>
+            <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-sparrow-dao</artifactId>
         </dependency>
 
@@ -70,6 +70,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.tarena.goods.server.MainApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

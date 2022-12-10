@@ -6,10 +6,7 @@ import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.protocol.param.UserModifyParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.dto.AuthorDTO;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public interface UserProfileService {
 
@@ -41,9 +38,9 @@ public interface UserProfileService {
 
     BasicUserDTO getBasicUser(Long userId, String size) throws BusinessException;
 
-    AuthorDTO getAuthor(Long userId) throws BusinessException;
-
-    Map<Long, AuthorDTO> getAuthorMap(Collection<Long> userIds) throws BusinessException;
+//    AuthorDTO getAuthor(Long userId) throws BusinessException;
+//
+//    Map<Long, AuthorDTO> getAuthorMap(Collection<Long> userIds) throws BusinessException;
 
     LoginUser modify(UserModifyParam user) throws BusinessException;
 
