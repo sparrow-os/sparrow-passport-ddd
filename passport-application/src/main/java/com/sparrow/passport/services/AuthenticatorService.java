@@ -20,14 +20,19 @@ import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.support.AbstractAuthenticatorService;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Value;
 
 @Named
 public class AuthenticatorService extends AbstractAuthenticatorService {
     @Inject
     private DomainRegistry domainRegistry;
 
+    @Value("${auth.security}")
+    private String security;
+
     @Override
     protected String getSecret(Long userId) {
-        return domainRegistry.getSecurityPrincipalRepository().findByUserId(userId).getPassword();
+        return this.security;
+        //return domainRegistry.getSecurityPrincipalRepository().findByUserId(userId).getPassword();
     }
 }

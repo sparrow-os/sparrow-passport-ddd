@@ -14,6 +14,10 @@
     <artifactId>passport-application</artifactId>
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-api</artifactId>
         </dependency>

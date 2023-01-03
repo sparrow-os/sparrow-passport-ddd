@@ -66,7 +66,7 @@ public class RegisteringUserService {
             client.getDeviceId(),
             false,
             1);
-        String permission = this.authenticatorService.sign(loginUser, registeringUserEntity.getPassword());
+        String permission = this.authenticatorService.sign(loginUser);
         return new LoginDTO(loginUser, permission);
     }
 

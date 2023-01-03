@@ -31,6 +31,7 @@ public class SecurityPrincipalService {
     @Inject
     private Authenticator authenticatorService;
 
+
     public SecurityPrincipalEntity findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
@@ -87,7 +88,7 @@ public class SecurityPrincipalService {
             securityPrincipal.getActivate(),
             tokenExpireDays
         );
-        String permission = this.authenticatorService.sign(loginUser, securityPrincipal.getLoginInfo().getEncryptPassword());
+        String permission = this.authenticatorService.sign(loginUser);
         return new LoginDTO(loginUser, permission);
     }
 

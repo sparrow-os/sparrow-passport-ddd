@@ -37,7 +37,7 @@
                 </label>
                 <input type="text" id="txtUserName" name="userName" class="input"
                        onfocus='$.v.showMessage(loginInfo,this);' onblur='$.v.isNull(loginInfo,this);'/>
-                <span id="errorUserName" name="login_user_name" class="error"></span>
+                <span th:text="${login_user_name}" id="errorUserName" name="login_user_name" class="error"></span>
             </div>
             <div class="pure-control-group">
                 <label>
@@ -60,7 +60,7 @@
                 <img id="imgLoginValidateCode"
                      onclick="$(this).fresh()" src="/validate-code"/>
                 <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
-                <span id="errorValidateCode" name="login_validate_code" class="error"></span>
+                <span id="errorValidateCode" th:text="${login_validate_code}" name="login_validate_code" class="error"></span>
             </div>
 
             <div class="pure-controls">

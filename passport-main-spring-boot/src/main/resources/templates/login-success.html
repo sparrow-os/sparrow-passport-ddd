@@ -6,8 +6,6 @@
     <meta content="恭喜！登录成功" name="description"/>
     <meta name="application-name" content="麻雀窝"/>
     <meta name="msapplication-tooltip" content="麻雀窝"/>
-    <link rel="shortcut icon" href="/static/favicon.ico"/>
-
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
@@ -27,7 +25,8 @@
     </div>
     <div class="content">
         <br/>
-        <span class="highlight" url="http://admin.sparrowzoo.com/" id="timer">5</span>秒以后将自动跳转,或者<a
+        <input id="hdnQueryString" type="hidden" th:value="${#httpServletRequest.getQueryString()}"/>
+        <span class="highlight" id="timer">5000</span>秒以后将自动跳转,或者<a
             href="http://admin.sparrowzoo.com/" target="_self">直接点击这里跳转</a>
         <script type="text/javascript">
             $.waitRedirect("timer");
