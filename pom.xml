@@ -20,6 +20,7 @@
         <module>passport-adapter</module>
         <module>passport-mybatis</module>
         <module>passport-mybatis-plus</module>
+        <module>passport-main-webapp</module>
 
     </modules>
 </project>

@@ -2,7 +2,6 @@ package com.sparrow.passport.mvc.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.Config;
-import com.sparrow.constant.User;
 import com.sparrow.mvc.RequestParameters;
 import com.sparrow.mvc.ViewWithModel;
 import com.sparrow.passport.controller.UserRegisterController;

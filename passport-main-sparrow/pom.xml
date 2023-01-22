@@ -75,11 +75,17 @@
         </filters>
         <resources>
             <resource>
+                <directory>../passport-main-webapp/src/main/resources</directory>
+                <includes>
+                    <include>templates/**/**</include>
+                </includes>
+                <targetPath>${project.basedir}/src/main/webapp</targetPath>
+            </resource>
+            <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*.xml</include>
                     <include>*.properties</include>
-                    <include>META-INF/</include>
                 </includes>
                 <filtering>true</filtering>
                 <targetPath>${project.build.directory}/classes/</targetPath>
@@ -89,8 +95,10 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat.plugin.version}</version>
                 <configuration>
                     <port>2222</port>
+                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>

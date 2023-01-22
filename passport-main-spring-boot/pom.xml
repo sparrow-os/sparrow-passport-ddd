@@ -86,13 +86,41 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>../passport-main-webapp/src/main/resources</directory>
+                <includes>
+                    <include>templates/**/**</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/classes/</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.properties</include>
+                    <include>*.yaml</include>
+                    <include>*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/classes/</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>com.tarena.goods.server.MainApplication</mainClass>
+                    <mainClass>com.sparrow.passport.boot.Application</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
