@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title th:text="${flash_exception_result?.message}">管理系统</title>
+    <title th:text="${flash_exception_result?flash_exception_result.message:''}">管理系统</title>
     <meta content="" name="keywords"/>
     <meta content="操作成功！" name="description"/>
     <meta name="application-name" content="管理系统"/>
@@ -27,13 +27,13 @@
 <script language="javascript" type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0.1"></script>
 <div class="body">
     <div class="header">
-        <h1><span th:text="${flash_exception_result?.message}"></span></h1>
+        <h1><span th:text="${flash_exception_result?flash_exception_result.message:''}"></span></h1>
         <h2>
 
         </h2>
     </div>
     <div class="content">
-        错误码：<span th:text="${flash_exception_result?.code}"></span><br/>
+        错误码：<span th:text="${flash_exception_result?flash_exception_result.code:''}"></span><br/>
         <br/>
 <!--        <a th:href="@{${#httpServletRequest.getQueryString()}}">test hyper</a>-->
         <input id="hdnQueryString" type="hidden" th:value="${#httpServletRequest.getQueryString()}"/>

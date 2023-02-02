@@ -38,7 +38,7 @@
         <filter-class>com.sparrow.mvc.ThymeleafDispatcherFilter</filter-class>
         <init-param>
             <param-name>except_url</param-name>
-            <param-value>/validate-code</param-value>
+            <param-value>/validate-code,/favicon.ico</param-value>
         </init-param>
     </filter>
     <filter-mapping>
