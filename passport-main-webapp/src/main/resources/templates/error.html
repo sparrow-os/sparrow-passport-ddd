@@ -3,9 +3,7 @@
 
     <title th:text="${flash_exception_result?flash_exception_result.message:''}">管理系统</title>
     <meta content="" name="keywords"/>
-    <meta content="操作成功！" name="description"/>
-    <meta name="application-name" content="管理系统"/>
-    <meta name="msapplication-tooltip" content="管理系统"/>
+    <meta content="${flash_exception_result?flash_exception_result.message:''}" name="description"/>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0.1"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0.1"/>
@@ -21,6 +19,7 @@
            var queryString='[[${#httpServletRequest.getQueryString()}]]';
             window.location.href=queryString;
         }
+
     </script>
 </head>
 <body>
@@ -35,7 +34,7 @@
     <div class="content">
         错误码：<span th:text="${flash_exception_result?flash_exception_result.code:''}"></span><br/>
         <br/>
-<!--        <a th:href="@{${#httpServletRequest.getQueryString()}}">test hyper</a>-->
+        <!--        <a th:href="@{${#httpServletRequest.getQueryString()}}">test hyper</a>-->
         <input id="hdnQueryString" type="hidden" th:value="${#httpServletRequest.getQueryString()}"/>
         <span id="timer">5000</span>秒以后将自动跳转,或者
 
