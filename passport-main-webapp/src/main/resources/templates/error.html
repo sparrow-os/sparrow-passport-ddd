@@ -1,9 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title th:text="${flash_exception_result?flash_exception_result.message:''}">管理系统</title>
+    <title th:text="${flash_exception_result?message:''}">管理系统</title>
     <meta content="" name="keywords"/>
-    <meta content="${flash_exception_result?flash_exception_result.message:''}" name="description"/>
+    <meta content="${flash_exception_result?message:''}" name="description"/>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0.1"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0.1"/>
