@@ -1,0 +1,154 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>快捷登录</title>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts.css?v=1.0"/>
+    <!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/sparrow.css?v=1.0"/>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/passport.js?v=1.0"></script>
+
+
+    <meta name="application-name" content="麻雀窝"/>
+    <meta name="msapplication-tooltip" content="麻雀窝"/>
+</head>
+
+<body style="width: 650px; height:450px;">
+
+<div id="tabs" class="tab">
+    <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list" style="width: 100%;">
+            <li class="pure-menu-item pure-menu-selected">
+                <a class="pure-menu-link" href="javascript:void(0);"><span>登&nbsp;&nbsp;录</span></a>
+            </li>
+            <li class="pure-menu-item"><a class="pure-menu-link" href="javascript:void(0);"><span>注&nbsp;&nbsp;册</span>
+            </a></li>
+            <li class="pure-menu-item more"><a class="pure-menu-link" href="javascript:void(0);"
+                                               onclick="parent.$.win.closeClick();"><span>关闭</span> </a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="divShortCutLogin" class="block">
+            <form method="post" class="pure-form pure-form-aligned">
+                <input type="hidden" name="parameter" value="shortcut"/> <br/>
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="txtusername">
+                            用户名
+                        </label>
+                        <input class="input" type="text" name="userName"
+                               onfocus="$.v.showMessage(loginInfo,this);"
+                               onblur="$.v.isNull(loginInfo,this);" id="txtUserName"/>
+                        <span id="errorUserName" name="login_user_name" class="pure-form-message-inline"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label>
+                            密 码
+                        </label>
+
+                        <input class="input" type="password"
+                               onfocus="$.v.showMessage(loginInfo,this);"
+                               onblur="$.v.isNull(loginInfo,this);" id="txtPassword"
+                               name="password"/>
+                        <span id="errorPassword" name="login_password" class="pure-form-message-inline"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label>
+                            验证码
+                        </label>
+                        <input class="input" onfocus="$.v.showMessage(loginInfo,this);"
+                               onblur="$.v.isNull(loginInfo,this);" type="text"
+                               maxlength="4" name="validateCode" id="txtValidateCode"/>
+
+                        <img id="imgLoginValidateCode"
+                             onclick="$(this).fresh()" src="/validate-code"/>
+                        <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
+                    </div>
+
+                    <div class="pure-controls">
+                        <span id="errorValidateCode" name="login_validate_code" class="prompt"></span>
+                        <label for="chbLoginDays" class="pure-checkbox">
+                            <input id="chbLoginDays" value="14" name="loginDays" type="checkbox"> 两周直接登录(家庭登录模式)<a
+                                href="http://localhost:2222/password/find-by-email">忘记密码</a><br/>
+                            <span class="highlight">温馨提示</span>为了您的密码安全,如果您在网吧等公共场所请不要勾选此项
+                        </label>
+
+                        <button onenter="true" id="btnLogin" type="button"
+                                class="pure-button pure-button-primary">登录
+                        </button>
+                    </div>
+                </fieldset>
+                <input type="hidden" id="hdnRedirectUrl" name="redirectUrl" class=""/>
+            </form>
+        </div>
+        <div id="divShortCutRegister" class="none">
+            <form method="post" class="pure-form pure-form-aligned">
+                <input type="hidden" id="hdnIntroducer" name="introducer" class=""/>
+                <fieldset>
+                    <div class="pure-control-group">
+
+                        <label> 电子邮箱 </label>
+                        <input type="text" tabindex="1"
+                               onfocus="$.v.showMessage(regInfo,this);" onblur="$.passport.register.validate.email(this);"
+                               name="email" id="txtEmail"/>
+                        <span id="errorEmail" name="register_user_email" class="prompt"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label> 用户名 </label>
+                        <input type="text" tabIndex="2"
+                               onfocus='$.v.showMessage(regInfo,this);' onblur='$.passport.register.validate.user(this);'
+                               name="userName" id="txtRegUserName"/>
+                        <span id="errorRegUserName" name="register_user_name" class="prompt"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label> 登陆密码 </label> <input class="input" type="password"
+                                                     tabindex="3" onfocus="$.v.showMessage(regInfo,this);"
+                                                     onblur="$.v.isNull(regInfo,this);" maxlength="16"
+                                                     name="password" id="txtRegPassword"/>
+                        <span id="errorRegPassword" class="prompt"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label> 确认密码 </label> <input name="passwordConfirm" class="input" type="password"
+                                                     tabindex="4" onfocus="$.v.showMessage(regInfo,this);"
+                                                     onblur="$.v.isEqual(regInfo,this);" maxlength="16"
+                                                     id="txtConfirmPassword"/> <span
+                            id="errorConfirmPassword" class="prompt"></span>
+                    </div>
+                    <div class="pure-control-group">
+                        <label> 验证码 </label>
+
+                        <input class="input"
+                               type="text" tabindex="5"
+                               onfocus="$.v.showMessage(regInfo,this)"
+                               onblur="$.v.isNull(regInfo,this);" maxlength="4"
+                               name="validateCode" id="txtRegValidateCode"/>
+                        <img alt="validate code" align="absMiddle" id="imgValidateCode" onclick="$(this).fresh();"
+                             src="validate-code"/>
+                        <a href="javascript:$('#imgValidateCode').fresh();"> 看不清 换一张</a>
+                    </div>
+                    <div class="pure-controls">
+                        <span id="errorRegValidateCode" name="register_validate_code" class="prompt"></span>
+                        <br/>
+                        <button onenter="true" id="btnRegister" type="button"
+                                class="pure-button pure-button-primary">注册
+                        </button>
+
+                        <br/> <br/> <a target="_blank"
+                                       href="/provision.jsp">麻雀窝服务条款</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

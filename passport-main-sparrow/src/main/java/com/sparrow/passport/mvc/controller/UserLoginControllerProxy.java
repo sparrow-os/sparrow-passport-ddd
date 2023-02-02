@@ -14,11 +14,17 @@ import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.StringUtility;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserLoginControllerProxy {
     @Inject
     private UserLoginController userLoginController;
+
+    public ViewWithModel index2(HttpServletRequest request) {
+        request.setAttribute("name", "zhangsan");
+        return ViewWithModel.forward();
+    }
 
     @RequestParameters("login,client")
     public ViewWithModel login(LoginQuery login,

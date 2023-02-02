@@ -4,10 +4,11 @@
 <mvc>
     <controller id="userLoginControllerProxy">
         <action name="/login.do" method="login"/>
+        <action name="/index2" method="index2"/>
         <action name="/shortcut-login.json" method="shortcut"/>
     </controller>
         <controller id="userRegisterControllerProxy">
-            <action name="/register.do" method="emailRegister"/>
+            <action name="/register/email.do" method="emailRegister"/>
             <action name="/shortcut-register.json" method="shortcut"/>
         </controller>
 
