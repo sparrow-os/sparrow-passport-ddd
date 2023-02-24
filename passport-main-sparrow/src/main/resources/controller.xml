@@ -4,7 +4,7 @@
 <mvc>
     <controller id="userLoginControllerProxy">
         <action name="/login.do" method="login"/>
-        <action name="/index2" method="index2"/>
+        <action name="/thymeleaf" method="thymeleaf"/>
         <action name="/shortcut-login.json" method="shortcut"/>
     </controller>
         <controller id="userRegisterControllerProxy">

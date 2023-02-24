@@ -40,6 +40,11 @@
             <param-name>except_url</param-name>
             <param-value>/validate-code,/favicon.ico</param-value>
         </init-param>
+
+        <init-param>
+            <param-name>template_expression</param-name>
+            <param-value>sparrow</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>DispatcherFilter</filter-name>

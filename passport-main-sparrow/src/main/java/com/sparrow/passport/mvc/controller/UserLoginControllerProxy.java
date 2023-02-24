@@ -6,6 +6,7 @@ import com.sparrow.mvc.RequestParameters;
 import com.sparrow.mvc.ViewWithModel;
 import com.sparrow.passport.controller.UserLoginController;
 import com.sparrow.passport.controller.protocol.query.LoginQuery;
+import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
@@ -21,9 +22,11 @@ public class UserLoginControllerProxy {
     @Inject
     private UserLoginController userLoginController;
 
-    public ViewWithModel index2(HttpServletRequest request) {
-        request.setAttribute("name", "zhangsan");
-        return ViewWithModel.forward();
+    public ViewWithModel thymeleaf(HttpServletRequest request) {
+        User user = new User();
+        user.setUserId(1L);
+        request.setAttribute("user", user);
+        return ViewWithModel.forward("thymeleaf-test");
     }
 
     @RequestParameters("login,client")

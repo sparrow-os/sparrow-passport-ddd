@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: sparrow-passport
-  main:
-    allow-bean-definition-overriding: true
   profiles:
     active: dev
   cloud:

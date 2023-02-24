@@ -29,7 +29,7 @@ public class UserMapper {
         securityPrincipal.setLastLoginTime(user.getLastLoginTime());
         securityPrincipal.setUserId(user.getUserId());
         securityPrincipal.setPassword(user.getPassword());
-        securityPrincipal.setStatus(user.getStatus());
+        securityPrincipal.setStatus(user.getStatus().ordinal());
         return securityPrincipal;
     }
 
@@ -60,27 +60,23 @@ public class UserMapper {
         user.setDevice(client.getDevice());
         user.setChannel(client.getChannel());
         user.setDeviceModel(client.getDeviceModel());
-        user.setCreateTime(System.currentTimeMillis());
-        user.setUpdateTime(user.getCreateTime());
-        user.setLastLoginTime(user.getCreateTime());
+        user.setGmtCreate(System.currentTimeMillis());
+        user.setGmtModified(user.getGmtCreate());
+        user.setLastLoginTime(System.currentTimeMillis());
         user.setActivate(registeringUser.getActivate());
-        if(user.getActivate()){
+        if (user.getActivate()) {
             user.setActivateTime(System.currentTimeMillis());
-        }
-        else {
+        } else {
             user.setActivateTime(0L);
         }
         user.setAvatar(Symbol.EMPTY);
         user.setGender(Gender.NULL.ordinal());
         user.setGroupLevel(Symbol.EMPTY);
         user.setBirthday(null);
-        user.setWebsite(client.getWebsite());
         user.setNickName(user.getUserName());
-        user.setZone(Symbol.EMPTY);
         user.setPersonalSignature(Symbol.EMPTY);
         user.setIp(this.ipSupport.toLong(client.getIp()));
-        user.setStatus(StatusRecord.ENABLE.ordinal());
-        user.setIsOnline(true);
+        user.setStatus(StatusRecord.ENABLE);
         user.setMobile(registeringUser.getMobile());
         if (user.getMobile() == null) {
             user.setMobile(Symbol.EMPTY);

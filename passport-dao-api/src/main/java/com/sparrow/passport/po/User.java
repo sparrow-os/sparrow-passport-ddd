@@ -2,6 +2,7 @@ package com.sparrow.passport.po;
 
 import com.sparrow.protocol.MethodOrder;
 import com.sparrow.protocol.POJO;
+import com.sparrow.protocol.dao.PO;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "user")
-public class User implements POJO, Cloneable {
+public class User extends PO implements Cloneable {
     /*-------基本信息-------------*/
     private Long userId;
     private String userName;
@@ -24,10 +25,7 @@ public class User implements POJO, Cloneable {
     private Long cent;
     private Boolean activate;
     private Long activateTime;
-    private Long createTime;
-    private Long updateTime;
     private Long lastLoginTime;
-    private String website;
     private Long ip;
     //设备
     private String device;
@@ -35,14 +33,7 @@ public class User implements POJO, Cloneable {
     private String deviceModel;
     //referer
     private String channel;
-    private Boolean isOnline;
     private String personalSignature;
-    //是否可用enable disable
-    private Integer status;
-    /**
-     * 用户自定义域名 全部子站共用一个域名
-     */
-    private String zone;
 
     private String groupLevel;
 
@@ -170,26 +161,6 @@ public class User implements POJO, Cloneable {
         this.cent = cent;
     }
 
-    @MethodOrder(order = 13)
-    @Column(name = "status", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '状态'", updatable = false)
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    @MethodOrder(order = 14)
-    @Column(name = "is_online", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否在线'", updatable = false)
-    public Boolean getIsOnline() {
-        return isOnline;
-    }
-
-    public void setIsOnline(Boolean isOnline) {
-        this.isOnline = isOnline;
-    }
-
     @MethodOrder(order = 15)
     @Column(name = "activate", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否激活'")
     public Boolean getActivate() {
@@ -210,12 +181,6 @@ public class User implements POJO, Cloneable {
         this.activateTime = activeTime;
     }
 
-    @MethodOrder(order = 17)
-    @Column(name = "zone", columnDefinition = "varchar(32) DEFAULT '' COMMENT '主页'", updatable = false)
-    public String getZone() {
-        return zone;
-    }
-
     @MethodOrder(order = 18)
     @Column(name = "channel", columnDefinition = "varchar(128) DEFAULT '' COMMENT '渠道来源'", updatable = false)
     public String getChannel() {
@@ -224,12 +189,6 @@ public class User implements POJO, Cloneable {
 
     public void setChannel(String origin) {
         this.channel = origin;
-    }
-
-    @MethodOrder(order = 19)
-    @Column(name = "website", columnDefinition = "varchar(128) DEFAULT '' COMMENT '用户注册网站'", updatable = false)
-    public String getWebsite() {
-        return website;
     }
 
     @MethodOrder(order = 20)
@@ -250,14 +209,6 @@ public class User implements POJO, Cloneable {
 
     public void setSecretMobile(String secretMobile) {
         this.secretMobile = secretMobile;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public void setZone(String zone) {
-        this.zone = zone;
     }
 
     @MethodOrder(order = 22)
@@ -299,25 +250,4 @@ public class User implements POJO, Cloneable {
     public void setIp(Long ip) {
         this.ip = ip;
     }
-
-    @MethodOrder(order = 27)
-    @Column(name = "create_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '注册日期'", updatable = false, nullable = false)
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    @MethodOrder(order = 28)
-    @Column(name = "update_time", columnDefinition = "bigint(10) DEFAULT 0 COMMENT '最近更新时间'")
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
-
 }

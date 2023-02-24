@@ -17,13 +17,13 @@
 
 package com.sparrow.passport;
 
+import com.sparrow.protocol.constant.Constant;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -31,8 +31,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.sparrow.protocol.constant.Constant;
 
 public class ValidateCode extends HttpServlet {
     public ValidateCode() {
@@ -77,7 +75,7 @@ public class ValidateCode extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+        throws IOException {
         BufferedImage buffImg = new BufferedImage(this.imagewidth,
             this.imageheight, BufferedImage.TYPE_INT_RGB);
         Graphics2D gd = buffImg.createGraphics();
