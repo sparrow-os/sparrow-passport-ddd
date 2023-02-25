@@ -43,7 +43,7 @@
 
         <init-param>
             <param-name>template_expression</param-name>
-            <param-value>sparrow</param-value>
+            <param-value>spring</param-value>
         </init-param>
     </filter>
     <filter-mapping>
