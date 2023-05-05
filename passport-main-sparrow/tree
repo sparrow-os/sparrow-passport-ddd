@@ -1,13 +1,7 @@
-[WARNING] 
-[WARNING] Some problems were encountered while building the effective settings
-[WARNING] Unrecognised tag: 'repositories' (position: START_TAG seen ...</servers>\n\n    <repositories>... @32:19)  @ /Users/zhanglizhi/.m2/settings.xml, line 32, column 19
-[WARNING] 
 [INFO] Scanning for projects...
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-zoo-bom/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-zoo-bom/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-bom/0.0.2-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-bom/0.0.2-SNAPSHOT/maven-metadata.xml
-[WARNING] 
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-zoo-bom/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-bom/0.0.2-SNAPSHOT/maven-metadata.xml
+[WARNING] 
 [WARNING] Some problems were encountered while building the effective model for com.sparrowzoo:passport-main-sparrow:war:1.0.0-SNAPSHOT
 [WARNING] The expression ${artifactId} is deprecated. Please use ${project.artifactId} instead.
 [WARNING] 
@@ -19,47 +13,27 @@ Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/spar
 [INFO] ------------------------------------------------------------------------
 [INFO] Building passport-main-sparrow 1.0.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-container/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-container/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-protocol-dao/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-protocol-dao/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-protocol-redis/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-protocol-redis/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-loader/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-loader/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-mvc-thymeleaf/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-mvc-thymeleaf/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-mvc/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-mvc/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-jedis/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-jedis/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-infrastructure/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-infrastructure/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-dao-api/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-dao-api/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-domain/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-domain/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-json/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-json/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-adapter/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-adapter/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-application/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-application/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-api/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-api/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/passport/passport-sparrow-dao/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/passport/passport-sparrow-dao/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-data-source/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-data-source/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/tedu-snapshots/com/sparrowzoo/sparrow-orm/1.0.0-SNAPSHOT/maven-metadata.xml
-Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/sparrow-orm/1.0.0-SNAPSHOT/maven-metadata.xml
-[INFO] 
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-container/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-protocol-dao/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-protocol-redis/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-loader/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-mvc-thymeleaf/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-mvc/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-jedis/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-infrastructure/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-dao-api/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-domain/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-protocol/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-json/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-adapter/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-application/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-api/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/passport/passport-sparrow-dao/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-data-source/1.0.0-SNAPSHOT/maven-metadata.xml
+Downloading: https://maven.aliyun.com/nexus/content/groups/public/com/sparrowzoo/sparrow-orm/1.0.0-SNAPSHOT/maven-metadata.xml
+[INFO] 
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ passport-main-sparrow ---
 [INFO] com.sparrowzoo:passport-main-sparrow:war:1.0.0-SNAPSHOT
 [INFO] +- ch.qos.logback:logback-classic:jar:1.2.9:compile
@@ -80,9 +54,16 @@ Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/spar
 [INFO] |  |  |  \- org.javassist:javassist:jar:3.20.0-GA:compile
 [INFO] |  |  +- org.attoparser:attoparser:jar:2.0.5.RELEASE:compile
 [INFO] |  |  \- org.unbescape:unbescape:jar:1.1.6.RELEASE:compile
-[INFO] |  \- com.sparrowzoo:sparrow-mvc:jar:1.0.0-SNAPSHOT:compile
-[INFO] |     +- com.google.zxing:core:jar:2.2:compile
-[INFO] |     \- eu.bitwalker:UserAgentUtils:jar:1.21:compile
+[INFO] |  +- com.sparrowzoo:sparrow-mvc:jar:1.0.0-SNAPSHOT:compile
+[INFO] |  |  +- com.google.zxing:core:jar:2.2:compile
+[INFO] |  |  \- eu.bitwalker:UserAgentUtils:jar:1.21:compile
+[INFO] |  +- org.thymeleaf:thymeleaf-spring5:jar:3.0.11.RELEASE:compile
+[INFO] |  \- org.springframework:spring-context:jar:5.2.8.RELEASE:compile
+[INFO] |     +- org.springframework:spring-aop:jar:5.2.8.RELEASE:compile
+[INFO] |     +- org.springframework:spring-beans:jar:5.2.8.RELEASE:compile
+[INFO] |     +- org.springframework:spring-core:jar:5.2.8.RELEASE:compile
+[INFO] |     |  \- org.springframework:spring-jcl:jar:5.2.8.RELEASE:compile
+[INFO] |     \- org.springframework:spring-expression:jar:5.2.8.RELEASE:compile
 [INFO] +- com.sparrowzoo:sparrow-jedis:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  +- redis.clients:jedis:jar:3.3.0:compile
 [INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.4.3:compile
@@ -94,9 +75,6 @@ Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/spar
 [INFO] |     \- com.alibaba:fastjson:jar:1.2.83:compile
 [INFO] +- com.sparrowzoo.passport:passport-adapter:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  \- com.sparrowzoo.passport:passport-application:jar:1.0.0-SNAPSHOT:compile
-[INFO] |     +- org.springframework:spring-beans:jar:5.2.8.RELEASE:compile
-[INFO] |     |  \- org.springframework:spring-core:jar:5.2.8.RELEASE:compile
-[INFO] |     |     \- org.springframework:spring-jcl:jar:5.2.8.RELEASE:compile
 [INFO] |     \- com.sparrowzoo.passport:passport-api:jar:1.0.0-SNAPSHOT:compile
 [INFO] +- com.sparrowzoo.passport:passport-sparrow-dao:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  +- mysql:mysql-connector-java:jar:8.0.29:compile
@@ -104,11 +82,12 @@ Downloading: https://nexus.tctm.life/repository/maven-public/com/sparrowzoo/spar
 [INFO] |  +- com.sparrowzoo:sparrow-data-source:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  +- com.sparrowzoo:sparrow-orm:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  \- com.sparrowzoo.passport:passport-protocol:jar:1.0.0-SNAPSHOT:compile
-[INFO] \- javax.servlet:javax.servlet-api:jar:3.0.1:provided
+[INFO] +- javax.servlet:javax.servlet-api:jar:3.0.1:provided
+[INFO] \- org.thymeleaf.extras:thymeleaf-extras-java8time:jar:3.0.4.RELEASE:compile
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 6.685 s
-[INFO] Finished at: 2023-02-02T15:39:05+08:00
-[INFO] Final Memory: 31M/309M
+[INFO] Total time: 9.380 s
+[INFO] Finished at: 2023-04-15T01:45:29+08:00
+[INFO] Final Memory: 35M/313M
 [INFO] ------------------------------------------------------------------------

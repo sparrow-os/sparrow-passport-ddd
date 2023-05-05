@@ -1,11 +1,12 @@
 package com.sparrow.passport.controller;
 
 import com.sparrow.cache.exception.CacheNotFoundException;
-import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
+import com.sparrow.passport.protocol.query.login.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.utility.StringUtility;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-//@RequestMapping("/")
-public class SpringUserLoginController {
-    @Autowired
-    private UserLoginController userLoginController;
+@RestController public class SpringUserLoginController {
+    @Autowired private UserLoginController userLoginController;
 
-    @GetMapping("/session-id")
-    public String sessionId(HttpServletRequest request) throws BusinessException {
+    @GetMapping("/session-id") public String sessionId(HttpServletRequest request) throws BusinessException {
         return request.getSession().getId();
     }
 
-    @PostMapping("/login.do")
+    @PostMapping("/login")
     /**
      * @RequestBody DispatcherServlet Completed 415 UNSUPPORTED_MEDIA_TYPE
      */

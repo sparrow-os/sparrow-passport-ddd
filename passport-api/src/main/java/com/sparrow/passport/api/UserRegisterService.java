@@ -14,7 +14,7 @@ public interface UserRegisterService {
 
     LoginDTO register(MobileRegisterParam registerParam) throws BusinessException;
 
-    LoginDTO register(EmailRegisterParam registerParam) throws BusinessException;
+    LoginDTO register(EmailRegisterParam registerParam,ClientInformation client) throws BusinessException;
 
     void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException;
 

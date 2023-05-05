@@ -1,8 +1,8 @@
 package com.sparrow.passport.protocol.param;
 
-import com.sparrow.protocol.POJO;
+import com.sparrow.protocol.Param;
 
-public class AvatarModifyParam implements POJO {
+public class AvatarModifyParam implements Param {
     public AvatarModifyParam() {
     }
 

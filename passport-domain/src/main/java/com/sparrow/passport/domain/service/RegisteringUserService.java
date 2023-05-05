@@ -14,6 +14,7 @@ import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
+import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.support.Authenticator;
 import com.sparrow.utility.ConfigUtility;
@@ -51,22 +52,21 @@ public class RegisteringUserService {
         Asserts.isTrue(oldUser != null,
             PassportError.USER_EMAIL_EXIST,
             UserFieldSuffix.REGISTER_USER_EMAIL);
-        registeringUserEntity.setCent(100L);
-        //registeringUserEntity.setCent(domainRegistry.getCodeService().getLongValueByCode(ConfigKeyDB.USER_CENT_REGISTER));
         registeringUserEntity.register(domainRegistry);
 
         registeringUserRepository.saveRegisteringUser(registeringUserEntity, client);
         this.success(registeringUserEntity.getUserId(), client, domainRegistry);
         this.sendActivateEmail(registeringUserEntity, domainRegistry);
+        String defaultAvatar = ConfigUtility.getValue(Config.DEFAULT_AVATAR);
         LoginUser loginUser = LoginUser.create(
             registeringUserEntity.getUserId(),
             registeringUserEntity.getUserName(),
             Symbol.EMPTY,
-            Symbol.EMPTY,
+            defaultAvatar,
             client.getDeviceId(),
-            false,
             1);
-        String permission = this.authenticatorService.sign(loginUser);
+        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
+        String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
         return new LoginDTO(loginUser, permission);
     }
 

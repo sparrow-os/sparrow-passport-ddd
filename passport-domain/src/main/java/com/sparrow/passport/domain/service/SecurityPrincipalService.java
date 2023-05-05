@@ -15,11 +15,13 @@ import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
+import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
+import javafx.util.Pair;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -31,7 +33,6 @@ public class SecurityPrincipalService {
     @Inject
     private Authenticator authenticatorService;
 
-
     public SecurityPrincipalEntity findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
@@ -39,7 +40,6 @@ public class SecurityPrincipalService {
 
         if (loginName.contains(Symbol.AT)) {
             securityPrincipal = securityPrincipalRepository.findByEmail(loginName);
-            securityPrincipal.activateEmail();
         } else {
             securityPrincipal = securityPrincipalRepository.findByName(loginName);
 //            if (securityPrincipal == null) {
@@ -78,17 +78,17 @@ public class SecurityPrincipalService {
         securityPrincipal.login();
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
-        Integer tokenExpireDays = securityPrincipal.getLoginInfo().getTokenExpireDays();
+        Integer tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
 
         LoginUser loginUser = LoginUser.create(securityPrincipal.getUserId(),
             securityPrincipal.getUserName(),
-            "",
-            "",
+            securityPrincipal.getNickName(),
+            securityPrincipal.getAvatar(),
             client.getDeviceId(),
-            securityPrincipal.getActivate(),
             tokenExpireDays
         );
-        String permission = this.authenticatorService.sign(loginUser);
+        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
+        String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
         return new LoginDTO(loginUser, permission);
     }
 

@@ -3,12 +3,12 @@
     "http://www.sparrowzoo.com/dtds/mvc.dtd">
 <mvc>
     <controller id="userLoginControllerProxy">
-        <action name="/login.do" method="login"/>
+        <action name="/login" method="login"/>
         <action name="/thymeleaf" method="thymeleaf"/>
         <action name="/shortcut-login.json" method="shortcut"/>
     </controller>
         <controller id="userRegisterControllerProxy">
-            <action name="/register/email.do" method="emailRegister"/>
+            <action name="/register/email" method="emailRegister"/>
             <action name="/shortcut-register.json" method="shortcut"/>
         </controller>
 

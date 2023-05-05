@@ -1,8 +1,5 @@
 package com.sparrow.passport.controller.protocol.vo;
 
-/**
- * Created by harry on 2017/1/6.
- */
 public class BasicUserVO {
     public static final String ONLINE = "ONLINE";
     public static final String OFFLINE = "OFFLINE";
@@ -40,13 +37,10 @@ public class BasicUserVO {
      */
     private String email;
     /**
-     * 电子邮箱
+     * 手机号
      */
     private String mobile;
-    /**
-     * 当前积分
-     */
-    private Long cent;
+
     /**
      * 是否激活
      */
@@ -92,34 +86,6 @@ public class BasicUserVO {
      * 用户状态
      */
     private String status;
-
-    private Long publishedCount;
-    private Long attentionCount;
-    private Long fansCount;
-
-    public Long getPublishedCount() {
-        return publishedCount;
-    }
-
-    public void setPublishedCount(Long publishedCount) {
-        this.publishedCount = publishedCount;
-    }
-
-    public Long getAttentionCount() {
-        return attentionCount;
-    }
-
-    public void setAttentionCount(Long attentionCount) {
-        this.attentionCount = attentionCount;
-    }
-
-    public Long getFansCount() {
-        return fansCount;
-    }
-
-    public void setFansCount(Long fansCount) {
-        this.fansCount = fansCount;
-    }
 
     public Long getUserId() {
         return userId;
@@ -191,14 +157,6 @@ public class BasicUserVO {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public Long getCent() {
-        return cent;
-    }
-
-    public void setCent(Long cent) {
-        this.cent = cent;
     }
 
     public Boolean getActivate() {

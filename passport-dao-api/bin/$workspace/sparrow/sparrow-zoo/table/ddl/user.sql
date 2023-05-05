@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
- `user_id` int(11) UNSIGNED AUTO_INCREMENT NOT NULL ,
+ `user_id` int(11) UNSIGNED AUTO_INCREMENT NOT NULL AUTO_INCREMENT,
  `user_name`  varchar(64) DEFAULT '' COMMENT '用户名'  ,
  `nick_name` varchar(64)  DEFAULT '' COMMENT '昵称'  ,
  `email` varchar(256) DEFAULT '' comment 'E-MAIL'  ,
@@ -12,20 +12,17 @@ CREATE TABLE `user` (
  `mobile` varchar(11) DEFAULT '0' COMMENT '手机号码'  ,
  `last_login_time` bigint(11) DEFAULT 0 COMMENT '最近登录时间'  ,
  `cent` bigint(10) DEFAULT 0 COMMENT '积分'  ,
- `status` tinyint(1) DEFAULT 0 COMMENT '状态'  ,
- `is_online` tinyint(1) DEFAULT 0 COMMENT '是否在线'  ,
  `activate` tinyint(1) DEFAULT 0 COMMENT '是否激活'  ,
  `activate_time` bigint(11) DEFAULT 0 COMMENT '激活时间'  ,
- `zone` varchar(32) DEFAULT '' COMMENT '主页'  ,
  `channel` varchar(128) DEFAULT '' COMMENT '渠道来源'  ,
- `website` varchar(128) DEFAULT '' COMMENT '用户注册网站'  ,
  `group_level` varchar(64) DEFAULT '' COMMENT '用户等级'  ,
  `secret_mobile` varchar(64) DEFAULT '' COMMENT  'SECRET MOBILE'  ,
  `device` varchar(16) DEFAULT '' COMMENT '设备'  ,
  `device_id` varchar(64) DEFAULT '' COMMENT '设备id'  ,
  `device_model` varchar(32) DEFAULT '' COMMENT '设备模型'  ,
  `ip` bigint(10) DEFAULT 0 COMMENT 'ip'  ,
- `create_time` bigint(11) DEFAULT 0 COMMENT '注册日期'  NOT NULL,
- `update_time` bigint(10) DEFAULT 0 COMMENT '最近更新时间'  ,
+ `status` tinyint(3) UNSIGNED DEFAULT 0 COMMENT 'STATUS'  NOT NULL,
+ `gmt_create` bigint(11)  DEFAULT 0 COMMENT '创建时间'  NOT NULL,
+ `gmt_modified` bigint(11)  DEFAULT 0 COMMENT '更新时间'  NOT NULL,
 PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='user';

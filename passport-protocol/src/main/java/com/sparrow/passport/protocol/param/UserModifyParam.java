@@ -1,4 +1,6 @@
 package com.sparrow.passport.protocol.param;
 
-public class UserModifyParam {
+import com.sparrow.protocol.Param;
+
+public class UserModifyParam implements Param {
 }

@@ -1,8 +1,9 @@
 package com.sparrow.passport.protocol.param.register;
 
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.Param;
 
-public class EmailActivateParam {
+public class EmailActivateParam implements Param {
     private String email;
     private Long userId;
     private ClientInformation client;

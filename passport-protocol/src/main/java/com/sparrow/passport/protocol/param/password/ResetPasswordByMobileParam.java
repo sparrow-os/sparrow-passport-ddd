@@ -1,8 +1,8 @@
 package com.sparrow.passport.protocol.param.password;
 
-import java.io.Serializable;
+import com.sparrow.protocol.Param;
 
-public class ResetPasswordByMobileParam implements Serializable {
+public class ResetPasswordByMobileParam implements Param {
     private String validateCode;
     private String password;
 

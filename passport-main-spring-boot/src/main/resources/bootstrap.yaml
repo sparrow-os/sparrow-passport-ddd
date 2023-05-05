@@ -1,38 +1,38 @@
-server:
-  port: 8112
-spring:
-  application:
-    name: sparrow-passport
-  profiles:
-    active: dev
-  cloud:
-    nacos:
-      server-addr: http://nacos.sparrowzoo.com
-      discovery:
-        enabled: true
-        register-enabled: true
-        server-addr: http://nacos.sparrowzoo.com
-      config:
-        server-addr: http://nacos.sparrowzoo.com
-
----
-spring:
-  profiles: dev
-  cloud:
-    nacos:
-      discovery:
-        namespace: 1ca35901-e24e-4076-a306-66e0ed05da8c
-
-
----
-spring:
-  profiles: local
-  cloud:
-    nacos:
-      config:
-        namespace:
-      discovery:
-        enabled: true
-        register-enabled: true
-        namespace: 127.0.0.1:8849
-
+#server:
+#  port: 8112
+#spring:
+#  application:
+#    name: sparrow-passport
+#  profiles:
+#    active: dev
+#  cloud:
+#    nacos:
+#      server-addr: http://nacos.sparrowzoo.com
+#      discovery:
+#        enabled: true
+#        register-enabled: true
+#        server-addr: http://nacos.sparrowzoo.com
+#      config:
+#        server-addr: http://nacos.sparrowzoo.com
+#
+#---
+#spring:
+#  profiles: dev
+#  cloud:
+#    nacos:
+#      discovery:
+#        namespace: 1ca35901-e24e-4076-a306-66e0ed05da8c
+#
+#
+#---
+#spring:
+#  profiles: local
+#  cloud:
+#    nacos:
+#      config:
+#        namespace:
+#      discovery:
+#        enabled: true
+#        register-enabled: true
+#        namespace: 127.0.0.1:8849
+#

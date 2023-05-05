@@ -22,7 +22,6 @@ public class UserMapper {
         }
         SecurityPrincipalEntity securityPrincipal = new SecurityPrincipalEntity();
         securityPrincipal.setActivate(user.getActivate());
-        securityPrincipal.setCent(user.getCent());
         securityPrincipal.setEmail(user.getEmail());
         securityPrincipal.setMobile(user.getMobile());
         securityPrincipal.setUserName(user.getUserName());
@@ -38,7 +37,6 @@ public class UserMapper {
             return null;
         }
         RegisteringUserEntity registeringUser = new RegisteringUserEntity();
-        registeringUser.setCent(user.getCent());
         registeringUser.setEmail(user.getEmail());
         registeringUser.setMobile(user.getMobile());
         registeringUser.setUserName(user.getUserName());
@@ -53,7 +51,6 @@ public class UserMapper {
         }
         User user = new User();
         user.setUserId(registeringUser.getUserId());
-        user.setCent(registeringUser.getCent());
         user.setUserName(registeringUser.getUserName());
         user.setEmail(registeringUser.getEmail());
         user.setPassword(registeringUser.getPassword());
@@ -71,7 +68,6 @@ public class UserMapper {
         }
         user.setAvatar(Symbol.EMPTY);
         user.setGender(Gender.NULL.ordinal());
-        user.setGroupLevel(Symbol.EMPTY);
         user.setBirthday(null);
         user.setNickName(user.getUserName());
         user.setPersonalSignature(Symbol.EMPTY);
