@@ -10,6 +10,7 @@ import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.servlet.ServletContainer;
 import com.sparrow.support.Authenticator;
@@ -18,26 +19,26 @@ import javax.inject.Named;
 
 @Named
 public class UserRegisterControllerImpl implements UserRegisterController {
-    private static final String VALIDATE_CODE = "register_validate_code";
+    private static final String VALIDATE_CODE_SUFFIX = "register_validate_code";
     @Inject
     private UserRegisterService registeringUserApplicationService;
     @Inject
     private ServletContainer servletContainer;
-    @Inject
-    private Authenticator authenticatorService;
 
-    private void validateCode(String validateCode, String userValidateCode) throws BusinessException {
-        boolean expression = validateCode == null
-            || !validateCode.equalsIgnoreCase(userValidateCode);
-        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, VALIDATE_CODE);
+    private void validateCaptcha(String captcha, String userValidateCode) throws BusinessException {
+        boolean expression = captcha == null
+            || !captcha.equalsIgnoreCase(userValidateCode);
+        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, VALIDATE_CODE_SUFFIX);
     }
 
     @Override public LoginDTO emailRegister(EmailRegisterParam user,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        user.setClient(client);
-        LoginDTO loginDto = registeringUserApplicationService.register(user);
+        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        this.validateCaptcha(user.getCaptcha(),
+            captcha);
+        LoginDTO loginDto = registeringUserApplicationService.register(user,client);
         servletContainer
-            .rootCookie(User.PERMISSION, loginDto.getPermission(), loginDto.getLoginUser().getDays());
+            .rootCookie(User.PERMISSION, loginDto.getToken(), loginDto.getLoginUser().getDays());
         return loginDto;
     }
 
@@ -52,5 +53,4 @@ public class UserRegisterControllerImpl implements UserRegisterController {
     public void activateEmail(String token, ClientInformation client) throws BusinessException {
         this.registeringUserApplicationService.activeEmail(token, client);
     }
-
 }

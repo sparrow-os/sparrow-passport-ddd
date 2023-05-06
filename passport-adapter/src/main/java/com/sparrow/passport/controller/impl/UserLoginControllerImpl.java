@@ -5,14 +5,14 @@ import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.api.UserLoginService;
 import com.sparrow.passport.controller.UserLoginController;
-import com.sparrow.passport.controller.assemble.LoginControllerAssemble;
-import com.sparrow.passport.controller.protocol.query.LoginQuery;
 import com.sparrow.passport.protocol.dto.LoginDTO;
+import com.sparrow.passport.protocol.query.login.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.servlet.ServletContainer;
+import com.sparrow.utility.StringUtility;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -25,31 +25,31 @@ public class UserLoginControllerImpl implements UserLoginController {
     @Named("userLoginApplicationService")
     private UserLoginService userLoginService;
 
-    @Inject
-    private LoginControllerAssemble loginControllerAssemble;
-
-    private void validateCode(String validateCode, String userValidateCode) throws BusinessException {
+    private void validateCaptcha(String validateCode, String userValidateCode) throws BusinessException {
         boolean expression = validateCode == null
             || !validateCode.equalsIgnoreCase(userValidateCode);
-        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, USER_LOGIN_VALIDATE_CODE);
+        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, USER_LOGIN_VALIDATE_CODE_SUFFIX);
     }
 
     @Override
     public LoginDTO login(LoginQuery login,
         ClientInformation client) throws BusinessException, CacheNotFoundException {
-        String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        this.validateCode(validateCode, login.getValidateCode());
-        LoginDTO loginDto = this.userLoginService.login(this.loginControllerAssemble.vo2dto(login, client));
+        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        if (StringUtility.isNullOrEmpty(login.getRedirectUrl())) {
+            login.setRedirectUrl("/login-success");
+        }
+        this.validateCaptcha(captcha, login.getCaptcha());
+        LoginDTO loginDto = this.userLoginService.login(login, client);
         servletContainer
-            .rootCookie(User.PERMISSION, loginDto.getPermission(), loginDto.getLoginUser().getDays());
+            .rootCookie(User.PERMISSION, loginDto.getToken(), loginDto.getLoginUser().getDays());
         return loginDto;
     }
 
     @Override
     public LoginDTO shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
-        String validateCode = servletContainer.flash(Constant.VALIDATE_CODE);
-        this.validateCode(validateCode, login.getValidateCode());
-        return this.userLoginService.login(this.loginControllerAssemble.vo2dto(login, client));
+        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        this.validateCaptcha(captcha, login.getCaptcha());
+        return this.userLoginService.login(login, client);
     }
 
     @Override

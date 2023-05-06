@@ -16,7 +16,7 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sparrow.*")
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class Application {
     private static Logger log = LoggerFactory.getLogger(Application.class);
 

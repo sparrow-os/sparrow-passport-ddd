@@ -5,10 +5,8 @@ import com.sparrow.cryptogram.MessageSignature;
 import com.sparrow.cryptogram.ThreeDES;
 import com.sparrow.passport.domain.service.EncryptionService;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import javax.inject.Named;
-
-import static com.sparrow.cryptogram.Base64.PREFERRED_ENCODING;
 
 @Named("encryptionService")
 public class SparrowEncryptionService implements EncryptionService {
@@ -17,16 +15,12 @@ public class SparrowEncryptionService implements EncryptionService {
     }
 
     @Override public String base64Encode(String originCode) {
-        try {
-            return Base64.encodeBytes(originCode.getBytes(PREFERRED_ENCODING));
-        } catch (UnsupportedEncodingException ignore) {
-            return null;
-        }
+        return Base64.encodeBytes(originCode.getBytes(StandardCharsets.US_ASCII));
     }
 
     @Override public String base64Decode(String base64) {
         try {
-            return new String(Base64.decode(base64), PREFERRED_ENCODING);
+            return new String(Base64.decode(base64), StandardCharsets.US_ASCII);
         } catch (IOException e) {
             return null;
         }

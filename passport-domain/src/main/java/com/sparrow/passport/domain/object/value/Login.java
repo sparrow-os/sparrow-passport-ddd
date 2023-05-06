@@ -7,14 +7,12 @@ public class Login implements ValueObject<Login> {
     private Password password;
     private String encryptPassword;
     private Boolean rememberMe;
-    private Integer cent;
     private Integer rememberDays;
 
-    public Login(String password, String encryptPassword, Boolean rememberMe, Integer cent, Integer rememberDays) {
+    public Login(String password, String encryptPassword, Boolean rememberMe, Integer rememberDays) {
         this.password = new Password(password);
         this.encryptPassword = encryptPassword;
         this.rememberMe = rememberMe;
-        this.cent = cent;
         this.rememberDays = rememberDays;
     }
 
@@ -23,17 +21,13 @@ public class Login implements ValueObject<Login> {
     }
 
     public Integer getTokenExpireDays() {
-        if (!this.rememberMe) {
+        if (this.rememberMe == null || !this.rememberMe) {
             return 1;
         }
         if (rememberDays == null) {
             return 15;
         }
         return rememberDays;
-    }
-
-    public Integer getCent() {
-        return cent;
     }
 
     public Password getPassword() {
@@ -49,12 +43,11 @@ public class Login implements ValueObject<Login> {
         return Objects.equals(getPassword(), login.getPassword()) &&
             Objects.equals(getEncryptPassword(), login.getEncryptPassword()) &&
             Objects.equals(rememberMe, login.rememberMe) &&
-            Objects.equals(getCent(), login.getCent()) &&
             Objects.equals(rememberDays, login.rememberDays);
     }
 
     @Override public int hashCode() {
-        return Objects.hash(getPassword(), getEncryptPassword(), rememberMe, getCent(), rememberDays);
+        return Objects.hash(getPassword(), getEncryptPassword(), rememberMe, rememberDays);
     }
 
     @Override public boolean sameValueAs(Login login) {

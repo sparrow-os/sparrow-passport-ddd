@@ -15,38 +15,44 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
     private String email;
     private String mobile;
     private Boolean activate;
-    private Long cent;
-    private Long plusCent = 0L;
+    /**
+     * 激活时间
+     */
+    private Long activateTime;
     private Long lastLoginTime;
     private Integer status;
-    private Login loginInfo;
-    private ModifyPassword modifyPasswordInfo;
+
+    private String nickName;
+    private String avatar;
+
+    private Login loginParam;
+    private ModifyPassword modifyPasswordParam;
 
     public void activateEmail() throws BusinessException {
         if (!this.activate) {
             throw new BusinessException(PassportError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
         }
+        this.activateTime = System.currentTimeMillis();
     }
 
     public void setLastLoginTime(Long lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public void setModifyPasswordInfo(ModifyPassword modifyPasswordInfo) {
-        this.modifyPasswordInfo = modifyPasswordInfo;
+    public void setModifyPassword(ModifyPassword modifyPasswordParam) {
+        this.modifyPasswordParam = modifyPasswordParam;
     }
 
     public void modifyPassword() throws BusinessException {
-        this.modifyPasswordInfo.getNewOriginPassword().isValid();
-        Asserts.isTrue(!this.modifyPasswordInfo.getOldEncryptionPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR);
-        this.password = this.modifyPasswordInfo.getNewEncryptionPassword();
+        this.modifyPasswordParam.getNewOriginPassword().isValid();
+        Asserts.isTrue(!this.modifyPasswordParam.getOldEncryptionPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR);
+        this.password = this.modifyPasswordParam.getNewEncryptionPassword();
     }
 
     public void login() throws BusinessException {
-        this.loginInfo.getPassword().isValid();
-        Asserts.isTrue(!this.loginInfo.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
+        this.loginParam.getPassword().isValid();
+        Asserts.isTrue(!this.loginParam.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
         this.setCurrent2LastLoginTime();
-        this.setCent((long) this.loginInfo.getCent());
     }
 
     public void resetPassword(String encryptLoginPassword) {
@@ -97,14 +103,6 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
         this.activate = activate;
     }
 
-    public Long getCent() {
-        return cent;
-    }
-
-    public void setCent(Long cent) {
-        this.cent = cent;
-    }
-
     public Long getLastLoginTime() {
         return lastLoginTime;
     }
@@ -113,20 +111,12 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
         this.lastLoginTime = System.currentTimeMillis();
     }
 
-    public Login getLoginInfo() {
-        return loginInfo;
+    public Login getLoginParam() {
+        return loginParam;
     }
 
-    public void setLoginInfo(Login loginInfo) {
-        this.loginInfo = loginInfo;
-    }
-
-    public Long getPlusCent() {
-        return plusCent;
-    }
-
-    public void setPlusCent(Long plusCent) {
-        this.plusCent = plusCent;
+    public void setLoginParam(Login loginParam) {
+        this.loginParam = loginParam;
     }
 
     public void setPassword(String password) {
@@ -143,6 +133,38 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
 
     @Override public boolean sameIdentityAs(SecurityPrincipalEntity entity) {
         return this.userId.equals(entity.getUserId());
+    }
+
+    public Long getActivateTime() {
+        return activateTime;
+    }
+
+    public void setActivateTime(Long activateTime) {
+        this.activateTime = activateTime;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public ModifyPassword getModifyPasswordParam() {
+        return modifyPasswordParam;
+    }
+
+    public void setModifyPasswordParam(ModifyPassword modifyPasswordParam) {
+        this.modifyPasswordParam = modifyPasswordParam;
     }
 
     @Override public Long identity() {

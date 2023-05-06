@@ -6,6 +6,7 @@ import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.Result;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class SpringUserRegisterController {
         return result;
     }
 
-    @PostMapping("/email.do")
+    @PostMapping("/email")
     public ModelAndView emailRegister(EmailRegisterParam user,
         ClientInformation client, RedirectAttributes attributes) throws BusinessException, CacheNotFoundException {
         this.userRegisterController.emailRegister(user, client);

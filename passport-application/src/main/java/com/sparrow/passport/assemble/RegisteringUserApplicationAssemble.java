@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 @Named
 public class RegisteringUserApplicationAssemble {
-    public RegisteringUserEntity emailDto2Entity(EmailRegisterParam registerParam) throws BusinessException {
+    public RegisteringUserEntity emailParam2Entity(EmailRegisterParam registerParam){
         RegisteringUserEntity registeringUser = new RegisteringUserEntity();
         registeringUser.setEmail(registerParam.getEmail());
         registeringUser.setPassword(registerParam.getPassword());

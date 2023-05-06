@@ -17,8 +17,7 @@ public class RegisteringUserEntity {
     private String password;
     private String passwordConfirm;
     private Long userId;
-    private Long cent;
-    private Boolean activate=false;
+    private Boolean activate = false;
 
     public String getUserName() {
         return userName;
@@ -44,7 +43,7 @@ public class RegisteringUserEntity {
         this.userName = userName;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -56,7 +55,7 @@ public class RegisteringUserEntity {
         this.password = password;
     }
 
-    public void setPasswordConfirm(String passwordConfirm)  {
+    public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
 
@@ -68,25 +67,17 @@ public class RegisteringUserEntity {
         this.userId = userId;
     }
 
-    public Long getCent() {
-        return cent;
-    }
-
-    public void setCent(Long cent) {
-        this.cent = cent;
-    }
-
     public void register(DomainRegistry domainRegistry) throws BusinessException {
         Asserts.isTrue(StringUtility.isNullOrEmpty(userName), SparrowError.GLOBAL_PARAMETER_NULL, UserFieldSuffix.REGISTER_USER_NAME);
         Asserts.isTrue(!RegexUtility.matches(password, Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_PASSWORD);
         Asserts.isTrue(!RegexUtility.matches(passwordConfirm, Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
         Asserts.isTrue(!passwordConfirm.equals(password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.REGISTER_CONFIRM_PASSWORD);
-        Asserts.isTrue(StringUtility.isNullOrEmpty(email)&&StringUtility.isNullOrEmpty(mobile), SparrowError.SYSTEM_ILLEGAL_REQUEST);
+        Asserts.isTrue(StringUtility.isNullOrEmpty(email) && StringUtility.isNullOrEmpty(mobile), SparrowError.SYSTEM_ILLEGAL_REQUEST);
         this.setPassword(domainRegistry.getEncryptionService().encryptPassword(this.getPassword()));
     }
 
-    public void active(){
-        this.activate=true;
+    public void active() {
+        this.activate = true;
     }
 
     public Boolean getActivate() {

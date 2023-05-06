@@ -7,7 +7,7 @@ https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
 {user.userId}<h1><span th:text="${user.userId}"></span></h1>
 spring boot<h1><span th:text="${user?.userId}"></span></h1>
-<!--原生<h1><span th:text=、"${user?user.userId:''}"></span></h1>-->
+<!--原生<h1><span th:text="${user?user.userId:''}"></span></h1>-->
 </body>
 </html>
 

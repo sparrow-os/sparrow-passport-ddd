@@ -31,9 +31,9 @@ public class RegisteringUserApplicationService implements UserRegisterService {
         return null;
     }
 
-    @Override public LoginDTO register(EmailRegisterParam registerParam) throws BusinessException {
-        RegisteringUserEntity registeringUser = this.registeringUserApplicationAssemble.emailDto2Entity(registerParam);
-        return this.domainRegistry.getRegisteringUserService().registerByEmail(registeringUser, registerParam.getClient(), domainRegistry);
+    @Override public LoginDTO register(EmailRegisterParam registerParam,ClientInformation client) throws BusinessException {
+        RegisteringUserEntity registeringUser = this.registeringUserApplicationAssemble.emailParam2Entity(registerParam);
+        return this.domainRegistry.getRegisteringUserService().registerByEmail(registeringUser,client, domainRegistry);
     }
 
     @Override public void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException {

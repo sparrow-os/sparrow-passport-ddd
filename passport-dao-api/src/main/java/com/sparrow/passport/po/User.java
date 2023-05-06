@@ -1,8 +1,11 @@
 package com.sparrow.passport.po;
 
+import com.sparrow.protocol.FieldOrder;
 import com.sparrow.protocol.MethodOrder;
 import com.sparrow.protocol.POJO;
 import com.sparrow.protocol.dao.PO;
+import com.sparrow.protocol.enums.StatusRecord;
+
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -11,38 +14,180 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "user")
-public class User extends PO implements Cloneable {
-    /*-------基本信息-------------*/
-    private Long userId;
-    private String userName;
-    private String nickName;
-    private String password;
-    private String avatar;
-    private Integer gender;
-    private Date birthday;
-    private String email;
-    private String mobile;
-    private Long cent;
-    private Boolean activate;
-    private Long activateTime;
-    private Long lastLoginTime;
-    private Long ip;
-    //设备
-    private String device;
-    private String deviceId;
-    private String deviceModel;
-    //referer
-    private String channel;
-    private String personalSignature;
-
-    private String groupLevel;
-
-    private String secretMobile;
-
+public class User implements Cloneable, POJO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
-    @MethodOrder(order = 1)
+    @FieldOrder(order = 1)
+    /**
+     * 用户ID
+     */
+    private Long userId;
+
+
+    @FieldOrder(order = 2)
+    @Column(name = "user_name", columnDefinition = " varchar(64) DEFAULT '' COMMENT '用户名'",nullable = false, updatable = false, unique = true)
+    /**
+     * 用户名
+     */
+    private String userName;
+    /**
+     * 昵称
+     */
+    @FieldOrder(order = 3)
+    @Column(name = "nick_name", columnDefinition = "varchar(64)  DEFAULT '' COMMENT '昵称'",nullable = false,updatable = true)
+    private String nickName;
+
+    /**
+     * 邮箱
+     */
+    @FieldOrder(order = 4)
+    @Column(name = "email", columnDefinition = "varchar(256) DEFAULT '' comment 'E-MAIL'", unique = true, updatable = false,nullable = false)
+    private String email;
+
+    @FieldOrder(order = 5)
+    @Column(name = "password", columnDefinition = "varchar(32) DEFAULT '' COMMENT '密码'", updatable = false, nullable = false)
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 性别
+     */
+    @FieldOrder(order = 6)
+    @Column(name = "gender", columnDefinition = "tinyint(2) DEFAULT 0 COMMENT '性别'",nullable = false)
+    private Integer gender;
+
+    /**
+     * 头像
+     */
+    @FieldOrder(order = 7)
+    @Column(name = "avatar", columnDefinition = "varchar(256) DEFAULT '' COMMENT '头象'", updatable = false,nullable = false)
+    private String avatar;
+
+
+    /**
+     * 个性签名
+     */
+    @FieldOrder(order = 8)
+    @Column(name = "personal_signature", columnDefinition = "varchar(256) DEFAULT '' COMMENT '签名'",nullable = false)
+    private String personalSignature;
+
+
+    @FieldOrder(order = 9)
+    @Column(name = "birthday", columnDefinition = "date COMMENT '生日'")
+    /**
+     * 生日
+     */
+    private Date birthday;
+
+
+    /**
+     * 手机号
+     */
+    @FieldOrder(order = 10)
+    @Column(name = "mobile", columnDefinition = "varchar(11) DEFAULT '0' COMMENT '手机号码'", updatable = false,nullable = false)
+
+    private String mobile;
+
+    @FieldOrder(order = 10.1F)
+    @Column(name = "secret_mobile", columnDefinition = "varchar(64) DEFAULT '' COMMENT  'SECRET MOBILE'", updatable = false,nullable = false)
+
+    /**
+     * 手机号码的密文部分
+     */
+    private String secretMobile;
+
+    @FieldOrder(order = 11)
+    @Column(name = "last_login_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '最近登录时间'", updatable = false,nullable = false)
+    /**
+     * 最后登录时间
+     */
+    private Long lastLoginTime;
+
+    @FieldOrder(order = 15)
+    @Column(name = "activate", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否激活'",nullable = false)
+    /**
+     * 是否激活
+     */
+    private Boolean activate;
+
+    @FieldOrder(order = 16)
+    @Column(name = "activate_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '激活时间'",nullable = false,updatable = false)
+    /**
+     * 激活时间
+     */
+    private Long activateTime;
+    @FieldOrder(order = 18)
+    @Column(name = "channel", columnDefinition = "varchar(128) DEFAULT '' COMMENT '渠道来源'", updatable = false,nullable = false)
+    /**
+     * 注册的来源渠道
+     */
+    private String channel;
+
+
+    @FieldOrder(order = 22)
+    @Column(name = "device", columnDefinition = "varchar(16) DEFAULT '' COMMENT '设备'", updatable = false,nullable = false)
+    /**
+     * 注册的设备
+     */
+    private String device;
+
+    @FieldOrder(order = 23)
+    @Column(name = "device_id", columnDefinition = "varchar(64) DEFAULT '' COMMENT '设备id'", updatable = false,nullable = false)
+
+    /**
+     * 设备ID
+     */
+    private String deviceId;
+
+    @FieldOrder(order = 24)
+    @Column(name = "device_model", columnDefinition = "varchar(32) DEFAULT '' COMMENT '设备模型'", updatable = false,nullable = false)
+    /**
+     * 设备的型号
+     */
+    private String deviceModel;
+
+    @FieldOrder(order = 26)
+    @Column(name = "ip", columnDefinition = "bigint(10) DEFAULT 0 COMMENT 'ip'", updatable = false,nullable = false)
+    /**
+     * 注册的IP
+     */
+    private Long ip;
+
+    @FieldOrder(
+            order = 100.0F
+    )
+    @Column(name = "status",
+            columnDefinition = "tinyint(3) UNSIGNED DEFAULT 0 COMMENT 'STATUS'",
+            nullable = false)
+    /**
+     * 用户状态 的剔除的问题
+     */
+    private StatusRecord status;
+    @FieldOrder(
+            order = 102.0F
+    )
+    @Column(name = "gmt_create",
+            columnDefinition = "bigint(11)  DEFAULT 0 COMMENT '创建时间'",
+            nullable = false,
+            updatable = false)
+    /**
+     * 创建时间
+     */
+    private Long gmtCreate;
+    @FieldOrder(order = 104.0F)
+    @Column(
+            name = "gmt_modified",
+            columnDefinition = "bigint(11)  DEFAULT 0 COMMENT '更新时间'",
+            nullable = false)
+    /**
+     * 修改时间
+     */
+    private Long gmtModified;
+
+
     public Long getUserId() {
         return userId;
     }
@@ -51,18 +196,14 @@ public class User extends PO implements Cloneable {
         this.userId = userId;
     }
 
-    @MethodOrder(order = 2)
-    @Column(name = "user_name", columnDefinition = " varchar(64) DEFAULT '' COMMENT '用户名'", updatable = false, unique = true)
     public String getUserName() {
-        return this.userName;
+        return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    @MethodOrder(order = 3)
-    @Column(name = "nick_name", columnDefinition = "varchar(64)  DEFAULT '' COMMENT '昵称'")
     public String getNickName() {
         return nickName;
     }
@@ -71,8 +212,6 @@ public class User extends PO implements Cloneable {
         this.nickName = nickName;
     }
 
-    @MethodOrder(order = 4)
-    @Column(name = "email", columnDefinition = "varchar(256) DEFAULT '' comment 'E-MAIL'", unique = true, updatable = false)
     public String getEmail() {
         return email;
     }
@@ -81,8 +220,6 @@ public class User extends PO implements Cloneable {
         this.email = email;
     }
 
-    @MethodOrder(order = 5)
-    @Column(name = "password", columnDefinition = "varchar(32) DEFAULT '' COMMENT '密码'", updatable = false, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -91,8 +228,6 @@ public class User extends PO implements Cloneable {
         this.password = password;
     }
 
-    @MethodOrder(order = 6)
-    @Column(name = "gender", columnDefinition = "tinyint(2) DEFAULT 0 COMMENT '性别'")
     public Integer getGender() {
         return gender;
     }
@@ -101,18 +236,14 @@ public class User extends PO implements Cloneable {
         this.gender = gender;
     }
 
-    @MethodOrder(order = 7)
-    @Column(name = "avatar", columnDefinition = "varchar(256) DEFAULT '' COMMENT '头象'", updatable = false)
     public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String headImg) {
-        this.avatar = headImg;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    @MethodOrder(order = 8)
-    @Column(name = "personal_signature", columnDefinition = "varchar(256) DEFAULT '' COMMENT '签名'")
     public String getPersonalSignature() {
         return personalSignature;
     }
@@ -121,8 +252,6 @@ public class User extends PO implements Cloneable {
         this.personalSignature = personalSignature;
     }
 
-    @MethodOrder(order = 9)
-    @Column(name = "birthday", columnDefinition = "date COMMENT '生日'")
     public Date getBirthday() {
         return birthday;
     }
@@ -131,8 +260,6 @@ public class User extends PO implements Cloneable {
         this.birthday = birthday;
     }
 
-    @MethodOrder(order = 10)
-    @Column(name = "mobile", columnDefinition = "varchar(11) DEFAULT '0' COMMENT '手机号码'", updatable = false)
     public String getMobile() {
         return mobile;
     }
@@ -141,8 +268,6 @@ public class User extends PO implements Cloneable {
         this.mobile = mobile;
     }
 
-    @MethodOrder(order = 11)
-    @Column(name = "last_login_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '最近登录时间'", updatable = false)
     public Long getLastLoginTime() {
         return lastLoginTime;
     }
@@ -151,58 +276,30 @@ public class User extends PO implements Cloneable {
         this.lastLoginTime = lastLoginTime;
     }
 
-    @MethodOrder(order = 12)
-    @Column(name = "cent", columnDefinition = "bigint(10) DEFAULT 0 COMMENT '积分'", updatable = false)
-    public Long getCent() {
-        return cent;
-    }
-
-    public void setCent(Long cent) {
-        this.cent = cent;
-    }
-
-    @MethodOrder(order = 15)
-    @Column(name = "activate", columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否激活'")
     public Boolean getActivate() {
-        return this.activate;
+        return activate;
     }
 
     public void setActivate(Boolean activate) {
         this.activate = activate;
     }
 
-    @MethodOrder(order = 16)
-    @Column(name = "activate_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '激活时间'")
     public Long getActivateTime() {
         return activateTime;
     }
 
-    public void setActivateTime(Long activeTime) {
-        this.activateTime = activeTime;
+    public void setActivateTime(Long activateTime) {
+        this.activateTime = activateTime;
     }
 
-    @MethodOrder(order = 18)
-    @Column(name = "channel", columnDefinition = "varchar(128) DEFAULT '' COMMENT '渠道来源'", updatable = false)
     public String getChannel() {
         return channel;
     }
 
-    public void setChannel(String origin) {
-        this.channel = origin;
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 
-    @MethodOrder(order = 20)
-    @Column(name = "group_level", columnDefinition = "varchar(64) DEFAULT '' COMMENT '用户等级'", updatable = false)
-    public String getGroupLevel() {
-        return groupLevel;
-    }
-
-    public void setGroupLevel(String groupLevel) {
-        this.groupLevel = groupLevel;
-    }
-
-    @MethodOrder(order = 21)
-    @Column(name = "secret_mobile", columnDefinition = "varchar(64) DEFAULT '' COMMENT  'SECRET MOBILE'", updatable = false)
     public String getSecretMobile() {
         return secretMobile;
     }
@@ -211,8 +308,6 @@ public class User extends PO implements Cloneable {
         this.secretMobile = secretMobile;
     }
 
-    @MethodOrder(order = 22)
-    @Column(name = "device", columnDefinition = "varchar(16) DEFAULT '' COMMENT '设备'", updatable = false)
     public String getDevice() {
         return device;
     }
@@ -221,8 +316,6 @@ public class User extends PO implements Cloneable {
         this.device = device;
     }
 
-    @MethodOrder(order = 23)
-    @Column(name = "device_id", columnDefinition = "varchar(64) DEFAULT '' COMMENT '设备id'", updatable = false)
     public String getDeviceId() {
         return deviceId;
     }
@@ -231,8 +324,6 @@ public class User extends PO implements Cloneable {
         this.deviceId = deviceId;
     }
 
-    @MethodOrder(order = 24)
-    @Column(name = "device_model", columnDefinition = "varchar(32) DEFAULT '' COMMENT '设备模型'", updatable = false)
     public String getDeviceModel() {
         return deviceModel;
     }
@@ -241,13 +332,35 @@ public class User extends PO implements Cloneable {
         this.deviceModel = deviceModel;
     }
 
-    @MethodOrder(order = 26)
-    @Column(name = "ip", columnDefinition = "bigint(10) DEFAULT 0 COMMENT 'ip'", updatable = false)
     public Long getIp() {
         return ip;
     }
 
     public void setIp(Long ip) {
         this.ip = ip;
+    }
+
+    public StatusRecord getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusRecord status) {
+        this.status = status;
+    }
+
+    public Long getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Long gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Long getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Long gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

@@ -1,8 +1,8 @@
 package com.sparrow.passport.protocol.param.password;
 
-import com.sparrow.protocol.POJO;
+import com.sparrow.protocol.Param;
 
-public class PasswordResetParam implements POJO {
+public class PasswordResetParam implements Param {
     private String token;
     private String password;
 

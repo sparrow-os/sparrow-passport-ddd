@@ -25,42 +25,34 @@ public class UserAssemble {
         if (StringUtility.isNullOrEmpty(basicUser.getUserId())
             || basicUser.getUserId().equals(User.VISITOR_ID)) {
             basicUserVo.setNickName(ConfigUtility.getLanguageValue(
-                ConfigKeyLanguage.USER_VISITOR));
+                ConfigKeyLanguage.USER_VISITOR_NICKNAME));
             basicUserVo.setAvatar(defaultHeadImage);
             basicUserVo.setGender(Gender.NULL.name());
             basicUserVo.setStatus(StatusRecord.DISABLE.name());
-            basicUserVo.setCent(0L);
-            basicUserVo.setAttentionCount(0L);
-            basicUserVo.setFansCount(0L);
-            basicUserVo.setPublishedCount(0L);
             basicUserVo.setCreateTime(Symbol.EMPTY);
             return basicUserVo;
 
         }
 
-
-
-
         basicUserVo.setActivate(basicUser.getActivate());
-        if(basicUser.getActivateTime()>0) {
+        if (basicUser.getActivateTime() > 0) {
             basicUserVo.setActivateTime(DateTimeUtility.getFormatTime(basicUser.getActivateTime(), DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
         }
 
-        if(basicUser.getBirthday()!=null) {
-            basicUserVo.setBirthday(DateTimeUtility.getFormatTime(basicUser.getBirthday(),DateTime.FORMAT_YYYY_MM_DD));
+        if (basicUser.getBirthday() != null) {
+            basicUserVo.setBirthday(DateTimeUtility.getFormatTime(basicUser.getBirthday(), DateTime.FORMAT_YYYY_MM_DD));
         }
         basicUserVo.setUserId(basicUser.getUserId());
         basicUserVo.setEmail(basicUser.getEmail());
         basicUserVo.setMobile(basicUser.getMobile());
         basicUserVo.setUserName(basicUser.getUserName());
-        basicUserVo.setCent(basicUser.getCent());
-        basicUserVo.setCreateTime(DateTimeUtility.getFormatTime(basicUser.getCreateTime(),DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
-        basicUserVo.setUpdateTime(DateTimeUtility.getFormatTime(basicUser.getUpdateTime(),DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
+        basicUserVo.setCreateTime(DateTimeUtility.getFormatTime(basicUser.getCreateTime(), DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
+        basicUserVo.setUpdateTime(DateTimeUtility.getFormatTime(basicUser.getUpdateTime(), DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
         basicUserVo.setDeviceModel(basicUser.getDeviceModel());
         basicUserVo.setDeviceId(basicUser.getDeviceId());
         basicUserVo.setDevice(basicUser.getDevice());
         basicUserVo.setIp(basicUser.getIp());
-        basicUserVo.setLastLoginTime(DateTimeUtility.getFormatTime(basicUser.getLastLoginTime(),DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
+        basicUserVo.setLastLoginTime(DateTimeUtility.getFormatTime(basicUser.getLastLoginTime(), DateTime.FORMAT_YYYY_MM_DD_HH_MM_SS));
         basicUserVo.setPersonalSignature(basicUser.getPersonalSignature());
 
         //set avatar

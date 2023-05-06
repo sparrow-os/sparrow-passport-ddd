@@ -1,8 +1,8 @@
 package com.sparrow.passport.protocol.query.login;
 
-import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.Query;
 
-public class LoginQueryDTO {
+public class LoginQuery implements Query {
     /**
      * 用户名
      */
@@ -14,7 +14,9 @@ public class LoginQueryDTO {
 
     private Boolean remember;
 
-    private ClientInformation client;
+    private String captcha;
+
+    private String redirectUrl;
 
     public Boolean getRemember() {
         return remember;
@@ -40,20 +42,29 @@ public class LoginQueryDTO {
         this.password = password;
     }
 
-    public ClientInformation getClient() {
-        return client;
+    public String getCaptcha() {
+        return captcha;
     }
 
-    public void setClient(ClientInformation client) {
-        this.client = client;
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
     }
 
-    @Override
-    public String toString() {
-        return "LoginQueryDTO{" +
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
+    @Override public String toString() {
+        return "LoginQuery{" +
             "userName='" + userName + '\'' +
             ", password='" + password + '\'' +
-            ", client=" + client +
+            ", remember=" + remember +
+            ", captcha='" + captcha + '\'' +
+            ", redirectUrl='" + redirectUrl + '\'' +
             '}';
     }
 }

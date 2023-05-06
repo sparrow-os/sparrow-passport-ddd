@@ -5,27 +5,19 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.VO;
 
 public class LoginDTO implements VO, DTO {
-    public LoginDTO(LoginUser loginUser, String permission) {
+    public LoginDTO(LoginUser loginUser, String token) {
         this.loginUser = loginUser;
-        this.permission = permission;
+        this.token = token;
     }
 
     private LoginUser loginUser;
-    private String permission;
+    private String token;
 
     public LoginUser getLoginUser() {
         return loginUser;
     }
 
-    public void setLoginUser(LoginUser loginUser) {
-        this.loginUser = loginUser;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public String getToken() {
+        return token;
     }
 }

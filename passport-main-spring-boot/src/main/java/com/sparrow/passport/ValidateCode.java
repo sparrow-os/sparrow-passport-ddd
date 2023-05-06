@@ -31,15 +31,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ValidateCode extends HttpServlet {
+    private static Logger logger = LoggerFactory.getLogger(ValidateCode.class);
+
     public ValidateCode() {
         super();
     }
 
     private static final long serialVersionUID = -5813134629255375160L;
-    private int imagewidth = 100;
-    private int imageheight = 35;
+    private int imageWidth = 100;
+    private int imageHeight = 35;
     private int codeCount = 4;
     private int fontHeight;
     private int codeY;
@@ -56,35 +60,35 @@ public class ValidateCode extends HttpServlet {
         String strCodeCount = this.getInitParameter("codeCount");
         try {
             if (strWidth != null && strWidth.length() != 0) {
-                this.imagewidth = Integer.parseInt(strWidth);
+                this.imageWidth = Integer.parseInt(strWidth);
             }
             if (strHeight != null && strHeight.length() != 0) {
-                this.imageheight = Integer.parseInt(strHeight);
+                this.imageHeight = Integer.parseInt(strHeight);
             }
             if (strCodeCount != null && strCodeCount.length() != 0) {
                 codeCount = Integer.parseInt(strCodeCount);
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            logger.error("validate code error", e);
         }
-        this.codeWidth = this.imagewidth / (codeCount + 1);
-        this.fontHeight = this.imageheight - 2;
-        this.codeY = this.imageheight - 4;
+        this.codeWidth = this.imageWidth / (codeCount + 1);
+        this.fontHeight = this.imageHeight - 2;
+        this.codeY = this.imageHeight - 4;
 
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws IOException {
-        BufferedImage buffImg = new BufferedImage(this.imagewidth,
-            this.imageheight, BufferedImage.TYPE_INT_RGB);
+        BufferedImage buffImg = new BufferedImage(this.imageWidth,
+            this.imageHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D gd = buffImg.createGraphics();
         Random random = new Random();
         gd.setColor(Color.white);
-        gd.fillRect(0, 0, this.imagewidth, this.imageheight);
+        gd.fillRect(0, 0, this.imageWidth, this.imageHeight);
         Font font = new Font("Fixedsys", Font.PLAIN, fontHeight);
         gd.setFont(font);
-        gd.drawRect(0, 0, this.imagewidth - 1, this.imageheight - 1);
+        gd.drawRect(0, 0, this.imageWidth - 1, this.imageHeight - 1);
 
         StringBuilder randomCode = new StringBuilder();
         int red = 0, green = 0, blue = 0;
@@ -116,7 +120,7 @@ public class ValidateCode extends HttpServlet {
         throws IOException {
         if (req.getParameter(Constant.VALIDATE_CODE) != null
             && req.getParameter(Constant.VALIDATE_CODE).equalsIgnoreCase(req.getSession().getAttribute(
-            Constant.VALIDATE_CODE)
+                Constant.VALIDATE_CODE)
             .toString().toLowerCase())) {
             resp.getWriter().write("OK");
             return;

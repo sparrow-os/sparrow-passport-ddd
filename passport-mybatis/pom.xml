@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <version>${sparrow_passport_version}</version>
     <artifactId>passport-mybatis</artifactId>
-
+    <groupId>com.sparrowzoo.passport</groupId>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>

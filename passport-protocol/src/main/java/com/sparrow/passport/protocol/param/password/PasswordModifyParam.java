@@ -2,8 +2,9 @@ package com.sparrow.passport.protocol.param.password;
 
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.POJO;
+import com.sparrow.protocol.Param;
 
-public class PasswordModifyParam implements POJO {
+public class PasswordModifyParam implements Param {
     private Long userId;
     private String password;
     private String newPassword;

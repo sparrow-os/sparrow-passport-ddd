@@ -1,10 +1,10 @@
 package com.sparrow.passport.protocol.query;
 
+import com.sparrow.protocol.Query;
 import com.sparrow.protocol.pager.SimplePager;
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserQueryDTO extends SimplePager implements Serializable {
+public class UserQueryDTO extends SimplePager implements Query {
     /**
      * 用户名
      */
