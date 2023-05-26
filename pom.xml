@@ -2,11 +2,66 @@
 <project
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <groupId>com.sparrowzoo</groupId>
+    <parent>
+        <groupId>com.sparrowzoo</groupId>
+        <artifactId>sparrow-bom</artifactId>
+        <version>1.0.3.1-RELEASE</version>
+    </parent>
     <version>1.0.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sparrow-passport-ddd</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <sparrow_passport_version>1.0.0-SNAPSHOT</sparrow_passport_version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-protocol</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-dao-api</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-sparrow-dao</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-api</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-application</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-infrastructure</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-domain</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sparrowzoo.passport</groupId>
+                <artifactId>passport-adapter</artifactId>
+                <version>${sparrow_passport_version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <modules>
         <module>passport-api</module>
         <module>passport-protocol</module>
@@ -21,6 +76,6 @@
         <module>passport-mybatis</module>
         <module>passport-mybatis-plus</module>
         <module>passport-main-webapp</module>
-
+        <module>passport-authenticator</module>
     </modules>
 </project>

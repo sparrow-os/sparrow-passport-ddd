@@ -1,15 +1,14 @@
 package com.sparrow.passport.domain;
 
-import com.sparrow.passport.domain.service.EmailService;
-import com.sparrow.passport.domain.service.EncryptionService;
-import com.sparrow.passport.domain.service.RegisteringUserService;
-import com.sparrow.passport.domain.service.SecurityPrincipalService;
-import com.sparrow.passport.domain.service.UserLimitService;
+import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
+import com.sparrow.passport.repository.UserProfileRepository;
 
 public interface DomainRegistry {
     RegisteringUserRepository getRegisteringUserRepository();
+
+    UserProfileRepository getUserProfileRepository();
 
     RegisteringUserService getRegisteringUserService();
 
@@ -22,5 +21,8 @@ public interface DomainRegistry {
     EncryptionService getEncryptionService();
 
     EmailService getEmailService();
+
+
+    UserProfileService getUserProfileService();
 
 }

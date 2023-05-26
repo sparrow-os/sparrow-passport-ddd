@@ -1,36 +1,21 @@
-package com.sparrow.passport.infrastructure.persistence.data.mapper;
+package com.sparrow.passport.infrastructure.persistence.data.converter;
 
 import com.sparrow.enums.Gender;
+import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.IpSupport;
-import com.sparrow.passport.domain.entity.RegisteringUserEntity;
-import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class UserMapper {
+public class RegisteringUserConverter
+{
     @Inject
     private IpSupport ipSupport;
-
-    public SecurityPrincipalEntity user2SecurityPrincipal(User user) {
-        if (user == null) {
-            return null;
-        }
-        SecurityPrincipalEntity securityPrincipal = new SecurityPrincipalEntity();
-        securityPrincipal.setActivate(user.getActivate());
-        securityPrincipal.setEmail(user.getEmail());
-        securityPrincipal.setMobile(user.getMobile());
-        securityPrincipal.setUserName(user.getUserName());
-        securityPrincipal.setLastLoginTime(user.getLastLoginTime());
-        securityPrincipal.setUserId(user.getUserId());
-        securityPrincipal.setPassword(user.getPassword());
-        securityPrincipal.setStatus(user.getStatus().ordinal());
-        return securityPrincipal;
-    }
 
     public RegisteringUserEntity user2RegisteringUser(User user) {
         if (user == null) {
@@ -76,7 +61,6 @@ public class UserMapper {
         user.setMobile(registeringUser.getMobile());
         if (user.getMobile() == null) {
             user.setMobile(Symbol.EMPTY);
-            user.setSecretMobile(Symbol.EMPTY);
         }
         return user;
     }

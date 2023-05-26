@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.passport.services;
+package com.sparrow.passport.authenticate;
 
 import com.sparrow.core.spi.JsonFactory;
 import com.sparrow.cryptogram.Base64;
@@ -23,33 +23,28 @@ import com.sparrow.exception.Asserts;
 import com.sparrow.json.Json;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
-import com.sparrow.passport.protocol.dto.UserDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
-import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.support.AbstractAuthenticatorService;
-
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.springframework.beans.factory.annotation.Value;
-
-import java.nio.charset.StandardCharsets;
 
 @Named
 public class AuthenticatorService extends AbstractAuthenticatorService {
-
-    @Inject
-    private DomainRegistry domainRegistry;
 
     private Json json = JsonFactory.getProvider();
 
     @Value("${auth.encrypt_key}")
     private String encryptKey;
+
+    @Inject
+    private DomainRegistry domainRegistry;
 
     @Override
     protected String getEncryptKey() {
@@ -81,7 +76,7 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     @Override
     protected LoginUser verify(String token, String secretKey) throws BusinessException {
         String[] tokens = token.split("\\.");
-        Asserts.isTrue(tokens.length != 2,PassportError.USER_TOKEN_ERROR);
+        Asserts.isTrue(tokens.length != 2, PassportError.USER_TOKEN_ERROR);
         String userInfo = tokens[0];
         String signature = tokens[1];
         try {

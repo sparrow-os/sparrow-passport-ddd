@@ -38,6 +38,7 @@ public class SecurityPrincipalService {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
         SecurityPrincipalEntity securityPrincipal;
 
+
         if (loginName.contains(Symbol.AT)) {
             securityPrincipal = securityPrincipalRepository.findByEmail(loginName);
         } else {

@@ -91,14 +91,6 @@ public class User implements Cloneable, POJO {
 
     private String mobile;
 
-    @FieldOrder(order = 10.1F)
-    @Column(name = "secret_mobile", columnDefinition = "varchar(64) DEFAULT '' COMMENT  'SECRET MOBILE'", updatable = false,nullable = false)
-
-    /**
-     * 手机号码的密文部分
-     */
-    private String secretMobile;
-
     @FieldOrder(order = 11)
     @Column(name = "last_login_time", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '最近登录时间'", updatable = false,nullable = false)
     /**
@@ -298,14 +290,6 @@ public class User implements Cloneable, POJO {
 
     public void setChannel(String channel) {
         this.channel = channel;
-    }
-
-    public String getSecretMobile() {
-        return secretMobile;
-    }
-
-    public void setSecretMobile(String secretMobile) {
-        this.secretMobile = secretMobile;
     }
 
     public String getDevice() {

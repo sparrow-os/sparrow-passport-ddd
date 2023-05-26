@@ -1,0 +1,94 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>新用户注册-麻雀窝</title>
+    <meta content="register 注册 " name="keywords"/>
+    <meta content="麻雀窝提供" name="description"/>
+    <meta name="application-name" content="麻雀窝"/>
+    <meta name="msapplication-tooltip" content="麻雀窝"/>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/pure-css/pure-min.css?v=1.0"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts-old-ie.css?v=1.0"/>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/layouts.css?v=1.0"/>
+    <!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://r.sparrowzoo.net/styles/sparrow.css?v=1.0"/>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/passport.js?v=1.0"></script>
+</head>
+<body>
+<div class="body">
+
+    <div class="header">
+        <h1>麻雀窝- 新用户注册</h1>
+        <h2>
+            您已有帐号?
+            <a href="http://passport.sparrowzoo.com/login">直接登录</a>
+        </h2>
+    </div>
+
+    <div class="content">
+        <br/>
+        <span id="errorRegister" name="error" class="error"></span>
+        <form action="/register/email" method="post" class="pure-form pure-form-aligned">
+            <input type="hidden" id="hdnIntroducer" name="introducer" class=""/>
+            <fieldset>
+                <div class="pure-control-group">
+                    <label> 电子邮箱 </label>
+                    <input type="text" value="" tabindex="1"
+                           onfocus="$.v.showMessage(regInfo,this);" onblur="$.v.isEmail(regInfo,this);"
+                           name="email" id="txtEmail"/>
+                    <span id="errorEmail" name="register_user_email" class="error"></span>
+                </div>
+                <div class="pure-control-group">
+                    <label> 用户名 </label>
+                    <input value="" type="text" tabIndex="2"
+                           onfocus='$.v.showMessage(regInfo,this);' onblur='$.v.isUserNameRule(regInfo,this);'
+                           name="userName" id="txtUserName"/>
+                    <span id="errorUserName" name="register_user_name" class="error"></span>
+                </div>
+                <div class="pure-control-group">
+                    <label> 登陆密码 </label> <input class="input" type="password"
+                                                     tabindex="3" onfocus="$.v.showMessage(regInfo,this);"
+                                                     onblur="$.v.isNull(regInfo,this);" maxlength="16"
+                                                     name="password" id="txtPassword"/>
+                    <span id="errorRegPassword" name="register_password" class="error"></span>
+                </div>
+                <div class="pure-control-group">
+                    <label> 确认密码 </label> <input name="passwordConfirm" class="input" type="password"
+                                                     tabindex="4" onfocus="$.v.showMessage(regInfo,this);"
+                                                     onblur="$.v.isEqual(regInfo,this);" maxlength="16"
+                                                     id="txtConfirmPassword"/>
+
+                    <span id="errorConfirmPassword" name="register_confirm_password" class="error"></span>
+                </div>
+                <div class="pure-control-group">
+                    <label> 验证码 </label>
+                    <input class="input"
+                           type="text" tabindex="5"
+                           onfocus="$.v.showMessage(regInfo,this)"
+                           onblur="$.v.isNull(regInfo,this);" maxlength="4"
+                           name="captcha" id="txtValidateCode"/>
+                    <img alt="validate code" align="absMiddle" id="imgValidateCode" onclick="$(this).fresh();"
+                         src="validate-code"/>
+                    <a href="javascript:$('#imgValidateCode').fresh();"> 看不清 换一张</a>
+                    <span id="errorValidateCode" name="register_validate_code" class="error"></span>
+                </div>
+                <div class="pure-controls">
+
+                    <button onenter="true" type="button" onclick="$.v.getValidateResult(regInfo);"
+                            class="pure-button pure-button-primary">注册
+                    </button>
+
+                    <br/> <br/> <a target="_blank"
+                                   href="/provision.jsp">麻雀窝服务条款</a>
+                </div>
+            </fieldset>
+    </div>
+</div>
+</body>
+</html>

@@ -21,7 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
         return request.getSession().getId();
     }
 
-    @PostMapping("/login")
+    //sparrow mvc 模式下 为了与login 区分开
+    @PostMapping("/login.do")
     /**
      * @RequestBody DispatcherServlet Completed 415 UNSUPPORTED_MEDIA_TYPE
      */

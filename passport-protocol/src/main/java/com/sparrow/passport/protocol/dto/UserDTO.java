@@ -8,7 +8,7 @@ import java.util.Map;
  *
  * @auth harry
  */
-public class UserDTO extends BasicUserDTO {
+public class UserDTO extends UserProfileDTO {
     private String roleNames;
     private String groupLevel;
     private String secretMobile;

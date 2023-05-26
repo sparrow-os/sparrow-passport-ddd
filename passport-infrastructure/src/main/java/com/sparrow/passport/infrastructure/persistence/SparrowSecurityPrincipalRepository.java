@@ -2,8 +2,7 @@ package com.sparrow.passport.infrastructure.persistence;
 
 import com.sparrow.passport.dao.UserDAO;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
-import com.sparrow.passport.infrastructure.persistence.data.mapper.SecurityPrincipalMapper;
-import com.sparrow.passport.infrastructure.persistence.data.mapper.UserMapper;
+import com.sparrow.passport.infrastructure.persistence.data.converter.SecurityPrincipalConverter;
 import com.sparrow.passport.po.SecurityPrincipal;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
@@ -16,25 +15,23 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     @Inject
     private UserDAO userDao;
     @Inject
-    private UserMapper userMapper;
-    @Inject
-    private SecurityPrincipalMapper securityPrincipalMapper;
+    private SecurityPrincipalConverter securityPrincipalMapper;
 
     @Override public SecurityPrincipalEntity findByUserId(Long userId) {
         User user = this.userDao.getEntity(userId);
-        return this.userMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByEmail(String email) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return this.userMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByName(String userName) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return this.userMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByMobile(String mobile, String secretMobile) {

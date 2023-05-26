@@ -1,15 +1,15 @@
 package com.sparrow.spring.reflect;
 
 import com.sparrow.cg.MethodAccessor;
-import com.sparrow.passport.protocol.dto.BasicUserDTO;
+import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class BasicUserDTOMethodAccess implements MethodAccessor {
-    private static Map<String, BiFunction<BasicUserDTO, String, Object>> getMap = new HashMap<>(1280);
-    private static Map<String, BiConsumer<BasicUserDTO, Object>> setMap = new HashMap<>();
+    private static Map<String, BiFunction<UserProfileDTO, String, Object>> getMap = new HashMap<>(1280);
+    private static Map<String, BiConsumer<UserProfileDTO, Object>> setMap = new HashMap<>();
 
     static {
         getMap.put("getUserName", (o, s) -> o.getUserName());
@@ -17,12 +17,12 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
     }
 
     public Object get(Object o, String methodName) {
-        com.sparrow.passport.protocol.dto.BasicUserDTO basicUserDTO = (com.sparrow.passport.protocol.dto.BasicUserDTO) o;
+        UserProfileDTO basicUserDTO = (UserProfileDTO) o;
         return getMap.get(methodName).apply(basicUserDTO, methodName);
     }
 
     public void set(Object o, String methodName, Object arg) {
-        com.sparrow.passport.protocol.dto.BasicUserDTO basicUserDTO = (com.sparrow.passport.protocol.dto.BasicUserDTO) o;
+        UserProfileDTO basicUserDTO = (UserProfileDTO) o;
 
         if (methodName.equalsIgnoreCase("setUserName") || methodName.equalsIgnoreCase("userName")) {
             basicUserDTO.setUserName((java.lang.String) arg);
@@ -61,10 +61,6 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
             basicUserDTO.setCreateTime((java.lang.Long) arg);
         }
 
-        if (methodName.equalsIgnoreCase("setUpdateTime") || methodName.equalsIgnoreCase("updateTime")) {
-            basicUserDTO.setUpdateTime((java.lang.Long) arg);
-        }
-
         if (methodName.equalsIgnoreCase("setActivateTime") || methodName.equalsIgnoreCase("activateTime")) {
             basicUserDTO.setActivateTime((java.lang.Long) arg);
         }
@@ -89,9 +85,6 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
             basicUserDTO.setPersonalSignature((java.lang.String) arg);
         }
 
-        if (methodName.equalsIgnoreCase("setOnline") || methodName.equalsIgnoreCase("online")) {
-            basicUserDTO.setOnline((java.lang.Boolean) arg);
-        }
 
         if (methodName.equalsIgnoreCase("setUserId") || methodName.equalsIgnoreCase("userId")) {
             basicUserDTO.setUserId((java.lang.Long) arg);
@@ -101,9 +94,6 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
             basicUserDTO.setIp((java.lang.String) arg);
         }
 
-        if (methodName.equalsIgnoreCase("setCent") || methodName.equalsIgnoreCase("cent")) {
-            basicUserDTO.setCent((java.lang.Long) arg);
-        }
 
         if (methodName.equalsIgnoreCase("setEmail") || methodName.equalsIgnoreCase("email")) {
             basicUserDTO.setEmail((java.lang.String) arg);

@@ -6,9 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sparrowzoo</groupId>
-        <artifactId>sparrow-zoo-bom</artifactId>
+        <artifactId>sparrow-passport-ddd</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
     <groupId>com.sparrowzoo.passport</groupId>
     <artifactId>passport-adapter</artifactId>
@@ -18,6 +17,10 @@
         <dependency>
             <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sparrowzoo.passport</groupId>

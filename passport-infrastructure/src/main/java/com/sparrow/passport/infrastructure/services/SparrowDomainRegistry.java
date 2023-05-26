@@ -1,13 +1,11 @@
 package com.sparrow.passport.infrastructure.services;
 
-import com.sparrow.passport.domain.service.EmailService;
-import com.sparrow.passport.domain.service.EncryptionService;
-import com.sparrow.passport.domain.service.RegisteringUserService;
-import com.sparrow.passport.domain.service.SecurityPrincipalService;
-import com.sparrow.passport.domain.service.UserLimitService;
+import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.domain.DomainRegistry;
+import com.sparrow.passport.repository.UserProfileRepository;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -29,31 +27,55 @@ public class SparrowDomainRegistry implements DomainRegistry {
     @Inject
     private EmailService emailService;
 
-    @Override public RegisteringUserRepository getRegisteringUserRepository() {
+
+    @Inject
+    private UserProfileService userProfileService;
+
+    @Inject
+    private UserProfileRepository userProfileRepository;
+
+    @Override
+    public RegisteringUserRepository getRegisteringUserRepository() {
         return this.registeringUserRepository;
     }
 
-    @Override public SecurityPrincipalService getSecurityPrincipalService() {
+    @Override
+    public SecurityPrincipalService getSecurityPrincipalService() {
         return this.securityPrincipalService;
     }
 
-    @Override public UserLimitService getUserLimitService() {
+    @Override
+    public UserLimitService getUserLimitService() {
         return this.userLimitService;
     }
 
-    @Override public SecurityPrincipalRepository getSecurityPrincipalRepository() {
+    @Override
+    public SecurityPrincipalRepository getSecurityPrincipalRepository() {
         return this.securityPrincipalRepository;
     }
 
-    @Override public EncryptionService getEncryptionService() {
+    @Override
+    public EncryptionService getEncryptionService() {
         return this.encryptionService;
     }
 
-    @Override public RegisteringUserService getRegisteringUserService() {
+    @Override
+    public RegisteringUserService getRegisteringUserService() {
         return registeringUserService;
     }
 
-    @Override public EmailService getEmailService() {
+    @Override
+    public EmailService getEmailService() {
         return emailService;
+    }
+
+    @Override
+    public UserProfileService getUserProfileService() {
+        return userProfileService;
+    }
+
+    @Override
+    public UserProfileRepository getUserProfileRepository() {
+        return userProfileRepository;
     }
 }

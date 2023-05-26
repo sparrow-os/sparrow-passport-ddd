@@ -1,14 +1,13 @@
 package com.sparrow.spring.reflect;
 
-import com.sparrow.passport.protocol.dto.BasicUserDTO;
+import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 public class AccessMethodProxyTest {
     public static void main(
         String[] args) throws IllegalAccessException, InterruptedException, NoSuchFieldException {
         BasicUserDTOMethodAccess basicUserMethodAccess = new BasicUserDTOMethodAccess();
-        BasicUserDTO basicUser = new BasicUserDTO();
+        UserProfileDTO basicUser = new UserProfileDTO();
         basicUser.setUserName("zhangsan");
         Thread.sleep(2000);
         long t = System.currentTimeMillis();
@@ -28,7 +27,7 @@ public class AccessMethodProxyTest {
 //            basicUser.getUserName();
         }
         System.out.println("origin jdk cost:" + (System.currentTimeMillis() - t));
-        Field field = BasicUserDTO.class.getDeclaredField("userName");
+        Field field = UserProfileDTO.class.getDeclaredField("userName");
 
         t = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
