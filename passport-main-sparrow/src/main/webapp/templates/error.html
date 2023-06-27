@@ -1,9 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${flash_exception_result?.message}">管理系统</title>
+    <title th:text="${flash_exception_result?.message}"></title>
     <meta content="" name="keywords"/>
     <meta th:content="${flash_exception_result?.message}" name="description"/>
-    <th:block th:include="frames::global_resource"/>
+    <th:block th:include="/frames::global_resource"/>
     <script language="javascript" type="text/javascript">
         function clickRedirect(){
            var queryString='[[${#httpServletRequest.getQueryString()}]]';

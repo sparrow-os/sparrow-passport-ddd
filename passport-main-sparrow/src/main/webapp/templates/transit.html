@@ -5,7 +5,7 @@
     <meta content="操作成功！" name="description"/>
     <meta name="application-name" content="管理系统"/>
     <meta name="msapplication-tooltip" content="管理系统"/>
-    <th:block th:include="frames::global_resource"/>
+    <th:block th:include="/frames::global_resource"/>
     <script language="javascript" type="text/javascript">
         function clickRedirect(){
            var queryString='[[${#httpServletRequest.getQueryString()}]]';
