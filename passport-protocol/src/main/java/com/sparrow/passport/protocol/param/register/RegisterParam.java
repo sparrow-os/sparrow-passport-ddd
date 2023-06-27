@@ -1,6 +1,5 @@
 package com.sparrow.passport.protocol.param.register;
 
-import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.Param;
 
 public abstract class RegisterParam implements Param {
@@ -10,6 +9,8 @@ public abstract class RegisterParam implements Param {
     protected String password;
 
     protected String passwordConfirm;
+
+    protected String nationality;
 
     protected String captcha;
 
@@ -45,5 +46,14 @@ public abstract class RegisterParam implements Param {
 
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
+    }
+
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

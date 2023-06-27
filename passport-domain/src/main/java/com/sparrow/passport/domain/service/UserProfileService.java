@@ -23,7 +23,7 @@ public class UserProfileService {
         UserProfileRepository userProfileRepository = domainRegistry.getUserProfileRepository();
         UserProfileDTO userProfile = null;
         if (userIdentify.contains(Symbol.AT)) {
-            userProfile = userProfileRepository.findByUserName(userIdentify);
+            userProfile = userProfileRepository.findByUserEmail(userIdentify);
         } else {
             userProfile = userProfileRepository.findByUserName(userIdentify);
 //            if (securityPrincipal == null) {

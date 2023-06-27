@@ -19,6 +19,8 @@ public class RegisteringUserEntity {
     private Long userId;
     private Boolean activate = false;
 
+    private String nationality;
+
     public String getUserName() {
         return userName;
     }
@@ -82,5 +84,13 @@ public class RegisteringUserEntity {
 
     public Boolean getActivate() {
         return activate;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

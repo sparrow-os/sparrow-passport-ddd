@@ -9,11 +9,16 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Collection;
+import java.util.Map;
 
+@Named
 public class SparrowProfileRepository implements UserProfileRepository {
     @Inject
     private UserDAO userDao;
 
+    @Inject
     private UserProfileConverter userProfileConverter;
 
     @Override
@@ -33,5 +38,17 @@ public class SparrowProfileRepository implements UserProfileRepository {
     @Override
     public UserProfileDTO findByUserMobile(String mobile) throws BusinessException {
         return null;
+    }
+
+    @Override
+    public UserProfileDTO findByUserId(Long userId) throws BusinessException {
+        User user = this.userDao.getEntity(userId);
+        return this.userProfileConverter.user2Profile(user);
+    }
+
+    @Override
+    public Map<Long, UserProfileDTO> findByUserIds(Collection<Long> userIds) throws BusinessException {
+        Map<Long,User> userMap = this.userDao.getEntityMap(userIds);
+        return this.userProfileConverter.user2Profile(userMap);
     }
 }

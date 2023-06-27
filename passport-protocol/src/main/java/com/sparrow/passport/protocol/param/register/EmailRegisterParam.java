@@ -1,7 +1,5 @@
 package com.sparrow.passport.protocol.param.register;
 
-import com.sparrow.passport.protocol.dto.UserDTO;
-
 public class EmailRegisterParam extends UserNameRegisterParam {
 
     private String email;

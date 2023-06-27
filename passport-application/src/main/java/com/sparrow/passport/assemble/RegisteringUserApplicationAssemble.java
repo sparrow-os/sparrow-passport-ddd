@@ -13,6 +13,7 @@ public class RegisteringUserApplicationAssemble {
         registeringUser.setPassword(registerParam.getPassword());
         registeringUser.setPasswordConfirm(registerParam.getPasswordConfirm());
         registeringUser.setUserName(registerParam.getUserName());
+        registeringUser.setNationality(registeringUser.getNationality());
         return registeringUser;
     }
 }

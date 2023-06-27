@@ -2,6 +2,7 @@ package com.sparrow.spring.reflect;
 
 import com.sparrow.cg.MethodAccessor;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -54,11 +55,11 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
         }
 
         if (methodName.equalsIgnoreCase("setStatus") || methodName.equalsIgnoreCase("status")) {
-            basicUserDTO.setStatus((java.lang.String) arg);
+            //basicUserDTO.setStatus((java.lang.String) arg);
         }
 
         if (methodName.equalsIgnoreCase("setCreateTime") || methodName.equalsIgnoreCase("createTime")) {
-            basicUserDTO.setCreateTime((java.lang.Long) arg);
+            basicUserDTO.setGmtCreate((java.lang.Long) arg);
         }
 
         if (methodName.equalsIgnoreCase("setActivateTime") || methodName.equalsIgnoreCase("activateTime")) {
@@ -70,7 +71,7 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
         }
 
         if (methodName.equalsIgnoreCase("setGender") || methodName.equalsIgnoreCase("gender")) {
-            basicUserDTO.setGender((java.lang.String) arg);
+            basicUserDTO.setGender((Integer) arg);
         }
 
         if (methodName.equalsIgnoreCase("setBirthday") || methodName.equalsIgnoreCase("birthday")) {
@@ -91,16 +92,12 @@ public class BasicUserDTOMethodAccess implements MethodAccessor {
         }
 
         if (methodName.equalsIgnoreCase("setIp") || methodName.equalsIgnoreCase("ip")) {
-            basicUserDTO.setIp((java.lang.String) arg);
+            basicUserDTO.setIp((Long) arg);
         }
 
 
         if (methodName.equalsIgnoreCase("setEmail") || methodName.equalsIgnoreCase("email")) {
             basicUserDTO.setEmail((java.lang.String) arg);
-        }
-
-        if (methodName.equalsIgnoreCase("setZone") || methodName.equalsIgnoreCase("zone")) {
-            basicUserDTO.setZone((java.lang.String) arg);
         }
     }
 }

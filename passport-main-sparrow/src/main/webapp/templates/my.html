@@ -1,0 +1,88 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>用户登录-麻雀窝</title>
+    <meta content="麻雀窝提供" name="description"/>
+    <meta name="application-name" content="麻雀窝"/>
+    <th:block th:include="/frames::global_resource"/>
+    <script language="javascript" type="text/javascript"
+            th:src="${resource}+'/ext/scripts/system/language/'+${sparrow_request_language}+'/user.js?v='+${resource_version}"></script>
+</head>
+<body style="width:700px;height:520px;">
+<form method="post" th:action="${root}+'/administrator/modify'">
+    <div class="body">
+        <%--<E:JNavigationMenu currentForum="004001"/>--%>
+        <j:hidden name="administrator.userId" id="hdnUserId"/>
+        <j:hidden name="option" id="hldOption"/>
+        <div class="frame">
+            <div class="title">
+                注: <span class="highlight">*</span>为必添项
+            </div>
+            <div class="content">
+                <div class="userName" id="userName">
+                    <j:span id="userName">${administrator.userLoginName}</j:span><a class="updateTime" id="updateTime">
+                    上次更新${administrator.updateTime}</a>
+                </div>
+
+                <div class="userTitle">
+                    <span>基本信息</span>
+                </div>
+                <table cellspacing="0" cellpadding="4">
+                    <tr>
+                        <th>昵称:</th>
+                        <td class="td-input"><j:text_box events="onfocus='$.v.showMessage(userInfo.txtUserName);'
+                        onblur='$.v.isNull(userInfo.txtUserName);'" name="administrator.userName" maxLength="8"
+                                                         id="txtUserName"/></td>
+                        <td class="td-message"><span id="errorUserName" class="prompt"></span></td>
+                        <td rowspan="8" valign="top" align="center" class="userHead">
+                            <img id="imgUserHead" style="width: 150px; height: 150px;"
+                                 src="${administrator.headImg}"/> <br/>
+                            <input type="button"
+                                   value="选择头像" class="button"
+                                   onclick="$.window({url:'${rootPath}/administrator/change_head.jsp?userId=${madministrator.userId}',showHead:false});"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>出生日期:</th>
+                        <td class="td-input"><j:text_box readonly="readonly" name="administrator.birthday"
+                                                         id="txtBirthday"/></td>
+                        <td class="td-message"><span id="errorBirthday" class="prompt"></span></td>
+                    </tr>
+                    <tr>
+                        <th>性别:</th>
+                        <td><j:drop_down_list name="administrator.sex" id="ddlSex"
+                                              keyValues="0:女,1:男"/></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <th>注册时间:</th>
+                        <td>${administrator.createTime}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>最后登录时间:</th>
+                        <td>${administrator.lastLoginTime}</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <th>个性签名:</th>
+                        <td colspan="3">
+                            <j:text_area cols="50" rows="3"
+                                         name="administrator.personalSignature" id="txtpersonalSignature"
+                                         events='onkeyup="$.v.updateTxtCount(this,userInfo.txtPersonalSignature.spanTxtCount,100);"'></j:text_area>
+                            <br/> 您还可以输入： <j:span cssClass="highlight"
+                                                  id="spanPersonalSignatureTxtCount">100</j:span> 个字符/100
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input type="button" onclick="$.submit();" class="button"
+           value="提  交"/>
+</form>
+</body>
+</html>

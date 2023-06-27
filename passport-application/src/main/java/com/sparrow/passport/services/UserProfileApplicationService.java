@@ -10,6 +10,8 @@ import com.sparrow.protocol.BusinessException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Collection;
+import java.util.Map;
 
 @Named
 public class UserProfileApplicationService implements UserProfileAppService {
@@ -21,6 +23,16 @@ public class UserProfileApplicationService implements UserProfileAppService {
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
         UserProfileService userProfileService = this.domainRegistry.getUserProfileService();
         return userProfileService.getByIdentify(userIdentify);
+    }
+
+    @Override
+    public Map<Long, UserProfileDTO> getUserMap(Collection<Long> userIds) throws BusinessException {
+        return this.domainRegistry.getUserProfileRepository().findByUserIds(userIds);
+    }
+
+    @Override
+    public UserProfileDTO getUser(Long userId) throws BusinessException {
+        return domainRegistry.getUserProfileRepository().findByUserId(userId);
     }
 
 

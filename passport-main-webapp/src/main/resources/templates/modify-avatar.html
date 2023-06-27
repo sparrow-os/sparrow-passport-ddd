@@ -1,0 +1,40 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>用户登录-麻雀窝</title>
+    <meta content="麻雀窝提供" name="description"/>
+    <meta name="application-name" content="麻雀窝"/>
+    <th:block th:include="/frames::global_resource"/>
+    <link rel="stylesheet" type="text/css" th:href="${resource} + '/ext/sparrowzoo/styles/avatar.css'"/>
+</head>
+<body style="width:700px;height:520px;">
+
+<input type="hidden" id="hdnImageCooperConfig"
+       post="/user/modify-avatar"
+       preview="imgPreviewAvatar"
+       current="imgCurrentAvatar"
+       parent_current="imgAvatar"
+       parent_input="hdnAvatar"
+       command="btnUploadAvatar"
+       business_id="userId"/>
+
+<div class="avatar-content">
+    <div class="current-avatar">
+        <img th:src="${resource}+'/images/user.gif'" id="imgCurrentAvatar"/>
+    </div>
+
+    <div class="local-upload">
+        <img id="imgPreviewAvatar" th:src="${resource}+'/images/camera.jpg'"/> <br/>
+    </div>
+    <div class="local-file">
+        <iframe class="file-frame" name="fileUpload" id="fileUpload"
+                frameborder="0" src="http://upload.sparrowzoo.com/file-upload?path-key=avatar"></iframe>
+        <span>支持.jpg|.jpeg|.png</span>
+    </div>
+    <div class="buttons_group">
+        <input type="button" value="保存" id="btnUploadAvatar" class="button"/>
+        <input type="button" onclick="parent.win.closeClick();" class="button" value="关闭"/>
+    </div>
+</div>
+</body>
+</html>

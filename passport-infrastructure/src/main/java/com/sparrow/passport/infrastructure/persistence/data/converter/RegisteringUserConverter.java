@@ -4,16 +4,17 @@ import com.sparrow.enums.Gender;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.IpSupport;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Locale;
 
 @Named
-public class RegisteringUserConverter
-{
+public class RegisteringUserConverter {
     @Inject
     private IpSupport ipSupport;
 
@@ -41,7 +42,16 @@ public class RegisteringUserConverter
         user.setPassword(registeringUser.getPassword());
         user.setDevice(client.getDevice());
         user.setChannel(client.getChannel());
+        if (user.getChannel() == null) {
+            user.setChannel(Symbol.EMPTY);
+        }
         user.setDeviceModel(client.getDeviceModel());
+        if (user.getDeviceModel() == null) {
+            user.setDeviceModel(Symbol.EMPTY);
+        }
+        if (user.getDeviceId() == null) {
+            user.setDeviceId(Symbol.EMPTY);
+        }
         user.setGmtCreate(System.currentTimeMillis());
         user.setGmtModified(user.getGmtCreate());
         user.setLastLoginTime(System.currentTimeMillis());
@@ -59,6 +69,11 @@ public class RegisteringUserConverter
         user.setIp(this.ipSupport.toLong(client.getIp()));
         user.setStatus(StatusRecord.ENABLE);
         user.setMobile(registeringUser.getMobile());
+
+        user.setNationality(registeringUser.getNationality());
+        if (user.getNationality() == null) {
+            user.setNationality(Constant.DEFAULT_NATIONALITY);
+        }
         if (user.getMobile() == null) {
             user.setMobile(Symbol.EMPTY);
         }

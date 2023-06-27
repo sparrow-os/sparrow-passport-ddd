@@ -35,6 +35,8 @@ public class UserProfileDTO implements POJO {
      */
     private String avatar;
 
+    private String nationality;
+
 
     /**
      * 个性签名
@@ -107,7 +109,6 @@ public class UserProfileDTO implements POJO {
      * 修改时间
      */
     private Long gmtModified;
-
 
 
     public Long getUserId() {
@@ -189,5 +190,93 @@ public class UserProfileDTO implements POJO {
 
     public void setPersonalSignature(String personalSignature) {
         this.personalSignature = personalSignature;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Boolean getActivate() {
+        return activate;
+    }
+
+    public void setActivate(Boolean activate) {
+        this.activate = activate;
+    }
+
+    public Long getActivateTime() {
+        return activateTime;
+    }
+
+    public void setActivateTime(Long activateTime) {
+        this.activateTime = activateTime;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getDeviceModel() {
+        return deviceModel;
+    }
+
+    public void setDeviceModel(String deviceModel) {
+        this.deviceModel = deviceModel;
+    }
+
+    public Long getIp() {
+        return ip;
+    }
+
+    public void setIp(Long ip) {
+        this.ip = ip;
+    }
+
+    public Long getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Long gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }
