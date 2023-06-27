@@ -1,0 +1,45 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base/>
+    <title>邮箱激活-麻雀窝</title>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="keywords" content="邮箱激活"/>
+    <meta http-equiv="description" content="邮箱激活"/>
+
+    <th:block th:include="frames::global_resource"/>
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/scripts/system/language/zh_cn/user.js?v=1.0"></script>
+
+    <script language="javascript" type="text/javascript"
+            src="http://r.sparrowzoo.net/ext/scripts/passport.js?v=1.0"></script>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
+<div class="body">
+
+    <div class="header">
+        <h1>麻雀窝-邮箱激活</h1>
+        <h2>
+            邮箱激活
+        </h2>
+    </div>
+
+    <div class="content">
+        <br/><br/>
+
+        <p>邮箱激活验证邮件已发送
+        </p> <br/>
+<!--        至 <a target="_blank" href=""-->
+<!--             onclick="$.browser.hyperClick(this,lang.message.email_no_config);">进入验证邮箱</a> <br/>-->
+        未收到?
+        <input id="hdnEmail" type="hidden" th:value="${param.email}">
+
+        <input id="btnResentActiveEmail" type="button" class="pure-button pure-button-primary button-xlarge pure-input-1-4"
+                value="重新发送"/>
+    </div>
+</div>
+</body>
+</html>
