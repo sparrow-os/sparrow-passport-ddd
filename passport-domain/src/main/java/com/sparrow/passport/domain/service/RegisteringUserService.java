@@ -81,7 +81,7 @@ public class RegisteringUserService {
         return new LoginDTO(loginUser, permission);
     }
 
-    private void asyncSendActivateEmail(RegisteringUserEntity registeringUserEntity, DomainRegistry domainRegistry) throws BusinessException {
+    private void sendActivateEmail(RegisteringUserEntity registeringUserEntity, DomainRegistry domainRegistry) throws BusinessException {
         String currentDate = DateTimeUtility.getFormatCurrentTime();
         EmailActivateToken emailActivateToken = EmailActivateToken
                 .createToken(registeringUserEntity.getUserId(),
@@ -103,19 +103,19 @@ public class RegisteringUserService {
                 language);
     }
 
-    public void sendActivateEmail(RegisteringUserEntity registeringUserEntity,
-                                  DomainRegistry domainRegistry) throws BusinessException {
-        ACTIVATE_EMAIL_THREAD_POOL.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    asyncSendActivateEmail(registeringUserEntity, domainRegistry);
-                } catch (BusinessException e) {
-                    logger.error("send activate email error", e);
-                }
-            }
-        });
-    }
+//    public void sendActivateEmail(RegisteringUserEntity registeringUserEntity,
+//                                  DomainRegistry domainRegistry) throws BusinessException {
+//        ACTIVATE_EMAIL_THREAD_POOL.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    asyncSendActivateEmail(registeringUserEntity, domainRegistry);
+//                } catch (BusinessException e) {
+//                    logger.error("send activate email error", e);
+//                }
+//            }
+//        });
+//    }
 
     public void activeEmail(String token, ClientInformation client,
                             DomainRegistry domainRegistry) throws BusinessException {
