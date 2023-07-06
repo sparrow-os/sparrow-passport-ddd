@@ -6,34 +6,72 @@
     <meta name="application-name" content="麻雀窝"/>
     <th:block th:include="/frames::global_resource"/>
     <link rel="stylesheet" type="text/css" th:href="${resource} + '/ext/sparrowzoo/styles/avatar.css'"/>
+    <script type="text/javascript">
+        document.ready(function () {
+            var imageCropper = new $.ImageCropper(
+                "imgPreviewAvatar",
+                {
+                    lockRate: true,
+                    left: 75,
+                    top: 75,
+                }
+            );
+            imageCropper.init();
+            $.url.upload = $.url.root;
+            $.file.isShowProgress = true;
+            $.file.imagePreviewCallback = function (url) {
+                imageCropper.resetImage(url.replace('origin', 'big'));
+                //imageCropper.init();
+            }
+            $.file.initImageUploadEvent('avatar', 'PreviewAvatar');
+            document.domain = $.browser.cookie.root_domain;
+            $("#btnUploadAvatar").bind("onclick",function (){
+                const params = {
+                    x: imageCropper.result.x,
+                    y: imageCropper.result.y,
+                    width: imageCropper.result.w,
+                    height:imageCropper.result.h,
+                    avatar:imageCropper.preview.src
+                };
+
+                $.http.post($.url.root+"/profile/modify-user-avatar", params, function (data) {
+                    $("imgCurrentAvatar").src=data+"?t="+new Date();
+                    $.message("操作成功！");
+                });
+            });
+        });
+    </script>
 </head>
-<body style="width:700px;height:520px;">
-
-<input type="hidden" id="hdnImageCooperConfig"
-       post="/user/modify-avatar"
-       preview="imgPreviewAvatar"
-       current="imgCurrentAvatar"
-       parent_current="imgAvatar"
-       parent_input="hdnAvatar"
-       command="btnUploadAvatar"
-       business_id="userId"/>
-
-<div class="avatar-content">
-    <div class="current-avatar">
-        <img th:src="${resource}+'/images/user.gif'" id="imgCurrentAvatar"/>
+<body>
+<div>
+    <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list" style="width: 100%;">
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="modify-avatar"><span>用户头象</span></a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="my"><span>用户信息</span></a>
+            </li>
+        </ul>
     </div>
+    <div class="avatar-content">
+        <div class="block">
+            <div class="current-avatar">
+                <img th:src="${resource}+'/images/user.gif'" id="imgCurrentAvatar"/>
+            </div>
 
-    <div class="local-upload">
-        <img id="imgPreviewAvatar" th:src="${resource}+'/images/camera.jpg'"/> <br/>
-    </div>
-    <div class="local-file">
-        <iframe class="file-frame" name="fileUpload" id="fileUpload"
-                frameborder="0" src="http://upload.sparrowzoo.com/file-upload?path-key=avatar"></iframe>
-        <span>支持.jpg|.jpeg|.png</span>
-    </div>
-    <div class="buttons_group">
-        <input type="button" value="保存" id="btnUploadAvatar" class="button"/>
-        <input type="button" onclick="parent.win.closeClick();" class="button" value="关闭"/>
+            <div class="local-upload">
+                <img id="imgPreviewAvatar" th:src="${resource}+'/images/camera.jpg'"/>
+                <div class="local-file">
+                    <iframe class="file-frame" name="fileUpload" id="null.avatar"
+                            frameborder="0"></iframe>
+                    <span>支持.jpg|.jpeg|.png</span>
+                </div>
+                <div class="buttons_group">
+                    <input type="button" value="保存" id="btnUploadAvatar" class="pure-button pure-button-primary"/>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

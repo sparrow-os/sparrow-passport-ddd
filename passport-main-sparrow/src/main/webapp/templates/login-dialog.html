@@ -1,26 +1,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>快捷登录</title>
-    <th:block th:include="/frames::global_resource"/>
-    <script language="javascript" type="text/javascript"
-            th:src="${resorce}+'/ext/scripts/language/zh_cn/user.js?v='+${resource_version}"></script>
-    <script language="javascript" type="text/javascript"
-            th:src="${resource}+'/ext/scripts/passport.js?v='+${resource_version}"></script>
-
-
     <meta name="application-name" content="麻雀窝"/>
     <meta name="msapplication-tooltip" content="麻雀窝"/>
+    <th:block th:include="/frames::global_resource"/>
+    <script language="javascript" type="text/javascript"
+            th:src="${resorce}+'/ext/scripts/system/language/zh_cn/user.js?v='+${resource_version}"></script>
+    <script language="javascript" type="text/javascript"
+            th:src="${resource}+'/ext/scripts/passport.js?v='+${resource_version}"></script>
 </head>
-
 <body style="width: 650px; height:450px;">
-
 <div id="tabs" class="tab">
     <div class="pure-menu pure-menu-horizontal">
         <ul class="pure-menu-list" style="width: 100%;">
             <li class="pure-menu-item pure-menu-selected">
                 <a class="pure-menu-link" href="javascript:void(0);"><span>登&nbsp;&nbsp;录</span></a>
             </li>
-            <li class="pure-menu-item"><a class="pure-menu-link" href="javascript:void(0);"><span>注&nbsp;&nbsp;册</span>
+            <li class="pure-menu-item"><a class="pure-menu-link"
+                                          href="javascript:void(0);"><span>注&nbsp;&nbsp;册</span>
             </a></li>
             <li class="pure-menu-item more"><a class="pure-menu-link" href="javascript:void(0);"
                                                onclick="parent.$.win.closeClick();"><span>关闭</span> </a></li>
@@ -88,29 +85,31 @@
 
                         <label> 电子邮箱 </label>
                         <input type="text" tabindex="1"
-                               onfocus="$.v.showMessage(regInfo,this);" onblur="$.passport.register.validate.email(this);"
+                               onfocus="$.v.showMessage(regInfo,this);"
+                               onblur="$.passport.register.validate.email(this);"
                                name="email" id="txtEmail"/>
                         <span id="errorEmail" name="register_user_email" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 用户名 </label>
                         <input type="text" tabIndex="2"
-                               onfocus='$.v.showMessage(regInfo,this);' onblur='$.passport.register.validate.user(this);'
+                               onfocus='$.v.showMessage(regInfo,this);'
+                               onblur='$.passport.register.validate.user(this);'
                                name="userName" id="txtRegUserName"/>
                         <span id="errorRegUserName" name="register_user_name" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 登陆密码 </label> <input class="input" type="password"
-                                                     tabindex="3" onfocus="$.v.showMessage(regInfo,this);"
-                                                     onblur="$.v.isNull(regInfo,this);" maxlength="16"
-                                                     name="password" id="txtRegPassword"/>
+                                                         tabindex="3" onfocus="$.v.showMessage(regInfo,this);"
+                                                         onblur="$.v.isNull(regInfo,this);" maxlength="16"
+                                                         name="password" id="txtRegPassword"/>
                         <span id="errorRegPassword" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
                         <label> 确认密码 </label> <input name="passwordConfirm" class="input" type="password"
-                                                     tabindex="4" onfocus="$.v.showMessage(regInfo,this);"
-                                                     onblur="$.v.isEqual(regInfo,this);" maxlength="16"
-                                                     id="txtConfirmPassword"/> <span
+                                                         tabindex="4" onfocus="$.v.showMessage(regInfo,this);"
+                                                         onblur="$.v.isEqual(regInfo,this);" maxlength="16"
+                                                         id="txtConfirmPassword"/> <span
                             id="errorConfirmPassword" class="prompt"></span>
                     </div>
                     <div class="pure-control-group">
@@ -139,7 +138,6 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

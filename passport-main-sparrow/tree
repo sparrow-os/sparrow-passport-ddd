@@ -36,7 +36,7 @@
 [INFO] |  +- com.sparrowzoo:sparrow-mvc:jar:1.0.3.1-RELEASE:compile
 [INFO] |  |  +- com.google.zxing:core:jar:2.2:compile
 [INFO] |  |  \- eu.bitwalker:UserAgentUtils:jar:1.21:compile
-[INFO] | [INFO] +- com.sparrowzoo:sparrow-jedis:jar:1.0.3.1-RELEASE:compile
+[INFO] +- com.sparrowzoo:sparrow-jedis:jar:1.0.3.1-RELEASE:compile
 [INFO] |  +- redis.clients:jedis:jar:3.3.0:compile
 [INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.4.3:compile
 [INFO] |  \- com.sparrowzoo:sparrow-protocol-redis:jar:1.0.3.1-RELEASE:compile
@@ -44,7 +44,9 @@
 [INFO] |  +- com.sparrowzoo.passport:passport-authenticator:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  +- com.sparrowzoo.passport:passport-dao-api:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  +- com.sparrowzoo.passport:passport-domain:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  |  \- com.sparrowzoo.passport:passport-protocol:jar:1.0.0-SNAPSHOT:compile
+[INFO] |  |  +- com.sparrowzoo.passport:passport-protocol:jar:1.0.0-SNAPSHOT:compile
+[INFO] |  |  \- com.sparrowzoo.file:file-api:jar:1.0.0-SNAPSHOT:compile
+[INFO] |  |     \- com.sparrowzoo.file:file-protocol:jar:1.0.0-SNAPSHOT:compile
 [INFO] |  \- com.sparrowzoo:sparrow-json:jar:1.0.3.1-RELEASE:compile
 [INFO] |     \- com.alibaba:fastjson:jar:1.2.83:compile
 [INFO] +- com.sparrowzoo.passport:passport-adapter:jar:1.0.0-SNAPSHOT:compile
@@ -60,6 +62,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.359 s
-[INFO] Finished at: 2023-06-28T00:18:25+08:00
+[INFO] Total time:  5.701 s
+[INFO] Finished at: 2023-07-06T23:12:51+08:00
 [INFO] ------------------------------------------------------------------------

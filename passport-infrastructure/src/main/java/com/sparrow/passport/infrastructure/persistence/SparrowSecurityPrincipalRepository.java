@@ -15,23 +15,23 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     @Inject
     private UserDAO userDao;
     @Inject
-    private SecurityPrincipalConverter securityPrincipalMapper;
+    private SecurityPrincipalConverter securityPrincipalConverter;
 
     @Override public SecurityPrincipalEntity findByUserId(Long userId) {
         User user = this.userDao.getEntity(userId);
-        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByEmail(String email) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByName(String userName) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
-        return this.securityPrincipalMapper.user2SecurityPrincipal(user);
+        return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
     @Override public SecurityPrincipalEntity findByMobile(String mobile, String secretMobile) {
@@ -43,7 +43,7 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     }
 
     @Override public void saveSecurity(SecurityPrincipalEntity securityPrincipalEntity) {
-        SecurityPrincipal securityPrincipal = this.securityPrincipalMapper.entity2Po(securityPrincipalEntity);
+        SecurityPrincipal securityPrincipal = this.securityPrincipalConverter.entity2Po(securityPrincipalEntity);
         this.userDao.save(securityPrincipal);
     }
 }

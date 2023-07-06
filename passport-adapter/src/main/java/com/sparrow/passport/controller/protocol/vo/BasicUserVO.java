@@ -1,8 +1,6 @@
 package com.sparrow.passport.controller.protocol.vo;
 
 public class BasicUserVO {
-    public static final String ONLINE = "ONLINE";
-    public static final String OFFLINE = "OFFLINE";
     /**
      * 用户ID
      */
@@ -21,10 +19,6 @@ public class BasicUserVO {
      */
     private String avatar;
     /**
-     * 专区id
-     */
-    private String zone;
-    /**
      * 性别
      */
     private String gender;
@@ -42,6 +36,11 @@ public class BasicUserVO {
     private String mobile;
 
     /**
+     * 国籍
+     */
+    private String nationality;
+
+    /**
      * 是否激活
      */
     private Boolean activate;
@@ -52,11 +51,11 @@ public class BasicUserVO {
     /**
      * 注册时间
      */
-    private String createTime;
+    private String gmtCreate;
     /**
      * 更新时间
      */
-    private String updateTime;
+    private String modified;
     /**
      * 最后一次登录时间
      */
@@ -70,10 +69,6 @@ public class BasicUserVO {
      * 设备型号 5S/
      */
     private String deviceModel;
-    /**
-     * 设备Id e456789056789
-     */
-    private String deviceId;
     /**
      * 网络IP 192.168.9.1
      */
@@ -117,14 +112,6 @@ public class BasicUserVO {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public String getZone() {
-        return zone;
-    }
-
-    public void setZone(String zone) {
-        this.zone = zone;
     }
 
     public String getGender() {
@@ -175,22 +162,6 @@ public class BasicUserVO {
         this.activateTime = activateTime;
     }
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public String getLastLoginTime() {
         return lastLoginTime;
     }
@@ -215,14 +186,6 @@ public class BasicUserVO {
         this.deviceModel = deviceModel;
     }
 
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
     public String getIp() {
         return ip;
     }
@@ -245,5 +208,29 @@ public class BasicUserVO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(String gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

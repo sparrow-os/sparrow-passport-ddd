@@ -4,11 +4,14 @@
     <meta content="register 注册 " name="keywords"/>
     <meta content="程序员有问题就上麻雀窝 和大牛直接聊" name="description"/>
     <meta name="application-name" content="麻雀窝"/>
-    <meta name="msapplication-tooltip" content="麻雀窝"/>
     <th:block th:include="/frames::global_resource"/>
-    <script language="javascript" type="text/javascript"
+    <script  type="text/javascript"
             th:src="${resource}+'/ext/scripts/language/'+${sparrow_request_language}+'/user.js?v='+${resource_version}"></script>
-
+    <script type="text/javascript">
+        document.ready(function (){
+           $.v.init(regInfo);
+        });
+    </script>
 </head>
 <body>
 <div class="body">
@@ -32,28 +35,25 @@
                 <div class="pure-control-group">
                     <label> 电子邮箱 </label>
                     <input type="text" value="" tabindex="1"
-                           onfocus="$.v.showMessage(regInfo,this);" onblur="$.v.isEmail(regInfo,this);"
                            name="email" id="txtEmail"/>
                     <span id="errorEmail" name="register_user_email" class="error"></span>
                 </div>
                 <div class="pure-control-group">
                     <label> 用户名 </label>
                     <input value="" type="text" tabIndex="2"
-                           onfocus='$.v.showMessage(regInfo,this);' onblur='$.v.isUserNameRule(regInfo,this);'
                            name="userName" id="txtRegUserName"/>
                     <span id="errorRegUserName" name="register_user_name" class="error"></span>
                 </div>
                 <div class="pure-control-group">
                     <label> 登陆密码 </label> <input class="input" type="password"
-                                                     tabindex="3" onfocus="$.v.showMessage(regInfo,this);"
-                                                     onblur="$.v.isNull(regInfo,this);" maxlength="16"
+                                                     tabindex="3"
+                                                     maxlength="16"
                                                      name="password" id="txtRegPassword"/>
                     <span id="errorRegPassword" name="register_password" class="error"></span>
                 </div>
                 <div class="pure-control-group">
                     <label> 确认密码 </label> <input name="passwordConfirm" class="input" type="password"
-                                                     tabindex="4" onfocus="$.v.showMessage(regInfo,this);"
-                                                     onblur="$.v.isEqual(regInfo,this);" maxlength="16"
+                                                     tabindex="4" maxlength="16"
                                                      id="txtConfirmPassword"/>
 
                     <span id="errorConfirmPassword" name="register_confirm_password" class="error"></span>
@@ -61,9 +61,7 @@
                 <div class="pure-control-group">
                     <label> 验证码 </label>
                     <input class="input"
-                           type="text" tabindex="5"
-                           onfocus="$.v.showMessage(regInfo,this)"
-                           onblur="$.v.isNull(regInfo,this);" maxlength="4"
+                           type="text" tabindex="5" maxlength="4"
                            name="captcha" id="txtRegValidateCode"/>
                     <img alt="validate code" align="absMiddle" id="imgValidateCode" onclick="$(this).fresh();"
                          src="validate-code"/>

@@ -4,8 +4,13 @@
     <meta content="程序员有问题就上麻雀窝 和大牛直接聊" name="description"/>
     <meta name="application-name" content="麻雀窝"/>
     <th:block th:include="/frames::global_resource"/>
-    <script language="javascript" type="text/javascript"
-            th:src="${resource}+'/ext/scripts/system/zh_cn/user.js?v=1.0'"></script>
+    <script type="text/javascript"
+            th:src="${resource}+'/ext/scripts/language/zh_cn/user.js?v='+${resource_version}"></script>
+    <script type="text/javascript">
+        document.ready(function (){
+            $.v.init(loginInfo);
+        });
+    </script>
 </head>
 <body>
 
@@ -24,17 +29,14 @@
                 <label for="txtUserName">
                     用户名
                 </label>
-                <input type="text" id="txtUserName" name="userName" class="input"
-                       onfocus='$.v.showMessage(loginInfo,this);' onblur='$.v.isNull(loginInfo,this);'/>
+                <input type="text" id="txtUserName" name="userName" class="input"/>
                 <span th:text="${login_user_name}" id="errorUserName" name="login_user_name" class="error"></span>
             </div>
             <div class="pure-control-group">
                 <label>
                     密 码
                 </label>
-                <input class="input" type="password"
-                       onfocus="$.v.showMessage(loginInfo,this);"
-                       onblur="$.v.isNull(loginInfo,this);" id="txtPassword"
+                <input class="input" type="password" id="txtPassword"
                        name="password"/>
                 <span id="errorPassword" name="login_password" class="error"></span>
             </div>
@@ -42,8 +44,7 @@
                 <label>
                     验证码
                 </label>
-                <input class="input" onfocus="$.v.showMessage(loginInfo,this);"
-                       onblur="$.v.isNull(loginInfo,this);" type="text"
+                <input class="input" type="text"
                        maxlength="4" name="captcha" id="txtValidateCode"/>
 
                 <img id="imgLoginValidateCode"

@@ -1,13 +1,13 @@
 package com.sparrow.passport.controller;
 
+import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
 
-/**
- * Created by harry on 2016/12/16.
- */
+import java.io.IOException;
+
 public interface UserProfileController {
     BasicUserVO loadUserBasic() throws BusinessException;
 
-    void modifyHeadImage(String parameter) throws BusinessException;
+    String modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException;
 }

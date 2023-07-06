@@ -5,8 +5,6 @@ import com.sparrow.protocol.Param;
 public class AvatarModifyParam implements Param {
     public AvatarModifyParam() {
     }
-
-    private Long userId;
     /**
      * 头象
      */
@@ -28,17 +26,12 @@ public class AvatarModifyParam implements Param {
      */
     private Integer height;
 
-    public AvatarModifyParam(Long userId, String avatar, Integer x, Integer y, Integer width, Integer height) {
-        this.userId = userId;
+    public AvatarModifyParam(String avatar, Integer x, Integer y, Integer width, Integer height) {
         this.avatar = avatar;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-    }
-
-    public Long getUserId() {
-        return userId;
     }
 
     public String getAvatar() {
@@ -64,7 +57,6 @@ public class AvatarModifyParam implements Param {
     @Override
     public String toString() {
         return "AvatarModifyDTO{" +
-                "userId=" + userId +
                 ", avatar='" + avatar + '\'' +
                 ", x=" + x +
                 ", y=" + y +

@@ -6,4 +6,6 @@ import com.sparrow.passport.po.User;
 
 public interface UserDAO extends DaoSupport<User, Long> {
     void save(SecurityPrincipal securityPrincipal);
+
+    void modifyAvatar(Long userId,String avatar);
 }

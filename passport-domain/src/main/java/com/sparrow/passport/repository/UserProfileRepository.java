@@ -1,6 +1,7 @@
 package com.sparrow.passport.repository;
 
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
+import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 
 import java.util.Collection;
@@ -16,4 +17,6 @@ public interface UserProfileRepository {
     UserProfileDTO findByUserId(Long userId) throws BusinessException;
 
     Map<Long, UserProfileDTO> findByUserIds(Collection<Long> userIds) throws BusinessException;
+
+    void modifyAvatar(String avatar) throws BusinessException;
 }
