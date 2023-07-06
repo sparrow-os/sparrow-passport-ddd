@@ -17,6 +17,9 @@ import com.sparrow.utility.StringUtility;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * user assemble
+ */
 @Named
 public class UserAssemble {
     @Inject
