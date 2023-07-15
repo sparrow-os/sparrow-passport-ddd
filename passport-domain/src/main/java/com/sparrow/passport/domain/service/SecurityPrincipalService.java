@@ -2,7 +2,9 @@ package com.sparrow.passport.domain.service;
 
 import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
+import com.sparrow.core.spi.JsonFactory;
 import com.sparrow.exception.Asserts;
+import com.sparrow.json.Json;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
 import com.sparrow.passport.domain.object.value.EmailFindPasswordToken;
@@ -32,6 +34,8 @@ public class SecurityPrincipalService {
     private static Logger logger = LoggerFactory.getLogger(SecurityPrincipalService.class);
     @Inject
     private Authenticator authenticatorService;
+
+    private Json json= JsonFactory.getProvider();
 
     public SecurityPrincipalEntity findByLoginName(String loginName,
         DomainRegistry domainRegistry) throws BusinessException {
@@ -88,6 +92,7 @@ public class SecurityPrincipalService {
             client.getDeviceId(),
             tokenExpireDays
         );
+        logger.info("security principle login user info {}",this.json.toString(loginUser));
         LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
         String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
         return new LoginDTO(loginUser, permission);
