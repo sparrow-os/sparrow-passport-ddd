@@ -28,6 +28,7 @@ public enum PassportError implements ErrorSupport {
     USER_NOT_LOGIN(false, PassportModule.USER, "22", "user not login"),
     USER_TOKEN_TYPE_ERROR(false, PassportModule.USER, "23", "user token type error"),
     USER_TOKEN_ERROR(false, PassportModule.USER, "24", "user token error"),
+    USER_IDS_IS_EMPTY(false, PassportModule.USER, "25", "user id is empty"),
 
     ;
     private boolean system;

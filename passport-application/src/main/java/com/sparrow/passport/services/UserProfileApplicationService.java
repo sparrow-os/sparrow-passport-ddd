@@ -4,13 +4,14 @@ import com.sparrow.passport.api.UserProfileAppService;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.service.UserProfileService;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
-import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.protocol.param.UserModifyParam;
 import com.sparrow.protocol.BusinessException;
+import com.sparrow.utility.CollectionsUtility;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 @Named
@@ -27,6 +28,9 @@ public class UserProfileApplicationService implements UserProfileAppService {
 
     @Override
     public Map<Long, UserProfileDTO> getUserMap(Collection<Long> userIds) throws BusinessException {
+        if (CollectionsUtility.isNullOrEmpty(userIds)) {
+            return Collections.emptyMap();
+        }
         return this.domainRegistry.getUserProfileRepository().findByUserIds(userIds);
     }
 

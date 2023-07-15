@@ -10,6 +10,7 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
+import com.sparrow.utility.CollectionsUtility;
 
 import javax.inject.Inject;
 import javax.inject.Named;
