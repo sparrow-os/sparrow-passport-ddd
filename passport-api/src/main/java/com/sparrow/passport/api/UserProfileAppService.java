@@ -27,6 +27,4 @@ public interface UserProfileAppService {
     UserProfileDTO getUser(Long userId) throws BusinessException;
 
     void modify(UserModifyParam user) throws BusinessException;
-
-    Boolean modifyAvatar(AvatarModifyParam avatarModify) throws BusinessException;
 }

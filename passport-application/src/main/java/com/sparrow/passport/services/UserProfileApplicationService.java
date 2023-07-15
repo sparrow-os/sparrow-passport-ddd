@@ -39,9 +39,4 @@ public class UserProfileApplicationService implements UserProfileAppService {
     @Override
     public void modify(UserModifyParam user) throws BusinessException {
     }
-
-    @Override
-    public Boolean modifyAvatar(AvatarModifyParam avatarModify) throws BusinessException {
-        return null;
-    }
 }
