@@ -28,11 +28,14 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.support.AbstractAuthenticatorService;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.sparrow.utility.StringUtility;
 import org.springframework.beans.factory.annotation.Value;
 
 @Named
@@ -43,21 +46,27 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     @Value("${auth.encrypt_key}")
     private String encryptKey;
 
+    private volatile boolean loadedEnvEncrypt;
+
     @Inject
     private DomainRegistry domainRegistry;
 
     @Override
     protected String getEncryptKey() {
-        if (encryptKey != null) {
-            return encryptKey;
+        if (this.loadedEnvEncrypt) {
+            return this.encryptKey;
         }
         synchronized (this) {
-            if (encryptKey != null) {
-                return encryptKey;
+            if (this.loadedEnvEncrypt) {
+                return this.encryptKey;
             }
-            this.encryptKey = System.getenv("ENCRYPT_KEY");
+            String encryptKey = System.getenv("authenticator_encrypt_key");
+            if (!StringUtility.isNullOrEmpty(encryptKey)) {
+                this.encryptKey = encryptKey;
+            }
+            this.loadedEnvEncrypt = true;
+            return this.encryptKey;
         }
-        return this.encryptKey;
     }
 
     @Override
@@ -69,7 +78,7 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     protected String sign(LoginUser loginUser, String secretKey) {
         String userInfo = this.json.toString(loginUser);
         String signature = Hmac.getInstance().getSHA1Base64(userInfo,
-            this.encryptKey);
+                this.getEncryptKey());
         return Base64.encodeBytes(userInfo.getBytes(StandardCharsets.US_ASCII)) + "." + signature;
     }
 
@@ -82,7 +91,7 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
         try {
             userInfo = new String(Base64.decode(userInfo), StandardCharsets.US_ASCII);
             String signatureOld = Hmac.getInstance().getSHA1Base64(userInfo,
-                this.encryptKey);
+                    this.getDecryptKey());
             if (signature.equals(signatureOld)) {
                 return this.json.parse(userInfo, LoginUser.class);
             }
