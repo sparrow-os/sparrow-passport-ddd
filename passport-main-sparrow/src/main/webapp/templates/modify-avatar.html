@@ -35,7 +35,7 @@
                 };
 
                 $.http.post($.url.root+"/profile/modify-user-avatar", params, function (data) {
-                    $("imgCurrentAvatar").src=data+"?t="+new Date();
+                    $("imgCurrentAvatar").src=data+"?t="+$.random();
                     $.message("操作成功！");
                 });
             });
