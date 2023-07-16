@@ -26,6 +26,11 @@
             $.file.initImageUploadEvent('avatar', 'PreviewAvatar');
             document.domain = $.browser.cookie.root_domain;
             $("#btnUploadAvatar").bind("onclick",function (){
+                // var previewSrc=$("imgPreviewAvatar").src;
+                // if(previewSrc==$.url.resource+'/images/camera.jpg'){
+                //     $.message("请选择上传头象！");
+                //     return;
+                // }
                 const params = {
                     x: imageCropper.result.x,
                     y: imageCropper.result.y,
@@ -34,8 +39,8 @@
                     avatar:imageCropper.preview.src
                 };
 
-                $.http.post($.url.root+"/profile/modify-user-avatar", params, function (data) {
-                    $("imgCurrentAvatar").src=data+"?t="+new Date();
+                $.http.post($.url.root+"/profile/modify-user-avatar", params, function (result) {
+                    $("imgCurrentAvatar").src=result.data+"?t="+$.random();
                     $.message("操作成功！");
                 });
             });
@@ -57,7 +62,7 @@
     <div class="avatar-content">
         <div class="block">
             <div class="current-avatar">
-                <img th:src="${resource}+'/images/user.gif'" id="imgCurrentAvatar"/>
+                <img th:src="${resource}+'/images/user.jpg'" id="imgCurrentAvatar"/>
             </div>
 
             <div class="local-upload">

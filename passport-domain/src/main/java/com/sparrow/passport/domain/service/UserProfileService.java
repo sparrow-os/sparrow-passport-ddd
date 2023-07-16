@@ -1,5 +1,6 @@
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.constant.Config;
 import com.sparrow.exception.Asserts;
 import com.sparrow.file.api.AttachService;
 import com.sparrow.file.param.ImageCropperParam;
@@ -12,6 +13,7 @@ import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
+import com.sparrow.utility.ConfigUtility;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -45,6 +47,8 @@ public class UserProfileService {
     }
 
     public String modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+        String resource = ConfigUtility.getValue(Config.RESOURCE);
+        Asserts.isTrue(avatarModifyParam.getAvatar().startsWith(resource), PassportError.USER_AVATAR_CAN_NOT_DEFAULT);
         ImageCropperParam imageCropperParam = new ImageCropperParam(avatarModifyParam.getAvatar(),
                 avatarModifyParam.getX(),
                 avatarModifyParam.getY(),
