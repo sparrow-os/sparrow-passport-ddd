@@ -19,6 +19,10 @@
             imageCropper.init();
             $.url.upload = $.url.root;
             $.file.isShowProgress = true;
+            //登录后重新初始化上传组件
+            $.file.loginCallback=function (){
+                $.file.initImageUploadEvent('avatar', 'PreviewAvatar');
+            };
             $.file.imagePreviewCallback = function (url) {
                 imageCropper.resetImage(url.replace('origin', 'big'));
                 //imageCropper.init();
@@ -48,6 +52,7 @@
     </script>
 </head>
 <body>
+<th:block th:include="/frames::banner"/>
 <div>
     <div class="pure-menu pure-menu-horizontal">
         <ul class="pure-menu-list" style="width: 100%;">
