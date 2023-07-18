@@ -1,8 +1,11 @@
 package com.sparrow.passport.infrastructure.persistence.data.converter;
 
+import com.sparrow.constant.Config;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.utility.BeanUtility;
+import com.sparrow.utility.ConfigUtility;
+import com.sparrow.utility.StringUtility;
 
 import javax.inject.Named;
 import java.util.HashMap;
@@ -16,19 +19,22 @@ public class UserProfileConverter {
         }
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         BeanUtility.copyProperties(user, userProfileDTO);
+        if (StringUtility.isNullOrEmpty(user.getAvatar())) {
+            userProfileDTO.setAvatar(ConfigUtility.getValue(Config.DEFAULT_AVATAR));
+        }
         return userProfileDTO;
     }
 
 
-    public Map<Long,UserProfileDTO> user2Profile(Map<Long,User> userMap) {
+    public Map<Long, UserProfileDTO> user2Profile(Map<Long, User> userMap) {
         if (userMap == null) {
             return null;
         }
-        Map<Long,UserProfileDTO> userProfileDTOMap=new HashMap<>();
-        for(Long userId:userMap.keySet()) {
+        Map<Long, UserProfileDTO> userProfileDTOMap = new HashMap<>();
+        for (Long userId : userMap.keySet()) {
             UserProfileDTO userProfileDTO = new UserProfileDTO();
             BeanUtility.copyProperties(userMap.get(userId), userProfileDTO);
-            userProfileDTOMap.put(userId,userProfileDTO);
+            userProfileDTOMap.put(userId, userProfileDTO);
         }
         return userProfileDTOMap;
     }
