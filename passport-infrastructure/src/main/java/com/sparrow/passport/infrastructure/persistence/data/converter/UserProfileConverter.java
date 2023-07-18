@@ -32,9 +32,7 @@ public class UserProfileConverter {
         }
         Map<Long, UserProfileDTO> userProfileDTOMap = new HashMap<>();
         for (Long userId : userMap.keySet()) {
-            UserProfileDTO userProfileDTO = new UserProfileDTO();
-            BeanUtility.copyProperties(userMap.get(userId), userProfileDTO);
-            userProfileDTOMap.put(userId, userProfileDTO);
+            userProfileDTOMap.put(userId, this.user2Profile(userMap.get(userId)));
         }
         return userProfileDTOMap;
     }
