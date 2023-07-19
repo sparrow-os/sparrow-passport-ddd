@@ -1,0 +1,142 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>用户登录-麻雀窝</title>
+    <meta content="麻雀窝提供" name="description"/>
+    <meta name="application-name" content="麻雀窝"/>
+    <th:block th:include="/frames::global_resource"/>
+    <script language="javascript" type="text/javascript"
+            th:src="${resource}+'/ext/scripts/language/'+${sparrow_request_language}+'/user.js?v='+${resource_version}"></script>
+</head>
+<div class="body">
+    <div class="header">
+        <h1>麻雀窝-个人中心</h1>
+        <h2 class="header">程序员有问题就上麻雀窝 和大牛直接聊</h2>
+    </div>
+
+    <div id="tabs" class="tab">
+        <div class="pure-menu pure-menu-horizontal" id="sparrow_14553803572462387">
+
+        </div>
+
+        <div class="tab-content" id="sparrow_7456766584821994">
+
+        </div>
+    </div>
+
+    <div class="content">
+        <br/>
+        <span id="errorRegister" name="error" class="error"></span>
+        <form  th:action="${root}+'/modify'" action="/register/email" method="post" class="pure-form pure-form-aligned">
+            <input type="hidden" th:value="${user.userId}" id="hdnUserId"/>
+            <fieldset>
+                <div class="pure-control-group">
+                    <label> 用户名 </label>
+                    <span>${user?.userName}</span>
+                </div>
+                <div class="pure-control-group">
+                    <label> 昵称 </label>
+                    <span>${user?.nickName}</span>
+                </div>
+                <div class="pure-control-group">
+                    <img id="imgAvatar" style="width: 150px; height: 150px;"
+                         src="${user?.avatar}"/> <br/>
+
+                    <input type="button"
+                           value="选择头像" class="button"
+                           th:onclick="'$.window({url:'+${root}+'/modify/avatar?userId='+${user.userId}',showHead:false});"/>
+                </div>
+                <div class="pure-control-group">
+                    <label> 出生日期 </label>
+                    <input value="" type="text" tabIndex="2"
+                           onfocus='$.v.showMessage(regInfo,this);' onblur='$.v.isUserNameRule(regInfo,this);'
+                           name="birthday" id="txtBirthday"/>
+                    <span id="errorRegUserName" name="register_user_name" class="error"></span>
+                </div>
+
+                <div class="pure-control-group">
+
+                        <th>性别:</th>
+                        <td><j:drop_down_list name="administrator.sex" id="ddlSex"
+                                              keyValues="0:女,1:男"/></td>
+                        <td></td>
+                </div>
+                <div class="pure-control-group">
+
+
+                <tr>
+                        <th>注册时间:</th>
+                        <td>${administrator.createTime}</td>
+                        <td></td>
+                    </tr>
+                </div>
+                <div class="pure-control-group">
+
+                <tr>
+                        <th>最后登录时间:</th>
+                        <td>${administrator.lastLoginTime}</td>
+                        <td></td>
+                    </tr>
+                </div>
+                <div class="pure-control-group">
+                    <label>个性签名</label>
+
+                    <textarea  cols="50" rows="3"
+                                         name="user.personalSignature" id="txtPersonalSignature"
+                                         onkeyup="$.v.updateTxtCount(this,userInfo.txtPersonalSignature.spanTxtCount,100);">
+
+                        </textarea>
+                    您还可以输入：
+
+                    <j:span cssClass="highlight"
+                                                        id="spanPersonalSignatureTxtCount">100</j:span> 个字符/100
+
+                </div>
+                <div class="pure-controls">
+
+                    <button onenter="true" type="button" onclick="$.v.getValidateResult(regInfo);"
+                            class="pure-button pure-button-primary">注册
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+
+
+<body style="width:700px;height:520px;">
+    <div class="body">
+        <div class="frame">
+            <div class="content">
+                <div class="userName" id="userName">
+                    <a class="updateTime" id="updateTime" th:text="'上次更新'+${user?.modifiedTime}"></a>
+                    <span>${user?.userName}</span>
+                </div>
+
+                <div class="title">
+                    <span>基本信息</span>
+                </div>
+                <table cellspacing="0" cellpadding="4">
+                    <tr>
+                        <th>昵称:</th>
+                        <td class="td-input">
+                            <input type="text" onfocus='$.v.showMessage(userInfo.txtUserName);'
+                        onblur='$.v.isNull(userInfo.txtUserName);' name="userName" maxLength="8"
+                                                         id="txtUserName" th:value="${user.userName}"/></td>
+                        <td class="td-message"><span id="errorUserName" class="prompt"></span></td>
+                        <td rowspan="8" valign="top" align="center" class="user-avatar">
+                               </td>
+                    </tr>
+
+                    <tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <input type="button" onclick="$.submit();" class="button"
+           value="提  交"/>
+</form>
+</body>
+</html>

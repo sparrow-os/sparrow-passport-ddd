@@ -27,75 +27,45 @@
     <div class="content">
         <br/>
         <span id="errorRegister" name="error" class="error"></span>
-        <form  th:action="${root}+'/modify'" action="/register/email" method="post" class="pure-form pure-form-aligned">
+        <form th:action="${root}+'/modify'" action="/register/email" method="post" class="pure-form pure-form-aligned">
             <input type="hidden" th:value="${user.userId}" id="hdnUserId"/>
             <fieldset>
                 <div class="pure-control-group">
                     <label> 用户名 </label>
-                    <span>${user?.userName}</span>
+                    <span>${profile?.userName}</span>
                 </div>
                 <div class="pure-control-group">
                     <label> 昵称 </label>
-                    <span>${user?.nickName}</span>
+                    <span>${profile?.nickName}</span>
                 </div>
                 <div class="pure-control-group">
-                    <img id="imgAvatar" style="width: 150px; height: 150px;"
-                         src="${user?.avatar}"/> <br/>
-
-                    <input type="button"
-                           value="选择头像" class="button"
-                           th:onclick="'$.window({url:'+${root}+'/modify/avatar?userId='+${user.userId}',showHead:false});"/>
+                    <img style="width: 150px; height: 150px;"
+                         src="${profile?.avatar}"/> <br/>
                 </div>
                 <div class="pure-control-group">
                     <label> 出生日期 </label>
                     <input value="" type="text" tabIndex="2"
-                           onfocus='$.v.showMessage(regInfo,this);' onblur='$.v.isUserNameRule(regInfo,this);'
                            name="birthday" id="txtBirthday"/>
                     <span id="errorRegUserName" name="register_user_name" class="error"></span>
                 </div>
 
                 <div class="pure-control-group">
 
-                        <th>性别:</th>
-                        <td><j:drop_down_list name="administrator.sex" id="ddlSex"
-                                              keyValues="0:女,1:男"/></td>
-                        <td></td>
                 </div>
                 <div class="pure-control-group">
-
-
-                <tr>
-                        <th>注册时间:</th>
-                        <td>${administrator.createTime}</td>
-                        <td></td>
-                    </tr>
+                    注册时间:${profile?.createTime}
                 </div>
                 <div class="pure-control-group">
-
-                <tr>
-                        <th>最后登录时间:</th>
-                        <td>${administrator.lastLoginTime}</td>
-                        <td></td>
-                    </tr>
+                    最后登录时间:${profile?.lastLoginTime}
                 </div>
                 <div class="pure-control-group">
                     <label>个性签名</label>
-
-                    <textarea  cols="50" rows="3"
-                                         name="user.personalSignature" id="txtPersonalSignature"
-                                         onkeyup="$.v.updateTxtCount(this,userInfo.txtPersonalSignature.spanTxtCount,100);">
-
-                        </textarea>
-                    您还可以输入：
-
-                    <j:span cssClass="highlight"
-                                                        id="spanPersonalSignatureTxtCount">100</j:span> 个字符/100
-
+                    <textarea cols="50" rows="3"
+                              name="user.personalSignature" id="txtPersonalSignature"></textarea>
                 </div>
                 <div class="pure-controls">
-
                     <button onenter="true" type="button" onclick="$.v.getValidateResult(regInfo);"
-                            class="pure-button pure-button-primary">注册
+                            class="pure-button pure-button-primary">更新
                     </button>
                 </div>
             </fieldset>
@@ -106,37 +76,37 @@
 
 
 <body style="width:700px;height:520px;">
-    <div class="body">
-        <div class="frame">
-            <div class="content">
-                <div class="userName" id="userName">
-                    <a class="updateTime" id="updateTime" th:text="'上次更新'+${user?.modifiedTime}"></a>
-                    <span>${user?.userName}</span>
-                </div>
-
-                <div class="title">
-                    <span>基本信息</span>
-                </div>
-                <table cellspacing="0" cellpadding="4">
-                    <tr>
-                        <th>昵称:</th>
-                        <td class="td-input">
-                            <input type="text" onfocus='$.v.showMessage(userInfo.txtUserName);'
-                        onblur='$.v.isNull(userInfo.txtUserName);' name="userName" maxLength="8"
-                                                         id="txtUserName" th:value="${user.userName}"/></td>
-                        <td class="td-message"><span id="errorUserName" class="prompt"></span></td>
-                        <td rowspan="8" valign="top" align="center" class="user-avatar">
-                               </td>
-                    </tr>
-
-                    <tr>
-
-                </table>
+<div class="body">
+    <div class="frame">
+        <div class="content">
+            <div class="userName" id="userName">
+                <a class="updateTime" id="updateTime" th:text="'上次更新'+${user?.modifiedTime}"></a>
+                <span>${user?.userName}</span>
             </div>
+
+            <div class="title">
+                <span>基本信息</span>
+            </div>
+            <table cellspacing="0" cellpadding="4">
+                <tr>
+                    <th>昵称:</th>
+                    <td class="td-input">
+                        <input type="text" onfocus='$.v.showMessage(userInfo.txtUserName);'
+                               onblur='$.v.isNull(userInfo.txtUserName);' name="userName" maxLength="8"
+                               id="txtUserName" th:value="${user.userName}"/></td>
+                    <td class="td-message"><span id="errorUserName" class="prompt"></span></td>
+                    <td rowspan="8" valign="top" align="center" class="user-avatar">
+                    </td>
+                </tr>
+
+                <tr>
+
+            </table>
         </div>
     </div>
-    <input type="button" onclick="$.submit();" class="button"
-           value="提  交"/>
+</div>
+<input type="button" onclick="$.submit();" class="button"
+       value="提  交"/>
 </form>
 </body>
 </html>

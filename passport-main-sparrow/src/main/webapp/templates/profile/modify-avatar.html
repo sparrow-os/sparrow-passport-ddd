@@ -8,27 +8,15 @@
     <link rel="stylesheet" type="text/css" th:href="${resource} + '/ext/sparrowzoo/styles/avatar.css'"/>
     <script type="text/javascript">
         document.ready(function () {
-
             var imageCropper = new $.ImageCropper(
                 "imgPreviewAvatar",
                 {
-                    lockRate: false,
+                    lockRate: true,
                     left: 75,
                     top: 75,
                 }
             );
             imageCropper.init();
-            var avatar='[[${profile.avatar}]]';
-            //http://u.r.sparrowzoo.net/user/small/5.png;
-
-            var defaultPreview=$.url.resource+'/images/camera.jpg';
-            var defaultAvatar=$.url.resource+'/images/user.jpg';
-            var previewAvatar=defaultPreview;
-            if(avatar!==defaultAvatar){
-                previewAvatar=avatar.replace('small','big');
-                $("imgCurrentAvatar").src=avatar;
-            }
-            imageCropper.resetImage(previewAvatar);
             $.url.upload = $.url.root;
             $.file.isShowProgress = true;
             //登录后重新初始化上传组件
@@ -55,7 +43,7 @@
                     avatar:imageCropper.preview.src
                 };
 
-                $.http.post($.url.root+"/modify-user-avatar", params, function (result) {
+                $.http.post($.url.root+"/profile/modify-user-avatar", params, function (result) {
                     $("imgCurrentAvatar").src=result.data+"?t="+$.random();
                     $.message("操作成功！");
                 });
@@ -69,21 +57,21 @@
     <div class="pure-menu pure-menu-horizontal">
         <ul class="pure-menu-list" style="width: 100%;">
             <li class="pure-menu-item">
-                <a class="pure-menu-link" th:href="${root_path}+'/modify-avatar'"><span>用户头象</span></a>
+                <a class="pure-menu-link" href="modify-avatar"><span>用户头象</span></a>
             </li>
             <li class="pure-menu-item">
-                <a class="pure-menu-link" th:href="${root_path}+'/my'"><span>用户信息</span></a>
+                <a class="pure-menu-link" href="my"><span>用户信息</span></a>
             </li>
         </ul>
     </div>
     <div class="avatar-content">
         <div class="block">
             <div class="current-avatar">
-                <img id="imgCurrentAvatar"/>
+                <img th:src="${resource}+'/images/user.jpg'" id="imgCurrentAvatar"/>
             </div>
 
             <div class="local-upload">
-                <img id="imgPreviewAvatar"/>
+                <img id="imgPreviewAvatar" th:src="${resource}+'/images/camera.jpg'"/>
                 <div class="local-file">
                     <iframe class="file-frame" name="fileUpload" id="null.avatar"
                             frameborder="0"></iframe>

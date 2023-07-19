@@ -50,7 +50,8 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
     }
 
     public void login() throws BusinessException {
-        this.loginParam.getPassword().isValid();
+        //登录暂不验证密码格式，为兼容老用户登录
+        //this.loginParam.getPassword().isValid();
         Asserts.isTrue(!this.loginParam.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
         this.setCurrent2LastLoginTime();
     }
