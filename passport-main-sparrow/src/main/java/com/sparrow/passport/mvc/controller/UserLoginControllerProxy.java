@@ -1,6 +1,5 @@
 package com.sparrow.passport.mvc.controller;
 
-import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.Config;
 import com.sparrow.mvc.RequestParameters;
 import com.sparrow.mvc.ViewWithModel;
@@ -14,6 +13,7 @@ import com.sparrow.servlet.Controller;
 import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.StringUtility;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,7 +31,7 @@ public class UserLoginControllerProxy {
 
     @RequestParameters("login,client")
     public ViewWithModel login(LoginQuery login,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+                               ClientInformation client) throws BusinessException {
         LoginDTO loginDto = userLoginController.login(login, client);
         String welcomePage = ConfigUtility.getValue(Config.DEFAULT_WELCOME_INDEX);
         if (StringUtility.isNullOrEmpty(login.getRedirectUrl()) || login.getRedirectUrl().equals("/")) {

@@ -28,15 +28,14 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.support.AbstractAuthenticatorService;
+import com.sparrow.utility.StringUtility;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import com.sparrow.utility.StringUtility;
-import org.springframework.beans.factory.annotation.Value;
 
 @Named
 public class AuthenticatorService extends AbstractAuthenticatorService {
@@ -88,6 +87,7 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
         Asserts.isTrue(tokens.length != 2, PassportError.USER_TOKEN_ERROR);
         String userInfo = tokens[0];
         String signature = tokens[1];
+
         try {
             userInfo = new String(Base64.decode(userInfo), StandardCharsets.US_ASCII);
         } catch (IOException e) {
@@ -102,14 +102,14 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     }
 
     @Override
-    protected void setUserStatus(LoginUser loginUser, LoginUserStatus loginUserStatus) {
+    protected void setUserStatus(Long userId, LoginUserStatus loginUserStatus) {
 //
     }
 
     @Override
     protected LoginUserStatus getUserStatus(Long userId) {
         //todo 从缓存中获取
-        return null;
+        return this.getUserStatusFromDB(userId);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     }
 
     @Override
-    protected void renewal(LoginUser loginUser, LoginUserStatus loginUserStatus) {
+    protected void renewal(Long userId, LoginUserStatus loginUserStatus) {
         //如果过期时间小于30分钟，延长1小时
         if (loginUserStatus.getExpireAt() - System.currentTimeMillis() < Duration.ofMinutes(30).toMillis())
             loginUserStatus.setExpireAt(System.currentTimeMillis() + Duration.ofHours(1).toMillis());
