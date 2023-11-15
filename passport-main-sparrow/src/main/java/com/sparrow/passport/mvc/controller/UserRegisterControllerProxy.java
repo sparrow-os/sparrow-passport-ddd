@@ -1,6 +1,5 @@
 package com.sparrow.passport.mvc.controller;
 
-import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.Config;
 import com.sparrow.mvc.RequestParameters;
 import com.sparrow.mvc.ViewWithModel;
@@ -11,6 +10,7 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.servlet.Controller;
 import com.sparrow.utility.ConfigUtility;
+
 import javax.inject.Inject;
 
 @Controller
@@ -20,13 +20,13 @@ public class UserRegisterControllerProxy {
 
     @RequestParameters("user,client")
     public LoginDTO shortcut(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+                             ClientInformation client) throws BusinessException {
         return this.userRegisterController.emailRegister(user, client);
     }
 
     @RequestParameters("user,client")
     public ViewWithModel emailRegister(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+                                       ClientInformation client) throws BusinessException {
         LoginDTO loginToken = this.userRegisterController.emailRegister(user, client);
         String welcomeUrl = ConfigUtility.getValue(Config.DEFAULT_WELCOME_INDEX);
         return ViewWithModel.transit("/login-success", welcomeUrl, loginToken);

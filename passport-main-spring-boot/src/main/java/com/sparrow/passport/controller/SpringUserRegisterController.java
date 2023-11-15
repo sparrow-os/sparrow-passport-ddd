@@ -1,14 +1,10 @@
 package com.sparrow.passport.controller;
 
-import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.Result;
-import com.sparrow.protocol.ThreadContext;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,16 +22,15 @@ public class SpringUserRegisterController {
 
     @PostMapping("/email/shortcut")
     public Result<Boolean> shortcut(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException, CacheNotFoundException {
+        ClientInformation client) throws BusinessException {
         userRegisterController.emailRegister(user, client);
-        Result<Boolean> result = new Result<>(true);
-        result.setMessage("激活邮件发送成功！！");
+        Result<Boolean> result = new Result<>(true,"激活邮件发送成功！！");
         return result;
     }
 
     @PostMapping("/email")
     public ModelAndView emailRegister(EmailRegisterParam user,
-        ClientInformation client, RedirectAttributes attributes) throws BusinessException, CacheNotFoundException {
+        ClientInformation client, RedirectAttributes attributes) throws BusinessException {
         this.userRegisterController.emailRegister(user, client);
         ModelAndView mv = new ModelAndView("redirect:/email-activate-send-success");
         mv.addObject("email", user.getEmail());
@@ -47,8 +42,7 @@ public class SpringUserRegisterController {
     public Result<Boolean> sendActivateEmail(EmailActivateParam user,
         ClientInformation client) throws BusinessException {
         this.userRegisterController.sendTokenToEmail(user, client);
-        Result<Boolean> result = new Result<>(true);
-        result.setMessage("激活邮件发送成功！！");
+        Result<Boolean> result = new Result<>(true,"激活邮件发送成功！！");
         return result;
     }
 

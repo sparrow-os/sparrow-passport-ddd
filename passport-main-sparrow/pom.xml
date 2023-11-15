@@ -37,10 +37,6 @@
             <version>1.0.3.1-RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.sparrowzoo</groupId>
-            <artifactId>sparrow-jedis</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-infrastructure</artifactId>
         </dependency>

@@ -1,6 +1,5 @@
 package com.sparrow.passport.controller.impl;
 
-import com.sparrow.cache.exception.CacheNotFoundException;
 import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.api.UserLoginService;
@@ -37,7 +36,7 @@ public class UserLoginControllerImpl implements UserLoginController {
 
     @Override
     public LoginDTO login(LoginQuery login,
-                          ClientInformation client) throws BusinessException, CacheNotFoundException {
+                          ClientInformation client) throws BusinessException {
         String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
         if (StringUtility.isNullOrEmpty(login.getRedirectUrl())) {
             login.setRedirectUrl("/login-success");
