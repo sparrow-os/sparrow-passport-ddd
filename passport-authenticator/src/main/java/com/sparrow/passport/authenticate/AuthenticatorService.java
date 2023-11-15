@@ -90,15 +90,15 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
         String signature = tokens[1];
         try {
             userInfo = new String(Base64.decode(userInfo), StandardCharsets.US_ASCII);
-            String signatureOld = Hmac.getInstance().getSHA1Base64(userInfo,
-                    this.getDecryptKey());
-            if (signature.equals(signatureOld)) {
-                return this.json.parse(userInfo, LoginUser.class);
-            }
-            throw new BusinessException(PassportError.USER_TOKEN_ERROR);
         } catch (IOException e) {
             throw new BusinessException(PassportError.USER_TOKEN_ERROR);
         }
+        String signatureOld = Hmac.getInstance().getSHA1Base64(userInfo,
+                this.getDecryptKey());
+        if (signature.equals(signatureOld)) {
+            return this.json.parse(userInfo, LoginUser.class);
+        }
+        throw new BusinessException(PassportError.USER_TOKEN_ERROR);
     }
 
     @Override
