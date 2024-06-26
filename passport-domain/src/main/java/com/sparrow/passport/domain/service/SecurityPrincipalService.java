@@ -23,11 +23,11 @@ import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
 import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
-import javafx.util.Pair;
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Named
 public class SecurityPrincipalService {

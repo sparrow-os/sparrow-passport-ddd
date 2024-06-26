@@ -1,68 +1,15 @@
 [INFO] Scanning for projects...
-[WARNING]
-[WARNING] Some problems were encountered while building the effective model for com.sparrowzoo.passport:passport-main-sparrow:war:1.0.0-SNAPSHOT
-[WARNING] 'version' contains an expression but should be a constant. @ com.sparrowzoo.passport:passport-main-sparrow:${sparrow_passport_version}, /Users/zhanglizhi/workspace/sparrow/sparrow-zoo/sparrow-passport-ddd/passport-main-sparrow/pom.xml, line 13, column 14
-[WARNING] The expression ${artifactId} is deprecated. Please use ${project.artifactId} instead.
-[WARNING]
-[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
-[WARNING]
-[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
-[WARNING]
-[INFO]
-[INFO] -----------< com.sparrowzoo.passport:passport-main-sparrow >------------
-[INFO] Building passport-main-sparrow 1.0.0-SNAPSHOT
-[INFO] --------------------------------[ war ]---------------------------------
-[INFO]
-[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ passport-main-sparrow ---
-[INFO] com.sparrowzoo.passport:passport-main-sparrow:war:1.0.0-SNAPSHOT
-[INFO] +- ch.qos.logback:logback-classic:jar:1.2.9:compile
-[INFO] |  +- ch.qos.logback:logback-core:jar:1.2.3:compile
-[INFO] |  \- org.slf4j:slf4j-api:jar:1.7.12:compile
-[INFO] +- com.sparrowzoo:sparrow-container:jar:1.0.3.1-RELEASE:compile
-[INFO] |  +- com.sparrowzoo:sparrow:jar:1.0.3.1-RELEASE:compile
-[INFO] |  |  +- javax.mail:mail:jar:1.4.7:compile
-[INFO] |  |  |  \- javax.activation:activation:jar:1.1:compile
-[INFO] |  |  +- javax.persistence:persistence-api:jar:1.0:compile
-[INFO] |  |  +- com.sparrowzoo:sparrow-protocol:jar:1.0.3.1-RELEASE:compile
-[INFO] |  |  \- com.sparrowzoo:sparrow-protocol-dao:jar:1.0.3.1-RELEASE:compile
-[INFO] |  \- javax.inject:javax.inject:jar:1:compile
-[INFO] +- com.sparrowzoo:sparrow-loader:jar:1.0.3.1-RELEASE:compile
-[INFO] +- com.sparrowzoo:sparrow-mvc-thymeleaf:jar:1.0.3.1-RELEASE:compile
-[INFO] |  +- org.thymeleaf:thymeleaf:jar:3.0.11.RELEASE:compile
-[INFO] |  |  +- ognl:ognl:jar:3.1.12:compile
-[INFO] |  |  |  \- org.javassist:javassist:jar:3.20.0-GA:compile
-[INFO] |  |  +- org.attoparser:attoparser:jar:2.0.5.RELEASE:compile
-[INFO] |  |  \- org.unbescape:unbescape:jar:1.1.6.RELEASE:compile
-[INFO] |  +- com.sparrowzoo:sparrow-mvc:jar:1.0.3.1-RELEASE:compile
-[INFO] |  |  +- com.google.zxing:core:jar:2.2:compile
-[INFO] |  |  \- eu.bitwalker:UserAgentUtils:jar:1.21:compile
-[INFO] |
-[INFO] +- com.sparrowzoo:sparrow-jedis:jar:1.0.3.1-RELEASE:compile
-[INFO] |  +- redis.clients:jedis:jar:3.3.0:compile
-[INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.4.3:compile
-[INFO] |  \- com.sparrowzoo:sparrow-protocol-redis:jar:1.0.3.1-RELEASE:compile
-[INFO] +- com.sparrowzoo.passport:passport-infrastructure:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  +- com.sparrowzoo.passport:passport-authenticator:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  +- com.sparrowzoo.passport:passport-dao-api:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  +- com.sparrowzoo.passport:passport-domain:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  |  +- com.sparrowzoo.passport:passport-protocol:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  |  \- com.sparrowzoo.file:file-api:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  |     \- com.sparrowzoo.file:file-protocol:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  \- com.sparrowzoo:sparrow-json:jar:1.0.3.1-RELEASE:compile
-[INFO] |     \- com.alibaba:fastjson:jar:1.2.83:compile
-[INFO] +- com.sparrowzoo.passport:passport-adapter:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  \- com.sparrowzoo.passport:passport-application:jar:1.0.0-SNAPSHOT:compile
-[INFO] |     \- com.sparrowzoo.passport:passport-api:jar:1.0.0-SNAPSHOT:compile
-[INFO] +- com.sparrowzoo.passport:passport-sparrow-dao:jar:1.0.0-SNAPSHOT:compile
-[INFO] |  +- mysql:mysql-connector-java:jar:8.0.29:compile
-[INFO] |  |  \- com.google.protobuf:protobuf-java:jar:3.13.0:compile
-[INFO] |  +- com.sparrowzoo:sparrow-data-source:jar:1.0.3.1-RELEASE:compile
-[INFO] |  \- com.sparrowzoo:sparrow-orm:jar:1.0.3.1-RELEASE:compile
-[INFO] +- javax.servlet:javax.servlet-api:jar:3.0.1:provided
-[INFO] \- org.thymeleaf.extras:thymeleaf-extras-java8time:jar:3.0.4.RELEASE:compile
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.270 s
-[INFO] Finished at: 2023-07-13T23:06:37+08:00
-[INFO] ------------------------------------------------------------------------
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[FATAL] Non-parseable POM /Users/zhanglizhi/workspace/sparrow/sparrow-zoo/sparrow-passport-ddd/passport-main-sparrow/pom.xml: expected START_TAG or END_TAG not TEXT (position: TEXT seen ...           </plugin>\n            //\u63d2\u5165\u4e0b\u9762\u8fd9\u4e2a\u63d2\u4ef6\uff0c\u95ee\u9898\u5c31\u89e3\u51b3\u4e86\u3002\n            <p... @96:15)  @ line 96, column 15
+ @ 
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project  (/Users/zhanglizhi/workspace/sparrow/sparrow-zoo/sparrow-passport-ddd/passport-main-sparrow/pom.xml) has 1 error
+[ERROR]     Non-parseable POM /Users/zhanglizhi/workspace/sparrow/sparrow-zoo/sparrow-passport-ddd/passport-main-sparrow/pom.xml: expected START_TAG or END_TAG not TEXT (position: TEXT seen ...           </plugin>\n            //\u63d2\u5165\u4e0b\u9762\u8fd9\u4e2a\u63d2\u4ef6\uff0c\u95ee\u9898\u5c31\u89e3\u51b3\u4e86\u3002\n            <p... @96:15)  @ line 96, column 15 -> [Help 2]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+[ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/ModelParseException
