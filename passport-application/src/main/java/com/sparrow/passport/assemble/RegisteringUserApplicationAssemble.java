@@ -1,8 +1,8 @@
 package com.sparrow.passport.assemble;
 
-import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
+
 import javax.inject.Named;
 
 @Named
