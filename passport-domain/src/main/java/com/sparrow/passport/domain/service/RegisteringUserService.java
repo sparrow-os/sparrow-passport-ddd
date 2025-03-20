@@ -71,6 +71,7 @@ public class RegisteringUserService {
         String defaultAvatar = ConfigUtility.getValue(Config.DEFAULT_AVATAR);
         LoginUser loginUser = LoginUser.create(
                 registeringUserEntity.getUserId(),
+                LoginUser.CATEGORY_REGISTER,
                 registeringUserEntity.getUserName(),
                 Symbol.EMPTY,
                 defaultAvatar,

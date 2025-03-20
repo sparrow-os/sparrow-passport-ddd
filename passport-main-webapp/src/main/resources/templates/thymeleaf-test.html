@@ -5,9 +5,31 @@
 <body>
 https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
-{user.userId}<h1><span th:text="${user.userId}"></span></h1>
+
+<h1><span th:text="${user.userId}"></span></h1>
+
 spring boot<h1><span th:text="${user?.userId}"></span></h1>
-<!--原生<h1><span th:text="${user?user.userId:''}"></span></h1>-->
+
+html5 兼容
+<div data-th-text="${user.userId}" data-th-remove="tag"></div>
+
+<!--原生ognl 写法<h1><span th:text="${user?user.userId:''}"></span></h1>-->
+
+
+方法1：使用 th:block
+<th:block th:text="${user.userId}" />
+
+
+
+方法2：使用 inline
+<!--<title>[[${user.userId}]] - 服务器错误。</title>-->
+
+Hello, [[${user.userId}]]!   //写法会html转义-->
+Hello, [(${user.userId})]!   //不会html转义-->
+<!--参考：https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#inlining-->
+
+方法3：使用 th:remove
+<span th:text="${user.userId}" th:remove="tag"></span>
 </body>
 </html>
 

@@ -17,89 +17,21 @@
 package com.sparrow.passport.authenticate;
 
 import com.sparrow.core.spi.JsonFactory;
-import com.sparrow.cryptogram.Base64;
-import com.sparrow.cryptogram.Hmac;
-import com.sparrow.exception.Asserts;
 import com.sparrow.json.Json;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.SecurityPrincipalEntity;
-import com.sparrow.passport.protocol.enums.PassportError;
-import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
-import com.sparrow.support.AbstractAuthenticatorService;
-import com.sparrow.utility.StringUtility;
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-
-@Named
-public class AuthenticatorService extends AbstractAuthenticatorService {
+import com.sparrow.support.DefaultAuthenticatorService;
+public class AuthenticatorService extends DefaultAuthenticatorService {
 
     private Json json = JsonFactory.getProvider();
-
-    @Value("${auth.encrypt_key}")
-    private String encryptKey;
-
-    private volatile boolean loadedEnvEncrypt;
-
-    @Inject
     private DomainRegistry domainRegistry;
 
-    @Override
-    protected String getEncryptKey() {
-        if (this.loadedEnvEncrypt) {
-            return this.encryptKey;
-        }
-        synchronized (this) {
-            if (this.loadedEnvEncrypt) {
-                return this.encryptKey;
-            }
-            String encryptKey = System.getenv("authenticator_encrypt_key");
-            if (!StringUtility.isNullOrEmpty(encryptKey)) {
-                this.encryptKey = encryptKey;
-            }
-            this.loadedEnvEncrypt = true;
-            return this.encryptKey;
-        }
+    public AuthenticatorService(String encryptKey, Boolean validateDeviceId, Boolean validateStatus,DomainRegistry domainRegistry) {
+        super(encryptKey, validateDeviceId, validateStatus);
+        this.domainRegistry = domainRegistry;
     }
 
-    @Override
-    protected String getDecryptKey() {
-        return this.getEncryptKey();
-    }
-
-    @Override
-    protected String sign(LoginUser loginUser, String secretKey) {
-        String userInfo = this.json.toString(loginUser);
-        String signature = Hmac.getInstance().getSHA1Base64(userInfo,
-                this.getEncryptKey());
-        return Base64.encodeBytes(userInfo.getBytes(StandardCharsets.US_ASCII)) + "." + signature;
-    }
-
-    @Override
-    protected LoginUser verify(String token, String secretKey) throws BusinessException {
-        String[] tokens = token.split("\\.");
-        Asserts.isTrue(tokens.length != 2, PassportError.USER_TOKEN_ERROR);
-        String userInfo = tokens[0];
-        String signature = tokens[1];
-
-        try {
-            userInfo = new String(Base64.decode(userInfo), StandardCharsets.US_ASCII);
-        } catch (IOException e) {
-            throw new BusinessException(PassportError.USER_TOKEN_ERROR);
-        }
-        String signatureOld = Hmac.getInstance().getSHA1Base64(userInfo,
-                this.getDecryptKey());
-        if (signature.equals(signatureOld)) {
-            return this.json.parse(userInfo, LoginUser.class);
-        }
-        throw new BusinessException(PassportError.USER_TOKEN_ERROR);
-    }
 
     @Override
     protected void setUserStatus(Long userId, LoginUserStatus loginUserStatus) {
@@ -116,12 +48,5 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
     protected LoginUserStatus getUserStatusFromDB(Long userId) {
         SecurityPrincipalEntity securityPrincipal = this.domainRegistry.getSecurityPrincipalRepository().findByUserId(userId);
         return new LoginUserStatus(securityPrincipal.getStatus(), 0L);
-    }
-
-    @Override
-    protected void renewal(Long userId, LoginUserStatus loginUserStatus) {
-        //如果过期时间小于30分钟，延长1小时
-        if (loginUserStatus.getExpireAt() - System.currentTimeMillis() < Duration.ofMinutes(30).toMillis())
-            loginUserStatus.setExpireAt(System.currentTimeMillis() + Duration.ofHours(1).toMillis());
     }
 }
