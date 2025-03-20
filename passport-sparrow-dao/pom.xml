@@ -24,10 +24,6 @@
         </dependency>
         <dependency>
             <groupId>com.sparrowzoo</groupId>
-            <artifactId>sparrow-data-source</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-orm</artifactId>
         </dependency>
         <dependency>
@@ -38,7 +34,6 @@
             <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-json</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-dao-api</artifactId>

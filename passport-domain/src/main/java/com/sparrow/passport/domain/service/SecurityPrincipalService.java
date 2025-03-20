@@ -35,10 +35,10 @@ public class SecurityPrincipalService {
     @Inject
     private Authenticator authenticatorService;
 
-    private Json json= JsonFactory.getProvider();
+    private Json json = JsonFactory.getProvider();
 
     public SecurityPrincipalEntity findByLoginName(String loginName,
-        DomainRegistry domainRegistry) throws BusinessException {
+                                                   DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalRepository securityPrincipalRepository = domainRegistry.getSecurityPrincipalRepository();
         SecurityPrincipalEntity securityPrincipal;
 
@@ -54,13 +54,13 @@ public class SecurityPrincipalService {
         }
         Asserts.isTrue(securityPrincipal == null, PassportError.USER_NAME_NOT_EXIST, UserFieldSuffix.LOGIN_USER_NAME);
         Asserts.isTrue(StatusRecord.DISABLE.ordinal() == securityPrincipal.getStatus(),
-            PassportError.USER_DISABLED,
-            UserFieldSuffix.LOGIN);
+                PassportError.USER_DISABLED,
+                UserFieldSuffix.LOGIN);
         return securityPrincipal;
     }
 
     private void addLoginEvent(Long userId, ClientInformation client,
-        DomainRegistry domainRegistry) throws BusinessException {
+                               DomainRegistry domainRegistry) throws BusinessException {
 //        try {
 //            EventService eventService = domainRegistry.getEventService();
 //            OperationQueryDTO operationQuery = new OperationQueryDTO();
@@ -78,45 +78,47 @@ public class SecurityPrincipalService {
     }
 
     public LoginDTO login(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
-        DomainRegistry domainRegistry) throws BusinessException {
+                          DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canLogin(securityPrincipal.getUserId());
         securityPrincipal.login();
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
         Integer tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
 
-        LoginUser loginUser = LoginUser.create(securityPrincipal.getUserId(),
-            securityPrincipal.getUserName(),
-            securityPrincipal.getNickName(),
-            securityPrincipal.getAvatar(),
-            client.getDeviceId(),
-            tokenExpireDays
+        LoginUser loginUser = LoginUser.create(
+                securityPrincipal.getUserId(),
+                LoginUser.CATEGORY_REGISTER,
+                securityPrincipal.getUserName(),
+                securityPrincipal.getNickName(),
+                securityPrincipal.getAvatar(),
+                client.getDeviceId(),
+                tokenExpireDays
         );
-        logger.info("security principle login user info {}",this.json.toString(loginUser));
+        logger.info("security principle login user info {}", this.json.toString(loginUser));
         LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
         String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
         return new LoginDTO(loginUser, permission);
     }
 
     public void sendFindPasswordToken(String email,
-        DomainRegistry domainRegistry) throws BusinessException {
+                                      DomainRegistry domainRegistry) throws BusinessException {
         SecurityPrincipalEntity securityPrincipal = domainRegistry.getSecurityPrincipalRepository().findByEmail(email);
         String currentDate = DateTimeUtility.getFormatCurrentTime();
         EmailFindPasswordToken emailFindPasswordToken = EmailFindPasswordToken.createToken(
-            securityPrincipal.getUserId(),
-            securityPrincipal.getUserName(),
-            securityPrincipal.getEmail(),
-            securityPrincipal.getPassword(),
-            currentDate, domainRegistry);
+                securityPrincipal.getUserId(),
+                securityPrincipal.getUserName(),
+                securityPrincipal.getEmail(),
+                securityPrincipal.getPassword(),
+                currentDate, domainRegistry);
         String passwordFindTokenContent = emailFindPasswordToken.generateContent();
         String language = ConfigUtility.getValue(Config.LANGUAGE);
         String emailFindPasswordSubject = ConfigUtility
-            .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT,
-                language);
+                .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT,
+                        language);
         domainRegistry.getEmailService().send(email,
-            emailFindPasswordSubject,
-            passwordFindTokenContent,
-            language);
+                emailFindPasswordSubject,
+                passwordFindTokenContent,
+                language);
     }
 
     public void tokenVerify(String token, DomainRegistry domainRegistry) throws BusinessException {
@@ -128,7 +130,7 @@ public class SecurityPrincipalService {
     }
 
     public void resetPasswordByEmailToken(String token, String newPassword, DomainRegistry domainRegistry)
-        throws BusinessException {
+            throws BusinessException {
         Asserts.isTrue(token == null, PassportError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
         EncryptionService encryptionService = domainRegistry.getEncryptionService();
         EmailTokenPair emailTokenPair = EmailTokenPair.parse(encryptionService.base64Decode(token));
@@ -142,15 +144,15 @@ public class SecurityPrincipalService {
     }
 
     public void modifyPassword(SecurityPrincipalEntity securityPrincipal,
-        ClientInformation client,
-        DomainRegistry domainRegistry) throws BusinessException {
+                               ClientInformation client,
+                               DomainRegistry domainRegistry) throws BusinessException {
         securityPrincipal.modifyPassword();
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addPasswordModifiedEvent(securityPrincipal, client, domainRegistry);
     }
 
     private void addPasswordModifiedEvent(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
-        DomainRegistry domainRegistry) {
+                                          DomainRegistry domainRegistry) {
 //        try {
 //            OperationQueryDTO operationQuery = new OperationQueryDTO();
 //            operationQuery.setUserId(securityPrincipal.getUserId());
