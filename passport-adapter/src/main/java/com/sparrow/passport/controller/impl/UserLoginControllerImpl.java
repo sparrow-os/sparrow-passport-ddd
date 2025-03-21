@@ -44,7 +44,7 @@ public class UserLoginControllerImpl implements UserLoginController {
         this.validateCaptcha(captcha, login.getCaptcha());
         LoginDTO loginDto = this.userLoginService.login(login, client);
         servletContainer
-                .rootCookie(User.PERMISSION, loginDto.getToken(), loginDto.getLoginUser().getDays());
+                .rootCookie(Constant.REQUEST_HEADER_KEY_LOGIN_TOKEN, loginDto.getToken(), loginDto.getLoginUser().getDays());
         return loginDto;
     }
 
