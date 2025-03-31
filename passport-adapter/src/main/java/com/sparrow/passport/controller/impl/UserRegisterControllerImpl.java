@@ -1,6 +1,5 @@
 package com.sparrow.passport.controller.impl;
 
-import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.api.UserRegisterService;
 import com.sparrow.passport.controller.UserRegisterController;
@@ -12,6 +11,8 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.servlet.ServletContainer;
+import com.sparrow.support.CaptchaService;
+import com.sparrow.support.web.HttpContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +25,9 @@ public class UserRegisterControllerImpl implements UserRegisterController {
     @Inject
     private ServletContainer servletContainer;
 
+    @Inject
+    private CaptchaService captchaService;
+
     private void validateCaptcha(String captcha, String userValidateCode) throws BusinessException {
         boolean expression = captcha == null
                 || !captcha.equalsIgnoreCase(userValidateCode);
@@ -33,7 +37,7 @@ public class UserRegisterControllerImpl implements UserRegisterController {
     @Override
     public LoginDTO emailRegister(EmailRegisterParam user,
                                   ClientInformation client) throws BusinessException {
-        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
         this.validateCaptcha(user.getCaptcha(),
                 captcha);
         LoginDTO loginDto = registeringUserApplicationService.register(user, client);

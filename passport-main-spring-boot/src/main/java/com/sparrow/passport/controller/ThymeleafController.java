@@ -22,6 +22,7 @@ public class ThymeleafController
         User user = new User();
         user.setUserId(10000L);
         request.setAttribute("user", user);
-        return new ModelAndView("thymeleaf-test");
+        request.setAttribute("html", "<a href='http://www.baidu.com'>百度</a>");
+        return new ModelAndView("/thymeleaf-test");
     }
 }
