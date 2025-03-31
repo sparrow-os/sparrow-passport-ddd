@@ -14,7 +14,7 @@
             th:src="${resource}+'/ext/scripts/passport.js?v='+${resource_version}"></script>
 </head>
 <body>
-<script  type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
+<script  type="text/javascript" th:src="${resource}+'/scripts/baidu.js?v='+${resource_version}"></script>
 <div class="body">
     <th:block th:include="/frames::banner"/>
     <div class="header">
@@ -25,12 +25,12 @@
     </div>
 
     <div class="content">
-        <span href="http://passport.sparrowzoo.com/login" id="timer">5000</span>秒以后将自动跳转,或者<a
-            href="http://passport.sparrowzoo.com/login" target="_self">点击这里直接登录</a>
+        <span data-th-href="${root_path}+'/login'" id="redirect"></span>" id="timer">5000</span>秒以后将自动跳转,或者
+        <a data-th-href="${root_path}+'/login'"  target="_self">点击这里直接登录</a>
         <script type="text/javascript">
             $.waitRedirect("timer");
         </script>
-        <a href="http://www.sparrowzoo.com">或点击这里,直接返回首页</a>
+        <a data-th-href="${root_path}/">或点击这里,直接返回首页</a>
     </div>
 </div>
 </body>

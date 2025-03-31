@@ -20,7 +20,7 @@
     <h1>麻雀窝用户登录</h1>
     <h2>
         还没有帐号?
-        <a href="http://www.sparrowzoo.com/register">立即注册</a>
+        <a data-th-href="${root_path}+'/register'">立即注册</a>
     </h2>
 </div>
 
@@ -49,17 +49,17 @@
                 <input class="input" type="text"
                        maxlength="4" name="captcha" id="txtValidateCode"/>
 
-                <img id="imgLoginValidateCode"
-                     onclick="$(this).fresh()" src="/validate-code"/>
-                <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
-                <span id="errorValidateCode" th:text="${login_validate_code}" name="login_validate_code"
+                <img id="imgCaptcha"
+                     onclick="$(this).fresh()" src="/captcha"/>
+                <a href="javascript:$('#imgCaptcha').fresh();"> 看不清 换一张</a>
+                <span id="errorCaptcha" th:text="${login_validate_code}" name="login_validate_code"
                       class="error"></span>
             </div>
 
             <div class="pure-controls">
                 <label for="chbLoginDays" class="pure-checkbox">
                     <input id="chbLoginDays" value="14" name="loginDays" type="checkbox"> 两周直接登录(家庭登录模式)<a
-                        href="http://www.sparrowzoo.com/password/find">忘记密码</a><br/>
+                        data-th-href="${root_path}+'/password/find'">忘记密码</a><br/>
                     <span class="highlight">温馨提示</span>为了您的密码安全,如果您在网吧等公共场所请不要勾选此项
                 </label>
 

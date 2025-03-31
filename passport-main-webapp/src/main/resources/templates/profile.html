@@ -56,7 +56,7 @@
                        maxlength="4" name="captcha" id="txtValidateCode"/>
 
                 <img id="imgLoginValidateCode"
-                     onclick="$(this).fresh()" src="/validate-code"/>
+                     onclick="$(this).fresh()" src="/captcha"/>
                 <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
                 <span id="errorValidateCode" th:text="${login_validate_code}" name="login_validate_code" class="error"></span>
             </div>

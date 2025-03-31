@@ -24,12 +24,12 @@
 
     <!-- 生成验证码 -->
     <servlet>
-        <servlet-name>ValidateCode</servlet-name>
+        <servlet-name>Captcha</servlet-name>
         <servlet-class>com.sparrow.web.support.ValidateCode</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ValidateCode</servlet-name>
-        <url-pattern>/validate-code</url-pattern>
+        <servlet-name>Captcha</servlet-name>
+        <url-pattern>/captcha</url-pattern>
     </servlet-mapping>
 
     <!-- ActionFilter -->
@@ -38,7 +38,7 @@
         <filter-class>com.sparrow.mvc.ThymeleafDispatcherFilter</filter-class>
         <init-param>
             <param-name>except_url</param-name>
-            <param-value>/validate-code,/favicon.ico</param-value>
+            <param-value>/captcha,/favicon.ico</param-value>
         </init-param>
 
         <init-param>

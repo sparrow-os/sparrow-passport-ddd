@@ -11,6 +11,8 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.servlet.ServletContainer;
+import com.sparrow.support.CaptchaService;
+import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.StringUtility;
 
 import javax.inject.Inject;
@@ -21,6 +23,8 @@ public class UserLoginControllerImpl implements UserLoginController {
     @Inject
     private ServletContainer servletContainer;
 
+    @Inject
+    private CaptchaService captchaService;
     @Inject
     @Named("userLoginApplicationService")
     private UserLoginService userLoginService;
@@ -37,7 +41,7 @@ public class UserLoginControllerImpl implements UserLoginController {
     @Override
     public LoginDTO login(LoginQuery login,
                           ClientInformation client) throws BusinessException {
-        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
         if (StringUtility.isNullOrEmpty(login.getRedirectUrl())) {
             login.setRedirectUrl("/login-success");
         }
@@ -50,7 +54,7 @@ public class UserLoginControllerImpl implements UserLoginController {
 
     @Override
     public LoginDTO shortcut(LoginQuery login, ClientInformation client) throws BusinessException {
-        String captcha = servletContainer.flash(Constant.VALIDATE_CODE);
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
         this.validateCaptcha(captcha, login.getCaptcha());
         return this.userLoginService.login(login, client);
     }

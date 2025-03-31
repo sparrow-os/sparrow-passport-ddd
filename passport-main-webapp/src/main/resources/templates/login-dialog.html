@@ -57,7 +57,7 @@
                                maxlength="4" name="captcha" id="txtValidateCode"/>
 
                         <img id="imgLoginValidateCode"
-                             onclick="$(this).fresh()" src="/validate-code"/>
+                             onclick="$(this).fresh()" src="/captcha"/>
                         <a href="javascript:$('#imgLoginValidateCode').fresh();"> 看不清 换一张</a>
                     </div>
 
@@ -121,7 +121,7 @@
                                onblur="$.v.isNull(regInfo,this);" maxlength="4"
                                name="validateCode" id="txtRegValidateCode"/>
                         <img alt="validate code" align="absMiddle" id="imgValidateCode" onclick="$(this).fresh();"
-                             src="validate-code"/>
+                             src="/captcha"/>
                         <a href="javascript:$('#imgValidateCode').fresh();"> 看不清 换一张</a>
                     </div>
                     <div class="pure-controls">

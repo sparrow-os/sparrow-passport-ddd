@@ -88,6 +88,9 @@
         </dependency>
     </dependencies>
     <build>
+        <filters>
+            <filter>src/main/configs/${env}.properties</filter>
+        </filters>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <resources>
             <resource>
