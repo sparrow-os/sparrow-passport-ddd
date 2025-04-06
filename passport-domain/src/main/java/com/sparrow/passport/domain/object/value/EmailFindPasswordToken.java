@@ -2,15 +2,19 @@ package com.sparrow.passport.domain.object.value;
 
 import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
+import com.sparrow.container.ConfigReader;
+import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.enums.DateTimeUnit;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.domain.DomainRegistry;
+import com.sparrow.passport.domain.service.EncryptionService;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.ValueObject;
-import com.sparrow.passport.domain.DomainRegistry;
-import com.sparrow.passport.domain.service.EncryptionService;
-import com.sparrow.utility.ConfigUtility;
+import com.sparrow.support.AuthenticatorConfigReader;
+import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.DateTimeUtility;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -71,11 +75,11 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     }
 
     public String generateContent() {
-        String language = ConfigUtility.getValue(Config.LANGUAGE);
-        return ConfigUtility
-            .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT,
-                language)
-            .replace("$rootPath", ConfigUtility.getValue(Config.ROOT_PATH))
+        WebConfigReader webConfigReader = ApplicationContext.getContainer().getBean(WebConfigReader.class);
+        ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
+        return configReader
+            .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT)
+            .replace("$rootPath",webConfigReader.getRootPath())
             .replace("$validateToken", this.generateToken())
             .replace("$date", this.sendDate);
     }
@@ -84,8 +88,8 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         Asserts.isTrue(!this.userName.equals(originUserName), PassportError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
         Asserts.isTrue(!TOKEN_TYPE.equals(this.tokenType), PassportError.USER_TOKEN_TYPE_ERROR);
 
-        int validateTokenAvailableDay = Integer.parseInt(ConfigUtility
-            .getValue(Config.VALIDATE_TOKEN_AVAILABLE_DAY));
+        AuthenticatorConfigReader configReader= this.domainRegistry.getAuthenticatorConfigReader();
+        int validateTokenAvailableDay = configReader.getTokenAvailableDays();
         int passDay = DateTimeUtility.getInterval(
             Timestamp.valueOf(sendDate).getTime(),
             System.currentTimeMillis(),

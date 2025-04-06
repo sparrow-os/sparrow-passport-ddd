@@ -1,10 +1,14 @@
 package com.sparrow.passport.infrastructure.services;
 
+import com.sparrow.container.ConfigReader;
+import com.sparrow.email.EmailSender;
 import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.repository.UserProfileRepository;
+import com.sparrow.support.AuthenticatorConfigReader;
+import com.sparrow.support.web.WebConfigReader;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,16 +27,21 @@ public class SparrowDomainRegistry implements DomainRegistry {
     private UserLimitService userLimitService;
 
     @Inject
-    private EncryptionService encryptionService;
-    @Inject
-    private EmailService emailService;
+    private AuthenticatorConfigReader authenticatorConfigReader;
 
+    @Inject
+    private WebConfigReader webConfigReader;
+    @Inject
+    private EncryptionService encryptionService;
 
     @Inject
     private UserProfileService userProfileService;
 
     @Inject
     private UserProfileRepository userProfileRepository;
+
+    @Inject
+    private EmailSender emailSender;
 
     @Override
     public RegisteringUserRepository getRegisteringUserRepository() {
@@ -64,10 +73,6 @@ public class SparrowDomainRegistry implements DomainRegistry {
         return registeringUserService;
     }
 
-    @Override
-    public EmailService getEmailService() {
-        return emailService;
-    }
 
     @Override
     public UserProfileService getUserProfileService() {
@@ -75,7 +80,21 @@ public class SparrowDomainRegistry implements DomainRegistry {
     }
 
     @Override
+    public AuthenticatorConfigReader getAuthenticatorConfigReader() {
+        return this.authenticatorConfigReader;
+    }
+
+    @Override
     public UserProfileRepository getUserProfileRepository() {
         return userProfileRepository;
     }
+
+    public EmailSender getEmailSender() {
+        return emailSender;
+    }
+
+    public WebConfigReader getWebConfigReader() {
+        return webConfigReader;
+    }
+
 }

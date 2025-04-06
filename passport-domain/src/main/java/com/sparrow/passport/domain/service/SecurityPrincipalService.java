@@ -1,7 +1,8 @@
 package com.sparrow.passport.domain.service;
 
-import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
+import com.sparrow.container.ConfigReader;
+import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.core.spi.JsonFactory;
 import com.sparrow.exception.Asserts;
 import com.sparrow.json.Json;
@@ -21,7 +22,6 @@ import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
-import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,15 +110,15 @@ public class SecurityPrincipalService {
                 securityPrincipal.getEmail(),
                 securityPrincipal.getPassword(),
                 currentDate, domainRegistry);
+        ConfigReader configReader= ApplicationContext.getContainer().getBean(ConfigReader.class);
         String passwordFindTokenContent = emailFindPasswordToken.generateContent();
-        String language = ConfigUtility.getValue(Config.LANGUAGE);
-        String emailFindPasswordSubject = ConfigUtility
-                .getLanguageValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT,
-                        language);
-        domainRegistry.getEmailService().send(email,
+        String emailFindPasswordSubject = configReader
+                .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT);
+
+        String websiteName = configReader.getI18nValue(ConfigKeyLanguage.WEBSITE_NAME);
+        domainRegistry.getEmailSender().send(websiteName,email,
                 emailFindPasswordSubject,
-                passwordFindTokenContent,
-                language);
+                passwordFindTokenContent);
     }
 
     public void tokenVerify(String token, DomainRegistry domainRegistry) throws BusinessException {

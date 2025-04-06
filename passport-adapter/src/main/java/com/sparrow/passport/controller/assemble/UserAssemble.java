@@ -1,16 +1,17 @@
 package com.sparrow.passport.controller.assemble;
 
-import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.constant.DateTime;
+import com.sparrow.container.ConfigReader;
+import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.enums.Gender;
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
+import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.IpSupport;
-import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import com.sparrow.utility.StringUtility;
 
@@ -24,17 +25,18 @@ import javax.inject.Named;
 public class UserAssemble {
     @Inject
     private IpSupport ipSupport;
+    @Inject
+    private DomainRegistry domainRegistry;
 
     public BasicUserVO assemble(UserProfileDTO basicUser) {
 
         BasicUserVO basicUserVo = new BasicUserVO();
-        String defaultAvatar = ConfigUtility
-                .getValue(Config.DEFAULT_AVATAR);
+        String defaultAvatar =this.domainRegistry.getWebConfigReader().getDefaultAvatar();
 
         if (StringUtility.isNullOrEmpty(basicUser.getUserId())
                 || basicUser.getUserId().equals(LoginUser.VISITOR_ID)) {
-            basicUserVo.setNickName(ConfigUtility.getLanguageValue(
-                    ConfigKeyLanguage.USER_VISITOR_NICKNAME));
+            ConfigReader configReader= ApplicationContext.getContainer().getBean(ConfigReader.class);
+            basicUserVo.setNickName(configReader.getI18nValue(ConfigKeyLanguage.USER_VISITOR_NICKNAME));
             basicUserVo.setAvatar(defaultAvatar);
             basicUserVo.setGender(Gender.NULL.name());
             basicUserVo.setStatus(StatusRecord.DISABLE.name());

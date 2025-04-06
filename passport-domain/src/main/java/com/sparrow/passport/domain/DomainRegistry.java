@@ -1,9 +1,12 @@
 package com.sparrow.passport.domain;
 
+import com.sparrow.email.EmailSender;
 import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.repository.UserProfileRepository;
+import com.sparrow.support.AuthenticatorConfigReader;
+import com.sparrow.support.web.WebConfigReader;
 
 public interface DomainRegistry {
     RegisteringUserRepository getRegisteringUserRepository();
@@ -20,9 +23,13 @@ public interface DomainRegistry {
 
     EncryptionService getEncryptionService();
 
-    EmailService getEmailService();
-
 
     UserProfileService getUserProfileService();
+
+    AuthenticatorConfigReader getAuthenticatorConfigReader();
+
+    EmailSender getEmailSender();
+
+    WebConfigReader getWebConfigReader();
 
 }

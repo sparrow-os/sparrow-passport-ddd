@@ -42,7 +42,7 @@ public class UserRegisterControllerImpl implements UserRegisterController {
                 captcha);
         LoginDTO loginDto = registeringUserApplicationService.register(user, client);
         servletContainer
-                .rootCookie(Constant.REQUEST_HEADER_KEY_LOGIN_TOKEN, loginDto.getToken(), loginDto.getLoginUser().getDays());
+                .cookie(Constant.REQUEST_HEADER_KEY_LOGIN_TOKEN, loginDto.getToken(), loginDto.getLoginUser().getDays());
         return loginDto;
     }
 

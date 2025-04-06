@@ -1,6 +1,5 @@
 package com.sparrow.passport.controller.impl;
 
-import com.sparrow.constant.User;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.api.UserLoginService;
 import com.sparrow.passport.controller.UserLoginController;
@@ -48,7 +47,7 @@ public class UserLoginControllerImpl implements UserLoginController {
         this.validateCaptcha(captcha, login.getCaptcha());
         LoginDTO loginDto = this.userLoginService.login(login, client);
         servletContainer
-                .rootCookie(Constant.REQUEST_HEADER_KEY_LOGIN_TOKEN, loginDto.getToken(), loginDto.getLoginUser().getDays());
+                .cookie(Constant.REQUEST_HEADER_KEY_LOGIN_TOKEN, loginDto.getToken(), loginDto.getLoginUser().getDays());
         return loginDto;
     }
 

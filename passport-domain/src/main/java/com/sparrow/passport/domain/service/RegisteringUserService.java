@@ -1,8 +1,10 @@
 package com.sparrow.passport.domain.service;
 
 import com.sparrow.concurrent.SparrowThreadFactory;
-import com.sparrow.constant.Config;
 import com.sparrow.constant.ConfigKeyLanguage;
+import com.sparrow.container.ConfigReader;
+import com.sparrow.core.spi.ApplicationContext;
+import com.sparrow.email.EmailSender;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
@@ -18,19 +20,24 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.support.Authenticator;
-import com.sparrow.utility.ConfigUtility;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Named
 public class RegisteringUserService {
     @Inject
     private Authenticator authenticatorService;
+
+    @Inject
+    private EmailSender emailSender;
 
     private static final ExecutorService ACTIVATE_EMAIL_THREAD_POOL = new ThreadPoolExecutor(2, 4, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<>(128)
             , new SparrowThreadFactory.Builder().daemon(true).namingPattern("activate-email-%d").build(), new ThreadPoolExecutor.CallerRunsPolicy());
@@ -68,7 +75,8 @@ public class RegisteringUserService {
         this.success(registeringUserEntity.getUserId(), client, domainRegistry);
         //异步发消息
         this.sendActivateEmail(registeringUserEntity, domainRegistry);
-        String defaultAvatar = ConfigUtility.getValue(Config.DEFAULT_AVATAR);
+
+        String defaultAvatar = domainRegistry.getWebConfigReader().getDefaultAvatar();
         LoginUser loginUser = LoginUser.create(
                 registeringUserEntity.getUserId(),
                 LoginUser.CATEGORY_REGISTER,
@@ -93,15 +101,13 @@ public class RegisteringUserService {
                         domainRegistry);
         String content = emailActivateToken.generateContent();
 
-        String language = ConfigUtility.getValue(Config.LANGUAGE);
-        String activateEmailSubject = ConfigUtility
-                .getLanguageValue(ConfigKeyLanguage.EMAIL_ACTIVATE_SUBJECT,
-                        language);
-
-        domainRegistry.getEmailService().send(registeringUserEntity.getEmail(),
+        ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
+        String activateEmailSubject = configReader
+                .getI18nValue(ConfigKeyLanguage.EMAIL_ACTIVATE_SUBJECT);
+        String websiteName = configReader.getI18nValue(ConfigKeyLanguage.WEBSITE_NAME);
+        emailSender.send(websiteName,registeringUserEntity.getEmail(),
                 activateEmailSubject,
-                content,
-                language);
+                content);
     }
 
     public void sendActivateEmail(RegisteringUserEntity registeringUserEntity,

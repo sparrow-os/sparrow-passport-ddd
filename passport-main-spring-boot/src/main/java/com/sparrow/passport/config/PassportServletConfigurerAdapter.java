@@ -1,6 +1,5 @@
 package com.sparrow.passport.config;
 
-import com.sparrow.passport.ValidateCode;
 import com.sparrow.passport.authenticate.AuthenticatorService;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.spring.starter.config.SparrowConfig;
@@ -8,7 +7,6 @@ import com.sparrow.support.Authenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
