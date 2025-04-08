@@ -8,7 +8,7 @@ cd ../passport-domain
 mvn clean install -DskipTests
 cd ../passport-authenticator
 mvn clean install -DskipTests
-cd ../passport-infrastracture
+cd ../passport-infrastructure
 mvn clean install -DskipTests
 cd ../passport-sparrow-dao
 mvn clean install -DskipTests
