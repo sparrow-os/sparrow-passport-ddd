@@ -7,6 +7,7 @@ import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.repository.UserProfileRepository;
+import com.sparrow.passport.repository.VisitorRepository;
 import com.sparrow.support.AuthenticatorConfigReader;
 import com.sparrow.support.web.WebConfigReader;
 
@@ -43,9 +44,17 @@ public class SparrowDomainRegistry implements DomainRegistry {
     @Inject
     private EmailSender emailSender;
 
+    @Inject
+    private VisitorRepository visitorRepository;
+
     @Override
     public RegisteringUserRepository getRegisteringUserRepository() {
         return this.registeringUserRepository;
+    }
+
+    @Override
+    public VisitorRepository getVisitorRepository() {
+        return this.visitorRepository;
     }
 
     @Override

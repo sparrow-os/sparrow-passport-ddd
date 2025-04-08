@@ -22,6 +22,7 @@ import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
+import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,8 @@ public class SecurityPrincipalService {
     private static Logger logger = LoggerFactory.getLogger(SecurityPrincipalService.class);
     @Inject
     private Authenticator authenticatorService;
+
+    private DomainRegistry domainRegistry;
 
     private Json json = JsonFactory.getProvider();
 

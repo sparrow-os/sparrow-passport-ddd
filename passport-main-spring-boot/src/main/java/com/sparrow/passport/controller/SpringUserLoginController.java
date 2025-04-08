@@ -56,6 +56,12 @@ public class SpringUserLoginController {
         return this.userLoginController.shortcut(login, client);
     }
 
+
+    @GetMapping("/get-visitor-token.json")
+    public LoginDTO getVisitorToken(ClientInformation client) {
+        return this.userLoginController.getVisitorToken(client);
+    }
+
     public void logout() {
         this.userLoginController.logout();
     }

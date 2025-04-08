@@ -16,5 +16,7 @@ public interface UserLoginController {
 
     LoginDTO shortcut(LoginQuery login, ClientInformation client) throws BusinessException;
 
+    LoginDTO getVisitorToken(ClientInformation client);
+
     void logout();
 }

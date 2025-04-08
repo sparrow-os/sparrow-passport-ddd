@@ -32,5 +32,9 @@
             <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 </project>

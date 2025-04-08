@@ -37,6 +37,7 @@ public class UserLoginControllerImpl implements UserLoginController {
         Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, USER_LOGIN_VALIDATE_CODE_SUFFIX);
     }
 
+
     @Override
     public LoginDTO login(LoginQuery login,
                           ClientInformation client) throws BusinessException {
@@ -56,6 +57,12 @@ public class UserLoginControllerImpl implements UserLoginController {
         String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
         this.validateCaptcha(captcha, login.getCaptcha());
         return this.userLoginService.login(login, client);
+    }
+
+
+    @Override
+    public LoginDTO getVisitorToken(ClientInformation client) {
+        return this.userLoginService.getVisitor(client.getDeviceId());
     }
 
     @Override

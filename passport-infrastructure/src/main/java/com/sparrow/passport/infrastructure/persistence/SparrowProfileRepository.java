@@ -4,13 +4,11 @@ import com.sparrow.passport.dao.UserDAO;
 import com.sparrow.passport.infrastructure.persistence.data.converter.UserProfileConverter;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
-import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
-import com.sparrow.utility.CollectionsUtility;
 
 import javax.inject.Inject;
 import javax.inject.Named;
