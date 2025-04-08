@@ -36,7 +36,7 @@ public class UserAssemble {
         if (StringUtility.isNullOrEmpty(basicUser.getUserId())
                 || basicUser.getUserId().equals(LoginUser.VISITOR_ID)) {
             ConfigReader configReader= ApplicationContext.getContainer().getBean(ConfigReader.class);
-            basicUserVo.setNickName(configReader.getI18nValue(ConfigKeyLanguage.USER_VISITOR_NICKNAME));
+            basicUserVo.setNickName(configReader.getI18nValue(ConfigKeyLanguage.USER_VISITOR_NAME));
             basicUserVo.setAvatar(defaultAvatar);
             basicUserVo.setGender(Gender.NULL.name());
             basicUserVo.setStatus(StatusRecord.DISABLE.name());
