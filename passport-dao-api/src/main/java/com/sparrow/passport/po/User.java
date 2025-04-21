@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "user")
+@Table(name = "t_user")
 public class User implements Cloneable, POJO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
