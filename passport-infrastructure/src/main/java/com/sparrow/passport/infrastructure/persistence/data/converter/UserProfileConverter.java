@@ -22,7 +22,11 @@ public class UserProfileConverter {
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         BeanUtility.copyProperties(user, userProfileDTO);
         if (StringUtility.isNullOrEmpty(user.getAvatar())) {
-            userProfileDTO.setAvatar(this.domainRegistry.getWebConfigReader().getDefaultAvatar());
+            String defaultAvatar = this.domainRegistry.getWebConfigReader().getDefaultAvatar();
+            if(defaultAvatar.contains("$userId")){
+                defaultAvatar=defaultAvatar.replace("$userId",String.valueOf(user.getUserId()%10));
+            }
+            userProfileDTO.setAvatar(defaultAvatar);
         }
         return userProfileDTO;
     }

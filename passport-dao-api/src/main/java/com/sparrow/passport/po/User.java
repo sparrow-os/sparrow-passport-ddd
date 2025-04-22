@@ -5,6 +5,7 @@ import com.sparrow.protocol.MethodOrder;
 import com.sparrow.protocol.POJO;
 import com.sparrow.protocol.dao.PO;
 import com.sparrow.protocol.enums.StatusRecord;
+import lombok.Data;
 
 import java.sql.Date;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "t_user")
+@Data
 public class User implements Cloneable, POJO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -151,6 +153,16 @@ public class User implements Cloneable, POJO {
      */
     private Long ip;
 
+    @Column(name = "category",
+            columnDefinition = "tinyint(3) UNSIGNED DEFAULT 0 COMMENT '类别'",
+            nullable = false)
+    private Integer category;
+
+    @Column(name = "english_name",
+            columnDefinition = "varchar(64)  DEFAULT '' COMMENT '英文名'",
+            nullable = false)
+    private String englishName;
+
     @FieldOrder(
             order = 100.0F
     )
@@ -181,182 +193,4 @@ public class User implements Cloneable, POJO {
      * 修改时间
      */
     private Long gmtModified;
-
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getPersonalSignature() {
-        return personalSignature;
-    }
-
-    public void setPersonalSignature(String personalSignature) {
-        this.personalSignature = personalSignature;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Long getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Long lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public Boolean getActivate() {
-        return activate;
-    }
-
-    public void setActivate(Boolean activate) {
-        this.activate = activate;
-    }
-
-    public Long getActivateTime() {
-        return activateTime;
-    }
-
-    public void setActivateTime(Long activateTime) {
-        this.activateTime = activateTime;
-    }
-
-    public String getChannel() {
-        return channel;
-    }
-
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    public String getDevice() {
-        return device;
-    }
-
-    public void setDevice(String device) {
-        this.device = device;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getDeviceModel() {
-        return deviceModel;
-    }
-
-    public void setDeviceModel(String deviceModel) {
-        this.deviceModel = deviceModel;
-    }
-
-    public Long getIp() {
-        return ip;
-    }
-
-    public void setIp(Long ip) {
-        this.ip = ip;
-    }
-
-    public StatusRecord getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusRecord status) {
-        this.status = status;
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
 }
