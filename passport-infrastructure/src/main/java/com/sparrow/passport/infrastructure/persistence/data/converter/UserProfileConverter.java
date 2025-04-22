@@ -15,6 +15,7 @@ import java.util.Map;
 public class UserProfileConverter {
     @Inject
     private DomainRegistry domainRegistry;
+
     public UserProfileDTO user2Profile(User user) {
         if (user == null) {
             return null;
@@ -23,8 +24,8 @@ public class UserProfileConverter {
         BeanUtility.copyProperties(user, userProfileDTO);
         if (StringUtility.isNullOrEmpty(user.getAvatar())) {
             String defaultAvatar = this.domainRegistry.getWebConfigReader().getDefaultAvatar();
-            if(defaultAvatar.contains("$userId")){
-                defaultAvatar=defaultAvatar.replace("$userId",String.valueOf(user.getUserId()%10));
+            if (defaultAvatar != null && defaultAvatar.contains("$userId")) {
+                defaultAvatar = defaultAvatar.replace("$userId", String.valueOf(user.getUserId() % 10));
             }
             userProfileDTO.setAvatar(defaultAvatar);
         }
