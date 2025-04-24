@@ -38,6 +38,7 @@ public class SecurityPrincipalConverter {
         securityPrincipal.setUserName(user.getUserName());
         securityPrincipal.setLastLoginTime(user.getLastLoginTime());
         securityPrincipal.setUserId(user.getUserId());
+        securityPrincipal.setCategory(user.getCategory());
         securityPrincipal.setPassword(user.getPassword());
         securityPrincipal.setStatus(user.getStatus().ordinal());
         return securityPrincipal;

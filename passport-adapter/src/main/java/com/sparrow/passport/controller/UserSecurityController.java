@@ -9,7 +9,7 @@ public interface UserSecurityController {
 
     Boolean modifyPassword(String newPassword, String oldPassword) throws BusinessException;
 
-    Result<Boolean> sendEmailTokenForFindPassword(String email) throws BusinessException;
+    Boolean sendEmailTokenForFindPassword(String email) throws BusinessException;
 
     void tokenVerify(String token) throws BusinessException;
 

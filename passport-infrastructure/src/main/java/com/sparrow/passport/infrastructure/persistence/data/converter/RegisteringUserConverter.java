@@ -4,6 +4,7 @@ import com.sparrow.enums.Gender;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
 import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
@@ -40,6 +41,7 @@ public class RegisteringUserConverter {
         user.setUserName(registeringUser.getUserName());
         user.setEmail(registeringUser.getEmail());
         user.setPassword(registeringUser.getPassword());
+        user.setCategory(LoginUser.CATEGORY_REGISTER);
         user.setDevice(client.getDevice());
         user.setChannel(client.getChannel());
         if (user.getChannel() == null) {

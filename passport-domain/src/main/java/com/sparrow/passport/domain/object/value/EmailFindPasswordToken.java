@@ -24,8 +24,8 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     private static final String TOKEN_TYPE = "find-password";
 
     public static EmailFindPasswordToken createToken(Long userId, String userName, String email, String password,
-        String currentDate,
-        DomainRegistry domainRegistry) {
+                                                     String currentDate,
+                                                     DomainRegistry domainRegistry) {
         EmailFindPasswordToken emailPasswordToken = new EmailFindPasswordToken();
         emailPasswordToken.userId = userId;
         emailPasswordToken.userName = userName;
@@ -37,7 +37,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
     }
 
     public static EmailFindPasswordToken parse(EmailTokenPair emailTokenPair, String password,
-        DomainRegistry domainRegistry) {
+                                               DomainRegistry domainRegistry) {
         if (emailTokenPair == null) {
             return null;
         }
@@ -52,7 +52,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         findPasswordOriginToken.userName = array[2];
         findPasswordOriginToken.sendDate = array[3];
         findPasswordOriginToken.password = password;
-
+        findPasswordOriginToken.domainRegistry = domainRegistry;
         return findPasswordOriginToken;
     }
 
@@ -78,47 +78,50 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         WebConfigReader webConfigReader = ApplicationContext.getContainer().getBean(WebConfigReader.class);
         ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
         return configReader
-            .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT)
-            .replace("$rootPath",webConfigReader.getRootPath())
-            .replace("$validateToken", this.generateToken())
-            .replace("$date", this.sendDate);
+                .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT)
+                .replace("$rootPath", webConfigReader.getRootPath())
+                .replace("$validateToken", this.generateToken())
+                .replace("$date", this.sendDate);
     }
 
     public boolean isValid(String originUserName) throws BusinessException {
         Asserts.isTrue(!this.userName.equals(originUserName), PassportError.USER_PASSWORD_VALIDATE_TOKEN_ERROR);
         Asserts.isTrue(!TOKEN_TYPE.equals(this.tokenType), PassportError.USER_TOKEN_TYPE_ERROR);
 
-        AuthenticatorConfigReader configReader= this.domainRegistry.getAuthenticatorConfigReader();
+        AuthenticatorConfigReader configReader = this.domainRegistry.getAuthenticatorConfigReader();
         int validateTokenAvailableDay = configReader.getTokenAvailableDays();
         int passDay = DateTimeUtility.getInterval(
-            Timestamp.valueOf(sendDate).getTime(),
-            System.currentTimeMillis(),
-            DateTimeUnit.DAY);
+                Timestamp.valueOf(sendDate).getTime(),
+                System.currentTimeMillis(),
+                DateTimeUnit.DAY);
         if (passDay > validateTokenAvailableDay) {
             throw new BusinessException(PassportError.USER_VALIDATE_TOKEN_TIME_OUT);
         }
         return true;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (!(o instanceof EmailFindPasswordToken))
             return false;
         EmailFindPasswordToken token = (EmailFindPasswordToken) o;
         return
-            userId.equals(token.userId) &&
-                userName.equals(token.userName) &&
-                sendDate.equals(token.sendDate) &&
-                email.equals(token.email) &&
-                password.equals(token.password);
+                userId.equals(token.userId) &&
+                        userName.equals(token.userName) &&
+                        sendDate.equals(token.sendDate) &&
+                        email.equals(token.email) &&
+                        password.equals(token.password);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(userId, userName, sendDate, email, password);
     }
 
-    @Override public boolean sameValueAs(EmailFindPasswordToken token) {
+    @Override
+    public boolean sameValueAs(EmailFindPasswordToken token) {
         if (this.hashCode() != token.hashCode()) {
             return false;
         }

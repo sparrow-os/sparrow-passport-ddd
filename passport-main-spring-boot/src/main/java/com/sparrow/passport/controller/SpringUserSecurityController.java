@@ -17,7 +17,7 @@ public class SpringUserSecurityController {
     private UserSecurityController userSecurityController;
 
     @PostMapping("/send-find-password-email.json")
-    public Result<Boolean> sendEmailTokenForFindPassword(String email) throws BusinessException {
+    public Boolean sendEmailTokenForFindPassword(String email) throws BusinessException {
         return this.userSecurityController.sendEmailTokenForFindPassword(email);
     }
 

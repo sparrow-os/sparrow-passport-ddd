@@ -7,9 +7,12 @@ import com.sparrow.protocol.ddd.Entity;
 import com.sparrow.passport.domain.object.value.Login;
 import com.sparrow.passport.domain.object.value.ModifyPassword;
 import com.sparrow.passport.support.suffix.UserFieldSuffix;
+import lombok.Data;
 
+@Data
 public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, Long> {
     private Long userId;
+    private Integer category;
     private String userName;
     private String password;
     private String email;
@@ -35,13 +38,6 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
         this.activateTime = System.currentTimeMillis();
     }
 
-    public void setLastLoginTime(Long lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public void setModifyPassword(ModifyPassword modifyPasswordParam) {
-        this.modifyPasswordParam = modifyPasswordParam;
-    }
 
     public void modifyPassword() throws BusinessException {
         this.modifyPasswordParam.getNewOriginPassword().isValid();
@@ -60,112 +56,12 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
         this.password = encryptLoginPassword;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Boolean getActivate() {
-        return activate;
-    }
-
-    public void setActivate(Boolean activate) {
-        this.activate = activate;
-    }
-
-    public Long getLastLoginTime() {
-        return lastLoginTime;
-    }
-
     public void setCurrent2LastLoginTime() {
         this.lastLoginTime = System.currentTimeMillis();
     }
 
-    public Login getLoginParam() {
-        return loginParam;
-    }
-
-    public void setLoginParam(Login loginParam) {
-        this.loginParam = loginParam;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     @Override public boolean sameIdentityAs(SecurityPrincipalEntity entity) {
-        return this.userId.equals(entity.getUserId());
-    }
-
-    public Long getActivateTime() {
-        return activateTime;
-    }
-
-    public void setActivateTime(Long activateTime) {
-        this.activateTime = activateTime;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public ModifyPassword getModifyPasswordParam() {
-        return modifyPasswordParam;
-    }
-
-    public void setModifyPasswordParam(ModifyPassword modifyPasswordParam) {
-        this.modifyPasswordParam = modifyPasswordParam;
+        return this.userId.equals(entity.userId);
     }
 
     @Override public Long identity() {
