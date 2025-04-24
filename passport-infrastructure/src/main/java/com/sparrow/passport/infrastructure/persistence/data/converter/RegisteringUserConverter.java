@@ -44,6 +44,7 @@ public class RegisteringUserConverter {
         user.setCategory(LoginUser.CATEGORY_REGISTER);
         user.setDevice(client.getDevice());
         user.setChannel(client.getChannel());
+        user.setEnglishName("");
         if (user.getChannel() == null) {
             user.setChannel(Symbol.EMPTY);
         }

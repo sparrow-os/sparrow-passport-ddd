@@ -22,5 +22,5 @@ cd ../password-mybatis-plus
 mvn clean install -DskipTests
 cd ../passport-main-webapp
 mvn clean install -DskipTests
-cd ../passport-spring-boot
+cd ../passport-main-spring-boot
 mvn clean install -DskipTests
