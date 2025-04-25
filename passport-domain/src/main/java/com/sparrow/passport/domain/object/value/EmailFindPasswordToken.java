@@ -80,7 +80,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         return configReader
                 .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT)
                 .replace("$rootPath", webConfigReader.getRootPath())
-                .replace("$passport",webConfigReade)
+                .replace("$passport",webConfigReader.getPassport())
                 .replace("$validateToken", this.generateToken())
                 .replace("$date", this.sendDate);
     }
