@@ -79,6 +79,7 @@ public class RegisteringUserService {
         String defaultAvatar = domainRegistry.getWebConfigReader().getDefaultAvatar();
         LoginUser loginUser = LoginUser.create(
                 registeringUserEntity.getUserId(),
+                "",
                 LoginUser.CATEGORY_REGISTER,
                 registeringUserEntity.getUserName(),
                 Symbol.EMPTY,

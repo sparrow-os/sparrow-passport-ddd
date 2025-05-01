@@ -42,9 +42,9 @@ public class UserLoginApplicationService implements UserLoginService {
         Long visitorId = this.domainRegistry.getVisitorRepository().getVisitorId();
         WebConfigReader webConfigReader = ApplicationContext.getContainer().getBean(WebConfigReader.class);
         ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
-        String visitorName = configReader.getI18nValue(ConfigKeyLanguage.USER_VISITOR_NAME, "","Visitor") + ":" + visitorId;
+        String visitorName = configReader.getI18nValue(ConfigKeyLanguage.USER_VISITOR_NAME, "", "Visitor") + ":" + visitorId;
         String avatar = webConfigReader.getDefaultAvatar();
-        LoginUser loginUser=LoginUser.create(visitorId, LoginUser.CATEGORY_VISITOR, visitorName, visitorName, avatar, deviceId, 1);
+        LoginUser loginUser = LoginUser.create(visitorId, "", LoginUser.CATEGORY_VISITOR, visitorName, visitorName, avatar, deviceId, 1);
         String permission = this.authenticator.sign(loginUser, null);
         return new LoginDTO(loginUser, permission);
     }

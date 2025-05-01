@@ -90,6 +90,7 @@ public class SecurityPrincipalService {
 
         LoginUser loginUser = LoginUser.create(
                 securityPrincipal.getUserId(),
+                "",
                 securityPrincipal.getCategory(),
                 securityPrincipal.getUserName(),
                 securityPrincipal.getNickName(),
@@ -113,13 +114,13 @@ public class SecurityPrincipalService {
                 securityPrincipal.getEmail(),
                 securityPrincipal.getPassword(),
                 currentDate, domainRegistry);
-        ConfigReader configReader= ApplicationContext.getContainer().getBean(ConfigReader.class);
+        ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
         String passwordFindTokenContent = emailFindPasswordToken.generateContent();
         String emailFindPasswordSubject = configReader
                 .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_SUBJECT);
 
         String websiteName = configReader.getI18nValue(ConfigKeyLanguage.WEBSITE_NAME);
-        domainRegistry.getEmailSender().send(websiteName,email,
+        domainRegistry.getEmailSender().send(websiteName, email,
                 emailFindPasswordSubject,
                 passwordFindTokenContent);
     }

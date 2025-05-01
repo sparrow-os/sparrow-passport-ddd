@@ -13,6 +13,7 @@ public class UserProfileDTO implements POJO {
      */
     private Long userId;
     private Integer category;
+    private Boolean isManager;
     private String englishName;
     /**
      * 用户名
@@ -40,20 +41,14 @@ public class UserProfileDTO implements POJO {
     private String avatar;
 
     private String nationality;
-
-
     /**
      * 个性签名
      */
     private String personalSignature;
-
-
     /**
      * 生日
      */
     private Date birthday;
-
-
     /**
      * 手机号
      */
@@ -79,12 +74,10 @@ public class UserProfileDTO implements POJO {
      */
     private String channel;
 
-
     /**
      * 注册的设备
      */
     private String device;
-
 
     /**
      * 设备ID

@@ -6,6 +6,7 @@ import com.sparrow.passport.domain.service.UserProfileService;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.param.UserModifyParam;
 import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.utility.CollectionsUtility;
 
 import javax.inject.Inject;
@@ -24,6 +25,11 @@ public class UserProfileApplicationService implements UserProfileAppService {
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
         UserProfileService userProfileService = this.domainRegistry.getUserProfileService();
         return userProfileService.getByIdentify(userIdentify);
+    }
+
+    @Override
+    public UserProfileDTO getByLoginUser(LoginUser loginUser) throws BusinessException {
+        return domainRegistry.getUserProfileRepository().findByUserId(loginUser.getUserId());
     }
 
     @Override
