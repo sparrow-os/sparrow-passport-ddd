@@ -13,7 +13,6 @@ public class UserProfileDTO implements POJO {
      */
     private Long userId;
     private Integer category;
-    private Boolean isManager;
     private String englishName;
     /**
      * 用户名
