@@ -12,7 +12,6 @@ import com.sparrow.support.IpSupport;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Locale;
 
 @Named
 public class RegisteringUserConverter {
@@ -37,6 +36,7 @@ public class RegisteringUserConverter {
             return null;
         }
         User user = new User();
+        user.setTenantId(0L);
         user.setUserId(registeringUser.getUserId());
         user.setUserName(registeringUser.getUserName());
         user.setEmail(registeringUser.getEmail());
