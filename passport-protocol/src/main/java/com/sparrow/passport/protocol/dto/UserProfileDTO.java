@@ -12,6 +12,7 @@ public class UserProfileDTO implements POJO {
      * 用户ID
      */
     private Long userId;
+    private Long tenantId;
     private Integer category;
     private String englishName;
     /**

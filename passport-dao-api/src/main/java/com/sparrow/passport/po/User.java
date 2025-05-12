@@ -1,18 +1,12 @@
 package com.sparrow.passport.po;
 
 import com.sparrow.protocol.FieldOrder;
-import com.sparrow.protocol.MethodOrder;
 import com.sparrow.protocol.POJO;
-import com.sparrow.protocol.dao.PO;
 import com.sparrow.protocol.enums.StatusRecord;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.sql.Date;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Table(name = "t_user")
 @Data
@@ -25,6 +19,10 @@ public class User implements Cloneable, POJO {
      * 用户ID
      */
     private Long userId;
+
+    @FieldOrder(order = 1.1F)
+    @Column(name = "tenant_id", columnDefinition = " int(11) DEFAULT 0 COMMENT '租户ID'", nullable = false, updatable = false)
+    private Long tenantId;
 
 
     @FieldOrder(order = 2)

@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, Long> {
     private Long userId;
+    private Long tenantId;
     private Integer category;
     private String userName;
     private String password;

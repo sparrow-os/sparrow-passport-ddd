@@ -33,6 +33,7 @@ public class SecurityPrincipalConverter {
         }
         SecurityPrincipalEntity securityPrincipal = new SecurityPrincipalEntity();
         securityPrincipal.setActivate(user.getActivate());
+        securityPrincipal.setTenantId(user.getTenantId());
         securityPrincipal.setEmail(user.getEmail());
         securityPrincipal.setMobile(user.getMobile());
         securityPrincipal.setUserName(user.getUserName());

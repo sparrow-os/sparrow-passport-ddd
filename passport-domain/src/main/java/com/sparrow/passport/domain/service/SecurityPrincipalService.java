@@ -90,7 +90,7 @@ public class SecurityPrincipalService {
 
         LoginUser loginUser = LoginUser.create(
                 securityPrincipal.getUserId(),
-                "",
+                securityPrincipal.getTenantId().toString(),
                 securityPrincipal.getCategory(),
                 securityPrincipal.getUserName(),
                 securityPrincipal.getNickName(),
