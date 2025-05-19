@@ -6,5 +6,8 @@ import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 public interface RegisteringUserRepository {
     RegisteringUserEntity findByEmail(String email);
 
+    RegisteringUserEntity findByUserName(String email);
+
+
     void saveRegisteringUser(RegisteringUserEntity user, ClientInformation client);
 }

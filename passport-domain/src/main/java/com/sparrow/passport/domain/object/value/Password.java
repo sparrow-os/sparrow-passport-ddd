@@ -4,7 +4,6 @@ import com.sparrow.constant.Regex;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.ValueObject;
-import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.utility.RegexUtility;
 import com.sparrow.utility.StringUtility;
 
@@ -19,8 +18,7 @@ public class Password implements ValueObject<Password> {
         //新密码为空或格式不正确
         if (StringUtility.isNullOrEmpty(originPassword) || !RegexUtility
             .matches(originPassword, Regex.PASSWORD)) {
-            throw new BusinessException(PassportError.USER_PASSWORD_FORMAT_ERROR,
-                UserFieldSuffix.NEW_PASSWORD);
+            throw new BusinessException(PassportError.USER_PASSWORD_FORMAT_ERROR);
         }
     }
 

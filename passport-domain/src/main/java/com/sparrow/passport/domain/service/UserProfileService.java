@@ -1,7 +1,5 @@
 package com.sparrow.passport.domain.service;
 
-import com.sparrow.constant.ConfigKeyLanguage;
-import com.sparrow.container.ConfigReader;
 import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.exception.Asserts;
 import com.sparrow.file.api.AttachService;
@@ -11,9 +9,7 @@ import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.repository.UserProfileRepository;
-import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.web.WebConfigReader;
@@ -43,7 +39,7 @@ public class UserProfileService {
 //                securityPrincipal = securityPrincipalRepository.findByMobile(mobilePair.getFirst(), mobilePair.getSecond());
 //            }
         }
-        Asserts.isTrue(userProfile == null, PassportError.USER_NAME_NOT_EXIST, UserFieldSuffix.LOGIN_USER_NAME);
+        Asserts.isTrue(userProfile == null, PassportError.USER_NAME_NOT_EXIST);
         Asserts.isTrue(StatusRecord.DISABLE == userProfile.getStatus(), PassportError.USER_DISABLED);
         return userProfile;
     }

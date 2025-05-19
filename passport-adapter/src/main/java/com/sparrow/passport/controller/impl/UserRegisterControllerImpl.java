@@ -19,7 +19,6 @@ import javax.inject.Named;
 
 @Named
 public class UserRegisterControllerImpl implements UserRegisterController {
-    private static final String VALIDATE_CODE_SUFFIX = "register_validate_code";
     @Inject
     private UserRegisterService registeringUserApplicationService;
     @Inject
@@ -31,7 +30,7 @@ public class UserRegisterControllerImpl implements UserRegisterController {
     private void validateCaptcha(String captcha, String userValidateCode) throws BusinessException {
         boolean expression = captcha == null
                 || !captcha.equalsIgnoreCase(userValidateCode);
-        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, VALIDATE_CODE_SUFFIX);
+        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR);
     }
 
     @Override

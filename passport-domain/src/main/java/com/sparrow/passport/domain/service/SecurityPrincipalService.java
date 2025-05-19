@@ -14,7 +14,6 @@ import com.sparrow.passport.domain.object.value.Password;
 import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
-import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
@@ -22,7 +21,6 @@ import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
-import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,10 +53,9 @@ public class SecurityPrincipalService {
 //                securityPrincipal = securityPrincipalRepository.findByMobile(mobilePair.getFirst(), mobilePair.getSecond());
 //            }
         }
-        Asserts.isTrue(securityPrincipal == null, PassportError.USER_NAME_NOT_EXIST, UserFieldSuffix.LOGIN_USER_NAME);
+        Asserts.isTrue(securityPrincipal == null, PassportError.USER_NAME_NOT_EXIST);
         Asserts.isTrue(StatusRecord.DISABLE.ordinal() == securityPrincipal.getStatus(),
-                PassportError.USER_DISABLED,
-                UserFieldSuffix.LOGIN);
+                PassportError.USER_DISABLED);
         return securityPrincipal;
     }
 

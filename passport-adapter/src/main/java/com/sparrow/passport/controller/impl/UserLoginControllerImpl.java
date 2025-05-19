@@ -34,7 +34,7 @@ public class UserLoginControllerImpl implements UserLoginController {
         }
         boolean expression = validateCode == null
                 || !validateCode.equalsIgnoreCase(userValidateCode);
-        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR, USER_LOGIN_VALIDATE_CODE_SUFFIX);
+        Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR);
     }
 
 

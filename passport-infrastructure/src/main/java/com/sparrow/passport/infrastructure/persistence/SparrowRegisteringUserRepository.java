@@ -26,6 +26,13 @@ public class SparrowRegisteringUserRepository implements RegisteringUserReposito
     }
 
     @Override
+    public RegisteringUserEntity findByUserName(String userName) {
+        UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
+        User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
+        return this.registeringUserConverter.user2RegisteringUser(user);
+    }
+
+    @Override
     public void saveRegisteringUser(RegisteringUserEntity registeringUserEntity, ClientInformation client) {
         User user = this.registeringUserConverter.registeringUser2User(registeringUserEntity, client);
         if (user.getUserId() == null) {

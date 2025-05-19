@@ -13,7 +13,6 @@ import com.sparrow.passport.domain.object.value.EmailTokenPair;
 import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.repository.RegisteringUserRepository;
-import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
@@ -65,10 +64,16 @@ public class RegisteringUserService {
                                     ClientInformation client, DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canRegister(client.getIp());
         RegisteringUserRepository registeringUserRepository = domainRegistry.getRegisteringUserRepository();
+
         RegisteringUserEntity oldUser = registeringUserRepository.findByEmail(registeringUserEntity.getEmail());
         Asserts.isTrue(oldUser != null,
-                PassportError.USER_EMAIL_EXIST,
-                UserFieldSuffix.REGISTER_USER_EMAIL);
+                PassportError.USER_EMAIL_EXIST);
+
+        oldUser = registeringUserRepository.findByUserName(registeringUserEntity.getUserName());
+        Asserts.isTrue(oldUser != null,
+                PassportError.USER_NAME_EXIST);
+
+
         registeringUserEntity.register(domainRegistry);
 
         registeringUserRepository.saveRegisteringUser(registeringUserEntity, client);

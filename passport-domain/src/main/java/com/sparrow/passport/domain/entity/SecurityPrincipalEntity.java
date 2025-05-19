@@ -1,12 +1,11 @@
 package com.sparrow.passport.domain.entity;
 
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.domain.object.value.Login;
+import com.sparrow.passport.domain.object.value.ModifyPassword;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.Entity;
-import com.sparrow.passport.domain.object.value.Login;
-import com.sparrow.passport.domain.object.value.ModifyPassword;
-import com.sparrow.passport.support.suffix.UserFieldSuffix;
 import lombok.Data;
 
 @Data
@@ -34,7 +33,7 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
 
     public void activateEmail() throws BusinessException {
         if (!this.activate) {
-            throw new BusinessException(PassportError.USER_NOT_ACTIVATE, UserFieldSuffix.LOGIN);
+            throw new BusinessException(PassportError.USER_NOT_ACTIVATE);
         }
         this.activateTime = System.currentTimeMillis();
     }
@@ -49,7 +48,7 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
     public void login() throws BusinessException {
         //登录暂不验证密码格式，为兼容老用户登录
         //this.loginParam.getPassword().isValid();
-        Asserts.isTrue(!this.loginParam.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR, UserFieldSuffix.LOGIN_PASSWORD);
+        Asserts.isTrue(!this.loginParam.getEncryptPassword().equals(this.password), PassportError.USER_PASSWORD_ERROR);
         this.setCurrent2LastLoginTime();
     }
 
@@ -61,11 +60,13 @@ public class SecurityPrincipalEntity implements Entity<SecurityPrincipalEntity, 
         this.lastLoginTime = System.currentTimeMillis();
     }
 
-    @Override public boolean sameIdentityAs(SecurityPrincipalEntity entity) {
+    @Override
+    public boolean sameIdentityAs(SecurityPrincipalEntity entity) {
         return this.userId.equals(entity.userId);
     }
 
-    @Override public Long identity() {
+    @Override
+    public Long identity() {
         return this.userId;
     }
 }
