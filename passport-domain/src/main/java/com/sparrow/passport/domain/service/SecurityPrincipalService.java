@@ -83,7 +83,7 @@ public class SecurityPrincipalService {
         securityPrincipal.login();
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
-        Integer tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
+        Double tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
 
         LoginUser loginUser = LoginUser.create(
                 securityPrincipal.getUserId(),

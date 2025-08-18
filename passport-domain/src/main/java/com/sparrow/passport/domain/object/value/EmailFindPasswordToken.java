@@ -90,7 +90,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         Asserts.isTrue(!TOKEN_TYPE.equals(this.tokenType), PassportError.USER_TOKEN_TYPE_ERROR);
 
         AuthenticatorConfigReader configReader = this.domainRegistry.getAuthenticatorConfigReader();
-        int validateTokenAvailableDay = configReader.getTokenAvailableDays();
+        Double validateTokenAvailableDay = configReader.getTokenAvailableDays();
         int passDay = DateTimeUtility.getInterval(
                 Timestamp.valueOf(sendDate).getTime(),
                 System.currentTimeMillis(),

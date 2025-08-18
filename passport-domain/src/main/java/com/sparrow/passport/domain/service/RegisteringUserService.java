@@ -19,6 +19,7 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.support.Authenticator;
+import com.sparrow.support.AuthenticatorConfigReader;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,7 @@ public class RegisteringUserService {
     public LoginDTO registerByEmail(RegisteringUserEntity registeringUserEntity,
                                     ClientInformation client, DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canRegister(client.getIp());
+        AuthenticatorConfigReader authenticatorConfigReader=ApplicationContext.getContainer().getBean(AuthenticatorConfigReader.class);
         RegisteringUserRepository registeringUserRepository = domainRegistry.getRegisteringUserRepository();
 
         RegisteringUserEntity oldUser = registeringUserRepository.findByEmail(registeringUserEntity.getEmail());
@@ -90,7 +92,7 @@ public class RegisteringUserService {
                 Symbol.EMPTY,
                 defaultAvatar,
                 client.getDeviceId(),
-                1);
+                authenticatorConfigReader.getLoginTokenAvailableDays());
         LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
         String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
         return new LoginDTO(loginUser, permission);

@@ -1,15 +1,18 @@
 package com.sparrow.passport.domain.object.value;
 
+import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.protocol.ddd.ValueObject;
+import com.sparrow.support.AuthenticatorConfigReader;
+
 import java.util.Objects;
 
 public class Login implements ValueObject<Login> {
     private Password password;
     private String encryptPassword;
     private Boolean rememberMe;
-    private Integer rememberDays;
+    private Double rememberDays;
 
-    public Login(String password, String encryptPassword, Boolean rememberMe, Integer rememberDays) {
+    public Login(String password, String encryptPassword, Boolean rememberMe, Double rememberDays) {
         this.password = new Password(password);
         this.encryptPassword = encryptPassword;
         this.rememberMe = rememberMe;
@@ -20,12 +23,9 @@ public class Login implements ValueObject<Login> {
         return encryptPassword;
     }
 
-    public Integer getTokenExpireDays() {
+    public Double getTokenExpireDays() {
         if (this.rememberMe == null || !this.rememberMe) {
-            return 1;
-        }
-        if (rememberDays == null) {
-            return 15;
+            return 1D;
         }
         return rememberDays;
     }

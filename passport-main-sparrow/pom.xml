@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-mvc-thymeleaf</artifactId>
-            <version>1.0.3.1-RELEASE</version>
+            <version>1.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
@@ -52,10 +52,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
+        <!--SPRING解析 thymeleaf -->
         <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-java8time</artifactId>
-            <version>3.0.4.RELEASE</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>2.3.2.RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -70,7 +71,8 @@
                 <includes>
                     <include>templates/**/**</include>
                 </includes>
-                <targetPath>${project.basedir}/src/main/webapp</targetPath>
+                <targetPath>${project.build.directory}/classes/</targetPath>
+                <filtering>false</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
