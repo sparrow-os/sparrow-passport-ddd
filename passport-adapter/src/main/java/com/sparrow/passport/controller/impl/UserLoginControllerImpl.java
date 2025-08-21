@@ -61,7 +61,7 @@ public class UserLoginControllerImpl implements UserLoginController {
 
 
     @Override
-    public LoginDTO getVisitorToken(ClientInformation client) {
+    public LoginDTO getVisitorToken(ClientInformation client) throws BusinessException {
         return this.userLoginService.getVisitor(client.getDeviceId());
     }
 

@@ -58,7 +58,7 @@ public class SpringUserLoginController {
 
 
     @GetMapping("/get-visitor-token.json")
-    public LoginDTO getVisitorToken(ClientInformation client) {
+    public LoginDTO getVisitorToken(ClientInformation client) throws BusinessException {
         return this.userLoginController.getVisitorToken(client);
     }
 

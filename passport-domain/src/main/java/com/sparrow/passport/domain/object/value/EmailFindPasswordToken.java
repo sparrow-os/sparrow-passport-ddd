@@ -1,6 +1,6 @@
 package com.sparrow.passport.domain.object.value;
 
-import com.sparrow.constant.Config;
+import com.sparrow.authenticator.AuthenticatorConfigReader;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.container.ConfigReader;
 import com.sparrow.core.spi.ApplicationContext;
@@ -11,7 +11,6 @@ import com.sparrow.passport.domain.service.EncryptionService;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ddd.ValueObject;
-import com.sparrow.support.AuthenticatorConfigReader;
 import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.DateTimeUtility;
 
@@ -80,7 +79,7 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         return configReader
                 .getI18nValue(ConfigKeyLanguage.PASSWORD_EMAIL_CONTENT)
                 .replace("$rootPath", webConfigReader.getRootPath())
-                .replace("$passport",webConfigReader.getPassport())
+                .replace("$passport", webConfigReader.getPassport())
                 .replace("$validateToken", this.generateToken())
                 .replace("$date", this.sendDate);
     }

@@ -76,6 +76,5 @@
         <module>passport-mybatis</module>
         <module>passport-mybatis-plus</module>
         <module>passport-main-webapp</module>
-        <module>passport-authenticator</module>
     </modules>
 </project>

@@ -1,5 +1,9 @@
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.authenticator.AuthenticationInfo;
+import com.sparrow.authenticator.Authenticator;
+import com.sparrow.authenticator.AuthenticatorConfigReader;
+import com.sparrow.authenticator.DefaultLoginUser;
 import com.sparrow.concurrent.SparrowThreadFactory;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.container.ConfigReader;
@@ -16,10 +20,8 @@ import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
-import com.sparrow.support.Authenticator;
-import com.sparrow.support.AuthenticatorConfigReader;
+import com.sparrow.protocol.enums.DeviceType;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +66,7 @@ public class RegisteringUserService {
     public LoginDTO registerByEmail(RegisteringUserEntity registeringUserEntity,
                                     ClientInformation client, DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canRegister(client.getIp());
-        AuthenticatorConfigReader authenticatorConfigReader=ApplicationContext.getContainer().getBean(AuthenticatorConfigReader.class);
+        AuthenticatorConfigReader authenticatorConfigReader = ApplicationContext.getContainer().getBean(AuthenticatorConfigReader.class);
         RegisteringUserRepository registeringUserRepository = domainRegistry.getRegisteringUserRepository();
 
         RegisteringUserEntity oldUser = registeringUserRepository.findByEmail(registeringUserEntity.getEmail());
@@ -84,17 +86,28 @@ public class RegisteringUserService {
         this.sendActivateEmail(registeringUserEntity, domainRegistry);
 
         String defaultAvatar = domainRegistry.getWebConfigReader().getDefaultAvatar();
-        LoginUser loginUser = LoginUser.create(
+        LoginUser loginUser = DefaultLoginUser.create(
                 registeringUserEntity.getUserId(),
                 "",
-                LoginUser.CATEGORY_REGISTER,
+                DefaultLoginUser.CATEGORY_REGISTER,
                 registeringUserEntity.getUserName(),
                 Symbol.EMPTY,
                 defaultAvatar,
+                client.getDeviceType().getIdentity(),
                 client.getDeviceId(),
-                authenticatorConfigReader.getLoginTokenAvailableDays());
-        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
-        String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
+                authenticatorConfigReader.getTokenAvailableDays());
+        AuthenticationInfo authenticationInfo=new AuthenticationInfo() {
+            @Override
+            public LoginUser getUser() {
+                return loginUser;
+            }
+
+            @Override
+            public String getCredential() {
+                return registeringUserEntity.getPassword();
+            }
+        };
+        String permission = this.authenticatorService.login(authenticationInfo);
         return new LoginDTO(loginUser, permission);
     }
 
@@ -113,7 +126,7 @@ public class RegisteringUserService {
         String activateEmailSubject = configReader
                 .getI18nValue(ConfigKeyLanguage.EMAIL_ACTIVATE_SUBJECT);
         String websiteName = configReader.getI18nValue(ConfigKeyLanguage.WEBSITE_NAME);
-        emailSender.send(websiteName,registeringUserEntity.getEmail(),
+        emailSender.send(websiteName, registeringUserEntity.getEmail(),
                 activateEmailSubject,
                 content);
     }

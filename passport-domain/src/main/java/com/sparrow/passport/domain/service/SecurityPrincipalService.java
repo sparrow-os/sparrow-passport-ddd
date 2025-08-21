@@ -1,5 +1,8 @@
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.authenticator.AuthenticationInfo;
+import com.sparrow.authenticator.Authenticator;
+import com.sparrow.authenticator.DefaultLoginUser;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.container.ConfigReader;
 import com.sparrow.core.spi.ApplicationContext;
@@ -17,10 +20,8 @@ import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
-import com.sparrow.support.Authenticator;
 import com.sparrow.utility.DateTimeUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,19 +86,30 @@ public class SecurityPrincipalService {
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
         Double tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
 
-        LoginUser loginUser = LoginUser.create(
+        LoginUser loginUser = DefaultLoginUser.create(
                 securityPrincipal.getUserId(),
                 securityPrincipal.getTenantId().toString(),
                 securityPrincipal.getCategory(),
                 securityPrincipal.getUserName(),
                 securityPrincipal.getNickName(),
                 securityPrincipal.getAvatar(),
+                client.getDeviceType().getIdentity(),
                 client.getDeviceId(),
                 tokenExpireDays
         );
         logger.info("security principle login user info {}", this.json.toString(loginUser));
-        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
-        String permission = this.authenticatorService.sign(loginUser, loginUserStatus);
+        AuthenticationInfo authenticationInfo=new AuthenticationInfo() {
+            @Override
+            public LoginUser getUser() {
+                return loginUser;
+            }
+
+            @Override
+            public String getCredential() {
+                return securityPrincipal.getPassword();
+            }
+        };
+        String permission = this.authenticatorService.login(authenticationInfo);
         return new LoginDTO(loginUser, permission);
     }
 

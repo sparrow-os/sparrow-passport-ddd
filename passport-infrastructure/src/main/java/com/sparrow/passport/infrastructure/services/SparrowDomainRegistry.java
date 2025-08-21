@@ -1,14 +1,13 @@
 package com.sparrow.passport.infrastructure.services;
 
-import com.sparrow.container.ConfigReader;
+import com.sparrow.authenticator.AuthenticatorConfigReader;
 import com.sparrow.email.EmailSender;
+import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
-import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.passport.repository.VisitorRepository;
-import com.sparrow.support.AuthenticatorConfigReader;
 import com.sparrow.support.web.WebConfigReader;
 
 import javax.inject.Inject;

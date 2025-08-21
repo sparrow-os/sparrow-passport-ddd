@@ -1,12 +1,12 @@
 package com.sparrow.passport.domain;
 
+import com.sparrow.authenticator.AuthenticatorConfigReader;
 import com.sparrow.email.EmailSender;
 import com.sparrow.passport.domain.service.*;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.passport.repository.VisitorRepository;
-import com.sparrow.support.AuthenticatorConfigReader;
 import com.sparrow.support.web.WebConfigReader;
 
 public interface DomainRegistry {

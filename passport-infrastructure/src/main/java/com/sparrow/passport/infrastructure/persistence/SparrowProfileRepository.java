@@ -1,5 +1,6 @@
 package com.sparrow.passport.infrastructure.persistence;
 
+import com.sparrow.context.SessionContext;
 import com.sparrow.passport.dao.UserDAO;
 import com.sparrow.passport.infrastructure.persistence.data.converter.UserProfileConverter;
 import com.sparrow.passport.po.User;
@@ -7,7 +8,6 @@ import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
 
 import javax.inject.Inject;
@@ -50,13 +50,13 @@ public class SparrowProfileRepository implements UserProfileRepository {
 
     @Override
     public Map<Long, UserProfileDTO> findByUserIds(Collection<Long> userIds) throws BusinessException {
-        Map<Long,User> userMap = this.userDao.getEntityMap(userIds);
+        Map<Long, User> userMap = this.userDao.getEntityMap(userIds);
         return this.userProfileConverter.user2Profile(userMap);
     }
 
     @Override
     public void modifyAvatar(String avatar) throws BusinessException {
-        LoginUser loginUser= ThreadContext.getLoginToken();
-        this.userDao.modifyAvatar(loginUser.getUserId(),avatar);
+        LoginUser loginUser = SessionContext.getLoginUser();
+        this.userDao.modifyAvatar(loginUser.getUserId(), avatar);
     }
 }

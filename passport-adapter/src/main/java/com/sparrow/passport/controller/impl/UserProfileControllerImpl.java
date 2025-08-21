@@ -1,5 +1,6 @@
 package com.sparrow.passport.controller.impl;
 
+import com.sparrow.context.SessionContext;
 import com.sparrow.passport.controller.UserProfileController;
 import com.sparrow.passport.controller.assemble.UserAssemble;
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
@@ -9,7 +10,6 @@ import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.ThreadContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,7 +25,7 @@ public class UserProfileControllerImpl implements UserProfileController {
 
     @Override
     public BasicUserVO loadUserBasic() throws BusinessException {
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         UserProfileDTO userProfile = this.domainRegistry.getUserProfileRepository().findByUserId(loginUser.getUserId());
         return this.userAssemble.assemble(userProfile);
     }

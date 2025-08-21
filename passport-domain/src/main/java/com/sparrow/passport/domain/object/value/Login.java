@@ -1,8 +1,6 @@
 package com.sparrow.passport.domain.object.value;
 
-import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.protocol.ddd.ValueObject;
-import com.sparrow.support.AuthenticatorConfigReader;
 
 import java.util.Objects;
 
@@ -34,23 +32,26 @@ public class Login implements ValueObject<Login> {
         return password;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (!(o instanceof Login))
             return false;
         Login login = (Login) o;
         return Objects.equals(getPassword(), login.getPassword()) &&
-            Objects.equals(getEncryptPassword(), login.getEncryptPassword()) &&
-            Objects.equals(rememberMe, login.rememberMe) &&
-            Objects.equals(rememberDays, login.rememberDays);
+                Objects.equals(getEncryptPassword(), login.getEncryptPassword()) &&
+                Objects.equals(rememberMe, login.rememberMe) &&
+                Objects.equals(rememberDays, login.rememberDays);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(getPassword(), getEncryptPassword(), rememberMe, rememberDays);
     }
 
-    @Override public boolean sameValueAs(Login login) {
+    @Override
+    public boolean sameValueAs(Login login) {
         if (this.hashCode() != login.hashCode()) {
             return false;
         }

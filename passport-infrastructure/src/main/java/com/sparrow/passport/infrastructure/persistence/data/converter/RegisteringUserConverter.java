@@ -1,5 +1,6 @@
 package com.sparrow.passport.infrastructure.persistence.data.converter;
 
+import com.sparrow.authenticator.DefaultLoginUser;
 import com.sparrow.enums.Gender;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
@@ -52,8 +53,8 @@ public class RegisteringUserConverter {
         if (user.getDeviceModel() == null) {
             user.setDeviceModel(Symbol.EMPTY);
         }
-        if (user.getDeviceId() == null) {
-            user.setDeviceId(Symbol.EMPTY);
+        if (user.getHost() == null) {
+            user.setHost(Symbol.EMPTY);
         }
         user.setGmtCreate(System.currentTimeMillis());
         user.setGmtModified(user.getGmtCreate());

@@ -9,5 +9,5 @@ import com.sparrow.protocol.LoginUser;
 public interface UserLoginService {
     LoginDTO login(LoginQuery login, ClientInformation client) throws BusinessException;
 
-    LoginDTO getVisitor(String deviceId);
+    LoginDTO getVisitor(String host) throws BusinessException;
 }
