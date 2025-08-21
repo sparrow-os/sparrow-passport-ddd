@@ -29,7 +29,6 @@
         <dependency>
             <groupId>com.sparrowzoo</groupId>
             <artifactId>authenticator-passport-starter</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

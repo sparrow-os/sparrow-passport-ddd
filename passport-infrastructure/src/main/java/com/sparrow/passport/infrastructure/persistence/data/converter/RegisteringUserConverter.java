@@ -1,6 +1,5 @@
 package com.sparrow.passport.infrastructure.persistence.data.converter;
 
-import com.sparrow.authenticator.DefaultLoginUser;
 import com.sparrow.enums.Gender;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
