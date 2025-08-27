@@ -3,6 +3,7 @@ package com.sparrow.passport.controller;
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class SpringUserProfileController {
     }
 
     @RequestMapping("modify-user-avatar")
-    public String modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+    public String modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
        return this.userProfileController.modifyAvatar(avatarModifyParam);
     }
 }

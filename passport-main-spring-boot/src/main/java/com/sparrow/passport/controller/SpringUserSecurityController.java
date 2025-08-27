@@ -4,10 +4,8 @@ import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.Result;
 import javax.inject.Inject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -17,7 +15,7 @@ public class SpringUserSecurityController {
     private UserSecurityController userSecurityController;
 
     @PostMapping("/send-find-password-email.json")
-    public Boolean sendEmailTokenForFindPassword(String email) throws BusinessException {
+    public Boolean sendEmailTokenForFindPassword(@RequestBody String email) throws BusinessException {
         return this.userSecurityController.sendEmailTokenForFindPassword(email);
     }
 
