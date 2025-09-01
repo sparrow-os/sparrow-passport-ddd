@@ -6,6 +6,7 @@ import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.query.login.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@Slf4j
 public class SpringUserLoginController {
+    public SpringUserLoginController() {
+        log.info("SpringUserLoginController");
+    }
+
     @Autowired
     private UserLoginController userLoginController;
-
     private static Logger logger = LoggerFactory.getLogger(SpringUserLoginController.class);
 
     @GetMapping("/session-id")
@@ -53,7 +58,7 @@ public class SpringUserLoginController {
     }
 
     @PostMapping("/shortcut-login.json")
-    public LoginDTO shortcut(@RequestBody  LoginQuery login, ClientInformation client) throws BusinessException {
+    public LoginDTO shortcut(@RequestBody LoginQuery login, ClientInformation client) throws BusinessException {
         return this.userLoginController.shortcut(login, client);
     }
 

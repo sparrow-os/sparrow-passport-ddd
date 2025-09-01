@@ -13,13 +13,18 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.web.WebConfigReader;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 
 @Named
+@Slf4j
 public class UserProfileService {
+    public UserProfileService() {
+        log.info("UserProfileService init");
+    }
 
     @Inject
     private DomainRegistry domainRegistry;

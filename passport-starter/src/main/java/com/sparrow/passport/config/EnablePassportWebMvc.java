@@ -9,10 +9,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Documented
-//@Import({PassportWebMvcConfiguration.class})
 @ComponentScan(
         basePackages = {"com.sparrow.passport"}
 )
-@ConditionalOnWebApplication
 public @interface EnablePassportWebMvc {
 }
