@@ -4,7 +4,6 @@ import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

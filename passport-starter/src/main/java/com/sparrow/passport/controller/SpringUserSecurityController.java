@@ -2,11 +2,10 @@ package com.sparrow.passport.controller;
 
 import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.protocol.BusinessException;
-import com.sparrow.protocol.Result;
-import javax.inject.Inject;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.inject.Inject;
 
 @RestController
 @RequestMapping("/password")
