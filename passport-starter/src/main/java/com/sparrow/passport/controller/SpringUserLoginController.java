@@ -6,6 +6,7 @@ import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.query.login.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Slf4j
+@Api(value = "UserLogin", tags = "UserLogin")
 public class SpringUserLoginController {
     public SpringUserLoginController() {
         log.info("SpringUserLoginController");

@@ -3,24 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.sparrowzoo</groupId>
-        <artifactId>sparrow-passport-ddd</artifactId>
+        <groupId>com.sparrowzoo.passport</groupId>
+        <artifactId>passport-bom</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${sparrow_passport_version}</version>
     <artifactId>passport-mybatis</artifactId>
-    <groupId>com.sparrowzoo.passport</groupId>
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.sparrowzoo.passport</groupId>

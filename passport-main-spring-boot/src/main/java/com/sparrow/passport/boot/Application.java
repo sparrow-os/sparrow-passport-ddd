@@ -3,7 +3,7 @@ package com.sparrow.passport.boot;
 import com.sparrow.container.Container;
 import com.sparrow.container.ContainerBuilder;
 import com.sparrow.core.spi.ApplicationContext;
-import com.sparrow.passport.config.EnablePassportWebMvc;
+import com.sparrow.passport.config.EnablePassport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,7 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sparrow.*")
-@EnablePassportWebMvc
+@EnablePassport
 public class Application {
     private static Logger log = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
