@@ -106,7 +106,7 @@ public class SecurityPrincipalService {
 
             @Override
             public String getCredential() {
-                return securityPrincipal.getPassword();
+                return null;
             }
         };
         String permission = this.authenticatorService.login(authenticationInfo);
