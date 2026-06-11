@@ -2,10 +2,10 @@ package com.sparrow.passport.po;
 
 import com.sparrow.protocol.POJO;
 import com.sparrow.protocol.enums.StatusRecord;
+import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Date;
 
-import javax.persistence.*;
-import java.sql.Date;
 
 @Table(name = "t_user")
 @Data
@@ -157,6 +157,8 @@ public class User implements Cloneable, POJO {
      * 创建时间
      */
     private Long gmtCreate;
+
+
     @Column(
             name = "gmt_modified",
             columnDefinition = "bigint(11)  DEFAULT 0 COMMENT '更新时间'",
