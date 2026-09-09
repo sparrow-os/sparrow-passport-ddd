@@ -8,7 +8,7 @@ import com.sparrow.passport.po.SecurityPrincipal;
 import com.sparrow.passport.po.User;
 import com.sparrow.utility.StringUtility;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("userDao")
 public class UserDAOImpl extends ORMStrategy<User, Long> implements UserDAO {

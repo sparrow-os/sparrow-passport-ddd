@@ -3,7 +3,7 @@ package com.sparrow.passport.infrastructure.services;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.domain.service.UserLimitService;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("userLimitService")
 public class RedisUserLimitService implements UserLimitService {

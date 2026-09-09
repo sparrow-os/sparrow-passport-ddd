@@ -23,19 +23,15 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.utility.DateTimeUtility;
+import jakarta.inject.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 @Named
 public class SecurityPrincipalService {
     private static Logger logger = LoggerFactory.getLogger(SecurityPrincipalService.class);
     @Inject
     private Authenticator authenticatorService;
-
-    private DomainRegistry domainRegistry;
 
     private Json json = JsonFactory.getProvider();
 

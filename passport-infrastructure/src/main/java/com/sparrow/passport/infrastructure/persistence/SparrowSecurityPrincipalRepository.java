@@ -7,8 +7,8 @@ import com.sparrow.passport.po.SecurityPrincipal;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("securityPrincipalRepository")
 public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepository {

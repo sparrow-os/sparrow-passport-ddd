@@ -13,6 +13,9 @@
     <groupId>com.sparrowzoo.passport</groupId>
     <properties>
         <passport_version>1.0.0-SNAPSHOT</passport_version>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +83,16 @@
                 <artifactId>passport-main-webapp</artifactId>
                 <version>${passport_version}</version>
             </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+            <version>2.8.8</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
     <url>http://maven.apache.org</url>

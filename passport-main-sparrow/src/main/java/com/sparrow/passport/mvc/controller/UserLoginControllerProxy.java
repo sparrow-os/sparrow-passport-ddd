@@ -14,7 +14,7 @@ import com.sparrow.servlet.Controller;
 import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.StringUtility;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller

@@ -5,12 +5,13 @@ import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.domain.service.UserProfileService;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.param.UserModifyParam;
+import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.utility.CollectionsUtility;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -19,17 +20,18 @@ import java.util.Map;
 public class UserProfileApplicationService implements UserProfileAppService {
 
     @Inject
-    private DomainRegistry domainRegistry;
+    private UserProfileService userProfileService;
+
+    private UserProfileRepository userProfileRepository;
 
     @Override
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
-        UserProfileService userProfileService = this.domainRegistry.getUserProfileService();
         return userProfileService.getByIdentify(userIdentify);
     }
 
     @Override
     public UserProfileDTO getByLoginUser(LoginUser loginUser) throws BusinessException {
-        return domainRegistry.getUserProfileRepository().findByUserId(loginUser.getUserId());
+        return userProfileRepository.findByUserId(loginUser.getUserId());
     }
 
     @Override
@@ -37,12 +39,12 @@ public class UserProfileApplicationService implements UserProfileAppService {
         if (CollectionsUtility.isNullOrEmpty(userIds)) {
             return Collections.emptyMap();
         }
-        return this.domainRegistry.getUserProfileRepository().findByUserIds(userIds);
+        return userProfileRepository.findByUserIds(userIds);
     }
 
     @Override
     public UserProfileDTO getUser(Long userId) throws BusinessException {
-        return domainRegistry.getUserProfileRepository().findByUserId(userId);
+        return userProfileRepository.findByUserId(userId);
     }
 
 

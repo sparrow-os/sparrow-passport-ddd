@@ -21,13 +21,13 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
-import com.sparrow.protocol.enums.DeviceType;
+import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.DateTimeUtility;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -37,6 +37,9 @@ import java.util.concurrent.TimeUnit;
 public class RegisteringUserService {
     @Inject
     private Authenticator authenticatorService;
+
+    @Inject
+    private WebConfigReader webConfigReader;
 
     @Inject
     private EmailSender emailSender;
@@ -85,7 +88,7 @@ public class RegisteringUserService {
         //异步发消息
         this.sendActivateEmail(registeringUserEntity, domainRegistry);
 
-        String defaultAvatar = domainRegistry.getWebConfigReader().getDefaultAvatar();
+        String defaultAvatar = webConfigReader.getDefaultAvatar();
         LoginUser loginUser = DefaultLoginUser.create(
                 registeringUserEntity.getUserId(),
                 "",

@@ -22,6 +22,10 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-application</artifactId>
         </dependency>

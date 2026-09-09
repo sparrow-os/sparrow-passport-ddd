@@ -30,6 +30,10 @@
             <artifactId>sparrow-json</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-dao-api</artifactId>
         </dependency>

@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.sparrowzoo</groupId>
-            <artifactId>authenticator-passport-starter</artifactId>
+            <artifactId>authenticator-core</artifactId>
         </dependency>
     </dependencies>
 </project>

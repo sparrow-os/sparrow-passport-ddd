@@ -6,8 +6,8 @@ import com.sparrow.passport.repository.VisitorRepository;
 import com.sparrow.utility.DateTimeUtility;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class RedisVisitorRepository implements VisitorRepository {

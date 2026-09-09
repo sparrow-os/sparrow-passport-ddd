@@ -14,8 +14,8 @@ import com.sparrow.support.CaptchaService;
 import com.sparrow.support.web.HttpContext;
 import com.sparrow.utility.StringUtility;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class UserLoginControllerImpl implements UserLoginController {

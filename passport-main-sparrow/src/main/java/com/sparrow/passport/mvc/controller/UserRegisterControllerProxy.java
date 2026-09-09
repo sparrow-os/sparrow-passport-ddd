@@ -10,7 +10,7 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
 import com.sparrow.servlet.Controller;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @Controller
 public class UserRegisterControllerProxy {

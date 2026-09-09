@@ -13,10 +13,9 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.web.WebConfigReader;
+import jakarta.inject.*;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 
 @Named
@@ -27,13 +26,12 @@ public class UserProfileService {
     }
 
     @Inject
-    private DomainRegistry domainRegistry;
+    UserProfileRepository userProfileRepository;
 
     @Inject
     private AttachService attachService;
 
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
-        UserProfileRepository userProfileRepository = domainRegistry.getUserProfileRepository();
         UserProfileDTO userProfile = null;
         if (userIdentify.contains(Symbol.AT)) {
             userProfile = userProfileRepository.findByUserEmail(userIdentify);
@@ -55,7 +53,7 @@ public class UserProfileService {
         Asserts.isTrue(avatarModifyParam.getAvatar().startsWith(resource), PassportError.USER_AVATAR_CAN_NOT_DEFAULT);
         ImageCropperParam imageCropperParam = new ImageCropperParam(avatarModifyParam.getAvatar(), avatarModifyParam.getX(), avatarModifyParam.getY(), avatarModifyParam.getWidth(), avatarModifyParam.getHeight());
         String avatar = this.attachService.imageCropper(imageCropperParam);
-        domainRegistry.getUserProfileRepository().modifyAvatar(avatar);
+        this.userProfileRepository.modifyAvatar(avatar);
         return avatar;
     }
 }

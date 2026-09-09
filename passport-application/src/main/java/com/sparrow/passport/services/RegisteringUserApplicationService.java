@@ -11,8 +11,8 @@ import com.sparrow.passport.protocol.param.register.MobileRegisterParam;
 import com.sparrow.passport.protocol.param.register.UserNameRegisterParam;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class RegisteringUserApplicationService implements UserRegisterService {

@@ -1,20 +1,20 @@
 package com.sparrow.passport.infrastructure.persistence.data.converter;
 
-import com.sparrow.passport.domain.DomainRegistry;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.protocol.BeanCopier;
+import com.sparrow.support.web.WebConfigReader;
 import com.sparrow.utility.StringUtility;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.HashMap;
 import java.util.Map;
 
 @Named
 public class UserProfileConverter {
     @Inject
-    private DomainRegistry domainRegistry;
+    private WebConfigReader webConfigReader;
 
     @Inject
     private BeanCopier beanCopier;
@@ -26,7 +26,7 @@ public class UserProfileConverter {
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         this.beanCopier.copyProperties(user, userProfileDTO);
         if (StringUtility.isNullOrEmpty(user.getAvatar())) {
-            String defaultAvatar = this.domainRegistry.getWebConfigReader().getDefaultAvatar();
+            String defaultAvatar = this.webConfigReader.getDefaultAvatar();
             if (defaultAvatar != null && defaultAvatar.contains("$userId")) {
                 defaultAvatar = defaultAvatar.replace("$userId", String.valueOf(user.getUserId() % 10));
             }

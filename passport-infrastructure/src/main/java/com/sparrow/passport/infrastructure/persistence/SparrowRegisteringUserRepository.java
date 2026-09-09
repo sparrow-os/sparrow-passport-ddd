@@ -8,8 +8,8 @@ import com.sparrow.passport.domain.entity.RegisteringUserEntity;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("registeringUserRepository")
 public class SparrowRegisteringUserRepository implements RegisteringUserRepository {

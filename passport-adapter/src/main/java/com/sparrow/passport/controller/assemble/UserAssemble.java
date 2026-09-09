@@ -15,8 +15,8 @@ import com.sparrow.support.IpSupport;
 import com.sparrow.utility.DateTimeUtility;
 import com.sparrow.utility.StringUtility;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * user assemble

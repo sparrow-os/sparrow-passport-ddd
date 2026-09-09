@@ -5,7 +5,7 @@ import com.sparrow.protocol.BusinessException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @RestController
 @RequestMapping("/password")

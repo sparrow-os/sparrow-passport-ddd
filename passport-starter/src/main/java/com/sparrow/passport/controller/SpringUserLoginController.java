@@ -6,7 +6,8 @@ import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.query.login.LoginQuery;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.ClientInformation;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 @Slf4j
-@Api(value = "UserLogin", tags = "UserLogin")
+@Tag(name = "UserLogin")
 public class SpringUserLoginController {
     public SpringUserLoginController() {
         log.info("SpringUserLoginController");

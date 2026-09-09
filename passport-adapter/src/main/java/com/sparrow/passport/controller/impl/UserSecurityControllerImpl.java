@@ -6,8 +6,8 @@ import com.sparrow.passport.protocol.param.password.PasswordModifyParam;
 import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.protocol.BusinessException;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class UserSecurityControllerImpl implements UserSecurityController {

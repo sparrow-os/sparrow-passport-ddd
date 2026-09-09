@@ -9,6 +9,9 @@ import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.passport.repository.VisitorRepository;
 import com.sparrow.support.web.WebConfigReader;
 
+/**
+ * 不要被domain service 引用 会产生循环依赖
+ */
 public interface DomainRegistry {
     RegisteringUserRepository getRegisteringUserRepository();
 
@@ -25,9 +28,6 @@ public interface DomainRegistry {
     SecurityPrincipalRepository getSecurityPrincipalRepository();
 
     EncryptionService getEncryptionService();
-
-
-    UserProfileService getUserProfileService();
 
     AuthenticatorConfigReader getAuthenticatorConfigReader();
 

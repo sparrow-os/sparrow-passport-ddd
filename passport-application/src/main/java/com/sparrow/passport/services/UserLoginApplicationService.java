@@ -20,9 +20,9 @@ import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.enums.DeviceType;
 import com.sparrow.support.web.WebConfigReader;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 
 @Named
 public class UserLoginApplicationService implements UserLoginService {

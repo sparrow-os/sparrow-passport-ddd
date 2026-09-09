@@ -10,8 +10,8 @@ import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.passport.repository.VisitorRepository;
 import com.sparrow.support.web.WebConfigReader;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("domainRegistry")
 public class SparrowDomainRegistry implements DomainRegistry {
@@ -83,11 +83,6 @@ public class SparrowDomainRegistry implements DomainRegistry {
 
 
     @Override
-    public UserProfileService getUserProfileService() {
-        return userProfileService;
-    }
-
-    @Override
     public AuthenticatorConfigReader getAuthenticatorConfigReader() {
         return this.authenticatorConfigReader;
     }
@@ -97,10 +92,12 @@ public class SparrowDomainRegistry implements DomainRegistry {
         return userProfileRepository;
     }
 
+    @Override
     public EmailSender getEmailSender() {
         return emailSender;
     }
 
+    @Override
     public WebConfigReader getWebConfigReader() {
         return webConfigReader;
     }
