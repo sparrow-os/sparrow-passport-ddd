@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn --version)",
+      "Bash(mvn compile *)",
+      "Read(//home/harry/.m2/repository/javax/inject/**)",
+      "Read(//home/harry/.m2/repository/jakarta/inject/**)",
+      "Read(//opt/**)",
+      "Read(//usr/lib/**)",
+      "Bash(update-alternatives --list java)",
+      "Bash(ggrep -r \"import javax.inject\" /mnt/d/workspace/sparrow/sparrowzoo/sparrow-passport-ddd --include=\"*.java\" -l)"
+    ]
+  }
+}
