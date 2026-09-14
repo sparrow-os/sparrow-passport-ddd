@@ -1,13 +1,49 @@
-<html>
-<header>
-    <body>
-        <form action="upload.do">
-            文件 <input type="file">
+<html lang="en">
+<head>
+    <title>上传</title>
+    <style>
+        html { background: linear-gradient(180deg, #eaf0ff, #f6f8fb 320px); }
+        body {
+            margin: 0; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                "Hiragino Sans GB", "Microsoft YaHei", sans-serif; color: #1f2937;
+        }
+        .card {
+            background: #fff; border-radius: 16px; padding: 40px 48px;
+            box-shadow: 0 20px 60px rgba(16, 24, 40, .10); min-width: 360px;
+        }
+        .row { margin-bottom: 16px; }
+        .row label { display: inline-block; width: 6em; font-size: 14px; font-weight: 500; color: #6b7280; }
+        input[type="text"], input[type="file"] {
+            padding: 10px 14px; font-size: 14px; border: 1px solid #e5e7eb;
+            border-radius: 8px; outline: none; width: 220px;
+        }
+        input[type="text"]:focus, input[type="file"]:focus { border-color: #2f6fed; box-shadow: 0 0 0 3px rgba(47,111,237,.15); }
+        input[type="submit"] {
+            padding: 11px 28px; font-size: 15px; font-weight: 500; color: #fff;
+            background: linear-gradient(135deg, #2f6fed, #1e4fc4); border: none;
+            border-radius: 8px; cursor: pointer; box-shadow: 0 8px 20px rgba(47,111,237,.28);
+            transition: all .18s ease;
+        }
+        input[type="submit"]:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(47,111,237,.38); }
+    </style>
+</head>
+<body>
+<div class="card">
+    <form action="upload.do">
+        <div class="row">
+            <label>文件</label>
+            <input type="file">
+        </div>
+        <div class="row">
+            <label>用户名</label>
             <input type="text" name="userName" value="zhangsan"/>
+        </div>
+        <div class="row">
             <input type="submit">
-            request.getParameter("userName")
-            request.getParameter("file")
-        </form>
-    </body>
-</header>
+        </div>
+    </form>
+</div>
+</body>
 </html>
