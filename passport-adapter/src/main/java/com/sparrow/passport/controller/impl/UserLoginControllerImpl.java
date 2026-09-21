@@ -29,9 +29,6 @@ public class UserLoginControllerImpl implements UserLoginController {
     private UserLoginService userLoginService;
 
     private void validateCaptcha(String validateCode, String userValidateCode) throws BusinessException {
-        if ("8888".equalsIgnoreCase(userValidateCode)) {
-            return;
-        }
         boolean expression = validateCode == null
                 || !validateCode.equalsIgnoreCase(userValidateCode);
         Asserts.isTrue(expression, SparrowError.GLOBAL_VALIDATE_CODE_ERROR);

@@ -18,11 +18,17 @@ public class SpringUserSecurityController {
         return this.userSecurityController.sendEmailTokenForFindPassword(email);
     }
 
+    @PostMapping("/old-send-find-password-email.json")
+    public Boolean oldSendEmailToken(@RequestParam("email") String email) throws BusinessException {
+        return this.userSecurityController.sendEmailTokenForFindPassword(email);
+    }
+
     @GetMapping("/token-verify")
     public ModelAndView tokenVerify(String token) throws BusinessException {
         this.userSecurityController.tokenVerify(token);
         return new ModelAndView("/password/token-verify");
     }
+
     @PostMapping("/reset-password-by-token")
     public ModelAndView resetPassword(PasswordResetParam param) throws BusinessException {
         this.userSecurityController.resetPassword(param);

@@ -30,7 +30,7 @@ public class SpringUserLoginController {
     private UserLoginController userLoginController;
     private static Logger logger = LoggerFactory.getLogger(SpringUserLoginController.class);
 
-    @GetMapping("/session-id")
+    @GetMapping("/session-id.json")
     public String sessionId(HttpServletRequest request) throws BusinessException {
         return request.getSession().getId();
     }

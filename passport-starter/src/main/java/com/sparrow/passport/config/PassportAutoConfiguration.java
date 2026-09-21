@@ -1,17 +1,14 @@
 package com.sparrow.passport.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 /**
  * Passport starter 的自动配置入口。
@@ -22,6 +19,7 @@ import org.springframework.util.StringUtils;
  */
 @Configuration
 @ComponentScan("com.sparrow.passport")
+@ConditionalOnClass(OpenAPI.class)
 @EnableConfigurationProperties(PassportOpenApiProperties.class)
 public class PassportAutoConfiguration {
 
@@ -37,8 +35,6 @@ public class PassportAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(name = "passportGroup")
-    @ConditionalOnProperty(prefix = "sparrow.passport.openapi", name = "enabled",
-            havingValue = "true", matchIfMissing = true)
     public GroupedOpenApi passportGroup(PassportOpenApiProperties properties) {
         return GroupedOpenApi.builder()
                 .group(properties.getGroup())

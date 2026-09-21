@@ -16,12 +16,12 @@ public class SpringUserProfileController {
     @Inject
     private UserProfileController userProfileController;
 
-    @GetMapping("load-user-profile")
+    @GetMapping("load-user-profile.json")
     BasicUserVO loadUserBasic() throws BusinessException {
         return this.userProfileController.loadUserBasic();
     }
 
-    @PostMapping("modify-user-avatar")
+    @PostMapping("modify-user-avatar.json")
     public String modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
        return this.userProfileController.modifyAvatar(avatarModifyParam);
     }

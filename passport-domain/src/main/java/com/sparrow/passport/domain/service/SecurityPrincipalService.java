@@ -3,6 +3,7 @@ package com.sparrow.passport.domain.service;
 import com.sparrow.authenticator.AuthenticationInfo;
 import com.sparrow.authenticator.Authenticator;
 import com.sparrow.authenticator.DefaultLoginUser;
+import com.sparrow.authenticator.config.AuthenticatorConfig;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.container.ConfigReader;
 import com.sparrow.core.spi.ApplicationContext;
@@ -23,17 +24,19 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.utility.DateTimeUtility;
-import jakarta.inject.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import lombok.extern.slf4j.Slf4j;
 
 @Named
+@Slf4j
 public class SecurityPrincipalService {
-    private static Logger logger = LoggerFactory.getLogger(SecurityPrincipalService.class);
+    private Json json = JsonFactory.getProvider();
+
+    @Inject
+    private AuthenticatorConfig authenticatorConfig;
     @Inject
     private Authenticator authenticatorService;
-
-    private Json json = JsonFactory.getProvider();
 
     public SecurityPrincipalEntity findByLoginName(String loginName,
                                                    DomainRegistry domainRegistry) throws BusinessException {
@@ -69,7 +72,7 @@ public class SecurityPrincipalService {
 //            eventService.successfulOperation(
 //                operationQuery);
 //        } catch (Exception ex) {
-//            logger.error("login event", ex);
+//            log.error("login event", ex);
 //            throw new BusinessException(SparrowError.SYSTEM_SERVER_ERROR, UserFieldSuffix.LOGIN);
 //        }
     }
@@ -77,7 +80,10 @@ public class SecurityPrincipalService {
     public LoginDTO login(SecurityPrincipalEntity securityPrincipal, ClientInformation client,
                           DomainRegistry domainRegistry) throws BusinessException {
         domainRegistry.getUserLimitService().canLogin(securityPrincipal.getUserId());
-        securityPrincipal.login();
+        //如果配置为跳过，则不进行较验，方便测试
+        if (!this.authenticatorConfig.getSkipPasswordValid()) {
+            securityPrincipal.login();
+        }
         domainRegistry.getSecurityPrincipalRepository().saveSecurity(securityPrincipal);
         this.addLoginEvent(securityPrincipal.getUserId(), client, domainRegistry);
         Double tokenExpireDays = securityPrincipal.getLoginParam().getTokenExpireDays();
@@ -93,8 +99,8 @@ public class SecurityPrincipalService {
                 client.getDeviceId(),
                 tokenExpireDays
         );
-        logger.info("security principle login user info {}", this.json.toString(loginUser));
-        AuthenticationInfo authenticationInfo=new AuthenticationInfo() {
+        log.info("security principle login user info {}", this.json.toString(loginUser));
+        AuthenticationInfo authenticationInfo = new AuthenticationInfo() {
             @Override
             public LoginUser getUser() {
                 return loginUser;
@@ -170,7 +176,7 @@ public class SecurityPrincipalService {
 //            operationQuery.setClient(client);
 //            domainRegistry.getEventService().successfulOperation(operationQuery);
 //        } catch (Exception e) {
-//            logger.error("modify password event error", e);
+//            log.error("modify password event error", e);
 //        }
     }
 }

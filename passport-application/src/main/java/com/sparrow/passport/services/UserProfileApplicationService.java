@@ -22,6 +22,7 @@ public class UserProfileApplicationService implements UserProfileAppService {
     @Inject
     private UserProfileService userProfileService;
 
+    @Inject
     private UserProfileRepository userProfileRepository;
 
     @Override

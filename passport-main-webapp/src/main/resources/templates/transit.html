@@ -8,7 +8,7 @@
     <th:block th:include="/frames::global_resource"/>
     <script  type="text/javascript">
         function clickRedirect(){
-           var queryString='[[${#httpServletRequest.getQueryString()}]]';
+            var queryString = '[(${queryString})]';
             window.location.href=queryString;
         }
     </script>
@@ -23,7 +23,7 @@
         </h2>
     </div>
     <div class="content">
-        <input id="hdnQueryString" type="hidden" th:value="${#httpServletRequest.getQueryString()}"/>
+        <input id="hdnQueryString" type="hidden" th:value="${queryString}"/>
         <span id="timer">50000</span>秒以后将自动跳转,或者
         <a href="javascript:void(0);" onclick="clickRedirect()" id="hyperQueryString" target="_self">直接点击这里跳转</a>
         <script type="text/javascript">

@@ -4,6 +4,7 @@ import com.sparrow.authenticator.AuthenticationInfo;
 import com.sparrow.authenticator.Authenticator;
 import com.sparrow.authenticator.AuthenticatorConfigReader;
 import com.sparrow.authenticator.DefaultLoginUser;
+import com.sparrow.authenticator.signature.jwt.JwtRSSignature;
 import com.sparrow.concurrent.SparrowThreadFactory;
 import com.sparrow.constant.ConfigKeyLanguage;
 import com.sparrow.container.ConfigReader;
@@ -105,9 +106,19 @@ public class RegisteringUserService {
                 return loginUser;
             }
 
+            /**
+             * 注意黑夜的签名算法为
+             * @see JwtRSSignature#sign(LoginUser, String)
+             * 该方法只接受符合rsa格式的公私钥对，如果用户传入的密码不符合rsa格式，那么需要重写signer 接口
+             * 这里不应该传用户密码，如果一定要使用密码 则需要重写
+             * @see com.sparrow.authenticator.Signature#sign(LoginUser, String)
+             * 并覆盖默认的签名对象
+             * @return
+             */
             @Override
             public String getCredential() {
-                return registeringUserEntity.getPassword();
+                return null;
+                //registeringUserEntity.getPassword();
             }
         };
         String permission = this.authenticatorService.login(authenticationInfo);

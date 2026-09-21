@@ -1,5 +1,6 @@
 package com.sparrow.passport.controller;
 
+import com.sparrow.passport.protocol.dto.LoginDTO;
 import com.sparrow.passport.protocol.param.register.EmailActivateParam;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.protocol.BusinessException;
@@ -16,15 +17,15 @@ public class SpringUserRegisterController {
     @Autowired
     private UserRegisterController userRegisterController;
 
-    @PostMapping("/email/shortcut")
-    public void shortcut(@RequestBody EmailRegisterParam user,
-        ClientInformation client) throws BusinessException {
-        userRegisterController.emailRegister(user, client);
+    @PostMapping("/email/shortcut.json")
+    public LoginDTO shortcut(@RequestBody EmailRegisterParam user,
+                             ClientInformation client) throws BusinessException {
+        return userRegisterController.emailRegister(user, client);
     }
 
     @PostMapping("/email")
     public ModelAndView emailRegister(EmailRegisterParam user,
-        ClientInformation client, RedirectAttributes attributes) throws BusinessException {
+                                      ClientInformation client, RedirectAttributes attributes) throws BusinessException {
         this.userRegisterController.emailRegister(user, client);
         ModelAndView mv = new ModelAndView("redirect:/email-activate-send-success");
         mv.addObject("email", user.getEmail());
@@ -34,7 +35,7 @@ public class SpringUserRegisterController {
 
     @PostMapping("/email/activate/send.json")
     public void sendActivateEmail(EmailActivateParam user,
-        ClientInformation client) throws BusinessException {
+                                  ClientInformation client) throws BusinessException {
         this.userRegisterController.sendTokenToEmail(user, client);
     }
 
