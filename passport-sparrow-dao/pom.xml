@@ -37,11 +37,6 @@
             <groupId>com.sparrowzoo.passport</groupId>
             <artifactId>passport-dao-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.sparrowzoo.passport</groupId>
-            <artifactId>passport-dao-api</artifactId>
-        </dependency>
-
     </dependencies>
 
 </project>
