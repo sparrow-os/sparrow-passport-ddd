@@ -8,7 +8,8 @@
       "Read(//opt/**)",
       "Read(//usr/lib/**)",
       "Bash(update-alternatives --list java)",
-      "Bash(ggrep -r \"import javax.inject\" /mnt/d/workspace/sparrow/sparrowzoo/sparrow-passport-ddd --include=\"*.java\" -l)"
+      "Bash(ggrep -r \"import javax.inject\" /mnt/d/workspace/sparrow/sparrowzoo/sparrow-passport-ddd --include=\"*.java\" -l)",
+      "Bash(unzip -l ~/.m2/repository/com/sparrowzoo/authenticator-core/1.0.5-SNAPSHOT/authenticator-core-1.0.5-SNAPSHOT.jar)"
     ]
   }
 }
