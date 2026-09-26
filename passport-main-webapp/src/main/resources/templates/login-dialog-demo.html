@@ -1,6 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>sparrow index </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script language="javascript" type="text/javascript"
             src="http://r.sparrowzoo.net/scripts/sparrow.js?v=1.0"></script>
     <script language="javascript" type="text/javascript"
@@ -14,20 +15,52 @@
         }
     </script>
     <style>
-        html { background: linear-gradient(180deg, #eaf0ff, #f6f8fb 320px); }
+        :root {
+            color-scheme: dark;
+            --bg: #07070d;
+            --text: #f4f4f7;
+            --brand: #6d5cff;
+            --cyan: #22d3ee;
+            --gradient: linear-gradient(110deg, var(--brand), var(--cyan) 52%, #a855f7);
+        }
+        * { box-sizing: border-box; }
+        html { background: var(--bg); }
         body {
-            margin: 0; min-height: 100vh;
+            position: relative; isolation: isolate;
+            margin: 0; min-height: 100vh; min-height: 100svh; padding: 32px 20px;
             display: flex; align-items: center; justify-content: center;
+            background:
+                radial-gradient(ellipse at 16% 14%, rgba(109, 92, 255, .14), transparent 48%),
+                radial-gradient(ellipse at 85% 68%, rgba(34, 211, 238, .07), transparent 44%),
+                radial-gradient(ellipse at 72% 100%, rgba(168, 85, 247, .09), transparent 45%);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text); -webkit-font-smoothing: antialiased;
         }
+        body::before {
+            content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, .035) .5px, transparent .5px);
+            background-size: 56px 56px, 56px 56px, 4px 4px;
+            mask-image: linear-gradient(#000, rgba(0, 0, 0, .25));
+        }
+        ::selection { background: rgba(109, 92, 255, .35); color: var(--text); }
         input[type="button"] {
-            padding: 13px 34px; font-size: 16px; font-weight: 500; color: #fff;
-            background: linear-gradient(135deg, #2f6fed, #1e4fc4); border: none;
-            border-radius: 8px; cursor: pointer;
-            box-shadow: 0 8px 20px rgba(47, 111, 237, .28); transition: all .18s ease;
+            min-height: 48px; max-width: 100%; padding: 13px 38px; font: inherit;
+            font-size: 16px; font-weight: 650; color: var(--bg);
+            background: var(--gradient); border: 1px solid transparent;
+            border-radius: 999px; cursor: pointer;
+            box-shadow: 0 6px 24px rgba(109, 92, 255, .2);
+            transition: transform .2s ease, box-shadow .2s ease;
         }
-        input[type="button"]:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(47, 111, 237, .38); }
+        input[type="button"]:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(109, 92, 255, .3); }
+        input[type="button"]:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+        @media (prefers-reduced-motion: reduce) {
+            input[type="button"] { transition: none; }
+            input[type="button"]:hover { transform: none; }
+        }
     </style>
 </head>
 <body>
