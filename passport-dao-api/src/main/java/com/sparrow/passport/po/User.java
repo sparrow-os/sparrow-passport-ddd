@@ -129,7 +129,6 @@ public class User implements Cloneable, POJO {
     private String device;
 
     @Column(name = "host", columnDefinition = "varchar(64) DEFAULT '' COMMENT 'host'", updatable = false, nullable = false)
-
     /**
      * 设备ID
      */

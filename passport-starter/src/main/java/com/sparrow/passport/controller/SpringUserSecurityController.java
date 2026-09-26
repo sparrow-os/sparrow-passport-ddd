@@ -35,6 +35,11 @@ public class SpringUserSecurityController {
         return this.userSecurityController.sendEmailTokenForFindPassword(email);
     }
 
+    @PostMapping("/reset-password-by-token.json")
+    public void newResetPassword(PasswordResetParam param) throws BusinessException {
+        this.userSecurityController.resetPassword(param);
+    }
+
     @PostMapping("/old-send-find-password-email.json")
     public Boolean oldSendEmailToken(@RequestParam("email") String email) throws BusinessException {
         return this.userSecurityController.sendEmailTokenForFindPassword(email);
