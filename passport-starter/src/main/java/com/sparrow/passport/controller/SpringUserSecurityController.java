@@ -36,7 +36,7 @@ public class SpringUserSecurityController {
     }
 
     @PostMapping("/reset-password-by-token.json")
-    public void newResetPassword(PasswordResetParam param) throws BusinessException {
+    public void newResetPassword(@RequestBody PasswordResetParam param) throws BusinessException {
         this.userSecurityController.resetPassword(param);
     }
 
