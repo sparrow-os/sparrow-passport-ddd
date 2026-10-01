@@ -20,6 +20,7 @@ package com.sparrow.passport.boot;
 import com.sparrow.container.Container;
 import com.sparrow.container.ContainerBuilder;
 import com.sparrow.core.spi.ApplicationContext;
+import com.sparrow.file.config.EnableFileApp;
 import com.sparrow.passport.config.EnablePassport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication
 @EnablePassport
+@EnableFileApp
 @Slf4j
 public class Application {
     public static void main(String[] args) {
