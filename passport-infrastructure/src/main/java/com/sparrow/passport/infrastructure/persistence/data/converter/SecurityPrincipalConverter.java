@@ -54,6 +54,7 @@ public class SecurityPrincipalConverter {
         securityPrincipal.setCategory(user.getCategory());
         securityPrincipal.setPassword(user.getPassword());
         securityPrincipal.setStatus(user.getStatus().ordinal());
+        securityPrincipal.setAvatar(user.getAvatar());
         return securityPrincipal;
     }
 }
