@@ -29,6 +29,7 @@ import com.sparrow.protocol.dao.UniqueKeyCriteria;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class SparrowProfileRepository implements UserProfileRepository {
     }
 
     @Override
-    public void modifyAvatar(String avatar) throws BusinessException {
+    public void modifyAvatar(String avatar) {
         LoginUser loginUser = SessionContext.getLoginUser();
         this.userDao.modifyAvatar(loginUser.getUserId(), avatar);
     }

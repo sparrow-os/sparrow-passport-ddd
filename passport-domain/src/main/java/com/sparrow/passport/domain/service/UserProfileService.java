@@ -17,10 +17,7 @@ limitations under the License.
 
 package com.sparrow.passport.domain.service;
 
-import com.sparrow.core.spi.ApplicationContext;
 import com.sparrow.exception.Asserts;
-import com.sparrow.file.api.AttachService;
-import com.sparrow.file.param.ImageCropperParam;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
@@ -28,11 +25,9 @@ import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
-import com.sparrow.support.web.WebConfigReader;
-import jakarta.inject.*;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
 
 @Named
 @Slf4j
@@ -43,9 +38,6 @@ public class UserProfileService {
 
     @Inject
     UserProfileRepository userProfileRepository;
-
-    @Inject
-    private AttachService attachService;
 
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
         UserProfileDTO userProfile = null;
@@ -63,13 +55,7 @@ public class UserProfileService {
         return userProfile;
     }
 
-    public String modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
-        WebConfigReader webConfigReader = ApplicationContext.getContainer().getBean(WebConfigReader.class);
-        String resource = webConfigReader.getResource();
-        Asserts.isTrue(avatarModifyParam.getAvatar().startsWith(resource), PassportError.USER_AVATAR_CAN_NOT_DEFAULT);
-        ImageCropperParam imageCropperParam = new ImageCropperParam(avatarModifyParam.getAvatar(), avatarModifyParam.getX(), avatarModifyParam.getY(), avatarModifyParam.getWidth(), avatarModifyParam.getHeight());
-        String avatar = this.attachService.imageCropper(imageCropperParam);
-        this.userProfileRepository.modifyAvatar(avatar);
-        return avatar;
+    public void modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException {
+        this.userProfileRepository.modifyAvatar(avatarModifyParam.getAvatar());
     }
 }

@@ -21,9 +21,9 @@ import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.inject.Inject;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.inject.Inject;
 import java.io.IOException;
 
 @RestController
@@ -39,7 +39,7 @@ public class SpringUserProfileController {
     }
 
     @PostMapping("modify-user-avatar.json")
-    public String modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
-        return this.userProfileController.modifyAvatar(avatarModifyParam);
+    public void modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+        this.userProfileController.modifyAvatar(avatarModifyParam);
     }
 }

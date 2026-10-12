@@ -50,7 +50,7 @@ public class UserProfileControllerImpl implements UserProfileController {
     }
 
     @Override
-    public String modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
-        return userProfileService.modifyAvatar(avatarModifyParam);
+    public void modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+        userProfileService.modifyAvatar(avatarModifyParam);
     }
 }
