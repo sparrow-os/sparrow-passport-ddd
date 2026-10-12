@@ -17,12 +17,18 @@ limitations under the License.
 
 package com.sparrow.passport.domain.service;
 
+import com.sparrow.authenticator.AuthenticationInfo;
+import com.sparrow.authenticator.Authenticator;
+import com.sparrow.authenticator.DefaultLoginUser;
+import com.sparrow.context.SessionContext;
 import com.sparrow.exception.Asserts;
+import com.sparrow.passport.protocol.dto.ModifyAvatarDTO;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import jakarta.inject.Inject;
@@ -32,12 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 @Named
 @Slf4j
 public class UserProfileService {
+    @Inject
+    UserProfileRepository userProfileRepository;
+    @Inject
+    private Authenticator authenticatorService;
+
     public UserProfileService() {
         log.info("UserProfileService init");
     }
-
-    @Inject
-    UserProfileRepository userProfileRepository;
 
     public UserProfileDTO getByIdentify(String userIdentify) throws BusinessException {
         UserProfileDTO userProfile = null;
@@ -55,7 +63,30 @@ public class UserProfileService {
         return userProfile;
     }
 
-    public void modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException {
+    public ModifyAvatarDTO modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException {
         this.userProfileRepository.modifyAvatar(avatarModifyParam.getAvatar());
+        LoginUser loginUser = SessionContext.getLoginUser();
+        LoginUser newLoginUser = DefaultLoginUser.create(
+                loginUser.getUserId(),
+                loginUser.getTenantId(),
+                loginUser.getCategory(),
+                loginUser.getUserName(),
+                loginUser.getNickName(),
+                avatarModifyParam.getAvatar(),
+                loginUser.getDeviceType(), loginUser.getHost(), loginUser.getDays());
+
+        AuthenticationInfo authenticationInfo = new AuthenticationInfo() {
+            @Override
+            public LoginUser getUser() {
+                return newLoginUser;
+            }
+
+            @Override
+            public String getCredential() {
+                return null;
+            }
+        };
+        String permission = this.authenticatorService.login(authenticationInfo);
+        return new ModifyAvatarDTO(avatarModifyParam.getAvatar(), permission);
     }
 }

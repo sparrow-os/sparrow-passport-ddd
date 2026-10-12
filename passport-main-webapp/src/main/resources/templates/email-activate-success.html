@@ -2,19 +2,19 @@
 <head>
     <base/>
     <title>邮箱激活-麻雀窝</title>
-    <meta http-equiv="pragma" content="no-cache"/>
-    <meta http-equiv="cache-control" content="no-cache"/>
-    <meta http-equiv="expires" content="0"/>
-    <meta http-equiv="keywords" content="邮箱激活"/>
-    <meta http-equiv="description" content="邮箱激活"/>
+    <meta content="no-cache" http-equiv="pragma"/>
+    <meta content="no-cache" http-equiv="cache-control"/>
+    <meta content="0" http-equiv="expires"/>
+    <meta content="邮箱激活" http-equiv="keywords"/>
+    <meta content="邮箱激活" http-equiv="description"/>
     <th:block th:include="/frames::global_resource"/>
-    <script  type="text/javascript"
-            th:src="${resource}+'/scripts/language/zh_cn/user.js?v=1.0"></script>
-    <script  type="text/javascript"
-            th:src="${resource}+'/ext/scripts/passport.js?v='+${resource_version}"></script>
+    <script th:src="${resource}+'/scripts/language/zh_cn/user.js?v=1.0"
+            type="text/javascript"></script>
+    <script th:src="${resource}+'/ext/scripts/passport.js?v='+${resource_version}"
+            type="text/javascript"></script>
 </head>
 <body>
-<script  type="text/javascript" th:src="${resource}+'/scripts/baidu.js?v='+${resource_version}"></script>
+<script th:src="${resource}+'/scripts/baidu.js?v='+${resource_version}" type="text/javascript"></script>
 <div class="body">
     <th:block th:include="/frames::banner"/>
     <div class="header">
@@ -26,7 +26,7 @@
 
     <div class="content">
         <span data-th-href="${root_path}+'/login'" id="redirect"></span>" id="timer">5000</span>秒以后将自动跳转,或者
-        <a data-th-href="${root_path}+'/login'"  target="_self">点击这里直接登录</a>
+        <a data-th-href="${root_path}+'/login'" target="_self">点击这里直接登录</a>
         <script type="text/javascript">
             $.waitRedirect("timer");
         </script>

@@ -18,7 +18,9 @@ limitations under the License.
 package com.sparrow.passport.mybatis.mapper;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.util.Date;
+
 public class User {
     /*-------基本信息-------------*/
     @TableId("user_id")
@@ -190,6 +192,10 @@ public class User {
         return zone;
     }
 
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
     public String getChannel() {
         return channel;
     }
@@ -200,6 +206,10 @@ public class User {
 
     public String getWebsite() {
         return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getGroupLevel() {
@@ -216,14 +226,6 @@ public class User {
 
     public void setSecretMobile(String secretMobile) {
         this.secretMobile = secretMobile;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public void setZone(String zone) {
-        this.zone = zone;
     }
 
     public String getDevice() {

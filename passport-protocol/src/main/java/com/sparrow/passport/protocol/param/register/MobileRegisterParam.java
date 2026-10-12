@@ -21,17 +21,18 @@ public class MobileRegisterParam extends UserNameRegisterParam {
 
     private String mobile;
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
     public String getMobile() {
         return mobile;
     }
 
-    @Override public String toString() {
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    @Override
+    public String toString() {
         return "MobileRegisterDTO{" +
-            "mobile='" + mobile + '\'' +
-            "} " + super.toString();
+                "mobile='" + mobile + '\'' +
+                "} " + super.toString();
     }
 }

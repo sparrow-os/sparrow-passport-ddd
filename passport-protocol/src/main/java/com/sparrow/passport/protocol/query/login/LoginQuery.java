@@ -75,13 +75,14 @@ public class LoginQuery implements Query {
         this.redirectUrl = redirectUrl;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "LoginQuery{" +
-            "userName='" + userName + '\'' +
-            ", password='" + password + '\'' +
-            ", remember=" + remember +
-            ", captcha='" + captcha + '\'' +
-            ", redirectUrl='" + redirectUrl + '\'' +
-            '}';
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", remember=" + remember +
+                ", captcha='" + captcha + '\'' +
+                ", redirectUrl='" + redirectUrl + '\'' +
+                '}';
     }
 }

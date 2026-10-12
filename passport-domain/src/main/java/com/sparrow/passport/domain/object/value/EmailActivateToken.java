@@ -35,19 +35,23 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class EmailActivateToken implements ValueObject<EmailActivateToken> {
+    private static final String TOKEN_TYPE = "email-activate";
     private DomainRegistry domainRegistry;
-
+    private Long userId;
+    private String userName;
+    private String sendDate;
+    private String email;
+    private String password;
+    private String tokenType;
     private EmailActivateToken() {
     }
 
-    private static final String TOKEN_TYPE = "email-activate";
-
     public static EmailActivateToken createToken(Long userId,
-        String userName,
-        String email,
-        String password,
-        String currentDate,
-        DomainRegistry domainRegistry) {
+                                                 String userName,
+                                                 String email,
+                                                 String password,
+                                                 String currentDate,
+                                                 DomainRegistry domainRegistry) {
         EmailActivateToken emailActivateToken = new EmailActivateToken();
         emailActivateToken.userId = userId;
         emailActivateToken.userName = userName;
@@ -59,8 +63,8 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
     }
 
     public static EmailActivateToken parse(EmailTokenPair emailTokenPair,
-        String password,
-        DomainRegistry domainRegistry) throws BusinessException {
+                                           String password,
+                                           DomainRegistry domainRegistry) throws BusinessException {
         if (emailTokenPair == null) {
             return null;
         }
@@ -81,13 +85,6 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
         }
     }
 
-    private Long userId;
-    private String userName;
-    private String sendDate;
-    private String email;
-    private String password;
-    private String tokenType;
-
     private String generateOriginToken() {
         // 令牌原码
         return TOKEN_TYPE + "|" + this.userId + "|" + this.userName + "|" + this.sendDate;
@@ -103,10 +100,10 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
         ConfigReader configReader = ApplicationContext.getContainer().getBean(ConfigReader.class);
         WebConfigReader webConfigReader = ApplicationContext.getContainer().getBean(WebConfigReader.class);
         return configReader
-            .getI18nValue(ConfigKeyLanguage.EMAIL_ACTIVATE_CONTENT)
-            .replace("$rootPath", webConfigReader.getRootPath())
-            .replace("$validateToken", this.generateToken())
-            .replace("$date", this.sendDate);
+                .getI18nValue(ConfigKeyLanguage.EMAIL_ACTIVATE_CONTENT)
+                .replace("$rootPath", webConfigReader.getRootPath())
+                .replace("$validateToken", this.generateToken())
+                .replace("$date", this.sendDate);
     }
 
     public boolean isValid(String originUserName) throws BusinessException {
@@ -116,34 +113,37 @@ public class EmailActivateToken implements ValueObject<EmailActivateToken> {
         AuthenticatorConfigReader configReader = this.domainRegistry.getAuthenticatorConfigReader();
         Double validateTokenAvailableDay = configReader.getTokenAvailableDays();
         int passDay = DateTimeUtility.getInterval(
-            Timestamp.valueOf(sendDate).getTime(),
-            System.currentTimeMillis(),
-            DateTimeUnit.DAY);
+                Timestamp.valueOf(sendDate).getTime(),
+                System.currentTimeMillis(),
+                DateTimeUnit.DAY);
         if (passDay > validateTokenAvailableDay) {
             throw new BusinessException(PassportError.USER_VALIDATE_TOKEN_TIME_OUT);
         }
         return true;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (!(o instanceof EmailActivateToken))
             return false;
         EmailActivateToken token = (EmailActivateToken) o;
         return
-            userId.equals(token.userId) &&
-                userName.equals(token.userName) &&
-                sendDate.equals(token.sendDate) &&
-                email.equals(token.email) &&
-                password.equals(token.password);
+                userId.equals(token.userId) &&
+                        userName.equals(token.userName) &&
+                        sendDate.equals(token.sendDate) &&
+                        email.equals(token.email) &&
+                        password.equals(token.password);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(userId, userName, sendDate, email, password);
     }
 
-    @Override public boolean sameValueAs(EmailActivateToken token) {
+    @Override
+    public boolean sameValueAs(EmailActivateToken token) {
         if (this.hashCode() != token.hashCode()) {
             return false;
         }

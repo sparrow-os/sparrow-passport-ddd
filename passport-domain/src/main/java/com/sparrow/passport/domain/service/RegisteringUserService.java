@@ -53,19 +53,15 @@ import java.util.concurrent.TimeUnit;
 
 @Named
 public class RegisteringUserService {
-    @Inject
-    private Authenticator authenticatorService;
-
-    @Inject
-    private WebConfigReader webConfigReader;
-
-    @Inject
-    private EmailSender emailSender;
-
     private static final ExecutorService ACTIVATE_EMAIL_THREAD_POOL = new ThreadPoolExecutor(2, 4, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<>(128)
             , new SparrowThreadFactory.Builder().daemon(true).namingPattern("activate-email-%d").build(), new ThreadPoolExecutor.CallerRunsPolicy());
-
     private static Logger logger = LoggerFactory.getLogger(RegisteringUserService.class);
+    @Inject
+    private Authenticator authenticatorService;
+    @Inject
+    private WebConfigReader webConfigReader;
+    @Inject
+    private EmailSender emailSender;
 
     private void success(Long userId, ClientInformation client,
                          DomainRegistry domainRegistry) throws BusinessException {

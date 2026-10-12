@@ -26,7 +26,6 @@ import com.sparrow.passport.repository.UserProfileRepository;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.dao.UniqueKeyCriteria;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -40,6 +39,7 @@ public class SparrowProfileRepository implements UserProfileRepository {
 
     @Inject
     private UserProfileConverter userProfileConverter;
+
 
     @Override
     public UserProfileDTO findByUserName(String userName) throws BusinessException {

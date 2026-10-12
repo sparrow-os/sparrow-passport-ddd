@@ -40,26 +40,31 @@ public class RegisteringUserApplicationService implements UserRegisterService {
     @Inject
     private DomainRegistry domainRegistry;
 
-    @Override public LoginDTO register(UserNameRegisterParam registerParam) throws BusinessException {
+    @Override
+    public LoginDTO register(UserNameRegisterParam registerParam) throws BusinessException {
         return null;
     }
 
-    @Override public LoginDTO register(MobileRegisterParam registerParam) throws BusinessException {
+    @Override
+    public LoginDTO register(MobileRegisterParam registerParam) throws BusinessException {
         return null;
     }
 
-    @Override public LoginDTO register(EmailRegisterParam registerParam,ClientInformation client) throws BusinessException {
+    @Override
+    public LoginDTO register(EmailRegisterParam registerParam, ClientInformation client) throws BusinessException {
         RegisteringUserEntity registeringUser = this.registeringUserApplicationAssemble.emailParam2Entity(registerParam);
-        return this.domainRegistry.getRegisteringUserService().registerByEmail(registeringUser,client, domainRegistry);
+        return this.domainRegistry.getRegisteringUserService().registerByEmail(registeringUser, client, domainRegistry);
     }
 
-    @Override public void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException {
+    @Override
+    public void sendTokenToEmail(EmailActivateParam emailActivateParam) throws BusinessException {
         RegisteringUserEntity registeringUserEntity = this.domainRegistry.getRegisteringUserRepository()
-            .findByEmail(emailActivateParam.getEmail());
+                .findByEmail(emailActivateParam.getEmail());
         this.domainRegistry.getRegisteringUserService().sendActivateEmail(registeringUserEntity, this.domainRegistry);
     }
 
-    @Override public void activeEmail(String token, ClientInformation client) throws BusinessException {
+    @Override
+    public void activeEmail(String token, ClientInformation client) throws BusinessException {
         this.domainRegistry.getRegisteringUserService().activeEmail(token, client, this.domainRegistry);
     }
 }

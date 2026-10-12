@@ -22,6 +22,7 @@ import com.sparrow.passport.controller.UserProfileController;
 import com.sparrow.passport.controller.assemble.UserAssemble;
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
 import com.sparrow.passport.domain.service.UserProfileService;
+import com.sparrow.passport.protocol.dto.ModifyAvatarDTO;
 import com.sparrow.passport.protocol.dto.UserProfileDTO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.passport.repository.UserProfileRepository;
@@ -50,7 +51,7 @@ public class UserProfileControllerImpl implements UserProfileController {
     }
 
     @Override
-    public void modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
-        userProfileService.modifyAvatar(avatarModifyParam);
+    public ModifyAvatarDTO modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+        return userProfileService.modifyAvatar(avatarModifyParam);
     }
 }

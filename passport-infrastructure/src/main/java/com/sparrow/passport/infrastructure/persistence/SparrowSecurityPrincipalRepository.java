@@ -34,24 +34,28 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
     @Inject
     private SecurityPrincipalConverter securityPrincipalConverter;
 
-    @Override public SecurityPrincipalEntity findByUserId(Long userId) {
+    @Override
+    public SecurityPrincipalEntity findByUserId(Long userId) {
         User user = this.userDao.getEntity(userId);
         return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipalEntity findByEmail(String email) {
+    @Override
+    public SecurityPrincipalEntity findByEmail(String email) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(email, "email");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
         return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipalEntity findByName(String userName) {
+    @Override
+    public SecurityPrincipalEntity findByName(String userName) {
         UniqueKeyCriteria uniqueKeyCriteria = UniqueKeyCriteria.createUniqueCriteria(userName, "userName");
         User user = this.userDao.getEntityByUnique(uniqueKeyCriteria);
         return this.securityPrincipalConverter.user2SecurityPrincipal(user);
     }
 
-    @Override public SecurityPrincipalEntity findByMobile(String mobile, String secretMobile) {
+    @Override
+    public SecurityPrincipalEntity findByMobile(String mobile, String secretMobile) {
 //        SearchCriteria searchCriteria = new SearchCriteria();
 //        searchCriteria.setWhere(BooleanCriteria.criteria(Criteria.field("mobile").equal(mobile))
 //            .and(Criteria.field("user.secretMobile").equal(secretMobile)));
@@ -59,7 +63,8 @@ public class SparrowSecurityPrincipalRepository implements SecurityPrincipalRepo
         return null;
     }
 
-    @Override public void saveSecurity(SecurityPrincipalEntity securityPrincipalEntity) {
+    @Override
+    public void saveSecurity(SecurityPrincipalEntity securityPrincipalEntity) {
         SecurityPrincipal securityPrincipal = this.securityPrincipalConverter.entity2Po(securityPrincipalEntity);
         this.userDao.save(securityPrincipal);
     }

@@ -18,6 +18,7 @@ limitations under the License.
 package com.sparrow.passport.controller;
 
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
+import com.sparrow.passport.protocol.dto.ModifyAvatarDTO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 
@@ -27,5 +28,5 @@ public interface UserProfileController {
 
     BasicUserVO loadUserBasic() throws BusinessException;
 
-    void modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException;
+    ModifyAvatarDTO modifyAvatar(AvatarModifyParam avatarModifyParam) throws BusinessException, IOException;
 }

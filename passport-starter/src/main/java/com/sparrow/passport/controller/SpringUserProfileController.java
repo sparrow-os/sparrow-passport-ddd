@@ -18,6 +18,7 @@ limitations under the License.
 package com.sparrow.passport.controller;
 
 import com.sparrow.passport.controller.protocol.vo.BasicUserVO;
+import com.sparrow.passport.protocol.dto.ModifyAvatarDTO;
 import com.sparrow.passport.protocol.param.AvatarModifyParam;
 import com.sparrow.protocol.BusinessException;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,7 +40,7 @@ public class SpringUserProfileController {
     }
 
     @PostMapping("modify-user-avatar.json")
-    public void modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
-        this.userProfileController.modifyAvatar(avatarModifyParam);
+    public ModifyAvatarDTO modifyAvatar(@RequestBody AvatarModifyParam avatarModifyParam) throws BusinessException, IOException {
+        return this.userProfileController.modifyAvatar(avatarModifyParam);
     }
 }

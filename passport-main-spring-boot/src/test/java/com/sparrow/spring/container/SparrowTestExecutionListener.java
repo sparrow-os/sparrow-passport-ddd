@@ -7,13 +7,14 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
 public class SparrowTestExecutionListener implements TestExecutionListener {
-    @Override public void beforeTestClass(TestContext testContext) throws Exception {
+    @Override
+    public void beforeTestClass(TestContext testContext) throws Exception {
         Container container = ApplicationContext.getContainer();
         ContainerBuilder builder = new ContainerBuilder()
-            .scanBasePackage("com.sparrow")
-            .initController(false)
-            .initSingletonBean(false)
-            .initInterceptor(false);
+                .scanBasePackage("com.sparrow")
+                .initController(false)
+                .initSingletonBean(false)
+                .initInterceptor(false);
         container.init(builder);
     }
 

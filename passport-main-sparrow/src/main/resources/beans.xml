@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE beans PUBLIC "-//sparrow Framework//DTD ioc Configuration//EN"
-    "http://www.sparrowzoo.com/dtds/beans.dtd">
+        "http://www.sparrowzoo.com/dtds/beans.dtd">
 <beans>
     <component-scan>com.sparrow</component-scan>
     <import resource="sparrow-default-beans.xml"/>

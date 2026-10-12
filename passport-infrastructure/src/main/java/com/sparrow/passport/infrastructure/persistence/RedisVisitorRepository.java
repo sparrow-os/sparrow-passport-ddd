@@ -21,10 +21,9 @@ import com.sparrow.constant.DateTime;
 import com.sparrow.passport.infrastructure.RedisKey;
 import com.sparrow.passport.repository.VisitorRepository;
 import com.sparrow.utility.DateTimeUtility;
-import org.springframework.data.redis.core.RedisTemplate;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.springframework.data.redis.core.RedisTemplate;
 
 @Named
 public class RedisVisitorRepository implements VisitorRepository {

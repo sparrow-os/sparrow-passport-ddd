@@ -32,7 +32,7 @@ public class EmailRegisterParam extends UserNameRegisterParam {
     @Override
     public String toString() {
         return "EmailRegisterDTO{" +
-            "email='" + email + '\'' +
-            '}';
+                "email='" + email + '\'' +
+                '}';
     }
 }

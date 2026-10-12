@@ -26,7 +26,7 @@ import com.sparrow.protocol.ClientInformation;
 public interface UserRegisterController {
 
     LoginDTO emailRegister(EmailRegisterParam user,
-        ClientInformation client) throws BusinessException;
+                           ClientInformation client) throws BusinessException;
 
     Boolean sendTokenToEmail(EmailActivateParam emailActivateParam, ClientInformation client) throws BusinessException;
 

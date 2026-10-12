@@ -3,17 +3,17 @@
     <head>
         <base/>
         <title>密码重置-麻雀窝</title>
-        <meta http-equiv="pragma" content="no-cache"/>
-        <meta http-equiv="cache-control" content="no-cache"/>
-        <meta http-equiv="expires" content="0"/>
-        <meta http-equiv="keywords" content="密码重置"/>
-        <meta http-equiv="description" content="密码重置"/>
+        <meta content="no-cache" http-equiv="pragma"/>
+        <meta content="no-cache" http-equiv="cache-control"/>
+        <meta content="0" http-equiv="expires"/>
+        <meta content="密码重置" http-equiv="keywords"/>
+        <meta content="密码重置" http-equiv="description"/>
         <th:block th:include="/frames::global_resource"/>
-        <script type="text/javascript"
-                src="http://r.sparrowzoo.net/ext/scripts/language/zh_cn/user.js?v=1.0"></script>
+        <script src="http://r.sparrowzoo.net/ext/scripts/language/zh_cn/user.js?v=1.0"
+                type="text/javascript"></script>
     </head>
 <body>
-<script  type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
+<script src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0" type="text/javascript"></script>
 <div class="body">
     <th:block th:include="/frames::banner"/>
     <div class="header">
@@ -24,30 +24,30 @@
     </div>
 
     <div class="content">
-        <form action="/password/reset-password-by-token" method="post" class="pure-form pure-form-aligned">
+        <form action="/password/reset-password-by-token" class="pure-form pure-form-aligned" method="post">
             <fieldset>
-                <input type="hidden" id="hdnValidateToken" name="token" th:value="${param.token}" class=""/>
+                <input class="" id="hdnValidateToken" name="token" th:value="${param.token}" type="hidden"/>
                 <div class="pure-control-group">
                     <label for="txtPassword">
                         新密码
                     </label>
-                    <input type="password"
-                           onfocus="$.v.showMessage(password,this);"
-                           onblur="$.v.isNull(password,this);" id="txtPassword"
-                           name="password"/>
-                    <span id="errorPassword" class="pure-form-message-inline"></span>
+                    <input id="txtPassword"
+                           name="password"
+                           onblur="$.v.isNull(password,this);" onfocus="$.v.showMessage(password,this);"
+                           type="password"/>
+                    <span class="pure-form-message-inline" id="errorPassword"></span>
                 </div>
                 <div class="pure-control-group">
                     <label for="txtConfirmPassword">确认密码</label>
-                    <input type="password" onfocus="$.v.showMessage(password,this);"
+                    <input id="txtConfirmPassword" name="newPassword2"
                            onblur="$.v.isEqual(password,this);"
-                           id="txtConfirmPassword" name="newPassword2"/>
-                    <span id="errorConfirmPassword" name="confirm_password" class="pure-form-message-inline"></span>
+                           onfocus="$.v.showMessage(password,this);" type="password"/>
+                    <span class="pure-form-message-inline" id="errorConfirmPassword" name="confirm_password"></span>
                 </div>
 
                 <div class="pure-controls">
-                    <button onenter="true" type="button" onclick="$.v.getValidateResult(password);"
-                            class="pure-button pure-button-primary">提交
+                    <button class="pure-button pure-button-primary" onclick="$.v.getValidateResult(password);" onenter="true"
+                            type="button">提交
                     </button>
                 </div>
             </fieldset>

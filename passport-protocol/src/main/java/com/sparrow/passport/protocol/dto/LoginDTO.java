@@ -23,10 +23,10 @@ import lombok.Data;
 
 @Data
 public class LoginDTO implements DTO {
+    private LoginUser loginUser;
+    private String token;
     public LoginDTO(LoginUser loginUser, String token) {
         this.loginUser = loginUser;
         this.token = token;
     }
-    private LoginUser loginUser;
-    private String token;
 }

@@ -17,9 +17,8 @@ limitations under the License.
 
 package com.sparrow.passport.infrastructure.services;
 
-import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.domain.service.UserLimitService;
-
+import com.sparrow.protocol.BusinessException;
 import jakarta.inject.Named;
 
 @Named("userLimitService")

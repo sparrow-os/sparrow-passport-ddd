@@ -17,10 +17,10 @@ limitations under the License.
 
 package com.sparrow.passport.api;
 
-import com.sparrow.passport.protocol.param.password.PasswordResetParam;
-import com.sparrow.protocol.BusinessException;
 import com.sparrow.passport.protocol.param.password.PasswordModifyParam;
+import com.sparrow.passport.protocol.param.password.PasswordResetParam;
 import com.sparrow.passport.protocol.param.password.ResetPasswordByMobileParam;
+import com.sparrow.protocol.BusinessException;
 
 public interface UserSecurityService {
 

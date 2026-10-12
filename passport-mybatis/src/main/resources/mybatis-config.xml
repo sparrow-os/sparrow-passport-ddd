@@ -42,7 +42,7 @@
         <setting name="defaultEnumTypeHandler" value="org.apache.ibatis.type.EnumTypeHandler"/>
         <setting name="callSettersOnNulls" value="false"/>
         <setting name="returnInstanceForEmptyRow" value="false"/>
-<!--        <setting name="proxyFactory" value="CGLIB"/>-->
+        <!--        <setting name="proxyFactory" value="CGLIB"/>-->
         <setting name="useActualParamName" value="true"/>
     </settings>
     <typeAliases>

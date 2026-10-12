@@ -39,13 +39,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Tag(name = "UserLogin")
 public class SpringUserLoginController {
+    private static Logger logger = LoggerFactory.getLogger(SpringUserLoginController.class);
+    @Autowired
+    private UserLoginController userLoginController;
     public SpringUserLoginController() {
         log.info("SpringUserLoginController");
     }
-
-    @Autowired
-    private UserLoginController userLoginController;
-    private static Logger logger = LoggerFactory.getLogger(SpringUserLoginController.class);
 
     @GetMapping("/session-id.json")
     public String sessionId(HttpServletRequest request) throws BusinessException {

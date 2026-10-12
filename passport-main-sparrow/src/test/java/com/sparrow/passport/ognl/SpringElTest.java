@@ -33,7 +33,7 @@
 //        //访问类型，在java.lang下不用全限定名
 //        Class<String> result1 = parser.parseExpression("T(String)").getValue(Class.class);
 //        //访问类型，不在java.lang下要全限定名
-////        Class<String> result2 = parser.parseExpression("T(cn.javass.spring.chapter5.SpELTest)").getValue(Class.class);
+/// /        Class<String> result2 = parser.parseExpression("T(cn.javass.spring.chapter5.SpELTest)").getValue(Class.class);
 //
 ////类静态字段访问
 //        parser.parseExpression("T(Integer).MAX_VALUE").getValue(int.class);

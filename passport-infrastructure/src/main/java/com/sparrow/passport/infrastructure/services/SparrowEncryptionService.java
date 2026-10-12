@@ -22,6 +22,7 @@ import com.sparrow.cryptogram.ThreeDES;
 import com.sparrow.passport.domain.service.EncryptionService;
 
 import jakarta.inject.Named;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 

@@ -18,6 +18,7 @@ limitations under the License.
 package com.sparrow.passport.domain.object.value;
 
 import com.sparrow.protocol.ddd.ValueObject;
+
 import java.util.Objects;
 
 public class ModifyPassword implements ValueObject<ModifyPassword> {
@@ -43,7 +44,8 @@ public class ModifyPassword implements ValueObject<ModifyPassword> {
         return newEncryptionPassword;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -52,11 +54,13 @@ public class ModifyPassword implements ValueObject<ModifyPassword> {
         return Objects.equals(oldEncryptionPassword, password1.oldEncryptionPassword) && Objects.equals(newEncryptionPassword, password1.newEncryptionPassword) && Objects.equals(password, password1.password);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(oldEncryptionPassword, newEncryptionPassword, password);
     }
 
-    @Override public boolean sameValueAs(ModifyPassword other) {
+    @Override
+    public boolean sameValueAs(ModifyPassword other) {
         if (this.hashCode() != other.hashCode()) {
             return false;
         }

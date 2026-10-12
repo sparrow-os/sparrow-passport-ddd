@@ -19,7 +19,10 @@ package com.sparrow.passport.domain;
 
 import com.sparrow.authenticator.AuthenticatorConfigReader;
 import com.sparrow.email.EmailSender;
-import com.sparrow.passport.domain.service.*;
+import com.sparrow.passport.domain.service.EncryptionService;
+import com.sparrow.passport.domain.service.RegisteringUserService;
+import com.sparrow.passport.domain.service.SecurityPrincipalService;
+import com.sparrow.passport.domain.service.UserLimitService;
 import com.sparrow.passport.repository.RegisteringUserRepository;
 import com.sparrow.passport.repository.SecurityPrincipalRepository;
 import com.sparrow.passport.repository.UserProfileRepository;

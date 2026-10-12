@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0">
     <parent>
         <groupId>com.sparrowzoo</groupId>
         <artifactId>sparrow-bom</artifactId>
@@ -19,7 +19,7 @@
         <module>passport-domain</module>
         <module>passport-infrastructure</module>
         <module>passport-sparrow-dao</module>
-<!--        <module>passport-main-sparrow</module>-->
+        <!--        <module>passport-main-sparrow</module>-->
         <module>passport-main-spring-boot</module>
         <module>passport-adapter</module>
         <module>passport-mybatis</module>

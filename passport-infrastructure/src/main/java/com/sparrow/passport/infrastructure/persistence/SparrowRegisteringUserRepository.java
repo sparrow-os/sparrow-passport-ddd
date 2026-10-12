@@ -17,14 +17,13 @@ limitations under the License.
 
 package com.sparrow.passport.infrastructure.persistence;
 
-import com.sparrow.passport.infrastructure.persistence.data.converter.RegisteringUserConverter;
-import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.dao.UniqueKeyCriteria;
 import com.sparrow.passport.dao.UserDAO;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
+import com.sparrow.passport.infrastructure.persistence.data.converter.RegisteringUserConverter;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.repository.RegisteringUserRepository;
-
+import com.sparrow.protocol.ClientInformation;
+import com.sparrow.protocol.dao.UniqueKeyCriteria;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 

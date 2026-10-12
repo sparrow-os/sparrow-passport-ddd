@@ -3,9 +3,9 @@
 <head>
     <title>用户登录-麻雀窝</title>
     <meta content="麻雀窝提供" name="description"/>
-    <meta name="application-name" content="麻雀窝"/>
+    <meta content="麻雀窝" name="application-name"/>
     <th:block th:include="/frames::global_resource"/>
-    <link rel="stylesheet" type="text/css" th:href="${resource} + '/ext/sparrowzoo/styles/avatar.css'"/>
+    <link rel="stylesheet" th:href="${resource} + '/ext/sparrowzoo/styles/avatar.css'" type="text/css"/>
     <script type="text/javascript">
         document.ready(function () {
 
@@ -18,21 +18,21 @@
                 }
             );
             imageCropper.init();
-            var avatar='[[${profile.avatar}]]';
+            var avatar = '[[${profile.avatar}]]';
             //http://u.r.sparrowzoo.net/user/small/5.png;
 
-            var defaultPreview=$.url.resource+'/images/camera.jpg';
-            var defaultAvatar=$.url.resource+'/images/user.jpg';
-            var previewAvatar=defaultPreview;
-            if(avatar!==defaultAvatar){
-                previewAvatar=avatar.replace('small','big');
-                $("imgCurrentAvatar").src=avatar;
+            var defaultPreview = $.url.resource + '/images/camera.jpg';
+            var defaultAvatar = $.url.resource + '/images/user.jpg';
+            var previewAvatar = defaultPreview;
+            if (avatar !== defaultAvatar) {
+                previewAvatar = avatar.replace('small', 'big');
+                $("imgCurrentAvatar").src = avatar;
             }
             imageCropper.resetImage(previewAvatar);
             $.url.upload = $.url.root;
             $.file.isShowProgress = true;
             //登录后重新初始化上传组件
-            $.file.loginCallback=function (){
+            $.file.loginCallback = function () {
                 $.file.initImageUploadEvent('avatar', 'PreviewAvatar');
             };
             $.file.imagePreviewCallback = function (url) {
@@ -41,7 +41,7 @@
             }
             $.file.initImageUploadEvent('avatar', 'PreviewAvatar');
             document.domain = $.browser.cookie.root_domain;
-            $("#btnUploadAvatar").bind("onclick",function (){
+            $("#btnUploadAvatar").bind("onclick", function () {
                 // var previewSrc=$("imgPreviewAvatar").src;
                 // if(previewSrc==$.url.resource+'/images/camera.jpg'){
                 //     $.message("请选择上传头象！");
@@ -51,12 +51,12 @@
                     x: imageCropper.result.x,
                     y: imageCropper.result.y,
                     width: imageCropper.result.w,
-                    height:imageCropper.result.h,
-                    avatar:imageCropper.preview.src
+                    height: imageCropper.result.h,
+                    avatar: imageCropper.preview.src
                 };
 
-                $.http.post($.url.root+"/modify-user-avatar", params, function (result) {
-                    $("imgCurrentAvatar").src=result.data+"?t="+$.random();
+                $.http.post($.url.root + "/modify-user-avatar", params, function (result) {
+                    $("imgCurrentAvatar").src = result.data + "?t=" + $.random();
                     $.message("操作成功！");
                 });
             });
@@ -85,13 +85,13 @@
             <div class="local-upload">
                 <img id="imgPreviewAvatar"/>
                 <div class="local-file">
-                    <iframe class="file-frame" name="fileUpload" id="null.avatar"
-                            frameborder="0"></iframe>
+                    <iframe class="file-frame" frameborder="0" id="null.avatar"
+                            name="fileUpload"></iframe>
                     <br/>
                     <span>支持.jpg|.jpeg|.png[图片大小<=5M]</span>
                 </div>
                 <div class="buttons_group">
-                    <input type="button" value="保存" id="btnUploadAvatar" class="pure-button pure-button-primary"/>
+                    <input class="pure-button pure-button-primary" id="btnUploadAvatar" type="button" value="保存"/>
                 </div>
             </div>
         </div>

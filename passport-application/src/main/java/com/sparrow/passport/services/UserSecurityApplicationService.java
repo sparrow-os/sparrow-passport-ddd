@@ -32,23 +32,28 @@ public class UserSecurityApplicationService implements UserSecurityService {
     @Inject
     private DomainRegistry domainRegistry;
 
-    @Override public void sendFindPasswordToken(String email) throws BusinessException {
+    @Override
+    public void sendFindPasswordToken(String email) throws BusinessException {
         this.domainRegistry.getSecurityPrincipalService().sendFindPasswordToken(email, domainRegistry);
     }
 
-    @Override public Boolean resetPasswordByMobile(ResetPasswordByMobileParam password) throws BusinessException {
+    @Override
+    public Boolean resetPasswordByMobile(ResetPasswordByMobileParam password) throws BusinessException {
         return null;
     }
 
-    @Override public void tokenVerify(String token) throws BusinessException {
+    @Override
+    public void tokenVerify(String token) throws BusinessException {
         this.domainRegistry.getSecurityPrincipalService().tokenVerify(token, domainRegistry);
     }
 
-    @Override public void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException {
+    @Override
+    public void resetPasswordByEmailToken(PasswordResetParam param) throws BusinessException {
         this.domainRegistry.getSecurityPrincipalService().resetPasswordByEmailToken(param.getToken(), param.getPassword(), domainRegistry);
     }
 
-    @Override public Boolean modifyPassword(PasswordModifyParam password) {
+    @Override
+    public Boolean modifyPassword(PasswordModifyParam password) {
         return null;
     }
 }

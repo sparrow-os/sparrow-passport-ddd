@@ -17,8 +17,8 @@ limitations under the License.
 
 package com.sparrow.passport.repository;
 
-import com.sparrow.protocol.ClientInformation;
 import com.sparrow.passport.domain.entity.RegisteringUserEntity;
+import com.sparrow.protocol.ClientInformation;
 
 public interface RegisteringUserRepository {
     RegisteringUserEntity findByEmail(String email);

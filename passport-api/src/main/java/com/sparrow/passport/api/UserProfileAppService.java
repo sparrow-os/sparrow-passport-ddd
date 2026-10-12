@@ -39,7 +39,7 @@ public interface UserProfileAppService {
      * @return
      * @throws BusinessException
      */
-    Map<Long,UserProfileDTO> getUserMap(Collection<Long> userIds) throws BusinessException;
+    Map<Long, UserProfileDTO> getUserMap(Collection<Long> userIds) throws BusinessException;
 
     UserProfileDTO getUser(Long userId) throws BusinessException;
 

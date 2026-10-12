@@ -35,9 +35,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToken> {
-    private DomainRegistry domainRegistry;
-
     private static final String TOKEN_TYPE = "find-password";
+    private DomainRegistry domainRegistry;
+    private Long userId;
+    private String userName;
+    private String sendDate;
+    private String email;
+    private String password;
+    private String tokenType;
 
     public static EmailFindPasswordToken createToken(Long userId, String userName, String email, String password,
                                                      String currentDate,
@@ -71,13 +76,6 @@ public class EmailFindPasswordToken implements ValueObject<EmailFindPasswordToke
         findPasswordOriginToken.domainRegistry = domainRegistry;
         return findPasswordOriginToken;
     }
-
-    private Long userId;
-    private String userName;
-    private String sendDate;
-    private String email;
-    private String password;
-    private String tokenType;
 
     private String generateOriginToken() {
         // 令牌原码

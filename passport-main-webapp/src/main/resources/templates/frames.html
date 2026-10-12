@@ -1,19 +1,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="global_resource">
-    <link rel="stylesheet" type="text/css"
-          th:href="${resource}+'/styles/pure-css/pure-min.css?v='+${resource_version}"/>
+    <link rel="stylesheet" th:href="${resource}+'/styles/pure-css/pure-min.css?v='+${resource_version}"
+          type="text/css"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" th:href="${resource}+'/styles/layouts-old-ie.css?v='+${resource_version}"/>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" type="text/css" th:href="${resource}+'/styles/layouts.css?v='+${resource_version}"/>
+    <link rel="stylesheet" th:href="${resource}+'/styles/layouts.css?v='+${resource_version}" type="text/css"/>
     <!--<![endif]-->
-    <link rel="stylesheet" type="text/css" th:href="${resource}+'/styles/sparrow.css?v='+${resource_version}"/>
-    <link rel="stylesheet" type="text/css" th:href="${resource}+'/styles/modal.css?v='+${resource_version}"/>
-    <script type="text/javascript"
-            th:src="${resource}+'/scripts/sparrow.js?v='+${resource_version}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="${resource}+'/styles/sparrow.css?v='+${resource_version}" type="text/css"/>
+    <link rel="stylesheet" th:href="${resource}+'/styles/modal.css?v='+${resource_version}" type="text/css"/>
+    <script th:src="${resource}+'/scripts/sparrow.js?v='+${resource_version}"
+            type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <style th:fragment="theme">
         :root {
             color-scheme: dark;
@@ -32,18 +32,19 @@
             --shadow: 0 24px 72px rgba(0, 0, 0, .3);
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         html {
             min-height: 100%;
             background-color: var(--bg);
-            background-image:
-                radial-gradient(ellipse at 12% 8%, rgba(109, 92, 255, .13), transparent 46%),
-                radial-gradient(ellipse at 88% 22%, rgba(34, 211, 238, .07), transparent 42%),
-                radial-gradient(ellipse at 65% 95%, rgba(168, 85, 247, .08), transparent 45%),
-                linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.035' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+            background-image: radial-gradient(ellipse at 12% 8%, rgba(109, 92, 255, .13), transparent 46%),
+            radial-gradient(ellipse at 88% 22%, rgba(34, 211, 238, .07), transparent 42%),
+            radial-gradient(ellipse at 65% 95%, rgba(168, 85, 247, .08), transparent 45%),
+            linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.035' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
             background-size: auto, auto, auto, 48px 48px, 48px 48px, 160px 160px;
             background-attachment: fixed;
         }
@@ -56,18 +57,26 @@
             background: transparent;
             color: var(--text);
             font: 14px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-                "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        ::selection { color: var(--text); background: rgba(109, 92, 255, .45); }
+        ::selection {
+            color: var(--text);
+            background: rgba(109, 92, 255, .45);
+        }
+
         a, a:link, a:visited {
             color: var(--cyan);
             text-decoration: none;
             text-underline-offset: 4px;
             transition: color .2s ease;
         }
-        a:hover, a:active { color: var(--text); }
+
+        a:hover, a:active {
+            color: var(--text);
+        }
+
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible,
         select:focus-visible, .pure-button:focus-visible {
             outline: 2px solid var(--cyan);
@@ -79,6 +88,7 @@
             background: var(--panel);
             border-bottom: 1px solid var(--border);
         }
+
         .banner-inner {
             max-width: 1080px;
             margin: 0 auto;
@@ -88,10 +98,23 @@
             justify-content: flex-end;
             font-size: 13px;
         }
-        .banner a { color: var(--muted); }
-        .banner a:hover { color: var(--cyan); }
-        .body > .banner { margin: -16px 0 28px; background: transparent; }
-        .body > .banner .banner-inner { padding: 0 0 14px; }
+
+        .banner a {
+            color: var(--muted);
+        }
+
+        .banner a:hover {
+            color: var(--cyan);
+        }
+
+        .body > .banner {
+            margin: -16px 0 28px;
+            background: transparent;
+        }
+
+        .body > .banner .banner-inner {
+            padding: 0 0 14px;
+        }
 
         /* Shared cards and the two adjoining halves of login/profile. */
         .body, body > .header, body > .content, body .avatar-content {
@@ -102,11 +125,13 @@
             box-shadow: var(--shadow);
             transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
         }
+
         .body, body .avatar-content {
             margin: 48px auto;
             padding: 36px 40px;
             border-radius: var(--radius);
         }
+
         body > .header {
             margin: 48px auto 0;
             padding: 36px 40px 24px;
@@ -114,13 +139,21 @@
             border-radius: var(--radius) var(--radius) 0 0;
             box-shadow: none;
         }
+
         body > .content {
             margin: 0 auto 48px;
             padding: 6px 40px 36px;
             border-top: 0;
             border-radius: 0 0 var(--radius) var(--radius);
         }
-        .header { margin: 0 0 26px; padding: 0; border: 0; text-align: center; }
+
+        .header {
+            margin: 0 0 26px;
+            padding: 0;
+            border: 0;
+            text-align: center;
+        }
+
         .header h1 {
             display: inline-block;
             margin: 0 0 10px;
@@ -130,6 +163,7 @@
             letter-spacing: .02em;
             color: var(--text);
         }
+
         @supports (background-clip: text) or (-webkit-background-clip: text) {
             .header h1, .frame .title span {
                 background: var(--gradient);
@@ -139,6 +173,7 @@
                 -webkit-text-fill-color: transparent;
             }
         }
+
         .header h2 {
             margin: 0;
             padding: 0;
@@ -148,14 +183,39 @@
             font-weight: 400;
             line-height: 1.8;
         }
-        .header h2 + h2 { margin-top: 6px; }
-        .header h2 a { margin-left: 5px; font-weight: 500; }
-        .content { margin: 0; padding: 0; color: var(--muted); line-height: 1.85; }
-        .content p { color: var(--text); }
+
+        .header h2 + h2 {
+            margin-top: 6px;
+        }
+
+        .header h2 a {
+            margin-left: 5px;
+            font-weight: 500;
+        }
+
+        .content {
+            margin: 0;
+            padding: 0;
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .content p {
+            color: var(--text);
+        }
 
         /* Match Pure's selector specificity so its white fields cannot bleed through. */
-        .pure-form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
-        .pure-form-aligned .pure-control-group { margin-bottom: 20px; }
+        .pure-form fieldset {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            min-width: 0;
+        }
+
+        .pure-form-aligned .pure-control-group {
+            margin-bottom: 20px;
+        }
+
         .pure-form-aligned .pure-control-group label {
             display: inline-block;
             width: 6em;
@@ -165,6 +225,7 @@
             font-weight: 500;
             text-align: right;
         }
+
         input:not([type]), input[type="text"], input[type="password"], input[type="email"],
         textarea, select,
         .pure-form input:not([type]), .pure-form input[type="text"],
@@ -183,12 +244,24 @@
             vertical-align: middle;
             transition: border-color .2s ease, box-shadow .2s ease;
         }
+
         .pure-control-group > input:not([type]),
         .pure-control-group > input[type="text"],
         .pure-control-group > input[type="password"],
-        .pure-control-group > input[type="email"] { width: 260px; }
-        .pure-form textarea { width: 100%; resize: vertical; }
-        input::placeholder, textarea::placeholder { color: var(--subtle); opacity: 1; }
+        .pure-control-group > input[type="email"] {
+            width: 260px;
+        }
+
+        .pure-form textarea {
+            width: 100%;
+            resize: vertical;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--subtle);
+            opacity: 1;
+        }
+
         input:not([type]):focus, input[type="text"]:focus, input[type="password"]:focus,
         input[type="email"]:focus, textarea:focus, select:focus,
         .pure-form input:not([type]):focus, .pure-form input[type="text"]:focus,
@@ -198,23 +271,42 @@
             outline: 0;
             box-shadow: 0 0 0 3px rgba(109, 92, 255, .18);
         }
+
         input:-webkit-autofill, input:-webkit-autofill:focus,
         .pure-form input:-webkit-autofill, .pure-form input:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--text);
             -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
             caret-color: var(--text);
         }
-        input[type="checkbox"], input[type="radio"] { accent-color: var(--brand); }
-        .pure-form-aligned .pure-controls { margin: 24px 0 0 7.3em; }
+
+        input[type="checkbox"], input[type="radio"] {
+            accent-color: var(--brand);
+        }
+
+        .pure-form-aligned .pure-controls {
+            margin: 24px 0 0 7.3em;
+        }
+
         .pure-form .pure-checkbox {
             margin: 0 0 16px;
             color: var(--muted);
             font-size: 12px;
             line-height: 1.9;
         }
-        .pure-checkbox a { display: inline-block; margin-left: 10px; }
-        .pure-checkbox .highlight { margin-right: 6px; }
-        .pure-control-group input[maxlength="4"] { width: 96px; }
+
+        .pure-checkbox a {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .pure-checkbox .highlight {
+            margin-right: 6px;
+        }
+
+        .pure-control-group input[maxlength="4"] {
+            width: 96px;
+        }
+
         #imgCaptcha, #imgValidateCode, #imgLoginValidateCode {
             width: auto;
             max-width: 100px;
@@ -226,7 +318,11 @@
             vertical-align: middle;
             cursor: pointer;
         }
-        .pure-control-group > a { display: inline-block; font-size: 12px; }
+
+        .pure-control-group > a {
+            display: inline-block;
+            font-size: 12px;
+        }
 
         /* Pill buttons use dark lettering for legibility across the cyan stop. */
         .pure-button, .button, input[type="submit"], input[type="button"] {
@@ -237,40 +333,66 @@
             background: var(--panel);
             color: var(--text);
             font: 600 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-                "Microsoft YaHei", sans-serif;
+            "Microsoft YaHei", sans-serif;
             text-align: center;
             text-decoration: none;
             cursor: pointer;
             transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
         }
+
         .pure-button-primary, a.pure-button-primary, input.pure-button-primary, .button {
             border-color: transparent;
             background: var(--gradient);
             color: var(--bg);
             box-shadow: 0 6px 24px rgba(109, 92, 255, .18);
         }
-        .pure-button:hover, .pure-button:focus { background-image: none; }
+
+        .pure-button:hover, .pure-button:focus {
+            background-image: none;
+        }
+
         .pure-button-primary:hover, .pure-button-primary:focus, .button:hover, .button:focus {
             background-image: var(--gradient);
             color: var(--bg);
         }
-        .pure-button:active, .button:active { transform: translateY(0); }
+
+        .pure-button:active, .button:active {
+            transform: translateY(0);
+        }
+
         .pure-button:disabled, .button:disabled, input[type="button"]:disabled,
         input[type="submit"]:disabled, .pure-button-disabled {
             opacity: .45;
             cursor: not-allowed;
             box-shadow: none;
         }
+
         .content .pure-button, .content input[type="submit"], .content input[type="button"] {
             width: auto;
             min-width: 120px;
             margin-top: 8px;
         }
 
-        .pure-menu { background: transparent; }
-        .pure-menu-horizontal { margin: 0 0 20px; border-bottom: 1px solid var(--border); }
-        .pure-menu-horizontal .pure-menu-list { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; }
-        .pure-menu-horizontal .pure-menu-item { height: auto; }
+        .pure-menu {
+            background: transparent;
+        }
+
+        .pure-menu-horizontal {
+            margin: 0 0 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pure-menu-horizontal .pure-menu-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 0;
+        }
+
+        .pure-menu-horizontal .pure-menu-item {
+            height: auto;
+        }
+
         .pure-menu-horizontal .pure-menu-link {
             padding: 12px 20px;
             border-radius: 12px 12px 0 0;
@@ -278,117 +400,348 @@
             font-size: 14px;
             font-weight: 500;
         }
+
         .pure-menu-horizontal .pure-menu-link:hover,
-        .pure-menu-horizontal .pure-menu-link:focus { color: var(--text); background: var(--panel); }
+        .pure-menu-horizontal .pure-menu-link:focus {
+            color: var(--text);
+            background: var(--panel);
+        }
+
         .pure-menu-horizontal .pure-menu-selected .pure-menu-link,
         .pure-menu-horizontal .pure-menu-selected .pure-menu-link:visited {
             border-bottom: 2px solid var(--cyan);
             background: rgba(34, 211, 238, .04);
             color: var(--cyan);
         }
-        .tab { border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel); }
-        .tab .more { margin-left: auto; }
-        .tab .tab-content { padding: 4px 20px 20px; }
-        body > .tab { margin: 12px; }
-        body > .tab .pure-form-aligned .pure-control-group { margin-bottom: 14px; }
-        body > .tab .pure-form-aligned .pure-controls { margin-top: 16px; }
 
-        .error, .prompt, .pure-form-message-inline { font-size: 12px; line-height: 1.6; }
-        .error, .pure-form-message-inline { color: #f5a0bb; font-weight: 400; }
-        .prompt { color: var(--muted); }
+        .tab {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--panel);
+        }
+
+        .tab .more {
+            margin-left: auto;
+        }
+
+        .tab .tab-content {
+            padding: 4px 20px 20px;
+        }
+
+        body > .tab {
+            margin: 12px;
+        }
+
+        body > .tab .pure-form-aligned .pure-control-group {
+            margin-bottom: 14px;
+        }
+
+        body > .tab .pure-form-aligned .pure-controls {
+            margin-top: 16px;
+        }
+
+        .error, .prompt, .pure-form-message-inline {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .error, .pure-form-message-inline {
+            color: #f5a0bb;
+            font-weight: 400;
+        }
+
+        .prompt {
+            color: var(--muted);
+        }
+
         .pure-control-group > .error:not(:empty), .pure-control-group > .prompt:not(:empty),
         .pure-control-group > .pure-form-message-inline:not(:empty) {
             display: block;
             margin: 6px 0 0 8.5em;
         }
-        .highlight { color: var(--cyan); font-size: inherit; font-weight: 500; }
+
+        .highlight {
+            color: var(--cyan);
+            font-size: inherit;
+            font-weight: 500;
+        }
 
         /* The crop preview keeps its original 300px geometry; only its surrounding panel changes. */
-        body .avatar-content { height: auto; }
-        .avatar-content .block { display: flex; gap: 28px; flex-wrap: wrap; }
+        body .avatar-content {
+            height: auto;
+        }
+
+        .avatar-content .block {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
         .avatar-content .current-avatar, .avatar-content .local-upload {
             float: none;
             height: auto;
             padding: 0;
             border: 0;
         }
-        .avatar-content .current-avatar { width: 170px; }
-        .avatar-content .local-upload { width: 300px; flex-shrink: 0; }
+
+        .avatar-content .current-avatar {
+            width: 170px;
+        }
+
+        .avatar-content .local-upload {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
         .avatar-content .current-avatar img {
             border-radius: var(--radius);
             border: 1px solid var(--border);
             background: var(--surface);
         }
-        .avatar-content .local-file { margin-top: 16px; color: var(--muted); font-size: 12px; }
-        .avatar-content .file-frame { max-width: 100%; border: 0; color-scheme: dark; }
-        .avatar-content .buttons_group { margin-top: 18px; }
-        body > .banner + div > .pure-menu { width: calc(100% - 32px); max-width: 680px; margin: 24px auto 0; }
 
-        .frame table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .frame table th { padding: 10px 12px; color: var(--muted); font-weight: 500; text-align: right; }
-        .frame table td { padding: 10px 12px; }
-        .frame .title { margin-top: 20px; padding: 10px 0; background: transparent; border-color: var(--border); text-indent: 0; }
-        .frame .title span { font-size: 16px; font-weight: 600; }
-        .frame .userName { color: var(--text); font-size: 18px; font-weight: 600; }
-        .frame .updateTime { margin-left: 10px; color: var(--subtle); font-size: 12px; font-weight: 400; }
-        .frame .user-avatar { width: 140px; }
-        body > .button { display: block; margin: 24px auto 48px; }
-        .pure-control-group > img:not([id]) { border-radius: var(--radius); }
+        .avatar-content .local-file {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 12px;
+        }
 
-        .modal { color: var(--text); background: var(--surface); border-color: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-        .modal-header, .modal-footer { border-color: var(--border); }
-        .modal-footer { background: var(--panel); box-shadow: none; border-radius: 0 0 var(--radius) var(--radius); }
-        pre, code, kbd, samp { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
-        pre { padding: 20px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); line-height: 1.7; }
-        code { padding: 3px 7px; border-radius: 6px; background: var(--surface); color: var(--text); }
-        pre code { padding: 0; background: transparent; }
+        .avatar-content .file-frame {
+            max-width: 100%;
+            border: 0;
+            color-scheme: dark;
+        }
+
+        .avatar-content .buttons_group {
+            margin-top: 18px;
+        }
+
+        body > .banner + div > .pure-menu {
+            width: calc(100% - 32px);
+            max-width: 680px;
+            margin: 24px auto 0;
+        }
+
+        .frame table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .frame table th {
+            padding: 10px 12px;
+            color: var(--muted);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .frame table td {
+            padding: 10px 12px;
+        }
+
+        .frame .title {
+            margin-top: 20px;
+            padding: 10px 0;
+            background: transparent;
+            border-color: var(--border);
+            text-indent: 0;
+        }
+
+        .frame .title span {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .frame .userName {
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .frame .updateTime {
+            margin-left: 10px;
+            color: var(--subtle);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .frame .user-avatar {
+            width: 140px;
+        }
+
+        body > .button {
+            display: block;
+            margin: 24px auto 48px;
+        }
+
+        .pure-control-group > img:not([id]) {
+            border-radius: var(--radius);
+        }
+
+        .modal {
+            color: var(--text);
+            background: var(--surface);
+            border-color: var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-header, .modal-footer {
+            border-color: var(--border);
+        }
+
+        .modal-footer {
+            background: var(--panel);
+            box-shadow: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        pre, code, kbd, samp {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        pre {
+            padding: 20px;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        code {
+            padding: 3px 7px;
+            border-radius: 6px;
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        pre code {
+            padding: 0;
+            background: transparent;
+        }
 
         @media (hover: hover) and (prefers-reduced-motion: no-preference) {
             .body:hover {
                 transform: translateY(-3px);
                 box-shadow: 0 28px 80px rgba(0, 0, 0, .4);
             }
+
             /* Move both halves together without adding a wrapper to the HTML. */
             body:has(> .header:hover, > .content:hover) > .header,
-            body:has(> .header:hover, > .content:hover) > .content { transform: translateY(-3px); }
+            body:has(> .header:hover, > .content:hover) > .content {
+                transform: translateY(-3px);
+            }
+
             .pure-button:not(:disabled):not(.pure-button-disabled):hover,
-            .button:not(:disabled):hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 10px 30px rgba(109, 92, 255, .24); }
+            .button:not(:disabled):hover {
+                transform: translateY(-2px);
+                filter: brightness(1.08);
+                box-shadow: 0 10px 30px rgba(109, 92, 255, .24);
+            }
         }
+
         @media (max-width: 720px) {
-            .body, body .avatar-content { margin-top: 24px; margin-bottom: 24px; padding: 28px 24px; }
-            body > .header { margin-top: 24px; padding: 28px 24px 20px; }
-            body > .content { margin-bottom: 24px; padding: 4px 24px 28px; }
-            .pure-form-aligned .pure-control-group label { display: block; width: auto; margin: 0 0 8px; text-align: left; }
-            .pure-form-aligned .pure-controls { margin-left: 0; }
+            .body, body .avatar-content {
+                margin-top: 24px;
+                margin-bottom: 24px;
+                padding: 28px 24px;
+            }
+
+            body > .header {
+                margin-top: 24px;
+                padding: 28px 24px 20px;
+            }
+
+            body > .content {
+                margin-bottom: 24px;
+                padding: 4px 24px 28px;
+            }
+
+            .pure-form-aligned .pure-control-group label {
+                display: block;
+                width: auto;
+                margin: 0 0 8px;
+                text-align: left;
+            }
+
+            .pure-form-aligned .pure-controls {
+                margin-left: 0;
+            }
+
             .pure-control-group > input:not([type]), .pure-control-group > input[type="text"],
-            .pure-control-group > input[type="password"], .pure-control-group > input[type="email"] { width: 100%; }
-            .pure-control-group input[maxlength="4"] { display: inline-block; width: 88px; }
+            .pure-control-group > input[type="password"], .pure-control-group > input[type="email"] {
+                width: 100%;
+            }
+
+            .pure-control-group input[maxlength="4"] {
+                display: inline-block;
+                width: 88px;
+            }
+
             .pure-control-group > .error:not(:empty), .pure-control-group > .prompt:not(:empty),
-            .pure-control-group > .pure-form-message-inline:not(:empty) { margin-left: 0; }
-            .pure-controls > input:not([type]) { width: 100%; }
-            .tab .tab-content { padding: 4px 16px 20px; }
-            body > .banner + div > .pure-menu { margin-left: 16px; margin-right: 16px; }
-            .frame table th, .frame table td { padding: 8px 4px; }
-            .frame .user-avatar { width: auto; }
+            .pure-control-group > .pure-form-message-inline:not(:empty) {
+                margin-left: 0;
+            }
+
+            .pure-controls > input:not([type]) {
+                width: 100%;
+            }
+
+            .tab .tab-content {
+                padding: 4px 16px 20px;
+            }
+
+            body > .banner + div > .pure-menu {
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+
+            .frame table th, .frame table td {
+                padding: 8px 4px;
+            }
+
+            .frame .user-avatar {
+                width: auto;
+            }
         }
+
         @media (max-width: 480px) {
             input:not([type]), input[type="text"], input[type="password"], input[type="email"],
             .pure-form input:not([type]), .pure-form input[type="text"],
             .pure-form input[type="password"], .pure-form input[type="email"],
-            .pure-form textarea { font-size: 16px; }
-            .pure-control-group > a { margin-top: 8px; }
-            .pure-form-aligned .pure-controls { margin-top: 20px; }
+            .pure-form textarea {
+                font-size: 16px;
+            }
+
+            .pure-control-group > a {
+                margin-top: 8px;
+            }
+
+            .pure-form-aligned .pure-controls {
+                margin-top: 20px;
+            }
         }
+
         @media (max-width: 400px) {
-            body .avatar-content { width: calc(100% - 16px); padding: 24px 0; }
-            .avatar-content .block { justify-content: center; }
+            body .avatar-content {
+                width: calc(100% - 16px);
+                padding: 24px 0;
+            }
+
+            .avatar-content .block {
+                justify-content: center;
+            }
         }
+
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { transition: none !important; }
+            *, *::before, *::after {
+                transition: none !important;
+            }
         }
     </style>
 </div>
-<div th:fragment="banner" class="banner">
+<div class="banner" th:fragment="banner">
     <div class="banner-inner">
         <a href="http://www.sparrowzoo.com">回到首页</a>
     </div>

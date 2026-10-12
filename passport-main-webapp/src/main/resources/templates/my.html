@@ -3,10 +3,10 @@
 <head>
     <title>用户登录-麻雀窝</title>
     <meta content="麻雀窝提供" name="description"/>
-    <meta name="application-name" content="麻雀窝"/>
+    <meta content="麻雀窝" name="application-name"/>
     <th:block th:include="/frames::global_resource"/>
-    <script language="javascript" type="text/javascript"
-            th:src="${resource}+'/ext/scripts/language/'+${sparrow_request_language}+'/user.js?v='+${resource_version}"></script>
+    <script language="javascript" th:src="${resource}+'/ext/scripts/language/'+${sparrow_request_language}+'/user.js?v='+${resource_version}"
+            type="text/javascript"></script>
 </head>
 <div class="body">
     <div class="header">
@@ -14,7 +14,7 @@
         <h2 class="header">程序员有问题就上麻雀窝 和大牛直接聊</h2>
     </div>
 
-    <div id="tabs" class="tab">
+    <div class="tab" id="tabs">
         <div class="pure-menu pure-menu-horizontal" id="sparrow_14553803572462387">
 
         </div>
@@ -26,9 +26,9 @@
 
     <div class="content">
         <br/>
-        <span id="errorRegister" name="error" class="error"></span>
-        <form th:action="${root}+'/modify'" action="/register/email" method="post" class="pure-form pure-form-aligned">
-            <input type="hidden" th:value="${user.userId}" id="hdnUserId"/>
+        <span class="error" id="errorRegister" name="error"></span>
+        <form action="/register/email" class="pure-form pure-form-aligned" method="post" th:action="${root}+'/modify'">
+            <input id="hdnUserId" th:value="${user.userId}" type="hidden"/>
             <fieldset>
                 <div class="pure-control-group">
                     <label> 用户名 </label>
@@ -39,14 +39,14 @@
                     <span>${profile?.nickName}</span>
                 </div>
                 <div class="pure-control-group">
-                    <img style="width: 150px; height: 150px;"
-                         src="${profile?.avatar}"/> <br/>
+                    <img src="${profile?.avatar}"
+                         style="width: 150px; height: 150px;"/> <br/>
                 </div>
                 <div class="pure-control-group">
                     <label> 出生日期 </label>
-                    <input value="" type="text" tabIndex="2"
-                           name="birthday" id="txtBirthday"/>
-                    <span id="errorRegUserName" name="register_user_name" class="error"></span>
+                    <input id="txtBirthday" name="birthday" tabIndex="2"
+                           type="text" value=""/>
+                    <span class="error" id="errorRegUserName" name="register_user_name"></span>
                 </div>
 
                 <div class="pure-control-group">
@@ -60,12 +60,12 @@
                 </div>
                 <div class="pure-control-group">
                     <label>个性签名</label>
-                    <textarea cols="50" rows="3"
-                              name="user.personalSignature" id="txtPersonalSignature"></textarea>
+                    <textarea cols="50" id="txtPersonalSignature"
+                              name="user.personalSignature" rows="3"></textarea>
                 </div>
                 <div class="pure-controls">
-                    <button onenter="true" type="button" onclick="$.v.getValidateResult(regInfo);"
-                            class="pure-button pure-button-primary">更新
+                    <button class="pure-button pure-button-primary" onclick="$.v.getValidateResult(regInfo);" onenter="true"
+                            type="button">更新
                     </button>
                 </div>
             </fieldset>
@@ -87,15 +87,15 @@
             <div class="title">
                 <span>基本信息</span>
             </div>
-            <table cellspacing="0" cellpadding="4">
+            <table cellpadding="4" cellspacing="0">
                 <tr>
                     <th>昵称:</th>
                     <td class="td-input">
-                        <input type="text" onfocus='$.v.showMessage(userInfo.txtUserName);'
-                               onblur='$.v.isNull(userInfo.txtUserName);' name="userName" maxLength="8"
-                               id="txtUserName" th:value="${user.userName}"/></td>
-                    <td class="td-message"><span id="errorUserName" class="prompt"></span></td>
-                    <td rowspan="8" valign="top" align="center" class="user-avatar">
+                        <input id="txtUserName" maxLength="8"
+                               name="userName" onblur='$.v.isNull(userInfo.txtUserName);' onfocus='$.v.showMessage(userInfo.txtUserName);'
+                               th:value="${user.userName}" type="text"/></td>
+                    <td class="td-message"><span class="prompt" id="errorUserName"></span></td>
+                    <td align="center" class="user-avatar" rowspan="8" valign="top">
                     </td>
                 </tr>
 
@@ -105,7 +105,7 @@
         </div>
     </div>
 </div>
-<input type="button" onclick="$.submit();" class="button"
+<input class="button" onclick="$.submit();" type="button"
        value="提  交"/>
 </form>
 </body>

@@ -4,12 +4,12 @@
     <title>恭喜！登录成功-程序员有问题就上麻雀窝 和大牛直接聊</title>
     <meta content="error" name="keywords"/>
     <meta content="程序员有问题就上麻雀窝 和大牛直接聊" name="description"/>
-    <meta name="application-name" content="麻雀窝"/>
-    <meta name="msapplication-tooltip" content="麻雀窝"/>
+    <meta content="麻雀窝" name="application-name"/>
+    <meta content="麻雀窝" name="msapplication-tooltip"/>
     <th:block th:include="/frames::global_resource"/>
 </head>
 <body>
-<script type="text/javascript" src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0"></script>
+<script src="http://r.sparrowzoo.net/scripts/baidu.js?v=1.0" type="text/javascript"></script>
 <div class="body">
     <th:block th:include="/frames::banner"/>
     <div class="header">
@@ -18,7 +18,7 @@
     </div>
     <div class="content">
         <br/>
-        <input id="hdnQueryString" type="hidden" th:value="${queryString}"/>
+        <input id="hdnQueryString" th:value="${queryString}" type="hidden"/>
         <span class="highlight" id="timer">5000</span>秒以后将自动跳转,或者<a
             href="http://www.sparrowzoo.com/" target="_self">直接点击这里跳转</a>
         <script type="text/javascript">

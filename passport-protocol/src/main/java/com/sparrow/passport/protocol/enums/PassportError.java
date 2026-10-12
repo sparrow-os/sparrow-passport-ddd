@@ -19,6 +19,7 @@ package com.sparrow.passport.protocol.enums;
 
 import com.sparrow.protocol.ErrorSupport;
 import com.sparrow.protocol.ModuleSupport;
+
 public enum PassportError implements ErrorSupport {
 
     USER_NAME_EXIST(false, PassportModule.USER, "01", "User name exist"),
